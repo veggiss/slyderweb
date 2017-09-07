@@ -5,5 +5,5 @@ Repository for project slyderweb
 
 * Kelly Martine Grøgaard https://github.com/kellana
 * Vegard Schau https://github.com/veggiss
-* Christine Strømland https://github.com/sunnyolives
+* Christine Strømland https://github.com/ SKRIV HER, DU
 * Silje Unander https://github.com/sunnyolives
