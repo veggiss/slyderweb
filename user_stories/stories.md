@@ -43,3 +43,9 @@ Jeg ble invitert på en konferanse som skal være om et par uker, og jeg synes d
 - As a user, i should be able to redo atleast some steps back.
 
 - I should be able to create graphs and diagrams
+
+- As a user, i can embed video and sound
+
+- As a user, my login credentials needs to be garanteed to be secured
+
+- As a presenter, i should have a second page for info and time about my presentation
