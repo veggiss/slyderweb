@@ -1,7 +1,5 @@
 # USER STORIES
 
-Tralallalala
-
 "som x ønsker jeg y for z"
 
 ## Fra Silje
@@ -31,8 +29,8 @@ Som designassistent i Topland begravelsesbyrå kan jeg fortelle at vi de siste �
 ### Konferanseinnlegg
 Jeg ble invitert på en konferanse som skal være om et par uker, og jeg synes det er vanskelig å vite hva jeg skal ha i presentasjonen min. Jeg har skrevet noen notater, men lurer på hvordan jeg skal gjøre dette. Jeg tror det blir vanskelig å skulle huske alt jeg skal si om jeg bare setter opp stikkord. Ellers synes jeg det blir så rotete med deling av slike presentasjoner i etterkant. Det hadde vært fint om det fantes en nettside hvor man både laget dem, men også hvor de kunne deles med andre, uten at man måtte huske å sende dem i ettertid.
 
-#
- Fra Vegard:
+
+## Fra Vegard:
 
 - As a user, I can move anything in the presentation editor.
 
