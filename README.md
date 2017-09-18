@@ -15,7 +15,7 @@ Repository for project slyderweb
 
 # Goal of Project
  
-With this presentation tool we seek to provide an easy-to-use online application for creating slides. This includes WYSIWYG-editing, presentation-wide styles and the ability to embed videos and sound for the ultimate experience. 
+With this presentation tool we seek to provide an easy-to-use online application for creating slides. This includes WYSIWYG-editing and presentation-wide styles.
 
 ## Our unique selling points
 
