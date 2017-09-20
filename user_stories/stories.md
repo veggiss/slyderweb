@@ -49,3 +49,12 @@ Jeg ble invitert på en konferanse som skal være om et par uker, og jeg synes d
 - As a user, my login credentials needs to be garanteed to be secured
 
 - As a presenter, i should have a second page for info and time about my presentation
+
+
+##Fra Christine:
+
+### personlig trener 
+Som en personlig trener kan jeg bruke powerpointen til å presenterer bilder og forklaring av treningsøvelser og muskelgrupper. Dette kan være bra for meg og illustrere viktige muskelgrupper og øvelser, slik kunder kan få en forståelse av riktig trening. Dette kan være enkelt og få til ved å logge inn på websiden og laste opp selv filmet videoer av øvelser, uten og måtte ha et eget program på pc'en på jobb. Jeg har lett tilgang til en enkel og rask måte å lage presentasjon på. 
+
+### butikksjef 
+Som butikksjef kan jeg bruke powerpointen til personalmøte. Jeg kan enkelt gå inn på websiden og lage en presentasjon av hovedpunkter i personalmøtet. Ved hjelp av maler kan jeg sette opp en presentasjon, uten å laste ned egne programmer på pc'en, og trenger ikke noe god kunnskap i hvordan pc programmer fungerer. Jeg går enkelt inn å velger min ønsket mal, og fyller inn mine tekster og bilder
