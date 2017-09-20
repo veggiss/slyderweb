@@ -12,3 +12,14 @@ Repository for project slyderweb
 
 * Storymap: https://trello.com/b/i31EI5pi/logical-storymap
 * Development: https://trello.com/b/hswY5obe/uia17-slyderweb
+
+# Goal of Project
+ 
+With this presentation tool we seek to provide an easy-to-use online application for creating slides. This includes WYSIWYG-editing and presentation-wide styles.
+
+## Our unique selling points
+
+* good set of hotkeys, also, user-definable
+* (POTENTIALLY) mobile remote control
+* (POSSIBLY) live chat hosted during presentation for questions
+* (POSSIBLY) works offline (editing and presenting)
