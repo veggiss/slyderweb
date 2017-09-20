@@ -51,7 +51,7 @@ Jeg ble invitert på en konferanse som skal være om et par uker, og jeg synes d
 - As a presenter, i should have a second page for info and time about my presentation
 
 
-##Fra Christine:
+## Fra Christine:
 
 ### personlig trener 
 Som en personlig trener kan jeg bruke powerpointen til å presenterer bilder og forklaring av treningsøvelser og muskelgrupper. Dette kan være bra for meg og illustrere viktige muskelgrupper og øvelser, slik kunder kan få en forståelse av riktig trening. Dette kan være enkelt og få til ved å logge inn på websiden og laste opp selv filmet videoer av øvelser, uten og måtte ha et eget program på pc'en på jobb. Jeg har lett tilgang til en enkel og rask måte å lage presentasjon på. 
@@ -69,9 +69,7 @@ Han har ett sted hvor han skriver notater til seg selv i tillegg.
 Han ser på forhandsvisning på hvordan det ferdige resultatet ser ut før han eksporterer filen.
 Exportert fil kan være mulig å se uten å være tilkoblet internett.
  
- 
 ### Flink og lat Ungdomsskole elever:
 
 Går på nettsiden. Logger inn. Velger en ferdig mal og begynner å skrive. Malen gjør at det går raskt å lage en presentasjon i bra standard. Det er mulig å velge mal i forhold til hvor mye arbeid man vil legge i det. Det er fint organisert så de som vil lage en personlig fremføring kan lett lære å gjøre det uten mye grunnleggende erfaringer samtidig som andre som bare vil bli ferdig kan velge mal hvor man bare fyller inn det man trenger av egen info.
 En enkel tourtorual side gjør det også enklere for førstegang brukere av digital presentasjon som hjelpemiddel. Presentasjonen blir lagret.
-
