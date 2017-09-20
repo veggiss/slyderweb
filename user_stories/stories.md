@@ -51,7 +51,7 @@ Jeg ble invitert på en konferanse som skal være om et par uker, og jeg synes d
 - As a presenter, i should have a second page for info and time about my presentation
 
 
-##Fra Christine:
+## Fra Christine:
 
 ### personlig trener 
 Som en personlig trener kan jeg bruke powerpointen til å presenterer bilder og forklaring av treningsøvelser og muskelgrupper. Dette kan være bra for meg og illustrere viktige muskelgrupper og øvelser, slik kunder kan få en forståelse av riktig trening. Dette kan være enkelt og få til ved å logge inn på websiden og laste opp selv filmet videoer av øvelser, uten og måtte ha et eget program på pc'en på jobb. Jeg har lett tilgang til en enkel og rask måte å lage presentasjon på. 
