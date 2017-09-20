@@ -58,3 +58,19 @@ Som en personlig trener kan jeg bruke powerpointen til å presenterer bilder og 
 
 ### butikksjef 
 Som butikksjef kan jeg bruke powerpointen til personalmøte. Jeg kan enkelt gå inn på websiden og lage en presentasjon av hovedpunkter i personalmøtet. Ved hjelp av maler kan jeg sette opp en presentasjon, uten å laste ned egne programmer på pc'en, og trenger ikke noe god kunnskap i hvordan pc programmer fungerer. Jeg går enkelt inn å velger min ønsket mal, og fyller inn mine tekster og bilder
+
+## Fra Kelly:
+
+### Lærer:
+ 
+Går inn på web siden, logger inn. Har tilgang på standard og egenlagde lagrede maler. Alt er fint organisert og han finner fort frem til presentasjonen han holder på å lage.
+Han Lagrer underveis. Det er lett å skjønner hva han klikker på og når. Legger inn titler, tekst, lister. Osv
+Han har ett sted hvor han skriver notater til seg selv i tillegg.
+Han ser på forhandsvisning på hvordan det ferdige resultatet ser ut før han eksporterer filen.
+Exportert fil kan være mulig å se uten å være tilkoblet internett.
+ 
+ 
+### Flink og lat Ungdomsskole elever:
+
+Går på nettsiden. Logger inn. Velger en ferdig mal og begynner å skrive. Malen gjør at det går raskt å lage en presentasjon i bra standard. Det er mulig å velge mal i forhold til hvor mye arbeid man vil legge i det. Det er fint organisert så de som vil lage en personlig fremføring kan lett lære å gjøre det uten mye grunnleggende erfaringer samtidig som andre som bare vil bli ferdig kan velge mal hvor man bare fyller inn det man trenger av egen info.
+En enkel tourtorual side gjør det også enklere for førstegang brukere av digital presentasjon som hjelpemiddel. Presentasjonen blir lagret.
