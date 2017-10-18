@@ -1,7 +1,7 @@
 fetch("/user/:username").then(res =>{
     return res.json();
 }).then(json => {
-    console.log(item);
+    console.log(json);
 }).catch(err => {
     printError(err);
 });
