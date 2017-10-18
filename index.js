@@ -9,12 +9,11 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.listen(app.get('port'), function() {
-	
     console.log('Server started on port: ', app.get('port'));
 });
 
 function serverUpkeep() {
-	let uptime = process.uptime();
+	var uptime = process.uptime();
 	process.stdout.write('\rServer uptime: ' + formatTime(uptime));
 }
 
