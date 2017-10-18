@@ -1,2 +1,2 @@
-server/node_modules
-server/*.log
+node_modules
+*.log
