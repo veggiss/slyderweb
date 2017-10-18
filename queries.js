@@ -19,9 +19,9 @@ function getUser(req, res) {
 
     client.connect();
 
-    client.query("select * from users", (err, res) => {
+    client.query("select * from users", (err, qRes) => {
         
-        console.log(res);
+        res.send(qRes);
 
         client.end();
     });
