@@ -17,7 +17,17 @@ Schema for user table
 
 Exmaple use:
 
+{
+	"username":"usr123",
+	"password":"sfoidfu3453oeriuf234",
+	"firstName":"Vegard",
+	"lastName":"Schau",
+	"mail":"vegaes15@uia.no",
+	"profileImg":"path_on_serv/img.jpg",
+	"lastLogin":"34598374958734",
+	"presentations":[pres_object, pres_object]
 
+}
 
 Schema for presentations
 
@@ -43,6 +53,7 @@ Example use:
 
 {
 	"author":"vegard",
+	"name":"Mysuper presentation",
 	"pages":[{"body":"
 		<div class=center>
 			<p id=infoBox></p>
@@ -54,5 +65,5 @@ Example use:
 		"}, {"body":"
 		<h1>Page 2</h1>
 		"}],
-	"create":"093485039480"
+	"created":"093485039480"
 }

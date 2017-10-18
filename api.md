@@ -22,10 +22,10 @@
 		app.GET("/user/:username", req, res)
 
 ### hente liste over presentasjoner
-		app.GET()("/user/pres", req, res)
+		app.GET("/user/pres", req, res)
 
 ### logge inn
-		app.GET()("/user/login", req, res)
+		app.GET("/user/login", req, res)
 brukernavn passord defineres her
 
 
