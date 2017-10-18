@@ -9,7 +9,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 
-router.get('/user/:username', db.getUser);
+app.get('/user/:username', db.getUser);
 
 
 app.listen(app.get('port'), function() {
