@@ -25,6 +25,7 @@ Schema for presentations
 	"type":"object",
 	"properties":{
 		"author":{"type":"string"},
+		"name":{"type":"string"},
 		"pages":{
 			"type":"array",
 			"items":{
