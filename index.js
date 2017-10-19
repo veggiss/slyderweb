@@ -1,5 +1,5 @@
+const url = require('url');
 const express = require('express');
-const router = express.Router();
 const bodyParser = require('body-parser');
 const db = require('./queries');
 const app = express();
@@ -37,5 +37,3 @@ function formatTime(seconds) {
 
 
 setInterval(serverUpkeep, 1000);
-
-module.exports = router;
