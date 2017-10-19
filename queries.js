@@ -20,7 +20,7 @@ function getUser(req, res) {
     client.connect();
 
     client.query(`select ${username} from users`, (err, qRes) => {
-        res.send(JSON.stringify(qRes.rows));
+        res.send(qRes);
         /*if (qRes.rows.length > 0) {
             let clientResponse = {
                 lastlogin: qRes.rows[0].lastlogin,

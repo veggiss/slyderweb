@@ -5,7 +5,6 @@ findUserBtn.onclick = () => {
 	let username = findUserInput.value;
 	if(username) {
 		findUser(username);
-		console.log(username);
 	}
 
 }
