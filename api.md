@@ -5,7 +5,7 @@
 | /user/:username     | GET       | hente info om brukerprofil               | username=[string]   |
 | /user/pres          | GET       | hente liste over presentasjoner          |                     |
 | /user/login         | GET       | logge inn                                |                     |
-| /user               | POST      | lage ny bruker                           |                     |
+| /user               | POST      | lage ny bruker                           | user schema         |
 | /user/pres          | POST      | lage ny presentasjon                     |                     |
 | /user/pres/page     | POST      | lage ny side i presentasjon              |                     |
 | /user/pres/:id      | PUT       | endre på informasjon om presentasjon     | id=[integer]        |
@@ -32,7 +32,7 @@ brukernavn passord defineres her
 ## POST
 ### lage ny bruker
 		app.POST("/user", res, req)
-trenger ikke /new, post legger jo til
+Alle parametere fra user schema vil være nødvendig.
 
 ### lage ny presentasjon
 		app.POST("/user/pres", res, req)
