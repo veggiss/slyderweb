@@ -1,4 +1,3 @@
-const url = require('url');
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./queries');
@@ -15,6 +14,10 @@ app.get('/user/:username', db.getUser);
 app.listen(app.get('port'), function() {
     console.log('Server started on port: ', app.get('port'));
 });
+
+
+
+
 
 function serverUpkeep() {
 	var uptime = process.uptime();

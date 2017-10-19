@@ -15,9 +15,10 @@ function newUser(req, res) {
 
 function getUser(req, res) {
 	let username = req.query.username;
-
 	let client = newClient();
+
     client.connect();
+    
     client.query(`select ${username} from users`, (err, qRes) => {
         if (qRes.rows.length > 0) {
             let clientResponse = {
