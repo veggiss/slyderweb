@@ -20,22 +20,23 @@ function getUser(req, res) {
     client.connect();
 
     client.query(`select ${username} from users`, (err, qRes) => {
-        if (qRes.rows.length > 0) {
+        res.send(JSON.stringify(qRes.rows));
+        /*if (qRes.rows.length > 0) {
             let clientResponse = {
                 lastlogin: qRes.rows[0].lastlogin,
                 firstname: qRes.rows[0].firstname,
                 lastname: qRes.rows[0].lastname,
                 mail: qRes.rows[0].mail,
-                //presentations: qRes.rows[0].presentations,
+                presentations: qRes.rows[0].presentations,
                 profileimg: qRes.rows[0].profileimg
             }
             res.send(clientResponse);
         } else {
             res.status(401).send(JSON.stringify('Could not find user :('));
-        }
-
-        client.end();
+        }*/
     });
+
+    client.end();
 }
 
 module.exports = {
