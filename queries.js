@@ -18,7 +18,7 @@ function getUser(req, res) {
 	let client = newClient();
 
     client.connect();
-    
+
     client.query(`select ${username} from users`, (err, qRes) => {
         if (qRes.rows.length > 0) {
             let clientResponse = {
@@ -26,7 +26,7 @@ function getUser(req, res) {
                 firstname: qRes.rows[0].firstname,
                 lastname: qRes.rows[0].lastname,
                 mail: qRes.rows[0].mail,
-                presentations: qRes.rows[0].presentations,
+                //presentations: qRes.rows[0].presentations,
                 profileimg: qRes.rows[0].profileimg
             }
             res.send(clientResponse);
