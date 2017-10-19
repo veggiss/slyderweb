@@ -19,9 +19,8 @@ function getUser(req, res) {
 
     client.connect();
 
-    client.query(`select ${username} from users`, (err, qRes) => {
-        res.send(qRes);
-        /*if (qRes.rows.length > 0) {
+    client.query(`SELECT * FROM users WHERE username=${username}`, (err, qRes) => {
+        if (qRes.rows.length > 0) {
             let clientResponse = {
                 lastlogin: qRes.rows[0].lastlogin,
                 firstname: qRes.rows[0].firstname,
@@ -33,7 +32,7 @@ function getUser(req, res) {
             res.send(clientResponse);
         } else {
             res.status(401).send(JSON.stringify('Could not find user :('));
-        }*/
+        }
     });
 
     client.end();

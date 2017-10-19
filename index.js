@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./queries');
-const router = express.Router();
 const app = express();
 
 app.set('port', (process.env.PORT || 8080));
@@ -41,5 +40,3 @@ function formatTime(seconds) {
 
 
 setInterval(serverUpkeep, 1000);
-
-module.exports = router;
