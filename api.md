@@ -6,7 +6,7 @@
 | /user/pres          | GET       | hente liste over presentasjoner          |                     |
 | /user/login         | GET       | logge inn                                |                     |
 | /user               | POST      | lage ny bruker                           | user schema         |
-| /user/pres          | POST      | lage ny presentasjon                     |                     |
+| /user/pres          | POST      | lage ny presentasjon                     | pres schema         |
 | /user/pres/page     | POST      | lage ny side i presentasjon              |                     |
 | /user/pres/:id      | PUT       | endre på informasjon om presentasjon     | id=[integer]        |
 | /user/:username     | PUT       | endre informasjon om eksisterende bruker | username=[string]   |
@@ -36,6 +36,7 @@ Alle parametere fra user schema vil være nødvendig.
 
 ### lage ny presentasjon
 		app.POST("/user/pres", res, req)
+Alle parametere fra presentation schema vil være nødvendig.
 
 ### lage ny side i presentasjon:
  		app.POST("/user/pres", res, req)
