@@ -29,7 +29,7 @@ function login(username, password) {
 	    return res.json();
 	}).then(res => {
 	    console.log(res);
-		//setLastlogin(username); <- not working correctly
+		//setLastlogin(username); <- not working correctly.
 	}).catch(err => {
 	    printError(err);
 	});

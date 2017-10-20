@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 app.get('/user', db.getUser);
 app.get('/user/login', db.loginUser);
-//app.get('/user/lastlogin', db.getLastlogin);
+// app.get('/user/lastlogin', db.getLastlogin);
 app.put('/user/lastlogin', db.setLastlogin);
 
 

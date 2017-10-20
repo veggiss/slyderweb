@@ -91,11 +91,10 @@ function setLastlogin(req, res) {
 
         let client = newClient();
         let sql = sqlstr.format('UPDATE users SET lastlogin = ? WHERE username = ?', [Date.now(), username]);
-        client.query(sql, (err, query, er) => {
+        client.query(sql, (err, query, er) => { // <- Not working - never gets called
             console.log("\nError: " + err);
             console.log("\nQuesry: " + query);
             console.log("\nEr: " + er);
-            console.log("oiasjdoaisdjo");
             if (!err) {
                 res.statusMessage = 'Timestamp set';
                 res.status(201);
