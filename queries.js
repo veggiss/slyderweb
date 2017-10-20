@@ -3,7 +3,7 @@ const sqlstr = require('sqlstring');
 
 function newClient() {
     let client = new Client({
-        connectionString:process.env.DATABASE_URL,
+        connectionString:'postgres://qmmmxfpbnkmfuu:61353f3ff055d0833425f0eb668e4eeae4455cbc102ce1703bdf7a0371a466ee@ec2-46-51-187-253.eu-west-1.compute.amazonaws.com:5432/dau7n64ghf76jc',
         ssl:true
     });
 
@@ -91,10 +91,10 @@ function setLastlogin(req, res) {
 
         let client = newClient();
         let sql = sqlstr.format('UPDATE users SET lastlogin = ? WHERE username = ?', [Date.now(), username]);
+
+        client.connect();
+
         client.query(sql, (err, query, er) => { // <- Not working - never gets called
-            console.log("\nError: " + err);
-            console.log("\nQuesry: " + query);
-            console.log("\nEr: " + er);
             if (!err) {
                 res.statusMessage = 'Timestamp set';
                 res.status(201);
@@ -105,6 +105,10 @@ function setLastlogin(req, res) {
             client.end();
         });
     }
+}
+
+function newUser(req, res) {
+    let
 }
 
 function noSymbols(str) {
