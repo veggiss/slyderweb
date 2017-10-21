@@ -18,11 +18,11 @@ let createuser_mail = document.getElementById('createuser_mail');
 let createuser_btn = document.getElementById('createuser_btn');
 
 userinfo_btn.addEventListener("click", () => {
-	getUser(userinfo_input);
+	getUser(userinfo_input.value);
 });
 
 login_btn.addEventListener("click", () => {
-	login(login_username.value, login.password.value);
+	login(login_username.value, login_password.value);
 });
 
 createuser_btn.addEventListener("click", () => {
@@ -31,7 +31,7 @@ createuser_btn.addEventListener("click", () => {
 		password: createuser_password.value,
 		firstname: createuser_firstname.value,
 		lastname: createuser_lastname.value,
-		mail: createuser_mail
+		mail: createuser_mail.value
 	}
 
 	newUser(user);
@@ -58,7 +58,7 @@ function login(username, password) {
 	    return res.json();
 	}).then(res => {
 	    console.log(res);
-		//setLastlogin(username); <-- Does not work correctly
+		setLastlogin(username);
 	}).catch(err => {
 	    printError(err);
 	});
@@ -79,11 +79,7 @@ function newUser(user) {
 		firstname: user.firstname,
 		lastname: user.lastname,
 		mail: user.mail
-	})).then(res =>{
-	    return res.json();
-	}).then(res => {
-	    console.log(res);
-	}).catch(err => {
+	})).catch(err => {
 	    printError(err);
 	});
 }
@@ -108,11 +104,10 @@ function newRequest(type, path, params) {
 	} else if (type == 'POST') {
 		request = new Request(path, {
 			method: 'POST',
-			body: params,
+			body: JSON.stringify(params),
 			headers:{
 				"Content-type":"application/json"
-			},
-			body: uriParams(params)
+			}
 		});
 	}
 

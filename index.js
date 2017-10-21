@@ -10,9 +10,10 @@ app.use(bodyParser.json());
 
 app.get('/user', db.getUser);
 app.get('/user/login', db.loginUser);
-app.post('/user', db.newUser);
-// app.get('/user/lastlogin', db.getLastlogin);
+
 app.put('/user/lastlogin', db.setLastlogin);
+
+app.post('/user', db.newUser);
 
 
 app.listen(app.get('port'), function() {
@@ -20,13 +21,6 @@ app.listen(app.get('port'), function() {
 });
 
 
-
-
-
-function serverUpkeep() {
-	let uptime = process.uptime();
-	process.stdout.write('\rServer uptime: ' + formatTime(uptime));
-}
 
 function formatTime(seconds) {
     seconds = Number(seconds);
@@ -39,6 +33,11 @@ function formatTime(seconds) {
     }
 
     return (`${t(hours)}:${t(minutes)}:${t(seconds)}`); 
+}
+
+function serverUpkeep() {
+	let uptime = process.uptime();
+	process.stdout.write('\rServer uptime: ' + formatTime(uptime));
 }
 
 setInterval(serverUpkeep, 1000);
