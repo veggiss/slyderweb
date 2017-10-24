@@ -1,9 +1,8 @@
 const {Client} = require('pg');
-const sqlstr = require('sqlstring');
 
 function newClient() {
     let client = new Client({
-        connectionString:process.env.DATABASE_URL,
+        connectionString:'postgres://qmmmxfpbnkmfuu:61353f3ff055d0833425f0eb668e4eeae4455cbc102ce1703bdf7a0371a466ee@ec2-46-51-187-253.eu-west-1.compute.amazonaws.com:5432/dau7n64ghf76jc',
         ssl:true
     });
 
@@ -17,11 +16,12 @@ function getUser(req, res) {
         print(`Getting info from user '${username}'`);
 
         let client = newClient();
-        let sql = sqlstr.format('SELECT * FROM users WHERE username = ?', [username]);
+        let sql = 'SELECT * FROM users WHERE username = $1';
+        let params = [username];
 
         client.connect();
 
-        client.query(sql, (err, query) => {
+        client.query(sql, params, (err, query) => {
             if (!err) {
                 if (query.rows.length > 0) {
                     let clientResponse = {
@@ -52,18 +52,19 @@ function getUser(req, res) {
 }
 
 function loginUser(req, res) {
-    let username = req.query.username;
-    let password = req.query.password;
+    let username = req.body.username;
+    let password = req.body.password;
 
     if (noSymbols(username) && isNotEmpty(username)) {
         print(`User '${username}' is trying to log in`);
 
         let client = newClient();
-        let sql = sqlstr.format('SELECT * FROM users WHERE username = ?', [username]);
+        let sql = 'SELECT * FROM users WHERE username = $1';
+        let params = [username];
 
         client.connect();
 
-        client.query(sql, (err, query) => {
+        client.query(sql, params, (err, query) => {
             if (!err) {
                 if (query.rows.length > 0) {
                     if(query.rows[0].password === password) {
@@ -96,11 +97,12 @@ function setLastlogin(req, res) {
         print(`Setting lastlogin on user '${username}'`);
 
         let client = newClient();
-        let sql = sqlstr.format('UPDATE users SET lastlogin = ? WHERE username = ?', [Date.now(), username]);
+        let sql = 'UPDATE users SET lastlogin = $1 WHERE username = $2';
+        let params = [Date.now(), username];
 
         client.connect();
 
-        client.query(sql, (err, query) => { // <- Not working - never gets called
+        client.query(sql, params, (err, query) => { // <- Not working - never gets called
             if (!err) {
                 res.statusMessage = 'Timestamp set';
                 res.status(201).end();
@@ -123,15 +125,18 @@ function newUser(req, res) {
     let lastname = req.body.lastname;
     let mail = req.body.mail;
 
+
     if (noSymbols(username, firstname, lastname) && isNotEmpty(username, password, firstname, lastname, mail)) {
         print(`Creating new user: '${username}'`);
 
         let client = newClient();
-        let sql = sqlstr.format('INSERT INTO users(username, password, firstname, lastname, mail) VALUES(?, ?, ?, ?, ?)', [username, password, firstname, lastname, mail]);
-        
+        let sql = 'INSERT INTO users(username, password, firstname, lastname, mail) VALUES($1, $2, $3, $4, $5)';
+        let params = [username, password, firstname, lastname, mail];
+        print(sql);
+
         client.connect();
 
-        client.query(sql, (err, query) => {
+        client.query(sql, params, (err, query) => {
             if (!err) {
                 res.statusMessage = 'New user created';
                 res.status(201).end();

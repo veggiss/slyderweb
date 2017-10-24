@@ -9,11 +9,11 @@ app.use(bodyParser.json());
 
 
 app.get('/user', db.getUser);
-app.get('/user/login', db.loginUser);
 
 app.put('/user/lastlogin', db.setLastlogin);
 
 app.post('/user', db.newUser);
+app.post('/user/login', db.loginUser);
 
 
 app.listen(app.get('port'), function() {
