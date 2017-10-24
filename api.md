@@ -4,7 +4,7 @@
 |---------------------|-----------|------------------------------------------|---------------------|
 | /user/:username     | GET       | hente info om brukerprofil               | username=[string]   |
 | /user/pres          | GET       | hente liste over presentasjoner          |                     |
-| /user/login         | GET       | logge inn                                | username/password   |
+| /user/login         | POST      | logge inn                                | username/password   |
 | /user               | POST      | lage ny bruker                           | user schema         |
 | /user/pres          | POST      | lage ny presentasjon                     | pres schema         |
 | /user/pres/page     | POST      | lage ny side i presentasjon              |                     |

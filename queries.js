@@ -1,5 +1,5 @@
 const {Client} = require('pg');
-const sqlstr = require('sqlstring');
+const util = require('./util');
 
 function newClient() {
     let client = new Client({
@@ -10,19 +10,25 @@ function newClient() {
     return client;
 }
 
+
+// Returns user info
 function getUser(req, res) {
     let username = req.query.username;
 
-    if (noSymbols(username) && isNotEmpty(username)) {
-        print(`Getting info from user '${username}'`);
+    // Check query not containing no or illigal characters
+    if (util.noSymbols(username) && util.isNotEmpty(username)) {
+        util.print(`Getting info from user '${username}'`);
 
+        // Prepare query strings and connection
         let client = newClient();
-        let sql = sqlstr.format('SELECT * FROM users WHERE username = ?', [username]);
+        let sql = 'SELECT * FROM users WHERE username = $1';
+        let params = [username];
 
         client.connect();
 
-        client.query(sql, (err, query) => {
+        client.query(sql, params, (err, query) => {
             if (!err) {
+                // If no error, and query returns a row, prepare a response
                 if (query.rows.length > 0) {
                     let clientResponse = {
                         lastlogin: query.rows[0].lastlogin,
@@ -35,35 +41,40 @@ function getUser(req, res) {
 
                     res.send(clientResponse);
                 } else {
+                    // If query did not return a row
                     res.statusMessage = 'Could not find user';
                     res.status(404).end();
                 }
             } else {
+                // If query returns an error
                 res.statusMessage = 'There was a problem getting user';
                 res.status(500).end();
             }
 
+            // End connection for client
             client.end();
         });
     } else {
+        // Either username was empty or contained illigal symbols
         res.statusMessage = 'Username contains no or illigal characters';
         res.status(403).end();
     }
 }
 
 function loginUser(req, res) {
-    let username = req.query.username;
-    let password = req.query.password;
+    let username = req.body.username;
+    let password = req.body.password;
 
-    if (noSymbols(username) && isNotEmpty(username)) {
-        print(`User '${username}' is trying to log in`);
+    if (util.noSymbols(username) && util.isNotEmpty(username)) {
+        util.print(`User '${username}' is trying to log in`);
 
         let client = newClient();
-        let sql = sqlstr.format('SELECT * FROM users WHERE username = ?', [username]);
+        let sql = 'SELECT * FROM users WHERE username = $1';
+        let params = [username];
 
         client.connect();
 
-        client.query(sql, (err, query) => {
+        client.query(sql, params, (err, query) => {
             if (!err) {
                 if (query.rows.length > 0) {
                     if(query.rows[0].password === password) {
@@ -92,15 +103,16 @@ function loginUser(req, res) {
 function setLastlogin(req, res) {
     let username = req.query.username;
 
-    if (noSymbols(username) && isNotEmpty(username)) {
-        print(`Setting lastlogin on user '${username}'`);
+    if (util.noSymbols(username) && util.isNotEmpty(username)) {
+        util.print(`Setting lastlogin on user '${username}'`);
 
         let client = newClient();
-        let sql = sqlstr.format('UPDATE users SET lastlogin = ? WHERE username = ?', [Date.now(), username]);
+        let sql = 'UPDATE users SET lastlogin = $1 WHERE username = $2';
+        let params = [Date.now(), username];
 
         client.connect();
 
-        client.query(sql, (err, query) => { // <- Not working - never gets called
+        client.query(sql, params, (err, query) => { // <- Not working - never gets called
             if (!err) {
                 res.statusMessage = 'Timestamp set';
                 res.status(201).end();
@@ -123,15 +135,18 @@ function newUser(req, res) {
     let lastname = req.body.lastname;
     let mail = req.body.mail;
 
-    if (noSymbols(username, firstname, lastname) && isNotEmpty(username, password, firstname, lastname, mail)) {
-        print(`Creating new user: '${username}'`);
+
+    if (util.noSymbols(username, firstname, lastname) && util.isNotEmpty(username, password, firstname, lastname, mail)) {
+        util.print(`Creating new user: '${username}'`);
 
         let client = newClient();
-        let sql = sqlstr.format('INSERT INTO users(username, password, firstname, lastname, mail) VALUES(?, ?, ?, ?, ?)', [username, password, firstname, lastname, mail]);
-        
+        let sql = 'INSERT INTO users(username, password, firstname, lastname, mail) VALUES($1, $2, $3, $4, $5)';
+        let params = [username, password, firstname, lastname, mail];
+        util.print(sql);
+
         client.connect();
 
-        client.query(sql, (err, query) => {
+        client.query(sql, params, (err, query) => {
             if (!err) {
                 res.statusMessage = 'New user created';
                 res.status(201).end();
@@ -147,44 +162,6 @@ function newUser(req, res) {
     }
 
     res.send(JSON.stringify('Success!'));
-}
-
-function noSymbols(...str) {
-    let state = true;
-
-    str.forEach(item => {
-        if(!/^[a-zA-Z0-9]+$/.test(item)) {
-            state = false;
-        }
-    });
-
-    return state;
-}
-
-function isNotEmpty(...str) {
-    let state = true;
-
-    str.forEach(item => {
-        if(!item.replace(/\s/g, "").length > 0) {
-            state = false;
-        }
-    });
-
-    return state;
-}
-
-function print(...lines) {
-    let d = new Date();
-    let date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-    let time = `${t(d.getHours())}:${t(d.getMinutes())}:${t(d.getSeconds())}`;
-
-    function t(i) {
-        return (i < 10) ? "0" + i : i;
-    }
-
-    lines.forEach(item => {
-        console.log(`\n${date} ${time}: ${item}`);
-    });
 }
 
 module.exports = {

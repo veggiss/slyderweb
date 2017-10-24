@@ -51,7 +51,7 @@ function getUser(username) {
 }
 
 function login(username, password) {
-	fetch(newRequest('GET', '/user/login', {
+	fetch(newRequest('POST', '/user/login', {
 		username: username,
 		password: password
 	})).then(res =>{
@@ -79,7 +79,9 @@ function newUser(user) {
 		firstname: user.firstname,
 		lastname: user.lastname,
 		mail: user.mail
-	})).catch(err => {
+	})).then(res => {
+		console.log(res);
+	}).catch(err => {
 	    printError(err);
 	});
 }

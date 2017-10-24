@@ -7,13 +7,15 @@ app.set('port', (process.env.PORT || 8080));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-
+// Get
 app.get('/user', db.getUser);
-app.get('/user/login', db.loginUser);
 
+// Put
 app.put('/user/lastlogin', db.setLastlogin);
 
-app.post('/user', db.newUser);
+// Post
+app.post('/user', db.newUser); // <- Should this be a get request?
+app.post('/user/login', db.loginUser);
 
 
 app.listen(app.get('port'), function() {
