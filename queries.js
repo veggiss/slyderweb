@@ -1,15 +1,4 @@
-const {Client} = require('pg');
 const util = require('./util');
-
-function newClient() {
-    let client = new Client({
-        connectionString:process.env.DATABASE_URL,
-        ssl:true
-    });
-
-    return client;
-}
-
 
 // Returns user info
 function getUser(req, res) {
@@ -20,7 +9,7 @@ function getUser(req, res) {
         util.print(`Getting info from user '${username}'`);
 
         // Prepare query strings and connection
-        let client = newClient();
+        let client = util.newClient();
         let sql = 'SELECT * FROM users WHERE username = $1';
         let params = [username];
 
@@ -68,7 +57,7 @@ function loginUser(req, res) {
     if (util.noSymbols(username) && util.isNotEmpty(username)) {
         util.print(`User '${username}' is trying to log in`);
 
-        let client = newClient();
+        let client = util.newClient();
         let sql = 'SELECT * FROM users WHERE username = $1';
         let params = [username];
 
@@ -78,7 +67,8 @@ function loginUser(req, res) {
             if (!err) {
                 if (query.rows.length > 0) {
                     if(query.rows[0].password === password) {
-                        res.send(JSON.stringify('Success!'));
+                        res.statusMessage = 'Login success';
+                        res.status(200).end();
                     } else {
                         res.statusMessage = 'Wrong password';
                         res.status(401).end();
@@ -106,13 +96,13 @@ function setLastlogin(req, res) {
     if (util.noSymbols(username) && util.isNotEmpty(username)) {
         util.print(`Setting lastlogin on user '${username}'`);
 
-        let client = newClient();
+        let client = util.newClient();
         let sql = 'UPDATE users SET lastlogin = $1 WHERE username = $2';
         let params = [Date.now(), username];
 
         client.connect();
 
-        client.query(sql, params, (err, query) => { // <- Not working - never gets called
+        client.query(sql, params, (err, query) => {
             if (!err) {
                 res.statusMessage = 'Timestamp set';
                 res.status(201).end();
@@ -135,14 +125,12 @@ function newUser(req, res) {
     let lastname = req.body.lastname;
     let mail = req.body.mail;
 
-
     if (util.noSymbols(username, firstname, lastname) && util.isNotEmpty(username, password, firstname, lastname, mail)) {
-        util.print(`Creating new user: '${username}'`);
+        util.print(`Creating new user '${username}'`);
 
-        let client = newClient();
+        let client = util.newClient();
         let sql = 'INSERT INTO users(username, password, firstname, lastname, mail) VALUES($1, $2, $3, $4, $5)';
         let params = [username, password, firstname, lastname, mail];
-        util.print(sql);
 
         client.connect();
 
@@ -160,12 +148,10 @@ function newUser(req, res) {
         res.statusMessage = 'Something contains no or illigal characters';
         res.status(403).end();
     }
-
-    res.send(JSON.stringify('Success!'));
 }
 
 module.exports = {
-	getUser : getUser,
+    getUser : getUser,
     loginUser : loginUser,
     setLastlogin : setLastlogin,
     newUser : newUser
