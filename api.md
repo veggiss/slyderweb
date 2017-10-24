@@ -13,8 +13,8 @@
 | /user/pres/page/:id | PUT       | endre på side                            | id=[integer]        |
 | /user/pres/:id      | DELETE    | slette en presentasjon                   | id=[integer]        |
 
-# Beskrivelse av hvert endpoint
 
+# Beskrivelse av hvert endpoint
 
 ## GET
 
@@ -24,22 +24,22 @@
 ### hente liste over presentasjoner
 		app.GET("/user/pres", req, res)
 
-### logge inn
-		app.GET("/user/login", req, res)
-brukernavn passord defineres her
-
 
 ## POST
+### logge inn
+		app.POST("/user/login", req, res)
+brukernavn og passord defineres i body
+
 ### lage ny bruker
 		app.POST("/user", res, req)
-Alle parametere fra user schema vil være nødvendig.
+Alle parametere fra schema untatt presentations, lastlogin og profileImg.
 
 ### lage ny presentasjon
 		app.POST("/user/pres", res, req)
 Alle parametere fra presentation schema vil være nødvendig.
 
 ### lage ny side i presentasjon:
- 		app.POST("/user/pres", res, req)
+		app.POST("/user/pres", res, req)
 
 ## PUT
 ### endre på informasjon om presentasjon

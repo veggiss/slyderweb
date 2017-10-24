@@ -1,3 +1,15 @@
+const {Client} = require('pg');
+
+function newClient() {
+    let client = new Client({
+        //process.env.DATABASE_URL <- Allways upload to git and heroku with this
+        connectionString:process.env.DATABASE_URL,
+        ssl:true
+    });
+
+    return client;
+}
+
 function noSymbols(...str) {
     let state = true;
 
@@ -39,5 +51,6 @@ function print(...lines) {
 module.exports = {
     noSymbols : noSymbols,
     isNotEmpty : isNotEmpty,
-    print : print
+    print : print,
+    newClient : newClient
 }
