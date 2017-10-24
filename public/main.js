@@ -54,11 +54,11 @@ function login(username, password) {
 	fetch(newRequest('POST', '/user/login', {
 		username: username,
 		password: password
-	})).then(res =>{
-	    return res.json();
-	}).then(res => {
-	    console.log(res);
-		setLastlogin(username);
+	})).then(res => {
+	    if (res.status === 200) {
+	    	console.log('Login success');
+			setLastlogin(username);
+		}
 	}).catch(err => {
 	    printError(err);
 	});
@@ -67,7 +67,11 @@ function login(username, password) {
 function setLastlogin(username) {
 	fetch(newRequest('PUT', '/user/lastlogin', {
 		username: username
-	})).catch(err => {
+	})).then(res => {
+	    if (res.status === 201) {
+			console.log(`Timestamp set on user '${username}'`);
+		}
+	}).catch(err => {
 	    printError(err);
 	});
 }
@@ -80,7 +84,9 @@ function newUser(user) {
 		lastname: user.lastname,
 		mail: user.mail
 	})).then(res => {
-		console.log(res);
+	    if (res.status === 201) {
+			console.log(`User '${user.username}' created`);
+		}
 	}).catch(err => {
 	    printError(err);
 	});
