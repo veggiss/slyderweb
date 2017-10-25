@@ -4,17 +4,17 @@
 |---------------------|-----------|------------------------------------------|---------------------|
 | /user/:username     | GET       | hente info om brukerprofil               | username=[string]   |
 | /user/pres          | GET       | hente liste over presentasjoner          |                     |
-| /user/login         | GET       | logge inn                                |                     |
-| /user               | POST      | lage ny bruker                           |                     |
-| /user/pres          | POST      | lage ny presentasjon                     |                     |
+| /user/login         | POST      | logge inn                                | username/password   |
+| /user               | POST      | lage ny bruker                           | user schema         |
+| /user/pres          | POST      | lage ny presentasjon                     | pres schema         |
 | /user/pres/page     | POST      | lage ny side i presentasjon              |                     |
 | /user/pres/:id      | PUT       | endre på informasjon om presentasjon     | id=[integer]        |
 | /user/:username     | PUT       | endre informasjon om eksisterende bruker | username=[string]   |
 | /user/pres/page/:id | PUT       | endre på side                            | id=[integer]        |
 | /user/pres/:id      | DELETE    | slette en presentasjon                   | id=[integer]        |
 
-# Beskrivelse av hvert endpoint
 
+# Beskrivelse av hvert endpoint
 
 ## GET
 
@@ -22,23 +22,24 @@
 		app.GET("/user/:username", req, res)
 
 ### hente liste over presentasjoner
-		app.GET()("/user/pres", req, res)
-
-### logge inn
-		app.GET()("/user/login", req, res)
-brukernavn passord defineres her
+		app.GET("/user/pres", req, res)
 
 
 ## POST
+### logge inn
+		app.POST("/user/login", req, res)
+brukernavn og passord defineres i body
+
 ### lage ny bruker
 		app.POST("/user", res, req)
-trenger ikke /new, post legger jo til
+Alle parametere fra schema untatt presentations, lastlogin og profileImg.
 
 ### lage ny presentasjon
 		app.POST("/user/pres", res, req)
+Alle parametere fra presentation schema vil være nødvendig.
 
 ### lage ny side i presentasjon:
- 		app.POST("/user/pres", res, req)
+		app.POST("/user/pres", res, req)
 
 ## PUT
 ### endre på informasjon om presentasjon
