@@ -1,0 +1,290 @@
+[33mcommit 51705b529621bee25efea9f7760c61a223ee3956[m
+Merge: 836e2b9 f4c036f
+Author: Vegard Egge Schau <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 22:10:45 2017 +0200
+
+    Merge pull request #15 from veggiss/master
+    
+    Refactored some methods, updated REST API.
+
+[33mcommit f4c036f22f6f13e03c72b786c1c54efb5f6a43d4[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 20:20:02 2017 +0200
+
+    Removed unnecessary modules
+
+[33mcommit e585b0c5215af08e65eef6b47a9c53cfb2e85833[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 19:52:56 2017 +0200
+
+    Fixed string
+
+[33mcommit f01cd727cfad71c6421783182446c1a73d8a6066[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 19:49:52 2017 +0200
+
+    Updated rest api
+
+[33mcommit 95c8f6375052accc8026d4365cf407dd1b0b8048[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 19:43:17 2017 +0200
+
+    Changed connection string
+
+[33mcommit 1a6bf5f63e00e4e322151ed3da0863791b8bcccd[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 19:42:22 2017 +0200
+
+    Changed status messages and code
+
+[33mcommit adc2a35734f38a222a878e7f4ab7c87917f584d8[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 19:41:20 2017 +0200
+
+    Changed response
+
+[33mcommit 221ce8514584b829880584cb1c8312ea29f273f4[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 19:40:06 2017 +0200
+
+    pg module now in util
+
+[33mcommit 836e2b9b1569824cfbe8bfde00da866ffea83ecd[m
+Merge: 06ed66b 976a55b
+Author: Vegard Egge Schau <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 18:38:58 2017 +0200
+
+    Merge pull request #14 from veggiss/master
+    
+    Removed sql format module (PG does this already), added utility methods as seperate module
+
+[33mcommit 976a55bcf7336e3743ca7bb1e3d10ecdebbc9e5b[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 18:33:07 2017 +0200
+
+    Changed connection string
+
+[33mcommit 35b6ab4442f84193718c8490330f98d5c421d799[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 18:27:33 2017 +0200
+
+    Remove unnecessary formating module, Refactored utility methods and added some comments
+
+[33mcommit 6944df43f306d0d3476c92104c6f7c160449bcb6[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Tue Oct 24 18:13:54 2017 +0200
+
+    Login is now post request
+
+[33mcommit 06ed66b42b5060256e3071f90d21bbbbe103b155[m
+Merge: a705abf 1207a79
+Author: Vegard Egge Schau <veg_ulf@hotmail.com>
+Date:   Sat Oct 21 12:37:08 2017 +0200
+
+    Merge pull request #13 from veggiss/master
+    
+    Added create user method and fixed set lastlogin
+
+[33mcommit 1207a797798c7ccaf4d6eacfdf9b9a3f71086be4[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Sat Oct 21 12:29:09 2017 +0200
+
+    Changed connection string
+
+[33mcommit c72c308a4229a6ac6c25f61bd7f20f5e1596012c[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Sat Oct 21 12:27:20 2017 +0200
+
+    Fixed setting lastlogin
+
+[33mcommit f4572f9d200ecb47f675997691ee6823227951ca[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Fri Oct 20 21:36:48 2017 +0200
+
+    Added create user method
+
+[33mcommit a705abf7f9b47508145919b38068b675aca82bb6[m
+Merge: 713b9d2 22bfa25
+Author: Vegard Egge Schau <veg_ulf@hotmail.com>
+Date:   Fri Oct 20 02:40:21 2017 +0200
+
+    Merge pull request #12 from veggiss/master
+    
+    La til user info og login funksjon, oppdaterte litt på schema
+
+[33mcommit 22bfa25844cb584671892848001d5a14a179096a[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Fri Oct 20 02:31:54 2017 +0200
+
+    Updated db string
+
+[33mcommit 5d029dab4c9256ad6d57bfb0fc73eead169682f7[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Fri Oct 20 02:29:52 2017 +0200
+
+    Updated with methods for login and get user
+
+[33mcommit ffc6a1e47a348eb6838294adfc9e390f747e79cd[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Fri Oct 20 02:24:09 2017 +0200
+
+    Added mathods
+
+[33mcommit 7cebeca2eb21e574aae515199f60189e2d26e6df[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Fri Oct 20 02:22:48 2017 +0200
+
+    Updated api schema
+
+[33mcommit 851223663246b84255f115e4f4f634f07efe87a9[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 16:37:10 2017 +0200
+
+    fixed nesting
+
+[33mcommit 21ca5d045427419483ead7348e8fc4ad54e3b3e0[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 16:25:03 2017 +0200
+
+    Various changes
+
+[33mcommit 695d72fa4c42180736309e82eaf7149b6bbd5ecd[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 16:17:01 2017 +0200
+
+    Database syntax fix
+
+[33mcommit 7bee1896a5062cd4c490248b8fa0b7bf75463ecf[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 15:55:46 2017 +0200
+
+    fixed
+
+[33mcommit 2ab219c3fa86b9a287355c53e9aac556595be20f[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 15:53:13 2017 +0200
+
+    fix
+
+[33mcommit 3adec9e5a31dcecfe37f84eb015fb271505c597c[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 15:49:47 2017 +0200
+
+    Various fixes
+
+[33mcommit b8b1d08b26350afa900d0d473134c879a4ad695b[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 15:46:36 2017 +0200
+
+    Fixed errors
+
+[33mcommit 423e854869787fb6a921e6fd5aff9b15566b3530[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 15:42:48 2017 +0200
+
+    Fixed getUser error
+
+[33mcommit 2a1ebd19c1046a94b6a1d0ce8ddaceb0d56a0740[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 15:18:59 2017 +0200
+
+    Updated getUser method
+
+[33mcommit 713b9d28ca35c49134a1f4abef725422ac90864c[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 13:13:01 2017 +0200
+
+    Updated api description
+
+[33mcommit 3f357ca3831d288f3203bbeef240cae5aacdb8d8[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 13:08:23 2017 +0200
+
+    Updated api description
+
+[33mcommit 16738ef14f36ec52be3a5e8f5eed41158e058a3a[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 13:05:27 2017 +0200
+
+    Updated api description
+
+[33mcommit 7c9ab2f896b71800aabda308e7613d15e74c2cc2[m
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 01:11:35 2017 +0200
+
+    Fixed errors
+
+[33mcommit e95e6f8a2dc5317cd7d8302b595517d9a773e39c[m
+Merge: e46649b 6605088
+Author: veggiss <veg_ulf@hotmail.com>
+Date:   Thu Oct 19 00:56:03 2017 +0200
+
+    Merge branch 'master' of https://github.com/slyderweb/slyderweb
+
+[33mcommit 66050883aab69f1288d2ba240cabf43dec16cc3d[m
+Author: sunnyolives <sunnyolives@users.noreply.github.com>
+Date:   Wed Oct 18 23:14:31 2017 +0200
+
+    Fjerne slash
+
+[33mcommit d6e820f0a037a8d9a96fd3be452bda74467391d4[m
+Author: sunnyolives <sunnyolives@users.noreply.github.com>
+Date:   Wed Oct 18 23:10:17 2017 +0200
+
+    Update to api.md
+    
+    Alt skal ha /user foran.
+
+[33mcommit e46649b2e5a8fd345acc740b96086c91e13923ae[m
+Author: Vegard Schau <vegard@VEGGIS.veggisnet>
+Date:   Wed Oct 18 23:02:48 2017 +0200
+
+    Updated repo from master
+
+[33mcommit f5595ae3508b7224b8ba82b458287f50757e85c5[m
+Merge: 9fa8d34 f17d7e8
+Author: Vegard Schau <vegard@VEGGIS.veggisnet>
+Date:   Wed Oct 18 22:59:59 2017 +0200
+
+    Merge branch 'master' of https://github.com/slyderweb/slyderweb
+
+[33mcommit 9fa8d349372f495ffb4020a44238ffe930cab222[m
+Author: Vegard Schau <vegard@VEGGIS.veggisnet>
+Date:   Wed Oct 18 22:39:14 2017 +0200
+
+    Fixed errors in getuser method
+
+[33mcommit 54e95d286cc1ca73bfea9ba7c2c996209785cdb7[m
+Author: Vegard Schau <vegard@VEGGIS.veggisnet>
+Date:   Wed Oct 18 22:35:03 2017 +0200
+
+    Various changes
+
+[33mcommit cc9bd76b895698c7d998dc77aadc7f24d1864303[m
+Author: Vegard Schau <vegard@VEGGIS.veggisnet>
+Date:   Wed Oct 18 22:31:19 2017 +0200
+
+    Added get user method
+
+[33mcommit f17d7e887454019e478f54343d310c41bf57eb55[m
+Author: sunnyolives <sunnyolives@users.noreply.github.com>
+Date:   Wed Oct 18 22:30:44 2017 +0200
+
+    Lager api.md med endpoints
+    
+    Tabell, enkel beskrivelse av hvert endpoint
+
+[33mcommit 01cbbf9764d7c7a92e20b89635937014f9ce51a1[m
+Author: chrisr14 <31845430+chrisr14@users.noreply.github.com>
+Date:   Wed Oct 18 22:28:16 2017 +0200
+
+    Update schema.json
+
+[33mcommit f4a7835cc620558e4ee2ab572ef9e68032ee7579[m
+Author: Vegard Schau <vegard@VEGGIS.veggisnet>
+Date:   Wed Oct 18 22:14:47 2017 +0200
+
+    Testing database stuff
+
+[33mcommit 493039c70f73af8f8f7dd50f6918b1820146694e[m
+Merge: 3f42647 592d

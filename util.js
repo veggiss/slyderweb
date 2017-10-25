@@ -3,7 +3,8 @@ const {Client} = require('pg');
 function newClient() {
     let client = new Client({
         //process.env.DATABASE_URL <- Allways upload to git and heroku with this
-        connectionString:process.env.DATABASE_URL,
+        //connectionString:process.env.DATABASE_URL,
+		connectionString:"postgres://qmmmxfpbnkmfuu:61353f3ff055d0833425f0eb668e4eeae4455cbc102ce1703bdf7a0371a466ee@ec2-46-51-187-253.eu-west-1.compute.amazonaws.com:5432/dau7n64ghf76jc",
         ssl:true
     });
 
