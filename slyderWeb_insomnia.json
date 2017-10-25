@@ -1,13 +1,13 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2017-10-25T17:26:30.778Z",
+	"__export_date": "2017-10-25T18:54:24.411Z",
 	"__export_source": "insomnia.desktop.app:v5.9.6",
 	"resources": [
 		{
 			"_id": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
 			"parentId": null,
-			"modified": 1508951631470,
+			"modified": 1508957646536,
 			"created": 1508943783307,
 			"name": "slyderWeb",
 			"description": "",
@@ -152,6 +152,19 @@
 			"name": "lokalt",
 			"data": {
 				"base_url": "http://localhost:8080"
+			},
+			"color": null,
+			"isPrivate": false,
+			"_type": "environment"
+		},
+		{
+			"_id": "env_5e50057ee7eb42afa8bc17d89384394c",
+			"parentId": "env_91d5a082199c40d1858b9a16e32fc417",
+			"modified": 1508956615973,
+			"created": 1508956571951,
+			"name": "heroku",
+			"data": {
+				"base_url": "slyderweb.herokuapp.com"
 			},
 			"color": null,
 			"isPrivate": false,
