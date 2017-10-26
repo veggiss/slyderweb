@@ -38,7 +38,9 @@ function isNotEmpty(...str) {
 }
 
 function logEvent(req, res, next) {
-    print(`New '${req.method}' request from '${req.ip}', Path: '${req.path}', Status: '${res.statusCode}', Message: '${res.statusMessage}'`);
+    if (connectionString != process.env.DATABASE_URL) {
+        print(`New '${req.method}' request from '${req.ip}', Path: '${req.path}', Status: '${res.statusCode}', Message: '${res.statusMessage}'`);
+    }
 
     if (res.err) {
         print(`${req.ip}: Query error (Code: ${res.err.code}, Message: ${res.err.message})`);
@@ -60,9 +62,9 @@ function print(...lines) {
 
     lines.forEach(item => {
         if (connectionString == process.env.DATABASE_URL) {
-            console.log(`${item}`);
-        } else {
             console.log(`\n${date} ${time}: ${item}`);
+        } else {
+            console.log(item);
         }
     });
 }
