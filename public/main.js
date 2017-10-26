@@ -57,19 +57,6 @@ function login(username, password) {
 	})).then(res => {
 	    if (res.status === 200) {
 	    	console.log('Login success');
-			setLastlogin(username);
-		}
-	}).catch(err => {
-	    printError(err);
-	});
-}
-
-function setLastlogin(username) {
-	fetch(newRequest('PUT', '/user/lastlogin', {
-		username: username
-	})).then(res => {
-	    if (res.status === 201) {
-			console.log(`Timestamp set on user '${username}'`);
 		}
 	}).catch(err => {
 	    printError(err);
