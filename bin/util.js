@@ -1,6 +1,7 @@
 const {Client} = require('pg');
 //connectionString = process.env.DATABASE_URL <- Allways upload to git and heroku with this
-const connectionString = process.env.DATABASE_URL;
+const connectionString = 'postgres://qmmmxfpbnkmfuu:61353f3ff055d0833425f0eb668e4eeae4455cbc102ce1703bdf7a0371a466ee@ec2-46-51-187-253.eu-west-1.compute.amazonaws.com:5432/dau7n64ghf76jc';
+const heroku = connectionString == process.env.DATABASE_URL;
 
 function newClient() {
     let client = new Client({
@@ -38,7 +39,7 @@ function isNotEmpty(...str) {
 }
 
 function logEvent(req, res, next) {
-    if (connectionString != process.env.DATABASE_URL) {
+    if (!heroku) {
         print(`New '${req.method}' request from '${req.ip}', Path: '${req.path}', Status: '${res.statusCode}', Message: '${res.statusMessage}'`);
     }
 
@@ -61,7 +62,7 @@ function print(...lines) {
     }
 
     lines.forEach(item => {
-        if (connectionString == process.env.DATABASE_URL) {
+        if (!heroku) {
             console.log(`\n${date} ${time}: ${item}`);
         } else {
             console.log(item);
