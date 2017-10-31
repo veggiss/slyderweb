@@ -1,15 +1,13 @@
-const util = require('./util');
+const ut = require(appRoot + '/bin/util');
 
 // Returns user info
-function getUser(req, res) {
+function getUser(req, res, next) {
     let username = req.query.username;
 
     // Check query not containing no or illigal characters
-    if (util.noSymbols(username) && util.isNotEmpty(username)) {
-        util.print(`Getting info from user '${username}'`);
-
+    if (ut.isNotEmpty(username) && ut.noSymbols(username)) {
         // Prepare query strings and connection
-        let client = util.newClient();
+        let client = ut.newClient();
         let sql = 'SELECT * FROM users WHERE username = $1';
         let params = [username];
 
@@ -29,6 +27,8 @@ function getUser(req, res) {
                     }
 
                     res.send(clientResponse);
+                    res.statusMessage = 'User found';
+                    res.status(200).end();
                 } else {
                     // If query did not return a row
                     res.statusMessage = 'Could not find user';
@@ -42,6 +42,8 @@ function getUser(req, res) {
 
             // End connection for client
             client.end();
+            // Call middleware (logging)
+            next();
         });
     } else {
         // Either username was empty or contained illigal symbols
@@ -50,14 +52,12 @@ function getUser(req, res) {
     }
 }
 
-function loginUser(req, res) {
+function loginUser(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
 
-    if (util.noSymbols(username) && util.isNotEmpty(username)) {
-        util.print(`User '${username}' is trying to log in`);
-
-        let client = util.newClient();
+    if (ut.isNotEmpty(username, password) && ut.noSymbols(username)) {
+        let client = ut.newClient();
         let sql = 'SELECT * FROM users WHERE username = $1';
         let params = [username];
 
@@ -69,6 +69,7 @@ function loginUser(req, res) {
                     if(query.rows[0].password === password) {
                         res.statusMessage = 'Login success';
                         res.status(200).end();
+                        res.next = true;
                     } else {
                         res.statusMessage = 'Wrong password';
                         res.status(401).end();
@@ -83,6 +84,7 @@ function loginUser(req, res) {
             }
 
             client.end();
+            next();
         });
     } else {
         res.statusMessage = 'Username contains no or illigal characters';
@@ -90,13 +92,11 @@ function loginUser(req, res) {
     }
 }
 
-function setLastlogin(req, res) {
-    let username = req.query.username;
+function setLastlogin(req, res, next) {
+    let username = req.body.username;
 
-    if (util.noSymbols(username) && util.isNotEmpty(username)) {
-        util.print(`Setting lastlogin on user '${username}'`);
-
-        let client = util.newClient();
+    if (ut.isNotEmpty(username) && ut.noSymbols(username)) {
+        let client = ut.newClient();
         let sql = 'UPDATE users SET lastlogin = $1 WHERE username = $2';
         let params = [Date.now(), username];
 
@@ -111,6 +111,7 @@ function setLastlogin(req, res) {
                 res.status(500).end();
             }
             client.end();
+            next();
         });
     } else {
         res.statusMessage = 'Username contains no or illigal characters';
@@ -118,17 +119,15 @@ function setLastlogin(req, res) {
     }
 }
 
-function newUser(req, res) {
+function newUser(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let mail = req.body.mail;
 
-    if (util.noSymbols(username, firstname, lastname) && util.isNotEmpty(username, password, firstname, lastname, mail)) {
-        util.print(`Creating new user '${username}'`);
-
-        let client = util.newClient();
+    if (ut.isNotEmpty(username, password, firstname, lastname, mail) && ut.noSymbols(username, firstname, lastname)) {
+        let client = ut.newClient();
         let sql = 'INSERT INTO users(username, password, firstname, lastname, mail) VALUES($1, $2, $3, $4, $5)';
         let params = [username, password, firstname, lastname, mail];
 
@@ -139,10 +138,22 @@ function newUser(req, res) {
                 res.statusMessage = 'New user created';
                 res.status(201).end();
             } else {
-                res.statusMessage = 'There was a problem creating new user';
-                res.status(500).end();
+                if (err.code === '23505') {
+                    if (err.constraint.includes('username')) {
+                        res.statusMessage = `Username already registered`;
+                    } else if (err.constraint.includes('mail')) {
+                        res.statusMessage = `Mail already registered`;
+                    }
+                    res.status(409).end();
+                } else {
+                    res.statusMessage = `There was a problem creating new user`;
+                    res.status(500).end();
+                }
+
+                res.err = err;
             }
             client.end();
+            next();
         });
     } else {
         res.statusMessage = 'Something contains no or illigal characters';

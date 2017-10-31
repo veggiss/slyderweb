@@ -1,30 +1,36 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('./queries');
+const path = require('path');
+
+global.appRoot = path.resolve(__dirname);
+const db = require(appRoot + '/bin/queries');
+const ut = require(appRoot + '/bin/util');
+
 const app = express();
 
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.enable('trust proxy');
 
 // Get
-app.get('/user', db.getUser);
-
-// Put
-app.put('/user/lastlogin', db.setLastlogin);
+app.get('/user', db.getUser, ut.logEvent);
 
 // Post
-app.post('/user', db.newUser); // <- Should this be a get request?
-app.post('/user/login', db.loginUser);
+app.post('/user', db.newUser, ut.logEvent);
+app.post('/user/login', db.loginUser, ut.logEvent, db.setLastlogin, ut.logEvent);
 
 
 app.listen(app.get('port'), function() {
-    console.log('Server started on port: ', app.get('port'));
+    ut.print('-----------------------------');
+    ut.print('       Server started');
+    ut.print(`    http://localhost:${app.get('port')}`);
+    ut.print('-----------------------------');
 });
 
 
-
-function formatTime(seconds) {
+// Unnecessary ?
+/*function formatTime(seconds) {
     seconds = Number(seconds);
     let hours = Math.floor(seconds / 3600);
     let minutes = Math.floor(seconds % 3600 / 60);
@@ -42,4 +48,4 @@ function serverUpkeep() {
 	process.stdout.write('\rServer uptime: ' + formatTime(uptime));
 }
 
-setInterval(serverUpkeep, 1000);
+setInterval(serverUpkeep, 1000);*/
