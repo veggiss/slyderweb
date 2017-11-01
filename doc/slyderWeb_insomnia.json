@@ -1,0 +1,174 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2017-10-25T18:54:24.411Z",
+	"__export_source": "insomnia.desktop.app:v5.9.6",
+	"resources": [
+		{
+			"_id": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
+			"parentId": null,
+			"modified": 1508957646536,
+			"created": 1508943783307,
+			"name": "slyderWeb",
+			"description": "",
+			"certificates": [],
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_91d5a082199c40d1858b9a16e32fc417",
+			"parentId": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
+			"modified": 1508943783312,
+			"created": 1508943783312,
+			"name": "Base Environment",
+			"data": {},
+			"color": null,
+			"isPrivate": false,
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_2fbd68853d43434e8576136ab685037c",
+			"parentId": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
+			"modified": 1508943783310,
+			"created": 1508943783310,
+			"name": "Default Jar",
+			"cookies": [],
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_ef3d827874704c019508c132e7925550",
+			"parentId": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
+			"modified": 1508952369872,
+			"created": 1508943810835,
+			"url": "{{ base_url  }}/user",
+			"name": "getUser",
+			"description": "Her henter man bruker informasjon",
+			"method": "GET",
+			"body": {},
+			"parameters": [
+				{
+					"name": "username",
+					"value": "veggis",
+					"id": "pair_14fdaf3576a24bdb98fb695e6ee51e70"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1508943810835,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_f95c094293874f278d5256a80fc713d9",
+			"parentId": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
+			"modified": 1508952354055,
+			"created": 1508946575449,
+			"url": "{{ base_url  }}/user/login",
+			"name": "loginUser",
+			"description": "Her logger man inn",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\n\"username\":\"veggis\",\n\"password\":\"passord\"\n\t\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_e0f724a4d4c54b29b0e439f572ff3c44"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1508946575449,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_adaffb6a0fc64da48819415e71ad8cae",
+			"parentId": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
+			"modified": 1508952340161,
+			"created": 1508946799197,
+			"url": "{{ base_url  }}/user",
+			"name": "newUser",
+			"description": "Lager ny bruker. NB: epost og brukernavn må være unikt",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\":\"bgjhghjhg\",\n\t\"password\":\"companion\",\n\t\"firstname\": \"Bad\",\n\t\"lastname\": \"Wolf\",\n\t\"mail\":\"tardjhghjhgis\"\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_71c122f0443f43a0aef564bccfba7456"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1508946799197,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_da7d73c75fb64da69f463223280cbc75",
+			"parentId": "wrk_5beb887634e6457f83a2e8c9ca8f5c58",
+			"modified": 1508952249211,
+			"created": 1508951913472,
+			"url": "{{ base_url  }}/user/lastLogin",
+			"name": "lastLogin",
+			"description": "Setter date now som last login",
+			"method": "PUT",
+			"body": {},
+			"parameters": [
+				{
+					"name": "username",
+					"value": "veggis",
+					"id": "pair_065596dc4d264655abd04e9138f5347e"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1508951913472,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "env_b47aa51d3d294bb28b2b64d2fc318468",
+			"parentId": "env_91d5a082199c40d1858b9a16e32fc417",
+			"modified": 1508950341024,
+			"created": 1508950226115,
+			"name": "lokalt",
+			"data": {
+				"base_url": "http://localhost:8080"
+			},
+			"color": null,
+			"isPrivate": false,
+			"_type": "environment"
+		},
+		{
+			"_id": "env_5e50057ee7eb42afa8bc17d89384394c",
+			"parentId": "env_91d5a082199c40d1858b9a16e32fc417",
+			"modified": 1508956615973,
+			"created": 1508956571951,
+			"name": "heroku",
+			"data": {
+				"base_url": "slyderweb.herokuapp.com"
+			},
+			"color": null,
+			"isPrivate": false,
+			"_type": "environment"
+		}
+	]
+}
