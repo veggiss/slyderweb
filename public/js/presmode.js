@@ -1,8 +1,12 @@
 let presmodeBtn = document.getElementById("presmodeBtn");
 let page = document.getElementById("editGrid");
-let isFullscreen = false;
+let sw = screen.width;
+let sh = screen.height;
+let scaleRatio = (sh / 360) * 100;
 
 presmodeBtn.onclick = goFullScreen;
+
+
 
 function goFullScreen() {
 	if(page.requestFullscreen) {
@@ -19,14 +23,37 @@ function goFullScreen() {
 		page.msRequestFullscreen();
 	}
 
-	isFullscreen = true;
+	page.style.bottom = "0";
+	page.style.right = "0"
+	page.style.zoom = scaleRatio + "%";
+	page.style.borderStyle = "none";
+	for (let e of content) {
+		e.style.borderStyle = "none";
+	}
+	presmode = true;
+
 }
 
 function exitHandler()
 {
-    if (isFullscreen)
-    {
-    	console.log("lol");
-    	isFullscreen = false;
+	function resetSize() {
+		page.style.bottom = "50px";
+		page.style.right = "50px"
+		page.style.zoom = "100%";
+		page.style.borderStyle = "dashed";
+		for (let e of content) {
+			e.style.borderStyle = "solid";
+		}
+		presmode = false;
+	}
+
+    if (document.webkitIsFullScreen === false) {
+        resetSize();
+    } else if (document.mozFullScreen === false) {
+        resetSize();
+    } else if (document.msFullscreenElement === false) {
+        resetSize();
+    } else if (document.fullscreenElement === false) {
+    	resetSize();
     }
 }
