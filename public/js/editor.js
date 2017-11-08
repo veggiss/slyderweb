@@ -44,7 +44,6 @@ function loadContent(page) {
 				originX = e.clientX;
 				originY = e.clientY;
 				setSelected(e.target);
-				selected.style.fontSize = "255px";
 				document.onmousemove = (e) => {
 					dragElement(e, selected);
 				}
