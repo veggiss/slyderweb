@@ -1,32 +1,26 @@
 let presmodeBtn = document.getElementById("presmodeBtn");
-let page = document.getElementById("editGrid");
-let sw = screen.width;
-let sh = screen.height;
-let scaleRatio = (sh / 360) * 100;
 
 presmodeBtn.onclick = goFullScreen;
 
-
-
 function goFullScreen() {
-	if(page.requestFullscreen) {
+	if(editGrid.requestFullscreen) {
 		document.addEventListener('fullscreenchange', exitHandler);
-		page.requestFullscreen();
-	} else if(page.mozRequestFullScreen) {
+		editGrid.requestFullscreen();
+	} else if(editGrid.mozRequestFullScreen) {
 		document.addEventListener('mozfullscreenchange', exitHandler);
-		page.mozRequestFullScreen();
-	} else if(page.webkitRequestFullscreen) {
+		editGrid.mozRequestFullScreen();
+	} else if(editGrid.webkitRequestFullscreen) {
 		document.addEventListener('webkitfullscreenchange', exitHandler);
-		page.webkitRequestFullscreen();
-	} else if(page.msRequestFullscreen) {
+		editGrid.webkitRequestFullscreen();
+	} else if(editGrid.msRequestFullscreen) {
 		document.addEventListener('MSFullscreenChange', exitHandler);
-		page.msRequestFullscreen();
+		editGrid.msRequestFullscreen();
 	}
 
-	page.style.bottom = "0";
-	page.style.right = "0"
-	page.style.zoom = scaleRatio + "%";
-	page.style.borderStyle = "none";
+	editGrid.style.bottom = "0";
+	editGrid.style.right = "0"
+	editGrid.style.zoom = (screen.height / 360) * 100 + "%";
+	editGrid.style.borderStyle = "none";
 	for (let e of content) {
 		e.style.borderStyle = "none";
 	}
@@ -34,13 +28,12 @@ function goFullScreen() {
 
 }
 
-function exitHandler()
-{
+function exitHandler() {
 	function resetSize() {
-		page.style.bottom = "50px";
-		page.style.right = "50px"
-		page.style.zoom = "100%";
-		page.style.borderStyle = "dashed";
+		editGrid.style.bottom = "50px";
+		editGrid.style.right = "50px"
+		editGrid.style.zoom = "100%";
+		editGrid.style.borderStyle = "dashed";
 		for (let e of content) {
 			e.style.borderStyle = "solid";
 		}

@@ -1,11 +1,12 @@
 let editGrid = document.getElementById('editGrid');
-let content = editGrid.getElementsByTagName("*");
 
 let originX = 0;
 let originY = 0;
 let editing = false;
 let presmode = false;
-let selected;
+let selected, content;
+
+loadContent(1);
 
 editGrid.addEventListener('mousedown', e => {
 	if (e.target === editGrid) {
@@ -13,49 +14,52 @@ editGrid.addEventListener('mousedown', e => {
 	}
 });
 
-for (let e of content) {
-	let name = e.getAttribute("name");
-	if (name === "text") {
-		addEventsText(e);
+function loadContent(page) {
+	editGrid.innerHTML = presentation["page_" + page];
+	content = editGrid.getElementsByTagName("*");
+
+
+	for (let e of content) {
+		let name = e.getAttribute("name");
+		if (name === "text") {
+			addEventsText(e);
+		}
+	}
+
+	function addEventsText(e) {
+		e.addEventListener('dblclick', e => {
+			setEditMode(e.target);
+		});
+
+		e.addEventListener('keypress', e => {
+			let key = e.which || e.keyCode;
+			if (key == 13) {
+				event.preventDefault();
+				addBr();
+			}
+		});
+
+		e.addEventListener('mousedown', e => {
+			if (!editing) {
+				originX = e.clientX;
+				originY = e.clientY;
+				setSelected(e.target);
+				selected.style.fontSize = "255px";
+				document.onmousemove = (e) => {
+					dragElement(e, selected);
+				}
+			}
+		});
+
+		e.addEventListener('mouseup', e => {
+			closeDragElement(e);
+		});
+
+		e.addEventListener('blur', e => {
+			removeEditMode(e.target);
+		});
 	}
 }
-
-function addEventsText(e) {
-	e.addEventListener('dblclick', e => {
-		setEditMode(e.target);
-	});
-
-	e.addEventListener('keypress', e => {
-		let key = e.which || e.keyCode;
-		if (key == 13) {
-			event.preventDefault();
-			addBr();
-		}
-	});
-
-	e.addEventListener('mousedown', e => {
-		if (!editing) {
-			originX = e.clientX;
-			originY = e.clientY;
-			setSelected(e.target);
-			document.onmousemove = (e) => {
-				dragElement(e, selected);
-			}
-		}
-	});
-
-	e.addEventListener('mouseup', e => {
-		closeDragElement(e);
-	});
-
-	e.addEventListener('blur', e => {
-		removeEditMode(e.target);
-	});
-}
-
-
-
-
 
 function setEditMode(element) {
 	if(!presmode) {

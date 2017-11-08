@@ -8,7 +8,7 @@
 
 <style type="text/css">
 	#editGrid {
-		position: absolute; 
+		position: absolute;
 		bottom: 50px; 
 		right: 50px;
 		border-style: dashed;
@@ -30,15 +30,16 @@
 		user-select: none;
 	}
 </style>
-
 <body>
-	<div id="editGrid">
-		<div class="content" name="text" style="font-size: 25px;">Title</div>
-		<div class="content" name="text" style="top: 180px">Some paragraph</div>
-	</div>
+	<div id="editGrid"></div>		
 	<button id="presmodeBtn">Presentation mode</button>
 </body>
 
+<script type="text/javascript">
+	let presentation = {
+		page_1: '<div class="content" name="text" style="font-size: 25px;">Title</div>'
+	}
+</script>
 <script type="text/javascript" src="js/editor.js"></script>
 <script type="text/javascript" src="js/presmode.js"></script>
 
