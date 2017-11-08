@@ -13,7 +13,10 @@ editGrid.addEventListener('mousedown', e => {
 });
 
 for (let e of content) {
-	addEventsText(e);
+	let name = e.getAttribute("name");
+	if (name === "text") {
+		addEventsText(e);
+	}
 }
 
 function addEventsText(e) {
@@ -48,6 +51,10 @@ function addEventsText(e) {
 		removeEditMode(e.target);
 	});
 }
+
+
+
+
 
 function setEditMode(element) {
 	element.setAttribute("contenteditable", true);
