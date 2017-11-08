@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+  	<title>Slyderweb</title>
+</head>
+
+<style type="text/css">
+	#editGrid {
+		border-style: dashed;
+		width: 640px;
+		height: 360px;
+	}
+
+	.content {
+		display: inline-block;
+		position: absolute;
+		border-style: double;
+		overflow: auto;
+		text-align: center;
+		padding: 10px;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+</style>
+
+<body>
+	<div id="editGrid">
+		<div class="content" style="font-size: 25px;" readonly>Title</div>
+		<div class="content" style="top: 180px" readonly>Some paragraph</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="editor.js"></script>
+
+</html>
