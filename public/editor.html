@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+  	<title>Slyderweb</title>
+</head>
+
+<style type="text/css">
+	#editGrid {
+		position: absolute; 
+		bottom: 50px; 
+		right: 50px;
+		border-style: dashed;
+		width: 640px;
+		height: 360px;
+	}
+
+	.content {
+		position: absolute;
+		border-style: solid;
+		overflow: hidden;
+		text-align: center;
+		padding: 10px;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+</style>
+
+<body>
+	<div id="editGrid">
+		<div class="content" name="text" style="font-size: 25px;">Title</div>
+		<div class="content" name="text" style="top: 180px">Some paragraph</div>
+	</div>
+	<button id="presmodeBtn">Presentation mode</button>
+</body>
+
+<script type="text/javascript" src="js/editor.js"></script>
+<script type="text/javascript" src="js/presmode.js"></script>
+
+</html>
