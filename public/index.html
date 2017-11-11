@@ -13,29 +13,33 @@
 </head>
 
 <body>
-	<!-- det hvite, øverste. Rekkefølgen er invertert -->
-	<header class="logo"><a class="noLinkStyle" href="index.html">SlyderWeb</a></header>
-	<menuitem class="right">
-	<a href="index.html">Presentations/home</a>
-	</menuitem>
-	<menuitem class="right">
-	<a href="editor.html">Editor</a>
-	</menuitem>
-	<menuitem class="right">
-	<a href="">Show</a>
-	</menuitem>
-	<menuitem class="right">
-	<a href="">Settings</a>
-	</menuitem>
-	<menuitem class="right">
-	<a href="">Sign out</a>
-	</menuitem>
-	<menuitem class="right">
-	<a href="">Sign in</a>
-	</menuitem>
+	<nav>
+		<!-- det hvite, øverste. Rekkefølgen er invertert -->
+		<header class="logo">
+			<a class="noLinkStyle" href="index.html">SlyderWeb</a>
+		</header>
+		<menuitem class="right">
+		<a href="index.html">Presentations/home</a>
+		</menuitem>
+		<menuitem class="right">
+		<a href="editor.html">Editor</a>
+		</menuitem>
+		<menuitem class="right">
+		<a href="">Show</a>
+		</menuitem>
+		<menuitem class="right">
+		<a href="">Settings</a>
+		</menuitem>
+		<menuitem class="right">
+		<a href="">Sign out</a>
+		</menuitem>
+		<menuitem class="right">
+		<a href="">Sign in</a>
+		</menuitem>
 	</nav>
 
-	<main> <!-- angir hovedområdet. Hver nye del er section, helst -->
+	<main>
+		<!-- angir hovedområdet. Hver nye del er section, helst -->
 		<aside id="aside" style="display:none;">
 			<button onclick="toggleVisibility()">Hide/show</button>
 			<menuitem>Presentations</menuitem>
@@ -46,39 +50,39 @@
 		</aside>
 
 		<section class="centered">
-		<fieldset>
-			<h3>Sign in</h3>
-			<input type="text" id="login_username" placeholder="Username">
-			<br>
-			<input type="text" id="login_password" placeholder="Password">
-			<br>
-			<button id="login_btn">Sign in</button>
-		</fieldset>
-		<hr>
-		<fieldset>
-			<h3>Create new user</h3>
-			Username:
-			<input type="text" id="createuser_username">
-			<br> Password:
-			<input type="text" id="createuser_password">
-			<br> First name:
-			<input type="text" id="createuser_firstname">
-			<br> Last name:
-			<input type="text" id="createuser_lastname">
-			<br> e-mail address:
-			<input type="text" id="createuser_mail">
-			<br>
-			<button id="createuser_btn">Create user</button>
-		</fieldset>
-		<hr>
-		<fieldset>
-			<h3>User details</h3>
-			<input type="text" id="userinfo_input" placeholder="Username">
-			<button id="userinfo_btn">Find user</button>
-		</fieldset>
-		<hr>
-	</section>
-	<section class="blueDiv">
+			<fieldset>
+				<h3>Sign in</h3>
+				<input type="text" id="login_username" placeholder="Username">
+				<br>
+				<input type="text" id="login_password" placeholder="Password">
+				<br>
+				<button id="login_btn">Sign in</button>
+			</fieldset>
+			<hr>
+			<fieldset>
+				<h3>Create new user</h3>
+				Username:
+				<input type="text" id="createuser_username">
+				<br> Password:
+				<input type="text" id="createuser_password">
+				<br> First name:
+				<input type="text" id="createuser_firstname">
+				<br> Last name:
+				<input type="text" id="createuser_lastname">
+				<br> e-mail address:
+				<input type="text" id="createuser_mail">
+				<br>
+				<button id="createuser_btn">Create user</button>
+			</fieldset>
+			<hr>
+			<fieldset>
+				<h3>User details</h3>
+				<input type="text" id="userinfo_input" placeholder="Username">
+				<button id="userinfo_btn">Find user</button>
+			</fieldset>
+			<hr>
+		</section>
+		<section class="blueDiv">
 			<div class="textContainer">
 				<p>
 					What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is
@@ -86,7 +90,7 @@
 				</p>
 			</div>
 		</section>
-	<!--<section class="blackDiv">
+		<!--<section class="blackDiv">
 			<div class="textContainer">
 				<p>
 					What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is
@@ -96,7 +100,8 @@
 		</section> -->
 	</main>
 
-	<footer>  <!-- del som inneholder ekstrainformasjon -->
+	<footer>
+		<!-- del som inneholder ekstrainformasjon -->
 		<menuitem>
 		<a href="">Help</a>
 		</menuitem>
@@ -107,6 +112,6 @@
 
 </body>
 
-	<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="main.js"></script>
 
 </html>

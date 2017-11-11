@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -7,31 +6,6 @@
 	<title>Slyderweb - editor</title>
 	<link href="css/darkStyle.css" rel="stylesheet" type="text/css" />
 </head>
-
-<style type="text/css">
-	#editGrid {
-		position: absolute;
-		bottom: 50px;
-		right: 50px;
-		border-style: dashed;
-		width: 640px;
-		height: 360px;
-	}
-
-	.content {
-		position: absolute;
-		border-style: solid;
-		overflow: hidden;
-		text-align: center;
-		padding: 10px;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-</style>
 
 <body>
 	<nav>
@@ -59,12 +33,46 @@
 		</menuitem>
 	</nav>
 
-	<div id="editGrid">
-		<div class="content" name="text" style="font-size: 25px;">Title</div>
-		<div class="content" name="text" style="top: 180px">Some paragraph</div>
-	</div>
-	<button id="presmodeBtn">Presentation mode</button>
+	<aside>
+		<ul class="hidden">
+			<li>ADD ELEMENT</li>
+			<li>text</li>
+			<li>image</li>
+		</ul>
+		<ul class="hidden">
+			<li>CHANGE</li>
+			<li>background</li>
+			<li>page template</li>
+			<li>presentation style</li>
+			<li>element style</li>
+			<li>slides ratio</li>
+			<li>move element above/below</li>
+		</ul>
+		<ul class="hidden">
+			<li>TEXT</li>
+			<li>size</li>
+			<li>style</li>
+			<li>font</li>
+			<li>color</li>
+			<li>list</li>
+		</ul>
+		<ul class="hidden">
+				<li>IMAGE</li>
+				<li>set size</li>
+				<li>lock ratio</li>
+				<li>crop</li>
+		</ul>
+	</aside>
+
+	<main>
+
+		<div id="editGrid">
+			<div class="content" name="text" style="font-size: 25px;">Title</div>
+			<div class="content" name="text" style="top: 180px">Some paragraph</div>
+		</div>
+		<button id="presmodeBtn">Presentation mode</button>
 </body>
+</main>
 
 <script type="text/javascript" src="js/editor.js"></script>
 <script type="text/javascript" src="js/presmode.js"></script>

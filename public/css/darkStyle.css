@@ -27,7 +27,7 @@ nav {
 }
 
 aside { /* Brukes bare ved presetasjoneditor */
-	width: 9em; /* Tilpasset innholde i sidebar  */
+	width: 7em; /* Tilpasset innholde i sidebar  */
 	background-color:#333;
 	float: left;
 	padding: 0.3em 0.5em;
@@ -140,8 +140,31 @@ p {
 	margin: 0 auto;
 }
 
+#editGrid {
+	position: absolute;
+	bottom: 50px;
+	right: 50px;
+	border-style: dashed;
+	width: 640px;
+	height: 360px;
+}
+
 .centered {
 	text-align: center;
+}
+
+.content {
+	position: absolute;
+	border-style: solid;
+	overflow: hidden;
+	text-align: center;
+	padding: 10px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .logo {
