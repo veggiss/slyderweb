@@ -22,12 +22,12 @@ body {
 
 nav {
 	background-color: #FFF;
-	height: auto;
+	height: 1.4em;
 	padding: 0.2em 1em;
 }
 
 aside { /* Brukes bare ved presetasjoneditor */
-	width: 7em; /* Tilpasset innholde i sidebar  */
+	width: 13em; /* Tilpasset innhold i sidebar  */
 	background-color:#333;
 	float: left;
 	padding: 0.3em 0.5em;
@@ -38,6 +38,7 @@ main { /*Sentrert */
 	/*height: 100%; blir kvitt unødvendig mellomrom over footer */
 	margin: 0 auto;
 	margin-bottom: 2em;  /* Tilsvarer footerens høyde */
+	/*height: 100%;*/
 }
 
 section {
@@ -140,21 +141,13 @@ p {
 	margin: 0 auto;
 }
 
-#editGrid {
-	position: absolute;
-	bottom: 50px;
-	right: 50px;
-	border-style: dashed;
-	width: 640px;
-	height: 360px;
-}
 
 .centered {
 	text-align: center;
 }
 
 .content {
-	position: absolute;
+	position: absolute;  
 	border-style: solid;
 	overflow: hidden;
 	text-align: center;
@@ -187,3 +180,37 @@ ul.hidden li {
 	list-style: none;
 }
 
+/* ratio-keeping editFrid classes https://stackoverflow.com/a/19787892 */
+
+.ratioContainer {
+	width: 80%; /* sets size */
+	margin: 0 auto; /* centers. alternative is float left or right */
+	position: absolute;  /* relative for sentrering */
+	margin-top: 1.8em;
+	left: 16em;
+}
+
+.ratioSizing {
+	width: 100%;
+	padding-bottom: 50%;    /* sets the ratio */
+	position: relative;
+}
+
+.ratioContent {  /*fills it up. probably replacable with editgrid id*/
+	width: 100%;
+	height: 100%;
+	background-color: teal;
+	position: absolute;  
+	margin-top: -50%;  /* must be same as padding-bottom in .ratioSizing */
+}
+
+#editGrid {
+	position: absolute;  
+	/*bottom: 50px;
+	right: 50px; */
+	left: 14em;
+	top: 1.8em;
+	border-style: dashed;
+	width: 640px;
+	height: 360px;
+}
