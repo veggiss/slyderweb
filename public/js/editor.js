@@ -230,20 +230,16 @@ let btnEvent = {
 
 	exportToFile: function() {
 		domEvent.removeSelected();
+		
+		let presObject = JSON.stringify(presentation);
+		let download = document.createElement('a');
+		let presName = presNameInput.value.replace(/\s/g, "").length > 0 ? presNameInput.value : 'no_name';
 
-		let promise = new Promise((resolve) => {
-			resolve(JSON.stringify(presentation));
-		});
-
-		promise.then(result => {
-			let download = document.createElement('a');
-			let presName = presNameInput.value.replace(/\s/g, "").length > 0 ? presNameInput.value : 'no_name';
-
-			download.setAttribute('download', presName + '.slyderweb');
-			download.setAttribute('href', 'data:text;charset=utf-8,' + result);
-			download.click();
-			download.remove();
-		});
+		download.setAttribute('download', presName + '.slyderweb');
+		download.setAttribute('href', 'data:text;charset=utf-8,' + presObject);
+		editGrid.appendChild(download);
+		download.click();
+		editGrid.removeChild(download);
 	}
 }
 
