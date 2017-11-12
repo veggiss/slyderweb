@@ -89,8 +89,10 @@
 	<button id="savePageBtn">Save page</button>
 	<button id="loadprevBtn">Prev page</button>
 	<button id="loadnextBtn">Next page</button>
-	<br>
+	<br><br>
 	<button id="newTextBoxBtn">New text box</button>
+	<button id="exportToFileBtn">Export presentation</button>
+	<input id="presNameInput" type="text" placeholder="Name" style="width:100px">
 
 	<div id="textToolBar">
 		<ul>
@@ -134,18 +136,6 @@
 	</div>
 </body>
 
-<script type="text/javascript">
-	let presentation = {
-		page_1: {
-			content:
-				'<div class="content" name="text" style="font-size: 25px; width: 150px;">Insert some text</div>'
-		},
-		page_2: {
-			content:
-				'<div class="content" name="text" style="font-size: 15px;">Testings1</div><div class="content" name="text" style="font-size: 25px; top: 55px">Testings2</div><div class="content" name="text" style="font-size: 35px; top: 75px">Testings3</div>'
-		}
-	}
-</script>
 <script type="text/javascript" src="js/editor.js"></script>
 <script type="text/javascript" src="js/presmode.js"></script>
 

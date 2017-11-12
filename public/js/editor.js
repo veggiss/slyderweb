@@ -4,6 +4,7 @@ let savePageBtn = document.getElementById('savePageBtn');
 let loadprevBtn = document.getElementById('loadprevBtn');
 let loadnextBtn = document.getElementById('loadnextBtn');
 let newTextBoxBtn = document.getElementById('newTextBoxBtn');
+let presNameInput = document.getElementById('presNameInput');
 
 //Text toolbar stuff
 let textToolBar			 = document.getElementById('textToolBar');
@@ -20,6 +21,12 @@ let toolbar_alignCenter	 = document.getElementById('toolbar_alignCenter');
 let toolbar_alignRight	 = document.getElementById('toolbar_alignRight');
 
 //Globals
+let presentation = {
+	page_1: {
+		content: ''
+	}
+}
+
 let originX = 0;
 let originY = 0;
 let editing = false;
@@ -49,7 +56,7 @@ let init = {
 		});
 
 		editGrid.addEventListener('drop', e => {
-			domEvent.dropImage(e);
+			domEvent.dropFile(e);
 		});
 
 		editGrid.addEventListener('input', e => {
@@ -207,6 +214,8 @@ let btnEvent = {
 	},
 
 	newTextBox: function() {
+		domEvent.removeSelected();
+
 		let box = document.createElement('div');
 		let top = parseInt(editGrid.style.height) / 2;
 		let left = parseInt(editGrid.style.width) / 2;
@@ -217,6 +226,24 @@ let btnEvent = {
 		editGrid.appendChild(box);
 		init.addDefaultEvents(box);
 		init.addEventsText(box);
+	},
+
+	exportToFile: function() {
+		domEvent.removeSelected();
+
+		let promise = new Promise((resolve) => {
+			resolve(JSON.stringify(presentation));
+		});
+
+		promise.then(result => {
+			let download = document.createElement('a');
+			let presName = presNameInput.value.replace(/\s/g, "").length > 0 ? presNameInput.value : 'no_name';
+
+			download.setAttribute('download', presName + '.slyderweb');
+			download.setAttribute('href', 'data:text;charset=utf-8,' + result);
+			download.click();
+			download.remove();
+		});
 	}
 }
 
@@ -257,32 +284,49 @@ let domEvent = {
 		presentation["page_" + currentPage].content = editGrid.innerHTML;
 	},
 
-	dropImage: function(e) {
+	dropFile: function(e) {
 		e.preventDefault();
 
 		let files = e.dataTransfer.files;
 
 		for (let obj of files) {
-			if (obj.type.includes("image")) {
-				let reader = new FileReader();
-				
-				reader.readAsDataURL(obj);
-
-				reader.onload = (e => {
-					let img = document.createElement('img');
-
-					img.className = 'content'
-					img.name = 'img';
-					img.src = e.target.result;
-					img.style.width = "250px";
-					img.style.height = "auto";
-					img.draggable = false;
-
-					editGrid.appendChild(img);
-					init.addDefaultEvents(img);
-				});
+			if (parseInt(obj.size) > 10485760) {
+				alert('Files over 10mb is not allowed');
 			} else {
-				console.log(`File '${obj.name}' is not an image`);
+				if (obj.type.includes("image")) {
+					let reader = new FileReader();
+					
+					reader.readAsDataURL(obj);
+
+					reader.onload = (e => {
+						let img = document.createElement('img');
+
+						img.className = 'content'
+						img.name = 'img';
+						img.src = e.target.result;
+						img.style.width = "250px";
+						img.style.height = "auto";
+						img.draggable = false;
+
+						editGrid.appendChild(img);
+						init.addDefaultEvents(img);
+					});
+				} else if (obj.name.split('.').pop() === 'slyderweb') {
+					let reader = new FileReader();
+					
+					reader.readAsDataURL(obj);
+
+					reader.onload = (e => {
+						let result = e.target.result;
+						let base64 = result.split(',').pop();
+						let decoded = window.atob(base64);
+						presentation = JSON.parse(decoded);
+						currentPage = 1;
+						init.loadContent();
+					});
+				} else {
+					console.log(`Cannot import file '${obj.name}' :'(`);
+				}
 			}
 		}
 	},
@@ -379,6 +423,7 @@ savePageBtn.onclick = btnEvent.saveCurrentPage;
 loadprevBtn.onclick = btnEvent.prevPage;
 loadnextBtn.onclick = btnEvent.nextPage;
 newTextBoxBtn.onclick = btnEvent.newTextBox;
+exportToFileBtn.onclick = btnEvent.exportToFile;
 
 init.loadGrid();
 init.loadContent();
