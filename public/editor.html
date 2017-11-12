@@ -9,35 +9,139 @@
 <style type="text/css">
 	#editGrid {
 		position: absolute;
-		bottom: 50px; 
-		right: 50px;
+		margin: auto;
+		left: 0; right: -25%;
+		top: 0; bottom: 0;
+		border-radius: 5px;
 		border-style: dashed;
-		width: 640px;
-		height: 360px;
+		border-width: thin;
+		border-color: gray;
+	}
+
+	#textToolBar {
+		position: absolute;
+		display: none;
+		width: 380px;
+		height: 0px;
+		left: 0; right: 0;
+		top: 155px; bottom: 0;
+	}
+
+	#textToolBar ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		background-color: #EEE;
+		border-radius: 5px;
+		border-style: solid;
+		border-width: thin;
+		border-color: gray;
+	}
+
+	#textToolBar ul li {
+		padding: 2px;
+		float: left;
+	}
+
+	#textToolBar ul li * {
+		display: inline-block;
+		color: black;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	#textToolBar ul li select, ul li input {
+		background-color: #EEE;
+		width: 40px;
+		padding: 6px 0px;
+	}
+
+	#textToolBar ul li img {
+		background-color: #EEE;
+		height: 15px;
+		padding: 6px 6px;
+	}
+
+	#textToolBar ul li span {
+		padding: 6px 14px;
+	}
+
+	#textToolBar ul li *:hover {
+		cursor: pointer;
+		background-color: #888;
 	}
 
 	.content {
 		position: absolute;
-		border-style: solid;
 		overflow: hidden;
 		text-align: center;
+		word-wrap: break-word;
 		padding: 10px;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
+		border: thin solid transparent;
 		user-select: none;
+		cursor: pointer;
 	}
 </style>
 <body>
-	<div id="editGrid"></div>		
+	<div id="editGrid"></div>
 	<button id="presmodeBtn">Presentation mode</button>
+	<button id="savePageBtn">Save page</button>
+	<button id="loadprevBtn">Prev page</button>
+	<button id="loadnextBtn">Next page</button>
+
+	<div id="textToolBar">
+		<ul>
+			<li id="toolbar_font" class="toolbar_dropdown">
+				<select>
+					<option value="Arial" style="font-family: 'Arial';">Arial</option>
+					<option value="Courier" style="font-family: 'Courier';">Courier</option>
+					<option value="Helvetica" style="font-family: 'Helvetica';">Helvetica</option>
+					<option value="Times" style="font-family: 'Times';">Times</option>
+					<option value="Verdana" style="font-family: 'Verdana';">Verdana</option>
+				</select>
+			</li>
+			<li id="toolbar_fontSize">
+				<select></select>
+			</li>
+			<li id="toolbar_bold">
+				<span><b>B</b></span>
+			</li>
+			<li id="toolbar_italic">
+				<span><i>I</i></span>
+			</li>
+			<li id="toolbar_underline">
+				<span style="text-decoration: underline;">U</span>
+			</li>
+			<li id="toolbar_bulletList">
+				<img src="http://dryicons.com/uploads/icon/preview/7192/bulleted_list.png">
+			</li>
+			<li id="toolbar_numberList">
+				<img src="http://dryicons.com/uploads/icon/preview/7221/numbered_list.png">
+			</li>
+			<li id="toolbar_alignLeft">
+				<img src="http://downloadicons.net/sites/default/files/align-left-icon-4549.png">
+			</li>
+			<li id="toolbar_alignCenter">
+				<img src="http://downloadicons.net/sites/default/files/align-justify-icon-4548.png">
+			</li>
+			<li id="toolbar_alignRight">
+				<img src="http://downloadicons.net/sites/default/files/align-right-icon-4550.png">
+			</li>
+		</ul>
+	</div>
 </body>
 
 <script type="text/javascript">
 	let presentation = {
-		page_1: '<div class="content" name="text" style="font-size: 25px;">Title</div>'
+		page_1: {
+			content:
+				'<div class="content" name="text" style="font-size: 25px; width: 150px;">Insert some text</div>'
+		},
+		page_2: {
+			content:
+				'<div class="content" name="text" style="font-size: 15px;">Testings1</div><div class="content" name="text" style="font-size: 25px; top: 55px">Testings2</div><div class="content" name="text" style="font-size: 35px; top: 75px">Testings3</div>'
+		}
 	}
 </script>
 <script type="text/javascript" src="js/editor.js"></script>

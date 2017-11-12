@@ -1,134 +1,352 @@
-let editGrid = document.getElementById('editGrid');
+//Editor related
+let editGrid	= document.getElementById('editGrid');
+let savePageBtn = document.getElementById('savePageBtn');
+let loadprevBtn = document.getElementById('loadprevBtn');
+let loadnextBtn = document.getElementById('loadnextBtn');
 
+//Text toolbar stuff
+let textToolBar			 = document.getElementById('textToolBar');
+let toolbar_parent		 = document.getElementById('toolbar_parent');
+let toolbar_font		 = document.getElementById('toolbar_font');
+let toolbar_fontSize	 = document.getElementById('toolbar_fontSize');
+let toolbar_bold		 = document.getElementById('toolbar_bold');
+let toolbar_italic		 = document.getElementById('toolbar_italic');
+let toolbar_underline	 = document.getElementById('toolbar_underline');
+let toolbar_bulletList	 = document.getElementById('toolbar_bulletList');
+let toolbar_numberList	 = document.getElementById('toolbar_numberList');
+let toolbar_alignLeft	 = document.getElementById('toolbar_alignLeft');
+let toolbar_alignCenter	 = document.getElementById('toolbar_alignCenter');
+let toolbar_alignRight	 = document.getElementById('toolbar_alignRight');
+
+//Globals
 let originX = 0;
 let originY = 0;
 let editing = false;
 let presmode = false;
-let selected, content;
+let currentPage = 1;
+let selected, content, presLength;
 
-loadContent(1);
+// -- Initalize content
+let init = {
+	loadGrid: function() {
+		editGrid.style.width = (screen.width * 0.5) + "px";
+		editGrid.style.height = (screen.height * 0.5) + "px";
 
-editGrid.addEventListener('mousedown', e => {
-	if (e.target === editGrid) {
-		removeSelected();
-	}
-});
-
-function loadContent(page) {
-	editGrid.innerHTML = presentation["page_" + page];
-	content = editGrid.getElementsByTagName("*");
-
-
-	for (let e of content) {
-		let name = e.getAttribute("name");
-		if (name === "text") {
-			addEventsText(e);
-		}
-	}
-
-	function addEventsText(e) {
-		e.addEventListener('dblclick', e => {
-			setEditMode(e.target);
-		});
-
-		e.addEventListener('keypress', e => {
-			let key = e.which || e.keyCode;
-			if (key == 13) {
-				event.preventDefault();
-				addBr();
+		editGrid.addEventListener('click', e => {
+			if (e.target === editGrid && selected != undefined) {
+				domEvent.removeSelected();
 			}
 		});
 
-		e.addEventListener('mousedown', e => {
-			if (!editing) {
+		editGrid.addEventListener('dragenter', e => {
+			e.preventDefault();
+		});
+
+		editGrid.addEventListener('dragover', e => {
+			e.preventDefault();
+		});
+
+		editGrid.addEventListener('drop', e => {
+			domEvent.dropImage(e);
+		});
+
+		editGrid.addEventListener('input', e => {
+			// Save events coming
+		});
+	},
+
+	loadToolbar: function() {
+		// Add font size options to selector
+		let toolbar_fontSize_selector = toolbar_fontSize.firstElementChild;
+		for (let i = 1; i <= 7; i ++) {
+			toolbar_fontSize_selector.innerHTML += `<option value=${i}>${i}</option>`;
+		}
+
+		toolbar_font.addEventListener('change', e => {
+			document.execCommand("fontName", false, e.target.value);
+		});
+
+		toolbar_fontSize.addEventListener('change', e => {
+			document.execCommand("fontSize", false, parseInt(e.target.value));
+		});
+
+		toolbar_bold.addEventListener('click', e => {
+			document.execCommand('bold');
+		});	
+
+		toolbar_italic.addEventListener('click', e => {
+			document.execCommand('italic');
+		});
+
+		toolbar_underline.addEventListener('click', e => {
+			document.execCommand('underline');
+		});
+
+		toolbar_bulletList.addEventListener('click', e => {
+			document.execCommand("insertunorderedlist");
+		});
+
+		toolbar_numberList.addEventListener('click', e => {
+			document.execCommand("insertorderedlist");
+		});
+
+		toolbar_alignLeft.addEventListener('click', e => {
+			document.execCommand("JustifyLeft", false);
+		});
+
+		toolbar_alignCenter.addEventListener('click', e => {
+			document.execCommand("JustifyCenter", false);
+		});
+
+		toolbar_alignRight.addEventListener('click', e => {
+			document.execCommand("JustifyRight", false);
+		});
+	},
+
+	loadContent: function() {
+		editGrid.innerHTML = presentation["page_" + currentPage].content;
+		content = editGrid.getElementsByTagName("*");
+		presLength = Object.keys(presentation).length;
+
+		for (let element of content) {
+			let parent = domEvent.getParent(editGrid, element);
+			let name = parent.getAttribute("name");
+
+			this.addDefaultEvents(parent);
+
+			if (name === "text") {
+				this.addEventsText(parent);
+			}
+		}
+	},
+
+	addDefaultEvents: function(element) {
+		element.addEventListener('mousedown', e => {
+			if (!editing && e.target != undefined) {
+				let element = domEvent.getParent(editGrid, e.target);
 				originX = e.clientX;
 				originY = e.clientY;
-				setSelected(e.target);
+				domEvent.setSelected(element);
 				document.onmousemove = (e) => {
-					dragElement(e, selected);
+					domEvent.dragElement(e, selected);
 				}
 			}
 		});
 
-		e.addEventListener('mouseup', e => {
-			closeDragElement(e);
+		element.addEventListener('mouseup', e => {
+			domEvent.closeDragElement(e);
 		});
 
-		e.addEventListener('blur', e => {
-			removeEditMode(e.target);
+		element.addEventListener('blur', e => {
+			if (!domEvent.checkClickedToolbar()) {
+				domEvent.removeEditMode(e.target);
+			} else if (editing && selected != undefined) {
+				selected.focus();
+			}
 		});
+	},
+
+	addEventsText: function(element) {
+		element.addEventListener('dblclick', e => {
+			let element = domEvent.getParent(editGrid, e.target);
+			domEvent.setEditMode(element, true);
+		});
+
+		/*element.addEventListener('keypress', e => {
+			let key = e.which || e.keyCode;
+			if (key == 13) {
+				// This was needed when selection was not parent of selected element
+				//e.preventDefault();
+				//domEvent.addBr();
+			}
+		});*/
 	}
 }
 
-function setEditMode(element) {
-	if(!presmode) {
-		element.setAttribute("contenteditable", true);
-		element.focus();
-		element.style.resize = "both";
-		editing = true;
+// -- Button functions
+let btnEvent = {
+	saveCurrentPage: function() {
+		domEvent.removeSelected();
+	},
+
+	prevPage: function() {
+		domEvent.removeSelected();
+
+		if (currentPage > 1) {
+			currentPage--;
+			init.loadContent(currentPage);
+		}
+	},
+
+	nextPage: function() {
+		domEvent.removeSelected();
+
+		if (currentPage < presLength) {
+			currentPage++;
+			init.loadContent(currentPage);
+		}
 	}
 }
 
-function removeEditMode(element) {
-	if(!presmode) {
-		element.contentEditable = false;
-		element.style.resize = "none";
-		editing = false;
-	}
-}
+// -- Element events
+let domEvent = {
+	setToolbarPos: function(element) {
+		let top = parseInt(element.style.top);
+		let left = parseInt(element.style.left);
+		let offsetTop = parseInt(editGrid.offsetTop);
+		let offsetLeft = parseInt(editGrid.offsetLeft);
+		textToolBar.style.top = (top + offsetTop - 50) + "px";
+		textToolBar.style.left = (left + offsetLeft) + "px";
+	},
 
-function setSelected(element) {
-	if(!presmode) {
-		if (selected != undefined) {
-			selected.style.borderColor = "black";
+	checkClickedToolbar: function() {
+		let clicked = false;
+		let mTarget = document.querySelectorAll(":hover");
+			
+		for (let element of mTarget) {
+			if (element === textToolBar) {
+				clicked = true;
+			}
 		}
 
-		selected = element;
-		selected.style.borderColor = "blue";
-	}
-}
+		return clicked;
+	},
 
-function removeSelected() {
-	if(!presmode) {
-		if (selected != undefined) {
-			selected.readonly = true;
-			selected.style.borderColor = "black";
-			selected = undefined;
+	getParent: function(parent, element) {
+		if (parent != undefined && element != undefined) {
+			while (element.parentElement != parent) {
+				element = element.parentElement;
+			}
+			return element;
+		}
+	},
+
+	savePage: function() {
+		presentation["page_" + currentPage].content = editGrid.innerHTML;
+	},
+
+	dropImage: function(e) {
+		e.preventDefault();
+
+		let files = e.dataTransfer.files;
+
+		for (let obj of files) {
+			if (obj.type.includes("image")) {
+				let reader = new FileReader();
+				
+				reader.readAsDataURL(obj);
+
+				reader.onload = (e => {
+					let img = document.createElement('img');
+
+					img.className = 'content'
+					img.name = 'img';
+					img.src = e.target.result;
+					img.style.width = "250px";
+					img.style.height = "auto";
+					img.draggable = false;
+
+					editGrid.appendChild(img);
+					init.addDefaultEvents(img);
+				});
+			} else {
+				console.log(`File '${obj.name}' is not an image`);
+			}
+		}
+	},
+
+
+	setEditMode: function(element, editable) {
+		if(!presmode) {
+			element.setAttribute("contenteditable", editable);
+			element.focus();
+			element.style.resize = "both";
+			element.style.cursor = "auto";
+			textToolBar.style.display = "inline-block";
+			this.setToolbarPos(element);
+
+			editing = true;
+		}
+	},
+
+	removeEditMode: function(element) {
+		if(!presmode) {
+			element.contentEditable = false;
+			element.style.resize = "none";
+			element.style.cursor = "pointer";
+			textToolBar.style.display = "none";
+
+			editing = false;
+		}
+	},
+
+	setSelected: function(element) {
+		if(!presmode) {
+			if (selected != undefined) {
+				this.removeSelected();
+			}
+
+			selected = element;
+			selected.style.borderColor = "lightblue";
+		}
+	},
+
+	removeSelected: function() {
+		if(!presmode) {
+			if (selected != undefined) {
+				selected.readonly = true;
+				selected.style.borderColor = "transparent";
+				selected = undefined;
+
+				this.savePage();
+			}
+		}
+	},
+
+	dragElement: function(e, element) {
+		if(!presmode && element != undefined) {
+			document.onmouseup = this.closeDragElement;
+
+		    let x = originX - e.clientX;
+		    let y = originY - e.clientY;
+		    let offsetX = element.offsetLeft - x;
+		    let offsetY = element.offsetTop - y;
+
+		    originX = e.clientX;
+		    originY = e.clientY;
+		    element.style.left = offsetX + "px";
+		    element.style.top = offsetY + "px";
+	    }
+	},
+
+	closeDragElement: function(e) {
+		if(!presmode) {
+			document.onmouseup = null;
+			document.onmousemove = null;
+		}
+	},
+
+	//Depricated
+	addBr: function() {
+		if(!presmode) {
+			let selection = window.getSelection();
+			let range = selection.getRangeAt(0);
+			let br = document.createElement("br");
+			range.deleteContents();
+			range.insertNode(br);
+			range.setStartAfter(br);
+			range.setEndAfter(br);
+			range.collapse(false);
+			selection.removeAllRanges();
+			selection.addRange(range);
 		}
 	}
 }
 
-function dragElement(e, ele) {
-	if(!presmode) {
-		document.onmouseup = closeDragElement;
+savePageBtn.onclick = btnEvent.saveCurrentPage;
+loadprevBtn.onclick = btnEvent.prevPage;
+loadnextBtn.onclick = btnEvent.nextPage;
 
-	    let x = originX - e.clientX;
-	    let y = originY - e.clientY;
-	    originX = e.clientX;
-	    originY = e.clientY;
-	    ele.style.left = (ele.offsetLeft - x) + "px";
-	    ele.style.top = (ele.offsetTop - y) + "px";
-    }
-}
-
-function closeDragElement(e) {
-	if(!presmode) {
-		document.onmouseup = null;
-		document.onmousemove = null;
-	}
-}
-
-function addBr() {
-	if(!presmode) {
-		let selection = window.getSelection();
-		let range = selection.getRangeAt(0);
-		let br = document.createElement("br");
-		range.deleteContents();
-		range.insertNode(br);
-		range.setStartAfter(br);
-		range.setEndAfter(br);
-		range.collapse(false);
-		selection.removeAllRanges();
-		selection.addRange(range);
-	}
-}
+init.loadGrid();
+init.loadContent();
+init.loadToolbar();

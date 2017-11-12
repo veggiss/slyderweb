@@ -17,36 +17,49 @@ function goFullScreen() {
 		editGrid.msRequestFullscreen();
 	}
 
-	editGrid.style.bottom = "0";
-	editGrid.style.right = "0"
-	editGrid.style.zoom = (screen.height / 360) * 100 + "%";
-	editGrid.style.borderStyle = "none";
-	for (let e of content) {
-		e.style.borderStyle = "none";
-	}
-	presmode = true;
+	lockGrid();
+}
 
+function lockGrid() {
+	if (selected != undefined) {
+		domEvent.removeSelected();
+	}
+
+	for (let e of content) {
+		let element = domEvent.getParent(editGrid, e);
+		element.style.borderStyle = "none";
+		element.style.cursor = "default";
+	}
+
+	editGrid.style.right = "0px";
+	editGrid.style.zoom = (screen.height / parseInt(editGrid.style.height)) * 100 + "%";
+	editGrid.style.borderStyle = "none";
+
+	presmode = true;
+}
+
+function resetGrid() {
+	for (let e of content) {
+		let element = domEvent.getParent(editGrid, e);
+		element.style.borderStyle = "solid";
+		element.style.cursor = "pointer";
+	}
+
+	editGrid.style.right = "-25%";
+	editGrid.style.zoom = "100%";
+	editGrid.style.borderStyle = "dashed";
+
+	presmode = false;
 }
 
 function exitHandler() {
-	function resetSize() {
-		editGrid.style.bottom = "50px";
-		editGrid.style.right = "50px"
-		editGrid.style.zoom = "100%";
-		editGrid.style.borderStyle = "dashed";
-		for (let e of content) {
-			e.style.borderStyle = "solid";
-		}
-		presmode = false;
-	}
-
     if (document.webkitIsFullScreen === false) {
-        resetSize();
+        resetGrid();
     } else if (document.mozFullScreen === false) {
-        resetSize();
+        resetGrid();
     } else if (document.msFullscreenElement === false) {
-        resetSize();
+        resetGrid();
     } else if (document.fullscreenElement === false) {
-    	resetSize();
+    	resetGrid();
     }
 }
