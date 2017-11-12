@@ -3,6 +3,7 @@ let editGrid	= document.getElementById('editGrid');
 let savePageBtn = document.getElementById('savePageBtn');
 let loadprevBtn = document.getElementById('loadprevBtn');
 let loadnextBtn = document.getElementById('loadnextBtn');
+let newTextBoxBtn = document.getElementById('newTextBoxBtn');
 
 //Text toolbar stuff
 let textToolBar			 = document.getElementById('textToolBar');
@@ -29,6 +30,7 @@ let selected, content, presLength;
 // -- Initalize content
 let init = {
 	loadGrid: function() {
+		let pressedDelKey = false;
 		editGrid.style.width = (screen.width * 0.5) + "px";
 		editGrid.style.height = (screen.height * 0.5) + "px";
 
@@ -52,6 +54,22 @@ let init = {
 
 		editGrid.addEventListener('input', e => {
 			// Save events coming
+		});
+
+		document.addEventListener('keydown', e => {
+			if (!pressedDelKey) {
+				let key = e.which || e.keyCode;
+				if (key == 46) {
+					if (!editing && selected != undefined) {
+						selected.remove();
+						domEvent.savePage();
+					}
+				}
+				pressedDelKey = true;
+			}
+		});
+		document.addEventListener('keyup', e => {
+			pressedDelKey = false;
 		});
 	},
 
@@ -152,6 +170,7 @@ let init = {
 			domEvent.setEditMode(element, true);
 		});
 
+		//Deprecated stuff
 		/*element.addEventListener('keypress', e => {
 			let key = e.which || e.keyCode;
 			if (key == 13) {
@@ -185,6 +204,19 @@ let btnEvent = {
 			currentPage++;
 			init.loadContent(currentPage);
 		}
+	},
+
+	newTextBox: function() {
+		let box = document.createElement('div');
+		let top = parseInt(editGrid.style.height) / 2;
+		let left = parseInt(editGrid.style.width) / 2;
+		box.className = 'content';
+		box.setAttribute('name', 'text');
+		box.style = `font-size: 25px; width: 150px; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px;`;
+		box.innerHTML = 'Enter text';
+		editGrid.appendChild(box);
+		init.addDefaultEvents(box);
+		init.addEventsText(box);
 	}
 }
 
@@ -326,7 +358,7 @@ let domEvent = {
 		}
 	},
 
-	//Depricated
+	//Deprecated
 	addBr: function() {
 		if(!presmode) {
 			let selection = window.getSelection();
@@ -346,6 +378,7 @@ let domEvent = {
 savePageBtn.onclick = btnEvent.saveCurrentPage;
 loadprevBtn.onclick = btnEvent.prevPage;
 loadnextBtn.onclick = btnEvent.nextPage;
+newTextBoxBtn.onclick = btnEvent.newTextBox;
 
 init.loadGrid();
 init.loadContent();
