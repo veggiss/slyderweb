@@ -80,8 +80,11 @@ footer {
 button {
 	box-shadow: none;
 	background-color: #ccc;
-	appearance: none;
-	margin: 6px 0px;
+	/*appearance: none; */
+	padding: 3px 9px;
+	margin: 2px;
+	border-radius: 4px;
+	border-style: none;
 }
 
 button:active {

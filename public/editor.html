@@ -37,8 +37,10 @@
 		<button id="presmodeBtn">Presentation mode</button>
 		<ul class="hidden">
 			<li>ADD ELEMENT</li>
-			<li>text</li>
-			<li>image</li>
+			<li>
+				<button>Text</button>
+				<button>Image</button>
+			</li>
 		</ul>
 		<ul class="hidden">
 			<li>CHANGE</li>
@@ -47,11 +49,15 @@
 			<li>presentation style</li>
 			<li>element style</li>
 			<li>slides ratio</li>
-			<li>move element above/below</li>
+			<li>move element</li>
+			<li>
+				<button>up/above</button>
+				<button>down/below</button>
+			</li>
 		</ul>
 		<ul class="hidden">
 			<li>TEXT</li>
-			<li>size</li>
+			<li>size <input type="number" value="12"/></li>
 			<li>style</li>
 			<li>font</li>
 			<li>color</li>
@@ -66,13 +72,10 @@
 	</aside>
 
 	<main>
-		<!-- <div class="ratioContainer">
-			<div class="ratioSizing"></div> -->
-			<div id="editGrid"> <!-- class="ratioContent">  -->
-				<div class="content" name="text" style="font-size: 25px;">Title</div>
-				<div class="content" name="text" style="top: 180px">Some paragraph</div>
-			</div>
-		<!-- </div>
+		<div id="editGrid">
+			<div class="content" name="text" style="font-size: 25px;">Title</div>
+			<div class="content" name="text" style="top: 180px">Some paragraph</div>
+		</div>
 </body>
 </main>
 
