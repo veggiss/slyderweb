@@ -146,7 +146,6 @@ p {
 	margin: 0 auto;
 }
 
-
 .centered {
 	text-align: center;
 }
@@ -220,6 +219,13 @@ textarea {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#slideView {
+	position: absolute;
+	right: 0;
+	padding: 0.2em 2em;
+	margin: 0 auto;
+}
+
 @media only screen and (min-width: 900px) {
 	aside {
 		width: 22em;
@@ -242,5 +248,12 @@ textarea {
 		box-sizing: border-box;
 		padding: 0.6em 4em;
 		font-size: 1.6em;
+	}
+
+	#slideView {
+		position: absolute;
+		right: 14em;
+		padding: 0.2em 2em;
+		margin: 0 auto;
 	}
 }
