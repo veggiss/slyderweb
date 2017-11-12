@@ -27,7 +27,7 @@ nav {
 }
 
 aside { /* Brukes bare ved presetasjoneditor */
-	width: 13em; /* Tilpasset innhold i sidebar  */
+	width: 16em; /* Tilpasset innhold i sidebar  */
 	background-color:#333;
 	float: left;
 	padding: 0.3em 0.5em;
@@ -211,7 +211,7 @@ ul.hidden li {
 	position: absolute;  
 	/*bottom: 50px;
 	right: 50px; */
-	left: 14em;
+	left: 17em;
 	top: 1.8em;
 	border-style: dashed;
 	width: 640px;
