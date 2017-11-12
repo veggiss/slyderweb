@@ -22,7 +22,7 @@ body {
 }
 
 nav {
-	background-color: #FFF;
+	background-color: rgb(214, 196, 196);
 	height: 1.4em;
 	padding: 0.2em 1em;
 }
@@ -125,7 +125,7 @@ menuitem a:visited {
 
 .noLinkStyle {
 	text-decoration: none;
-	color: red;
+	color: black;
 }
 
 p {
