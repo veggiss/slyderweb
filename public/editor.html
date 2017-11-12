@@ -33,6 +33,7 @@
 		</menuitem>
 	</nav>
 
+	<main>
 	<aside>
 		<button id="presmodeBtn">Presentation mode</button>
 		<ul class="hidden">
@@ -45,24 +46,29 @@
 		<ul class="hidden">
 			<li>CHANGE</li>
 			<li>presentation style
-					<select>
-							<option selected>Default</option>
-							<option>Dark</option>
-							<option>Light</option>
-							<option>Formal</option>
-							<option>Moon</option>
-							<option>Warm</option>
-						</select>
+				<select>
+					<option selected>Default</option>
+					<option>Dark</option>
+					<option>Light</option>
+					<option>Formal</option>
+					<option>Moon</option>
+					<option>Warm</option>
+				</select>
 				<button id="editStylesbtn">Edit styles</button>
 			</li>
 			<li>page template
-					<select>
-							<option selected>Default</option>
-							<option>Columns</option>
-							<option>Titlepage</option>
-							<option>Image</option>
-						</select>
+				<select>
+					<option selected>Default</option>
+					<option>Columns</option>
+					<option>Titlepage</option>
+					<option>Image</option>
+				</select>
 				<button id="editTemplatesbtn">Edit templates</button>
+			</li>
+			<li>Element alignment
+				<button>Left</button>
+				<button>Center</button>
+				<button>Right</button>
 			</li>
 			<li>background color
 				<select>
@@ -74,13 +80,13 @@
 				<button id="colorPickerbtn">Color picker</button>
 			</li>
 			<li>slides ratio
-					<select>
-						<option selected>16:9</option>
-							<option>Self-defined</option>
-							<option>Auto</option>
-							<option>4:3</option>
-							<option>16:10</option>
-						</select>
+				<select>
+					<option selected>16:9</option>
+					<option>Self-defined</option>
+					<option>Auto</option>
+					<option>4:3</option>
+					<option>16:10</option>
+				</select>
 			</li>
 			<li>move element</li>
 			<li>
@@ -91,15 +97,15 @@
 		<ul class="hidden">
 			<li>TEXT</li>
 			<li>element style
-			<select>
-				<option>Title</option>
-				<option>None</option>
-				<option>Header 1</option>
-				<option>Header 2</option>
-				<option>Header 3</option>
-				<option selected>Paragraph</option>
-				<option>Quote</option>
-			</select>
+				<select>
+					<option>Title</option>
+					<option>None</option>
+					<option>Header 1</option>
+					<option>Header 2</option>
+					<option>Header 3</option>
+					<option selected>Paragraph</option>
+					<option>Quote</option>
+				</select>
 			</li>
 			<li>size
 				<input type="number" value="12" />
@@ -117,13 +123,13 @@
 				</select>
 			</li>
 			<li>color
-					<select>
-							<option selected>Default</option>
-							<option>Black</option>
-							<option>Red</option>
-							<option>Blue</option>
-						</select>
-						<button id="colorPickerbtn">Color picker</button>
+				<select>
+					<option selected>Default</option>
+					<option>Black</option>
+					<option>Red</option>
+					<option>Blue</option>
+				</select>
+				<button id="colorPickerbtn">Color picker</button>
 			</li>
 			<li>list
 				<ul>
@@ -134,19 +140,38 @@
 		</ul>
 		<ul class="hidden">
 			<li>IMAGE</li>
-			<li>set size<input placeholder="width" type="number"/><input placeholder="height" type="number"/></li>
-			<li><input type="checkbox"/>Lock ratio</li>
-			<li><button>Crop</button></li>
+			<li>set size
+				<input placeholder="width" type="number" />
+				<input placeholder="height" type="number" />
+			</li>
+			<li>
+				<input type="checkbox" />Lock ratio</li>
+			<li>
+				<button>Crop</button>
+			</li>
 		</ul>
 	</aside>
 
-	<main>
+	<section id="editGridContainer1">
+	<section id="editGridContainer2">
 		<div id="editGrid">
 			<div class="content" name="text" style="font-size: 25px;">Title</div>
 			<div class="content" name="text" style="top: 180px">Some paragraph</div>
 		</div>
+	</section>
+	</section>
+	</main>
+
+<!--
+	<footer> <!-- del som inneholder ekstrainformasjon
+			<menuitem>
+			<a href="">Help</a>
+			</menuitem>
+			<menuitem>
+			<a href="">About</a>
+			</menuitem>
+		</footer>  -->
 </body>
-</main>
 
 <script type="text/javascript" src="js/editor.js"></script>
 <script type="text/javascript" src="js/presmode.js"></script>
