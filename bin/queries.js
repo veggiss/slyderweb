@@ -51,10 +51,13 @@ function getUser(req, res, next) {
         res.status(403).end();
     }
 }
-
+// Lagt til salting og ny sha1 hashing av passord, ikke helt ferdig.
 function loginUser(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
+    let salt = "1234567890";
+    password = salt + password;
+    password = sha1(password);
 
     if (ut.isNotEmpty(username, password) && ut.noSymbols(username)) {
         let client = ut.newClient();
