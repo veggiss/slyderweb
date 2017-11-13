@@ -5,6 +5,7 @@ let loadprevBtn = document.getElementById('loadprevBtn');
 let loadnextBtn = document.getElementById('loadnextBtn');
 let newTextBoxBtn = document.getElementById('newTextBoxBtn');
 let presNameInput = document.getElementById('presNameInput');
+let currentPageTxt = document.getElementById('currentPageTxt');
 
 //Text toolbar stuff
 let textToolBar			 = document.getElementById('textToolBar');
@@ -129,6 +130,7 @@ let init = {
 	},
 
 	loadContent: function() {
+		currentPageTxt.innerHTML = 'Current page: ' + currentPage;
 		editGrid.innerHTML = presentation["page_" + currentPage].content;
 		content = editGrid.getElementsByTagName("*");
 		presLength = Object.keys(presentation).length;
@@ -197,7 +199,6 @@ let btnEvent = {
 
 	prevPage: function() {
 		domEvent.removeSelected();
-
 		if (currentPage > 1) {
 			currentPage--;
 			init.loadContent(currentPage);
@@ -207,10 +208,20 @@ let btnEvent = {
 	nextPage: function() {
 		domEvent.removeSelected();
 
+		presLength = Object.keys(presentation).length;
+
 		if (currentPage < presLength) {
 			currentPage++;
 			init.loadContent(currentPage);
 		}
+	},
+
+	newPage: function() {
+		for (let i = presLength; i >= currentPage + 1; i--) {
+			presentation['page_' + (i + 1)] = presentation['page_' + i];
+		}
+		presentation['page_' + (currentPage + 1)] = {content: ''};
+		btnEvent.nextPage();
 	},
 
 	newTextBox: function() {
@@ -329,7 +340,7 @@ let domEvent = {
 
 
 	setEditMode: function(element, editable) {
-		if(!presmode) {
+		if(!presmode && !editing) {
 			element.setAttribute("contenteditable", editable);
 			element.focus();
 			element.style.resize = "both";
@@ -342,7 +353,7 @@ let domEvent = {
 	},
 
 	removeEditMode: function(element) {
-		if(!presmode) {
+		if(!presmode && editing) {
 			element.contentEditable = false;
 			element.style.resize = "none";
 			element.style.cursor = "pointer";
@@ -366,6 +377,8 @@ let domEvent = {
 	removeSelected: function() {
 		if(!presmode) {
 			if (selected != undefined) {
+				this.removeEditMode(selected);
+
 				selected.readonly = true;
 				selected.style.borderColor = "transparent";
 				selected = undefined;
@@ -418,6 +431,7 @@ let domEvent = {
 savePageBtn.onclick = btnEvent.saveCurrentPage;
 loadprevBtn.onclick = btnEvent.prevPage;
 loadnextBtn.onclick = btnEvent.nextPage;
+newPageBtn.onclick = btnEvent.newPage;
 newTextBoxBtn.onclick = btnEvent.newTextBox;
 exportToFileBtn.onclick = btnEvent.exportToFile;
 
