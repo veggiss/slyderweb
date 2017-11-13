@@ -50,10 +50,13 @@ function getUser(username) {
 	});
 }
 
+// Legger til sha1 hash passord kryptering fra klient side:
 function login(username, password) {
+    var hashPassword = sha1(password);
+    console.log(hashPassword);
 	fetch(newRequest('POST', '/user/login', {
 		username: username,
-		password: password
+		password: hashPassword
 	})).then(res => {
 	    if (res.status === 200) {
 	    	console.log('Login success');
