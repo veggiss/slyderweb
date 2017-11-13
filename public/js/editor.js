@@ -41,7 +41,7 @@ let init = {
 		editGrid.style.width = (screen.width * 0.5) + "px";
 		editGrid.style.height = (screen.height * 0.5) + "px";
 
-		editGrid.addEventListener('click', e => {
+		editGrid.addEventListener('mousedown', e => {
 			if (e.target === editGrid && selected != undefined) {
 				domEvent.removeSelected();
 			}
@@ -95,35 +95,35 @@ let init = {
 			document.execCommand("fontSize", false, parseInt(e.target.value));
 		});
 
-		toolbar_bold.addEventListener('click', e => {
+		toolbar_bold.addEventListener('mousedown', e => {
 			document.execCommand('bold');
 		});	
 
-		toolbar_italic.addEventListener('click', e => {
+		toolbar_italic.addEventListener('mousedown', e => {
 			document.execCommand('italic');
 		});
 
-		toolbar_underline.addEventListener('click', e => {
+		toolbar_underline.addEventListener('mousedown', e => {
 			document.execCommand('underline');
 		});
 
-		toolbar_bulletList.addEventListener('click', e => {
+		toolbar_bulletList.addEventListener('mousedown', e => {
 			document.execCommand("insertunorderedlist");
 		});
 
-		toolbar_numberList.addEventListener('click', e => {
+		toolbar_numberList.addEventListener('mousedown', e => {
 			document.execCommand("insertorderedlist");
 		});
 
-		toolbar_alignLeft.addEventListener('click', e => {
+		toolbar_alignLeft.addEventListener('mousedown', e => {
 			document.execCommand("JustifyLeft", false);
 		});
 
-		toolbar_alignCenter.addEventListener('click', e => {
+		toolbar_alignCenter.addEventListener('mousedown', e => {
 			document.execCommand("JustifyCenter", false);
 		});
 
-		toolbar_alignRight.addEventListener('click', e => {
+		toolbar_alignRight.addEventListener('mousedown', e => {
 			document.execCommand("JustifyRight", false);
 		});
 	},
