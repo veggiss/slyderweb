@@ -1,8 +1,50 @@
 let presmodeBtn = document.getElementById("presmodeBtn");
+let lastPage;
 
 presmodeBtn.onclick = goFullScreen;
 
+let fsEvents = {
+	nextPageKeys: function(e) {
+		if (presmode) {
+			e.preventDefault();
+			
+			let key = e.which || e.keyCode;
+			if (key === 39) {
+				btnEvent.nextPage();
+			} else if (key === 37) {
+				btnEvent.prevPage();
+			}
+
+			lockCursor();
+		}
+	},
+
+	nextPageClick: function(e) {
+		if (presmode) {
+			e.preventDefault();
+
+			let click = e.which;
+
+			if (click === 1) {
+				btnEvent.nextPage();
+			} else if (click === 3) {
+				btnEvent.prevPage();
+			}
+
+			lockCursor();
+		}
+	},
+
+	preventMenu: function(e) {
+		if (presmode) {
+			e.preventDefault();
+		}
+	}
+}
+
 function goFullScreen() {
+	lockGrid();
+
 	if(editGrid.requestFullscreen) {
 		document.addEventListener('fullscreenchange', exitHandler);
 		editGrid.requestFullscreen();
@@ -16,29 +58,36 @@ function goFullScreen() {
 		document.addEventListener('MSFullscreenChange', exitHandler);
 		editGrid.msRequestFullscreen();
 	}
-
-	lockGrid();
 }
 
+//Issue #4 Firefox not scaling content properly
 function lockGrid() {
-	if (selected != undefined) {
-		domEvent.removeSelected();
-	}
+	domEvent.removeSelected()
 
-	for (let e of content) {
-		let element = domEvent.getParent(editGrid, e);
-		element.style.borderStyle = "none";
-		element.style.cursor = "default";
-	}
+	lastPage = currentPage;
+	currentPage = 1;
+	init.loadContent(currentPage);
+
+	lockCursor();
 
 	editGrid.style.right = "0px";
-	editGrid.style.zoom = (screen.height / parseInt(editGrid.style.height)) * 100 + "%";
 	editGrid.style.borderStyle = "none";
+	editGrid.style.zoom = (screen.height / parseInt(editGrid.style.height)) * 100 + "%";
 
 	presmode = true;
 }
 
+function lockCursor() {
+	for (let e of content) {
+		let element = domEvent.getParent(editGrid, e);
+		element.style.cursor = "default";
+	}
+}
+
 function resetGrid() {
+	currentPage = lastPage;
+	init.loadContent(currentPage);
+
 	for (let e of content) {
 		let element = domEvent.getParent(editGrid, e);
 		element.style.borderStyle = "solid";
@@ -63,3 +112,7 @@ function exitHandler() {
     	resetGrid();
     }
 }
+
+document.addEventListener('keydown', fsEvents.nextPageKeys);
+document.addEventListener('mousedown', fsEvents.nextPageClick);
+document.addEventListener('contextmenu', fsEvents.preventMenu);

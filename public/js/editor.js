@@ -175,6 +175,8 @@ let init = {
 
 	addEventsText: function(element) {
 		element.addEventListener('dblclick', e => {
+			e.preventDefault();
+
 			let element = domEvent.getParent(editGrid, e.target);
 			domEvent.setEditMode(element, true);
 		});
