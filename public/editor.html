@@ -73,6 +73,17 @@
 		background-color: #888;
 	}
 
+	#notesTxt {
+		width: 150px; 
+		height: 150px; 
+    	resize: both;
+		border-radius: 5px;
+		border-style: solid;
+		border-width: thin;
+		border-color: gray;
+		overflow: auto;
+	}
+
 	.content {
 		position: absolute;
 		overflow: hidden;
@@ -96,6 +107,8 @@
 	<button id="newTextBoxBtn">New text box</button>
 	<button id="exportToFileBtn">Export presentation</button>
 	<input id="presNameInput" type="text" placeholder="Name" style="width:100px">
+	<br><br>Notes:<br>
+	<div id="notesTxt" contenteditable="true"></div>
 
 	<div id="textToolBar">
 		<ul>

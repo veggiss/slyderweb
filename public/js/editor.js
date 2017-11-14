@@ -6,25 +6,27 @@ let loadnextBtn = document.getElementById('loadnextBtn');
 let newTextBoxBtn = document.getElementById('newTextBoxBtn');
 let presNameInput = document.getElementById('presNameInput');
 let currentPageTxt = document.getElementById('currentPageTxt');
+let notesTxt = document.getElementById('notesTxt');
 
 //Text toolbar stuff
-let textToolBar			 = document.getElementById('textToolBar');
-let toolbar_parent		 = document.getElementById('toolbar_parent');
-let toolbar_font		 = document.getElementById('toolbar_font');
-let toolbar_fontSize	 = document.getElementById('toolbar_fontSize');
-let toolbar_bold		 = document.getElementById('toolbar_bold');
-let toolbar_italic		 = document.getElementById('toolbar_italic');
-let toolbar_underline	 = document.getElementById('toolbar_underline');
-let toolbar_bulletList	 = document.getElementById('toolbar_bulletList');
-let toolbar_numberList	 = document.getElementById('toolbar_numberList');
-let toolbar_alignLeft	 = document.getElementById('toolbar_alignLeft');
-let toolbar_alignCenter	 = document.getElementById('toolbar_alignCenter');
-let toolbar_alignRight	 = document.getElementById('toolbar_alignRight');
+let textToolBar = document.getElementById('textToolBar');
+let toolbar_parent = document.getElementById('toolbar_parent');
+let toolbar_font = document.getElementById('toolbar_font');
+let toolbar_fontSize = document.getElementById('toolbar_fontSize');
+let toolbar_bold = document.getElementById('toolbar_bold');
+let toolbar_italic = document.getElementById('toolbar_italic');
+let toolbar_underline = document.getElementById('toolbar_underline');
+let toolbar_bulletList = document.getElementById('toolbar_bulletList');
+let toolbar_numberList = document.getElementById('toolbar_numberList');
+let toolbar_alignLeft = document.getElementById('toolbar_alignLeft');
+let toolbar_alignCenter = document.getElementById('toolbar_alignCenter');
+let toolbar_alignRight = document.getElementById('toolbar_alignRight');
 
 //Globals
 let presentation = {
 	page_1: {
-		content: ''
+		content: '',
+		notes: ''
 	}
 }
 
@@ -62,6 +64,10 @@ let init = {
 
 		editGrid.addEventListener('input', e => {
 			// Save events coming
+		});
+
+		notesTxt.addEventListener('input', e => {
+			presentation["page_" + currentPage].notes = notesTxt.innerHTML;
 		});
 
 		document.addEventListener('keydown', e => {
@@ -130,8 +136,13 @@ let init = {
 	},
 
 	loadContent: function() {
+		let presObject = presentation["page_" + currentPage];
+		notesTxt.innerHTML = "";
+
 		currentPageTxt.innerHTML = 'Current page: ' + currentPage;
-		editGrid.innerHTML = presentation["page_" + currentPage].content;
+		editGrid.innerHTML = presObject.content;
+		notesTxt.innerHTML = presObject.notes;
+
 		content = editGrid.getElementsByTagName("*");
 		presLength = Object.keys(presentation).length;
 
@@ -222,7 +233,7 @@ let btnEvent = {
 		for (let i = presLength; i >= currentPage + 1; i--) {
 			presentation['page_' + (i + 1)] = presentation['page_' + i];
 		}
-		presentation['page_' + (currentPage + 1)] = {content: ''};
+		presentation['page_' + (currentPage + 1)] = {content: '', notes: ''};
 		btnEvent.nextPage();
 	},
 
@@ -290,7 +301,9 @@ let domEvent = {
 	},
 
 	savePage: function() {
-		presentation["page_" + currentPage].content = editGrid.innerHTML;
+		let presObject = presentation["page_" + currentPage];
+		presObject.content = editGrid.innerHTML;
+		presObject.notes = notesTxt.innerHTML;
 	},
 
 	dropFile: function(e) {
