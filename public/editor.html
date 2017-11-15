@@ -23,7 +23,7 @@
 	#textToolBar {
 		position: absolute;
 		display: none;
-		width: 431px;
+		width: 472px;
 		height: 0px;
 		left: 0; right: 0;
 		top: 155px; bottom: 0;
@@ -85,6 +85,47 @@
 		overflow: auto;
 	}
 
+	#colorPicker {
+		position: absolute;
+		z-index: 100;
+		display: none;
+		text-align: center;
+		width: 200px;
+		height: 200px;
+		padding: 5px;
+		background-color: lightgray;
+		border-radius: 5px;
+		border-style: solid;
+		border-width: thin;
+		border-color: gray;
+	}
+
+	#colorPicker [name = hue] {
+		background: linear-gradient(to right, red, orange, yellow, green, blue, indigo,violet);
+	}
+
+	#colorPicker [name = light] {
+		background: linear-gradient(to right, black, white);
+	}
+
+	#colorPicker [name = alpha] {
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQYV2NkQID/ICYjNgGwDEwSpAJFAACKfwQDF+r+wwAAAABJRU5ErkJggg==), linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+	}
+
+	#colorPicker div {
+		border-radius: 5px;
+		border-style: solid;
+		border-width: thin;
+		border-color: gray;
+	}
+
+	#colorPicker input {
+		position: relative;
+		width: 100%;
+		top: 1px;
+		right: 2px;
+	}
+
 	.content {
 		position: absolute;
 		overflow: hidden;
@@ -97,6 +138,27 @@
 	}
 </style>
 <body>
+	<!--<input id="colorPicker" type="color">-->
+
+	<div id="colorPicker">
+		Hue
+		<div name="hue">
+			<input type="range" min="1" max="300" value="130">
+		</div>
+		Light
+		<div name="light">
+			<input type="range" min="1" max="100" value="100">
+		</div>
+		Alpha
+		<div name="alpha">
+			<input type="range" min="0" max="1" step="0.01" value="1">
+		</div>
+		Saturation
+		<div name="sat">
+			<input type="range" min="0" max="1" step="0.01" value="1">
+		</div>
+	</div>
+
 	<div id="editGrid"></div>
 	<button id="presmodeBtn">Presentation mode</button>
 	<button id="savePageBtn">Save page</button>
@@ -133,6 +195,9 @@
 			</li>
 			<li id="toolbar_underline">
 				<span style="text-decoration: underline;">U</span>
+			</li>
+			<li id="toolbar_shadow">
+				<span style="text-shadow: 2px 2px #bfbfbf;">S</span>
 			</li>
 			<li id="toolbar_txtColor">
 				<img src="http://dryicons.com/uploads/icon/preview/7226/icon_grid_1x_text_color.png">
