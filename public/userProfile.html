@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User profile</title>
+    <link href="css/userProfile.css" rel="stylesheet">
 </head>
 <body>
     <nav> <!-- det hvite, øverste -->
@@ -26,27 +27,53 @@
   </menuitem>
 </nav>
 
-<main>
+<main id="profile-root">
   <section id="profile-controls">
     <div>
-      <img src="https://lorempixel.com/200/200/people" alt="">
+      <!-- <img src="https://lorempixel.com/200/200/people/1" alt=""> -->
     </div>
-    <nav>
-      <a href="#">User info</a>
-      <a href="#">Presentations</a>
-      <a href="#">Setting</a>
-    </nav>
+		<nav>
+      <a href="#info"    class="menu-item">User info</a>
+      <a href="#slides"  class="menu-item">Presentations</a>
+      <a href="#setting" class="menu-item">Setting</a>
+		</nav>
+    <!--<nav>
+      <a href="#info"    onclick="window.location.reload()">User info</a>
+      <a href="#slides"  onclick="window.location.reload()">Presentations</a>
+      <a href="#setting" onclick="window.location.reload()">Setting</a>
+    </nav>-->
   </section>
-  
-  <section id="profile-content">
+
+  <section id="page-info" class="page">
     <header>
-      <h1>bruker navn</h1>
+      <h1>Info</h1>
     </header>
     <div>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque unde distinctio ab error blanditiis quasi, ex ipsum perspiciatis animi vel, aliquam similique nulla incidunt minus minima totam sed dolorum atque!</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quibusdam voluptate officia nostrum optio quod deserunt quis totam nam consequuntur ducimus quas eius culpa et, similique, tempora nobis, libero sunt.</p>
     </div>
   </section>
+
+  <section id="page-slides" class="page">
+    <header>
+      <h1>Slides</h1>
+    </header>
+    <div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque unde distinctio ab error blanditiis quasi, ex ipsum perspiciatis animi vel, aliquam similique nulla incidunt minus minima totam sed dolorum atque!</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quibusdam voluptate officia nostrum optio quod deserunt quis totam nam consequuntur ducimus quas eius culpa et, similique, tempora nobis, libero sunt.</p>
+    </div>
+  </section>
+
+  <section id="page-setting" class="page">
+    <header>
+      <h1>Settings</h1>
+    </header>
+    <div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque unde distinctio ab error blanditiis quasi, ex ipsum perspiciatis animi vel, aliquam similique nulla incidunt minus minima totam sed dolorum atque!</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quibusdam voluptate officia nostrum optio quod deserunt quis totam nam consequuntur ducimus quas eius culpa et, similique, tempora nobis, libero sunt.</p>
+    </div>
+  </section>
+
 </main>
 
 
@@ -59,4 +86,5 @@
   </menuitem>
 </footer>
 </body>
+<script type="text/javascript" src="js/userProfile.js"></script>
 </html>
