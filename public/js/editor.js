@@ -24,9 +24,7 @@ let toolbar_alignCenter = document.getElementById('toolbar_alignCenter');
 let toolbar_alignRight = document.getElementById('toolbar_alignRight');
 
 //Color picker for toolbar
-let colorPicker = new thistle.Picker('hsl(255, 255, 255)');
-colorPicker.el.style.display = "none";
-document.body.appendChild(colorPicker.el);
+let colorPicker = document.getElementById('colorPicker');
 
 //Globals
 let presentation = {
@@ -95,9 +93,7 @@ let init = {
 
 	loadToolbar: function() {
 		// Add font size options to selector
-		let lastTxtColor = colorPicker.getHSL();
-		let lastBgColor = colorPicker.getHSL();
-		let lastSelected, clickedPicker;
+		let clickedPicker, lastSelected;
 		let toolbar_fontSize_selector = toolbar_fontSize.firstElementChild;
 
 		for (let i = 1; i <= 7; i ++) {
@@ -125,35 +121,24 @@ let init = {
 		});
 
 		toolbar_txtColor.addEventListener('mousedown', e => {
-			if (lastTxtColor != undefined) {
-				colorPicker.setCSS(lastTxtColor);
-			}
-
 			lastSelected = toolbar_txtColor;
 			domEvent.toggleColorPicker();
 		});
 
 		toolbar_bgColor.addEventListener('mousedown', e => {
-			if (lastBgColor != undefined) {
-				colorPicker.setCSS(lastBgColor);
-			}
-
 			lastSelected = toolbar_bgColor;
 			domEvent.toggleColorPicker();
 		});
 
-		colorPicker.el.addEventListener('mousedown', e => {
-			clickedPicker = true;
-		});
-
 		document.addEventListener('mouseup', e => {
-			if (colorPicker.el.style.display != "none" && clickedPicker) {
+			if (colorPicker.style.display != "none") {
 				if (lastSelected === toolbar_txtColor) {
-					lastTxtColor = colorPicker.getCSS();
-					document.execCommand('foreColor', false, lastTxtColor);
+					document.execCommand('foreColor', false, colorPicker.value);
+					toolbar_txtColor.style.backgroundColor = colorPicker.value;
+					console.log(colorPicker);
 				} else if (lastSelected === toolbar_bgColor) {
-					lastBgColor = colorPicker.getCSS();
-					document.execCommand('BackColor', false, lastBgColor);
+					document.execCommand('BackColor', false, colorPicker.value);
+					toolbar_bgColor.style.backgroundColor = colorPicker.value;
 				}
 			}
 		});
@@ -314,14 +299,14 @@ let btnEvent = {
 // -- Element events
 let domEvent = {
 	toggleColorPicker() {
-		if (colorPicker.el.style.display === "none") {
+		if (colorPicker.style.display === "none") {
 			let top = parseInt(textToolBar.style.top);
 			let left = parseInt(textToolBar.style.left);
-			colorPicker.el.style.top = (top - 220) + "px";
-			colorPicker.el.style.left = (left) + "px";
-			colorPicker.el.style.display = "inline-block";
+			colorPicker.style.top = (top - 220) + "px";
+			colorPicker.style.left = (left) + "px";
+			colorPicker.style.display = "inline-block";
 		} else {
-			colorPicker.el.style.display = "none";
+			colorPicker.style.display = "none";
 		}
 	},
 
@@ -339,7 +324,7 @@ let domEvent = {
 		let mTarget = document.querySelectorAll(":hover");
 			
 		for (let element of mTarget) {
-			if (element === textToolBar) {
+			if (element === textToolBar || element === colorPicker) {
 				clicked = true;
 			}
 		}
@@ -429,7 +414,7 @@ let domEvent = {
 			element.style.resize = "none";
 			element.style.cursor = "pointer";
 			textToolBar.style.display = "none";
-			colorPicker.el.style.display = "none";
+			colorPicker.style.display = "none";
 
 			editing = false;
 		}
