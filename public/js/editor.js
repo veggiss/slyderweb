@@ -10,17 +10,23 @@ let notesTxt = document.getElementById('notesTxt');
 
 //Text toolbar stuff
 let textToolBar = document.getElementById('textToolBar');
-let toolbar_parent = document.getElementById('toolbar_parent');
 let toolbar_font = document.getElementById('toolbar_font');
 let toolbar_fontSize = document.getElementById('toolbar_fontSize');
 let toolbar_bold = document.getElementById('toolbar_bold');
 let toolbar_italic = document.getElementById('toolbar_italic');
+let toolbar_txtColor = document.getElementById('toolbar_txtColor');
+let toolbar_bgColor = document.getElementById('toolbar_bgColor');
 let toolbar_underline = document.getElementById('toolbar_underline');
 let toolbar_bulletList = document.getElementById('toolbar_bulletList');
 let toolbar_numberList = document.getElementById('toolbar_numberList');
 let toolbar_alignLeft = document.getElementById('toolbar_alignLeft');
 let toolbar_alignCenter = document.getElementById('toolbar_alignCenter');
 let toolbar_alignRight = document.getElementById('toolbar_alignRight');
+
+//Color picker for toolbar
+let hslPicker = new thistle.Picker('hsl(255, 255, 255)');
+hslPicker.el.style.display = "none";
+document.body.appendChild(hslPicker.el);
 
 //Globals
 let presentation = {
@@ -71,7 +77,7 @@ let init = {
 		});
 
 		document.addEventListener('keydown', e => {
-			if (!pressedDelKey) {
+			if (!pressedDelKey && !presmode) {
 				let key = e.which || e.keyCode;
 				if (key == 46) {
 					if (!editing && selected != undefined) {
@@ -89,7 +95,11 @@ let init = {
 
 	loadToolbar: function() {
 		// Add font size options to selector
+		let lastTxtColor = hslPicker.getHSL();
+		let lastBgColor = hslPicker.getHSL();
+		let lastSelected;
 		let toolbar_fontSize_selector = toolbar_fontSize.firstElementChild;
+
 		for (let i = 1; i <= 7; i ++) {
 			toolbar_fontSize_selector.innerHTML += `<option value=${i}>${i}</option>`;
 		}
@@ -112,6 +122,36 @@ let init = {
 
 		toolbar_underline.addEventListener('mousedown', e => {
 			document.execCommand('underline');
+		});
+
+		toolbar_txtColor.addEventListener('mousedown', e => {
+			if (lastTxtColor != undefined) {
+				hslPicker.setHSL(lastTxtColor.h, lastTxtColor.s, lastTxtColor.l);
+			}
+
+			lastSelected = toolbar_txtColor;
+			domEvent.toggleColorPicker();
+		});
+
+		toolbar_bgColor.addEventListener('mousedown', e => {
+			if (lastBgColor != undefined) {
+				hslPicker.setHSL(lastBgColor.h, lastBgColor.s, lastBgColor.l);
+			}
+
+			lastSelected = toolbar_bgColor;
+			domEvent.toggleColorPicker();
+		});
+
+		hslPicker.el.addEventListener('mouseup', e => {
+			if (hslPicker.el.style.display != "none") {
+				if (lastSelected === toolbar_txtColor) {
+					lastTxtColor = hslPicker.getHSL();
+					document.execCommand('foreColor', false, hslPicker.getCSS());
+				} else if (lastSelected === toolbar_bgColor) {
+					lastBgColor = hslPicker.getHSL();
+					document.execCommand('BackColor', false, hslPicker.getCSS());
+				}
+			}
 		});
 
 		toolbar_bulletList.addEventListener('mousedown', e => {
@@ -269,6 +309,18 @@ let btnEvent = {
 
 // -- Element events
 let domEvent = {
+	toggleColorPicker() {
+		if (hslPicker.el.style.display === "none") {
+			let top = parseInt(textToolBar.style.top);
+			let left = parseInt(textToolBar.style.left);
+			hslPicker.el.style.top = (top - 220) + "px";
+			hslPicker.el.style.left = (left) + "px";
+			hslPicker.el.style.display = "inline-block";
+		} else {
+			hslPicker.el.style.display = "none";
+		}
+	},
+
 	setToolbarPos: function(element) {
 		let top = parseInt(element.style.top);
 		let left = parseInt(element.style.left);
@@ -373,6 +425,7 @@ let domEvent = {
 			element.style.resize = "none";
 			element.style.cursor = "pointer";
 			textToolBar.style.display = "none";
+			hslPicker.el.style.display = "none";
 
 			editing = false;
 		}
