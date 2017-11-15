@@ -52,8 +52,7 @@ function getUser(username) {
 
 // Legger til sha1 hash passord kryptering fra klient side:
 function login(username, password) {
-    var hashPassword = sha1(password);
-    console.log(hashPassword);
+    let hashPassword = sha1(password);
 	fetch(newRequest('POST', '/user/login', {
 		username: username,
 		password: hashPassword
@@ -67,6 +66,9 @@ function login(username, password) {
 }
 
 function newUser(user) {
+    let hashPassword = sha1(user.password);
+    console.log(hashPassword);
+    user.password = hashPassword;
 	fetch(newRequest('POST', '/user', {
 		username: user.username,
 		password: user.password,
@@ -76,6 +78,7 @@ function newUser(user) {
 	})).then(res => {
 	    if (res.status === 201) {
 			console.log(`User '${user.username}' created`);
+            
 		}
 	}).catch(err => {
 	    printError(err);
