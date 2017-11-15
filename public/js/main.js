@@ -66,9 +66,8 @@ function login(username, password) {
 }
 
 function newUser(user) {
-    let hashPassword = sha1(user.password);
-    console.log(hashPassword);
-    user.password = hashPassword;
+    user.password = sha1(user.password);
+
 	fetch(newRequest('POST', '/user', {
 		username: user.username,
 		password: user.password,
