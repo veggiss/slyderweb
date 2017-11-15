@@ -29,7 +29,7 @@ nav {
 
 aside { /* Brukes bare ved presetasjoneditor */
 	width: 14em; /* Tilpasset innhold i sidebar */
-	background-color:#333;
+	background-color:rgb(19, 17, 17);
 	float: left;
 	padding: 0.3em 0.5em;
 	height: 100%;
@@ -187,7 +187,7 @@ ul.hidden li {
 #editGrid {
 	position: absolute;  
 	background: white;
-	border-style: dashed;
+	border: 0.2em solid gray;
 	top: 1.8em;
 	left: 15em;
 	/* original size
@@ -195,6 +195,7 @@ ul.hidden li {
 	height: 360px;*/
 	width: 355px;
 	height: 200px;
+	color: black;
 }
 
 #presNotes {
@@ -224,6 +225,7 @@ textarea {
 	right: 0;
 	padding: 0.2em 2em;
 	margin: 0 auto;
+	font-size: 0.7em;
 }
 
 @media only screen and (min-width: 900px) {
@@ -252,8 +254,9 @@ textarea {
 
 	#slideView {
 		position: absolute;
-		right: 14em;
+		right: 10vh;
 		padding: 0.2em 2em;
 		margin: 0 auto;
+		font-size: 1.2em;
 	}
 }
