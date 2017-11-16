@@ -1,25 +1,24 @@
-<!-- slides.com-inspirert layout
-	Forfattere:
-	- Vegard
-	- Silje U.
--->
+<!--  slides.com-inspirert layout. holy grail with CSS grid -->
+
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
 
 <head>
-	<meta chartset="utf-8" />
+	<meta charset="utf-8" />
 	<title>Slyderweb - homepage</title>
 	<link href="css/cssGrid.css" rel="stylesheet" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
-	<nav>
-		<!-- det hvite, øverste. Rekkefølgen er invertert -->
+<body class="hg">
+	<nav class="hg-header">
+<!-- Rekkefølgen er motsatt -->
 		<header class="logo">
 			<a class="noLinkStyle" href="index.html">SlyderWeb</a>
 		</header>
 		<menuitem class="right">
-		<a href="index.html">Presentations/home</a>
+		<a href="index.html">Presentations</a>
 		</menuitem>
 		<menuitem class="right">
 		<a href="editor.html">Editor</a>
@@ -38,16 +37,7 @@
 		</menuitem>
 	</nav>
 
-	<main>
-		<!-- angir hovedområdet. Hver nye del er section, helst -->
-		<aside style="display:none;">
-			<button onclick="toggleVisibility()">Hide/show</button>
-			<menuitem>Presentations</menuitem>
-			<menuitem>Presentation editor</menuitem>
-			<menuitem>Presentation mode</menuitem>
-			<menuitem>Help</menuitem>
-
-		</aside>
+	<main class="hg-main">
 
 		<section class="centered">
 			<fieldset>
@@ -100,7 +90,10 @@
 		</section> -->
 	</main>
 
-	<footer>
+	<aside class="hg-left" style="display:none;"></aside>
+     <aside class="hg-right" style="display:none;"></aside>
+	
+       <footer class="hg-footer">
 		<!-- kanskje vi ikke trenger dette -->
 		<menuitem>
 		<a href="">Help</a>

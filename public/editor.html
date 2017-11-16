@@ -1,20 +1,24 @@
+<!--  slides.com-inspirert layout. holy grail with CSS grid -->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8" />
 	<title>Slyderweb - editor</title>
 	<link href="css/cssGrid.css" rel="stylesheet" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
-	<nav>
-		<!-- det hvite, øverste. Rekkefølgen er invertert -->
+<body class="hg">
+	<nav class="hg-header">
+		<!-- Rekkefølgen er motsatt -->
 		<header class="logo">
 			<a class="noLinkStyle" href="index.html">SlyderWeb</a>
 		</header>
 		<menuitem class="right">
-		<a href="index.html">Presentations/home</a>
+		<a href="index.html">Presentations</a>
 		</menuitem>
 		<menuitem class="right">
 		<a href="editor.html">Editor</a>
@@ -33,9 +37,26 @@
 		</menuitem>
 	</nav>
 
-	<main>
-		<aside>
-			<button id="presmodeBtn">Presentation mode</button>
+	<main class="hg-main">
+	<button id="presmodeBtn">Presentation mode</button>
+		<div id="editGrid">
+		<div class="content" name="text" style="font-size: 25px;">Title</div>
+		<div class="content" name="text" style="top: 120px">Some paragraph</div>
+		</div>
+	
+	
+	  <section id="notes">
+      <h1> Presentation notes</h1>
+      <textarea placeholder="Enter notes here"></textarea>
+    </section>
+	
+	</main>
+	
+	
+	
+	
+		<aside class="hg-left">Options
+						
 			<ul class="hidden">
 				<li>ADD ELEMENT</li>
 				<li>
@@ -152,16 +173,8 @@
 			</ul>
 		</aside>
 
-		<div id="editGrid">
-			<div class="content" name="text" style="font-size: 25px;">Title</div>
-			<div class="content" name="text" style="top: 120px">Some paragraph</div>
-		</div>
-
-		<section id="notes">
-			<h1> Presentation notes</h1>
-			<textarea placeholder="Enter notes here"></textarea>
-		</section>
-
+		<aside class="hg-right">Slides
+		
 		<section id="slideView" class="centered">
 			<h1>Slides overview</h1>
 			<ul class="hidden">
@@ -170,17 +183,17 @@
 				<li>Slide 3</li>
 			</ul>
 		</section>
-	</main>
+		
+		</aside>
 
-	<!--
-	<footer> <!-- del som inneholder ekstrainformasjon
+	<footer class="hg-footer">
 			<menuitem>
 			<a href="">Help</a>
 			</menuitem>
 			<menuitem>
 			<a href="">About</a>
 			</menuitem>
-		</footer>  -->
+		</footer> 
 </body>
 
 <script type="text/javascript" src="js/editor.js"></script>
