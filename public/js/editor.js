@@ -14,6 +14,7 @@ let toolbar_font = document.getElementById('toolbar_font');
 let toolbar_fontSize = document.getElementById('toolbar_fontSize');
 let toolbar_bold = document.getElementById('toolbar_bold');
 let toolbar_italic = document.getElementById('toolbar_italic');
+let toolbar_shadow = document.getElementById('toolbar_shadow');
 let toolbar_txtColor = document.getElementById('toolbar_txtColor');
 let toolbar_bgColor = document.getElementById('toolbar_bgColor');
 let toolbar_underline = document.getElementById('toolbar_underline');
@@ -45,6 +46,7 @@ let selected, content, presLength;
 let init = {
 	loadGrid: function() {
 		let pressedDelKey = false;
+
 		editGrid.style.width = (screen.width * 0.5) + "px";
 		editGrid.style.height = (screen.height * 0.5) + "px";
 
@@ -93,8 +95,20 @@ let init = {
 
 	loadToolbar: function() {
 		// Add font size options to selector
-		let clickedPicker, lastSelected;
+		let lastSelected;
 		let toolbar_fontSize_selector = toolbar_fontSize.firstElementChild;
+		let colorPickerChildren = colorPicker.getElementsByTagName('input');
+		let colorPickerSat = colorPicker.querySelector('[name = sat]');
+
+		let colors = {
+			hue: 150,
+			light: 50,
+			alpha: 1.0,
+			sat: 50
+		}
+
+		document.execCommand('styleWithCSS', false, true);
+		colorPickerSat.style = `background-color: hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha});`;
 
 		for (let i = 1; i <= 7; i ++) {
 			toolbar_fontSize_selector.innerHTML += `<option value=${i}>${i}</option>`;
@@ -130,18 +144,21 @@ let init = {
 			domEvent.toggleColorPicker();
 		});
 
-		document.addEventListener('mouseup', e => {
-			if (colorPicker.style.display != "none") {
+		for (let element of colorPickerChildren) {
+			element.addEventListener('input', e => {
+				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
+
+				let name = element.parentElement.getAttribute('name');
+				colors[name] = element.value;
+				colorPickerSat.style = `background-color: ${hsla}`;
+
 				if (lastSelected === toolbar_txtColor) {
-					document.execCommand('foreColor', false, colorPicker.value);
-					toolbar_txtColor.style.backgroundColor = colorPicker.value;
-					console.log(colorPicker);
+					document.execCommand('foreColor', false, hsla);
 				} else if (lastSelected === toolbar_bgColor) {
-					document.execCommand('BackColor', false, colorPicker.value);
-					toolbar_bgColor.style.backgroundColor = colorPicker.value;
+					document.execCommand('BackColor', false, hsla);
 				}
-			}
-		});
+			});
+		}
 
 		toolbar_bulletList.addEventListener('mousedown', e => {
 			document.execCommand("insertunorderedlist");
@@ -220,16 +237,6 @@ let init = {
 			let element = domEvent.getParent(editGrid, e.target);
 			domEvent.setEditMode(element, true);
 		});
-
-		//Deprecated stuff
-		/*element.addEventListener('keypress', e => {
-			let key = e.which || e.keyCode;
-			if (key == 13) {
-				// This was needed when selection was not parent of selected element
-				//e.preventDefault();
-				//domEvent.addBr();
-			}
-		});*/
 	}
 }
 
@@ -465,22 +472,6 @@ let domEvent = {
 		if(!presmode) {
 			document.onmouseup = null;
 			document.onmousemove = null;
-		}
-	},
-
-	//Deprecated
-	addBr: function() {
-		if(!presmode) {
-			let selection = window.getSelection();
-			let range = selection.getRangeAt(0);
-			let br = document.createElement("br");
-			range.deleteContents();
-			range.insertNode(br);
-			range.setStartAfter(br);
-			range.setEndAfter(br);
-			range.collapse(false);
-			selection.removeAllRanges();
-			selection.addRange(range);
 		}
 	}
 }
