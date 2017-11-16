@@ -1,50 +1,34 @@
 /************************************************************************
-Layout-elementer først, deretter resterende elementer, til sist klasser og id-er alfabetisk.
-Forfatter: Silje U.
+Layout in order, form elements, other elements, classes and ids
+Authors: Silje U.
 *************************************************************************/
 
+/* Layout in order */
 
-/* Layout hiearkisk ********************************/
-html,
-body {
+html, body, section {
 	margin: 0;
 	padding: 0;
-	width: 100%;
-	height: 100%;
-	font-size:0.9em;
+	/*font-size:0.9em;*/
 }
 
 body {
 	color: rgb(227, 17, 71);
 	background-color: #000; /*#333; */
-	font-family: lato;
-	margin: 0 auto;
+	font-family: Lato, Verdana, sans-serif;
 }
 
-nav {
+nav, footer {
 	background-color: rgb(214, 196, 196);
-	height: 1.4em;
-	padding: 0.2em 1em;
 }
+
+
+/*main {
+
+}*/
 
 aside { /* Brukes bare ved presetasjoneditor */
-	width: 14em; /* Tilpasset innhold i sidebar */
-	background-color:rgb(19, 17, 17);
-	float: left;
-	padding: 0.3em 0.5em;
-	height: 100%;
-}
-
-main { /*Sentrert */
-	/*height: 100%; blir kvitt unødvendig mellomrom over footer */
-	margin: 0 auto;
-	margin-bottom: 2em;  /* Tilsvarer footerens høyde */
-	height: 100%;
-}
-
-section {
-	padding: 0;
-	margin: 0;
+	border-right:1px solid rgb(19, 17, 17);
+	padding: 1rem;
 }
 
 .blueDiv {
@@ -65,17 +49,8 @@ section {
 	margin: 0 auto;
 }
 
-footer {
-	width: 100%;
-	background-color: white;
-	height: 1.7em;
-	padding: 0.6em 0;
-	text-align: center;
-	margin-bottom: 0px;
-	position: absolute;
-}
 
-/* Non-layout elements  *************************************/
+/* Form elements  */
 
 button {
 	box-shadow: none;
@@ -88,6 +63,13 @@ button {
 	border-style: none;
 }
 
+
+button:hover {
+	background-color: rgb(214, 196, 196);
+	margin: 0.2em;
+	cursor: pointer;
+}
+
 button:active {
 	color: #fff;
 	background-color: rgb(227, 17, 71);
@@ -96,7 +78,16 @@ button:active {
 
 fieldset {
 	border: none;
+}	
+	
+	input, select {
+	width: auto;
+	margin: 0.4em;
+	font-size:0.8em;
 }
+
+	
+	/* Other */
 
 h1 {
 	text-align: center;
@@ -107,11 +98,6 @@ hr {
 	border-top: 1px dotted #fff;
 }
 
-input, select {
-	width: auto;
-	margin: 0.4em;
-	font-size:0.8em;
-}
 
 menuitem a {
 	color: red; 
@@ -185,11 +171,11 @@ ul.hidden li {
 }
 
 #editGrid {
-	position: absolute;  
+	position: relative;
 	background: white;
-	border: 0.2em solid gray;
-	top: 1.8em;
-	left: 15em;
+	/*border: 0.2em solid gray;*/
+	/*top: 1.8em;
+	left: 15em;*/
 	/* original size
 	width: 640px;
 	height: 360px;*/
@@ -199,10 +185,8 @@ ul.hidden li {
 }
 
 #notes {
-	position: absolute;
-	top: calc(200px + 2.6em);
+	/*top: calc(200px + 2.6em);*/
 	background: gray;
-	left: 15em;
 }
 
 #notes h1 {
@@ -221,13 +205,11 @@ textarea {
 }
 
 #slideView {
-	position: absolute;
-	right: 0;
 	padding: 0.2em 2em;
-	margin: 0 auto;
 	font-size: 0.7em;
 }
 
+/*  fjerner...bruker cssGrid istedet
 @media only screen and (min-width: 900px) {
 	aside {
 		width: 22em;
@@ -259,4 +241,60 @@ textarea {
 		margin: 0 auto;
 		font-size: 1.2em;
 	}
+} 
+*/
+
+
+
+/* Holy Grail Layout with CSS Grid */
+		/* borrowed code */
+		
+/* Define grid areas */
+.hg-header { grid-area: header; }
+.hg-footer { grid-area: footer; }
+.hg-main { grid-area: main; }
+.hg-left { grid-area: sidebarLeft; }
+.hg-right { grid-area: sidebarRight; }
+
+.hg {
+	display: grid;
+	grid-template-areas: "header header header"
+						"sidebarLeft main sidebarRight"
+						"footer footer footer";
+								
+	grid-template-columns: 1fr 60% 1fr; 
+	
+	grid-template-rows: 3rem
+						1fr
+						2rem;
+								
+	min-height: 100vh /* ellers trekker footeren seg opp */
+}
+
+/* til skjermer smalere enn 600px */
+
+@media screen and (max-width: 600px) {
+	.hg {
+		grid-template-areas: "header"
+									"sidebarLeft"
+									"main"
+									"sidebarRight"
+									"footer";
+
+		grid-template-columns: 100%;
+		grid-template-rows: 4rem
+									50px 
+									1fr
+									50px 
+									30px;
+	}
+}
+
+/* mer tilpasning: custom css styles */
+
+.hg-header, .hg-footer {
+	display: flex;
+	justify-content: center;  /*? aligner i miten av element*/
+	align-items: center;    /*???? aligner i høyden*/
+	text-align: center;  /* så ingen virkning av med justify-content*/
 }
