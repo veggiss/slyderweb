@@ -4,7 +4,6 @@
 <head>
 	<meta charset="utf-8" />
   	<title>Slyderweb</title>
-  	<script src='./js/colorpicker.js'></script>
 </head>
 
 <style type="text/css">
@@ -85,10 +84,9 @@
 		overflow: auto;
 	}
 
-	#colorPicker {
+	#colorPicker, #shadowPicker {
 		position: absolute;
 		z-index: 100;
-		display: none;
 		text-align: center;
 		width: 200px;
 		height: 200px;
@@ -112,14 +110,14 @@
 		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQYV2NkQID/ICYjNgGwDEwSpAJFAACKfwQDF+r+wwAAAABJRU5ErkJggg==), linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
 	}
 
-	#colorPicker div {
+	#colorPicker div, #shadowPicker div {
 		border-radius: 5px;
 		border-style: solid;
 		border-width: thin;
 		border-color: gray;
 	}
 
-	#colorPicker input {
+	#colorPicker input, #shadowPicker input {
 		position: relative;
 		width: 100%;
 		top: 1px;
@@ -156,6 +154,22 @@
 		Saturation
 		<div name="sat">
 			<input type="range" min="0" max="100" value="50">
+		</div>
+	</div>
+
+	<div id="shadowPicker">
+		<div name="preview" style="font-size: 25px; padding: 15px; text-shadow: 5px 5px 5px">T</div>
+		X
+		<div name="cordX">
+			<input type="range" min="-50" max="50" value="5">
+		</div>
+		Y
+		<div name="cordY">
+			<input type="range" min="-50" max="50" value="5">
+		</div>
+		Feather
+		<div name="feather">
+			<input type="range" min="0" max="100" value="5">
 		</div>
 	</div>
 

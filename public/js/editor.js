@@ -24,8 +24,11 @@ let toolbar_alignLeft = document.getElementById('toolbar_alignLeft');
 let toolbar_alignCenter = document.getElementById('toolbar_alignCenter');
 let toolbar_alignRight = document.getElementById('toolbar_alignRight');
 
-//Color picker for toolbar
+//Exttra stuff for toolbar
 let colorPicker = document.getElementById('colorPicker');
+let shadowPicker = document.getElementById('shadowPicker');
+colorPicker.style.display = "none";
+shadowPicker.style.display = "none";
 
 //Globals
 let presentation = {
@@ -88,6 +91,7 @@ let init = {
 				pressedDelKey = true;
 			}
 		});
+
 		document.addEventListener('keyup', e => {
 			pressedDelKey = false;
 		});
@@ -132,6 +136,11 @@ let init = {
 
 		toolbar_underline.addEventListener('mousedown', e => {
 			document.execCommand('underline');
+		});
+
+		toolbar_shadow.addEventListener('mousedown', e => {
+			lastSelected = toolbar_shadow;
+			domEvent.toggleShadowPicker();
 		});
 
 		toolbar_txtColor.addEventListener('mousedown', e => {
@@ -306,7 +315,8 @@ let btnEvent = {
 // -- Element events
 let domEvent = {
 	toggleColorPicker() {
-		if (colorPicker.style.display === "none") {
+		if (colorPicker.style.display == "none") {
+			shadowPicker.style.display = "none";
 			let top = parseInt(textToolBar.style.top);
 			let left = parseInt(textToolBar.style.left);
 			colorPicker.style.top = (top - 220) + "px";
@@ -314,6 +324,23 @@ let domEvent = {
 			colorPicker.style.display = "inline-block";
 		} else {
 			colorPicker.style.display = "none";
+			shadowPicker.style.display = "none";
+		}
+	},
+
+	toggleShadowPicker() {
+		if (shadowPicker.style.display == "none" && colorPicker.style.display == "none") {
+			let top = parseInt(textToolBar.style.top);
+			let left = parseInt(textToolBar.style.left);
+			colorPicker.style.top = (top - 220) + "px";
+			colorPicker.style.left = (left) + "px";
+			colorPicker.style.display = "inline-block";
+			shadowPicker.style.top = colorPicker.style.top;
+			shadowPicker.style.left = (left + parseInt(colorPicker.offsetWidth) + 2) + "px";
+			shadowPicker.style.display = "inline-block";
+		} else {
+			colorPicker.style.display = "none";
+			shadowPicker.style.display = "none";
 		}
 	},
 
@@ -331,7 +358,7 @@ let domEvent = {
 		let mTarget = document.querySelectorAll(":hover");
 			
 		for (let element of mTarget) {
-			if (element === textToolBar || element === colorPicker) {
+			if (element === textToolBar || element === colorPicker || element === shadowPicker) {
 				clicked = true;
 			}
 		}
@@ -422,6 +449,7 @@ let domEvent = {
 			element.style.cursor = "pointer";
 			textToolBar.style.display = "none";
 			colorPicker.style.display = "none";
+			shadowPicker.style.display = "none";
 
 			editing = false;
 		}
