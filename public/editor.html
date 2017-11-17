@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title>Slyderweb - editor</title>
 	<link href="css/cssGrid.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="./css/editor.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="./css/editor.css" />  -->
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 	<!-- dette gjør at ikke kan zoome på smal skjerm...	<meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
@@ -51,16 +51,16 @@
 			</div>
 		</div>
 
-		<button id="presmodeBtn">
-			< </button>
+		<button id="loadprevBtn">
+			 Prev </button>
 				<button id="savePageBtn">Save page</button>
 				<span id='currentPageTxt'>Current page:</span>
-				<button id="loadprevBtn">Preview page (F11)</button>
-				<button id="loadnextBtn"> > </button>
+				<button id="presmodeBtn">Preview page (F11)</button>
+				<button id="loadnextBtn"> Next  </button>
 
-				<section id="notesTxt" contenteditable="true">
+				<section id="notesSection">
 					<h4>Presentation notes</h4>
-					<textarea placeholder="Enter notes here"></textarea>
+					<textarea id="notesTxt" placeholder="Enter notes here"></textarea>
 
 					<ul class="hidden">
 						<li>IMAGE</li>

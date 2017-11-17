@@ -148,19 +148,6 @@ ul {
 	text-align: center;
 }
 
-.content {
-	position: absolute;  
-	border-style: solid;
-	overflow: hidden;
-	text-align: center;
-	padding: 10px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
 
 .logo {
 	color: rgb(227, 17, 71);
@@ -191,19 +178,19 @@ ul.hidden {
 	top: 0; bottom: 0; left: 0; right: 0;
 	background: white;
 	color: black;
-	border: 0.2em solid gray;
+	border: 0.1em solid gray;
 	margin: 0 auto;
 	box-sizing: border-box;
-	/*padding-bottom: 20%;*/
 }
 
-#notesTxt {  /* var nesten finere uten */
+#notesSection {  /* var nesten finere uten */
 	background: gray;
 	margin: 0 auto;
 	width: 100%;
+	height: 16rem;
 }
 
-#notesTxt h4 {
+#notesSection h4 {
 	color:  rgb(214, 196, 196);
 	margin: 0.3em 0em;
 	text-align: center;
@@ -216,7 +203,7 @@ textarea {
 	padding: 0.2rem 1rem;
 	background: rgb(214, 196, 196);
 	font-size: 1.0rem;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: Verdana, Tahoma, sans-serif;
 	box-sizing: border-box;
 }
 
@@ -226,41 +213,123 @@ textarea {
 	box-sizing: border-box;
 }
 
-/*  fjerner...bruker cssGrid istedet
-@media only screen and (min-width: 900px) {
-	aside {
-		width: 22em;
-	}
 
-	#editGrid {
-		left: 23em;
-		width: 800px;
-		height: 450px;
-	}
+/* ******************************************* editor.css *******************/
 
-	#notes {
-		top: calc(450px + 2.6em);
-		left: 23em;
-	}
+#textToolBar {
+	position: absolute;
+	display: none;
+	width: 445px;
+	height: 0px;
+}
 
-	textarea {
-		width: 802px;
-		columns: 2 1em;
-		box-sizing: border-box;
-		padding: 0.6em 4em;
-		font-size: 1.6em;
-	}
+#textToolBar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #EEE;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: thin;
+	border-color: gray;
+}
 
-	#slideView {
-		position: absolute;
-		right: 10vh;
-		padding: 0.2em 2em;
-		margin: 0 auto;
-		font-size: 1.2em;
-	}
-} 
+#textToolBar ul li {
+	padding: 0px;
+	margin-top: 3px;
+	float: left;
+}
+
+#textToolBar ul li * {
+	display: inline-block;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+}
+
+#textToolBar ul li select, ul li input {
+	background-color: #EEE;
+	width: 40px;
+	padding: 5.5px 0px;
+}
+
+#textToolBar ul li img {
+	background-color: #EEE;
+	height: 18px;
+	padding: 6px 6px;
+}
+
+#textToolBar ul li span {
+	padding: 6px 10px;
+}
+
+#textToolBar ul li *:hover {
+	cursor: pointer;
+	background-color: #888;
+}
+
+#colorPicker, #shadowPicker {
+	position: absolute;
+	z-index: 100;
+	text-align: center;
+	width: 200px;
+	height: 200px;
+	padding: 5px;
+	background-color: lightgray;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: thin;
+	border-color: gray;
+}
+
+#colorPicker [name = hue] {
+	background: linear-gradient(to right, red, orange, yellow, green, blue, indigo,violet);
+}
+
+#colorPicker [name = light] {
+	background: linear-gradient(to right, black, white);
+}
+
+#colorPicker [name = alpha] {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQYV2NkQID/ICYjNgGwDEwSpAJFAACKfwQDF+r+wwAAAABJRU5ErkJggg==), linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+}
+
+#colorPicker div, #shadowPicker div {
+	border-radius: 5px;
+	border-style: solid;
+	border-width: thin;
+	border-color: gray;
+}
+
+#colorPicker input, #shadowPicker input, #shadowPicker button {
+	position: relative;
+	width: 100%;
+	top: 1px;
+	right: 2px;
+}
+
+.content {
+	position: absolute;
+	overflow: hidden;
+	text-align: center;
+	word-wrap: break-word;
+	padding: 10px;
+	border: thin solid transparent;
+	user-select: none;
+	cursor: pointer;
+}
+
+/*
+.content { gammel
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 */
-
 
 
 /* Holy Grail Layout with CSS Grid */

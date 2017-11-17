@@ -52,8 +52,8 @@ let init = {
 	loadGrid: function() {
 		let pressedDelKey = false;
 
-		editGrid.style.width = (screen.width * 0.5) + "px";
-		editGrid.style.height = (screen.height * 0.5) + "px";
+		//editGrid.style.width = (screen.width * 0.5) + "px";
+		//editGrid.style.height = (screen.height * 0.5) + "px";
 
 		editGrid.addEventListener('mousedown', e => {
 			if (e.target === editGrid && selected != undefined) {
@@ -78,7 +78,7 @@ let init = {
 		});
 
 		notesTxt.addEventListener('input', e => {
-			presentation["page_" + currentPage].notes = notesTxt.innerHTML;
+			presentation["page_" + currentPage].notes = notesTxt.value;
 		});
 
 		document.addEventListener('keydown', e => {
@@ -230,11 +230,11 @@ let init = {
 
 	loadContent: function() {
 		let presObject = presentation["page_" + currentPage];
-		notesTxt.innerHTML = "";
+		notesTxt.value = "";
 
 		currentPageTxt.innerHTML = 'Current page: ' + currentPage;
 		editGrid.innerHTML = presObject.content;
-		notesTxt.innerHTML = presObject.notes;
+		notesTxt.value = presObject.notes;
 
 		content = editGrid.getElementsByTagName("*");
 		presLength = Object.keys(presentation).length;
@@ -416,7 +416,7 @@ let domEvent = {
 	savePage: function() {
 		let presObject = presentation["page_" + currentPage];
 		presObject.content = editGrid.innerHTML;
-		presObject.notes = notesTxt.innerHTML;
+		presObject.notes = notesTxt.values;
 	},
 
 	dropFile: function(e) {
