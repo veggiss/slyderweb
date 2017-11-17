@@ -13,10 +13,8 @@
 #textToolBar {
 	position: absolute;
 	display: none;
-	width: 472px;
+	width: 445px;
 	height: 0px;
-	left: 0; right: 0;
-	top: 155px; bottom: 0;
 }
 
 #textToolBar ul {
@@ -32,7 +30,8 @@
 }
 
 #textToolBar ul li {
-	padding: 2px;
+	padding: 0px;
+	margin-top: 3px;
 	float: left;
 }
 
@@ -46,17 +45,17 @@
 #textToolBar ul li select, ul li input {
 	background-color: #EEE;
 	width: 40px;
-	padding: 6px 0px;
+	padding: 5.5px 0px;
 }
 
 #textToolBar ul li img {
 	background-color: #EEE;
-	height: 15px;
+	height: 18px;
 	padding: 6px 6px;
 }
 
 #textToolBar ul li span {
-	padding: 6px 14px;
+	padding: 6px 10px;
 }
 
 #textToolBar ul li *:hover {

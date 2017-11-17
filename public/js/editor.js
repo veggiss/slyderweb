@@ -16,6 +16,7 @@ let toolbar_bold = document.getElementById('toolbar_bold');
 let toolbar_italic = document.getElementById('toolbar_italic');
 let toolbar_shadow = document.getElementById('toolbar_shadow');
 let toolbar_txtColor = document.getElementById('toolbar_txtColor');
+let toolbar_hiliteColor = document.getElementById('toolbar_hiliteColor');
 let toolbar_bgColor = document.getElementById('toolbar_bgColor');
 let toolbar_underline = document.getElementById('toolbar_underline');
 let toolbar_bulletList = document.getElementById('toolbar_bulletList');
@@ -156,6 +157,11 @@ let init = {
 			domEvent.toggleColorPicker();
 		});
 
+		toolbar_hiliteColor.addEventListener('mousedown', e => {
+			lastSelected = toolbar_hiliteColor;
+			domEvent.toggleColorPicker();
+		});
+
 		toolbar_bgColor.addEventListener('mousedown', e => {
 			lastSelected = toolbar_bgColor;
 			domEvent.toggleColorPicker();
@@ -169,15 +175,15 @@ let init = {
 				let shadow = `${shadows.cordX}px ${shadows.cordY}px ${shadows.feather}px`;
 				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
 				colorPickerSat.style.backgroundColor = hsla;
-
+				
 				if (lastSelected === toolbar_txtColor) {
 					document.execCommand('foreColor', false, hsla);
-				} else if (lastSelected === toolbar_bgColor) {
-					document.execCommand('BackColor', false, hsla);
+				} else if (lastSelected === toolbar_hiliteColor) {
+					document.execCommand('HiliteColor', false, hsla);
 				} else if (lastSelected === toolbar_shadow) {
-					console.log("lolo");
 					selected.style.textShadow = `${shadow} ${hsla}`;
-					console.log()
+				} else if (lastSelected === toolbar_bgColor) {
+					selected.style.backgroundColor = hsla;
 				}
 			});
 		}
