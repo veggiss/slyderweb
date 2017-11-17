@@ -416,7 +416,7 @@ let domEvent = {
 	savePage: function() {
 		let presObject = presentation["page_" + currentPage];
 		presObject.content = editGrid.innerHTML;
-		presObject.notes = notesTxt.values;
+		presObject.notes = notesTxt.value;
 	},
 
 	dropFile: function(e) {

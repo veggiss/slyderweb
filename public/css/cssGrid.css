@@ -148,6 +148,9 @@ ul {
 	text-align: center;
 }
 
+#currentPageTxt {
+	font-size: 1rem;
+}
 
 .logo {
 	color: rgb(227, 17, 71);
