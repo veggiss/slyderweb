@@ -5,32 +5,35 @@ Authors: Silje U.
 
 /* Layout in order */
 
-html, body, section {
+html {
+	font-size: 62.5%;   /* gjør at man kan oppgi rem som 1/10 pt-størrelse */
+}
+
+html, body, section, main {
 	margin: 0;
 	padding: 0;
-	/*font-size:0.9em;*/
 }
 
 body {
 	color: #fff;
 	background-color: #000;
-	font-family: Lato, Verdana, sans-serif;
+	font-family: 'Lato', 'Verdana', sans-serif;
 }
 
 nav, footer {
 	background-color: rgb(214, 196, 196);
-	font-size: 0.9rem;
+	font-size: 1.2rem;
 }
 
-/*main {
-
-}*/
+main {
+		font-size: 1.2rem;
+}
 
 aside { /* Brukes bare ved presetasjoneditor */
 	/*border-right:1px solid rgb(19, 17, 17);*/
 	color:  rgb(214, 196, 196);
 	background-color: #000;
-	font-size: 0.8rem;
+	margin: 0.5rem 0.3rem;
 }
 
 .blueDiv {
@@ -60,7 +63,7 @@ button {
 	background-color: #444;
 	padding: 0.2em 1.2em;
 	margin: 0.2em;
-	font-size:0.8em;
+	font-size:0.9rem;
 	border-radius: 4px;
 	border-style: none;
 }
@@ -171,9 +174,6 @@ li {
 
 ul.hidden {
 	padding-left: 0;
-}
-
-ul.hidden li {
 	list-style: none;
 }
 
@@ -187,6 +187,7 @@ ul.hidden li {
 	height: 200px;
 	color: black;
 	margin: 0 auto;
+	box-sizing: border-box;
 }
 
 #notes {
@@ -199,21 +200,23 @@ ul.hidden li {
 	color:  rgb(214, 196, 196);
 	margin: 0.3em 0em;
 	text-align: center;
-	font-size: 0.9rem;
 }
 
 textarea {
 	border: none;
-	width: 100%;
 	height: 150px;
+	width: 100%;
+	padding: 0.2rem 1rem;
 	background: rgb(214, 196, 196);
-	font-size: 0.8rem;
+	font-size: 1.0rem;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	box-sizing: border-box;
 }
 
 #slideView {
-	padding: 0.2em 2em;
+	padding: 0.2em 1em;
 	font-size: 0.7em;
+	box-sizing: border-box;
 }
 
 /*  fjerner...bruker cssGrid istedet
@@ -273,9 +276,9 @@ textarea {
 								
 	grid-template-columns: 1fr 60% 1fr; 
 	
-	grid-template-rows: 2rem
+	grid-template-rows: 2.2rem
 						1fr
-						2rem;
+						2.2rem;
 								
 	min-height: 100vh /* ellers trekker footeren seg opp */
 }
@@ -286,18 +289,18 @@ textarea {
 	.hg {
 		grid-template-areas: "header"
 							"sidebarLeft"
-							/*"editgrid"*/
 							"main"
 							"sidebarRight"
 							"footer";
 
 		grid-template-columns: 100%;
-		grid-template-rows: 4rem
-									50px 
-									1fr
-									50px 
-									30px;
+		grid-template-rows: 2rem
+							1fr 
+							2fr
+							1fr 
+							2rem;
 	}
+
 }
 
 /* mer tilpasning: custom css styles */
@@ -314,7 +317,8 @@ textarea {
 .hg-right,
 .hg-main,
 .hg-editgrid {
-	padding: 0.8rem;
+	padding: 0rem;
+	box-sizing: border-box;
 }
 
 .hg-right {

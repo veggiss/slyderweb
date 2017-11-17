@@ -8,7 +8,8 @@
 	<title>Slyderweb - editor</title>
 	<link href="css/cssGrid.css" rel="stylesheet" type="text/css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/>
+<!-- dette gjør at ikke kan zoome på smal skjerm...	<meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
 
 <body class="hg">
@@ -44,10 +45,11 @@
 			<div class="content" name="text" style="top: 120px">Some paragraph</div>
 		</div>
 
-		<button id="presmodeBtn">Presentation (F5)</button>
+		<button id="presmodeBtn"> < </button>
+		<button id="presmodeBtn">Save page</button>
 		<button id="presmodeBtn">Preview page (F11)</button>
-		
-		
+		<button id="presmodeBtn"> > </button>
+				
 		<section id="notes">
 			<h4>Presentation notes</h4>
 			<textarea placeholder="Enter notes here"></textarea>
@@ -55,7 +57,7 @@
 
 	</main>
 
-	<aside class="hg-left">
+	<aside class="hg-left centered">
 		<h1>Options</h1>
 
 		<ul class="hidden">
@@ -82,8 +84,9 @@
 		<hr>
 		<ul class="hidden">
 			<li>PRESENTATION</li>
-			<li>New page</li>
-			<li>Delete page</li>
+			<button id="newPresbtn">New page</button>
+			<button id="newPresbtn">Duplicate page</button>
+			<button id="newPresbtn">Delete current page</button>
 			<li>Page template
 				<select>
 					<option selected>Default</option>
@@ -131,16 +134,16 @@
 	<aside class="hg-right">
 		
 		<h1>Slides</h1>
+		<button id="presmodeBtn">Presentation mode (F5)</button>
 		<section id="slideView" class="centered">
-				<button id="newPresbtn">New page</button>
-				<button id="newPresbtn">Copy page</button>
-				<button id="newPresbtn">Delete current page</button>
+				
 			<ul class="hidden">
 				<li>Slide 1</li>
 				<li>Slide 2</li>
 				<li>Slide 3</li>
 			</ul>
-						<button id="newPresbtn">New presentation</button>
+			<button id="presmodeBtn">Export presentation</button>			
+			<button id="newPresbtn">+ New presentation</button>
 		</section>
 
 	</aside>
