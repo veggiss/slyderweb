@@ -197,13 +197,13 @@ ul.hidden {
 	/*padding-bottom: 20%;*/
 }
 
-#notes {
+#notesTxt {  /* var nesten finere uten */
 	background: gray;
 	margin: 0 auto;
 	width: 100%;
 }
 
-#notes h4 {
+#notesTxt h4 {
 	color:  rgb(214, 196, 196);
 	margin: 0.3em 0em;
 	text-align: center;
