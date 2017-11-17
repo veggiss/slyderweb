@@ -55,7 +55,7 @@ function getUser(req, res, next) {
 function loginUser(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
-
+    
     if (ut.isNotEmpty(username, password) && ut.noSymbols(username)) {
         let client = ut.newClient();
         let sql = 'SELECT * FROM users WHERE username = $1';
@@ -73,6 +73,7 @@ function loginUser(req, res, next) {
                     } else {
                         res.statusMessage = 'Wrong password';
                         res.status(401).end();
+                        
                     }
                 } else {
                     res.statusMessage = 'Could not find user';
