@@ -1,6 +1,6 @@
 {
   "name": "slyderweb",
-  "version": "0.14.19",
+  "version": "0.16.00",
   "description": "Server files for slyderweb project",
   "main": "index.js",
   "scripts": {
