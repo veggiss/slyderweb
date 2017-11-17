@@ -36,6 +36,7 @@ aside { /* Brukes bare ved presetasjoneditor */
 	margin: 0.5rem 0.3rem;
 }
 
+
 .blueDiv {
 	width: 100%;
 	background-color: darkblue;
@@ -61,8 +62,8 @@ button {
 	box-shadow: none;
 	color: rgb(214, 196, 196); /* fin gråfarge: #ccc;*/
 	background-color: #444;
-	padding: 0.2em 1.2em;
-	margin: 0.2em;
+	padding: 0.3rem 0.7rem;
+	margin: 0.2rem 0.07rem;
 	font-size:0.9rem;
 	border-radius: 4px;
 	border-style: none;
@@ -95,6 +96,10 @@ fieldset {
 	
 	/* Other */
 
+header {
+	padding-right: 1.5rem;
+}
+
 h1 {
 	text-align: center;
 	padding: 0.1rem;
@@ -109,7 +114,7 @@ hr {
 
 menuitem a {
 	color: red; 
-	padding: 0 0.2em;
+	padding: 0 0.3em;
 	text-decoration: none;
 }
 
@@ -130,6 +135,9 @@ li {
 	padding: 0.2rem;
 }
 
+ul {
+	margin: 0.2rem 0;
+}
 
 
 /* ***************************************************************************  */
@@ -161,16 +169,10 @@ li {
 	font-weight: bold;
 }
 
-.right {
-	float: right;
-	padding: 0 2px;
-}
-
 ul.hidden {
 	padding-left: 0;
 	list-style: none;
 }
-
 
 #ratioContainer1 {
 	width:100%;
@@ -288,25 +290,6 @@ textarea {
 	min-height: 100vh /* ellers trekker footeren seg opp */
 }
 
-/* til skjermer smalere enn 600px */
-
-@media screen and (max-width: 600px) {
-	.hg {
-		grid-template-areas: "header"
-							"sidebarLeft"
-							"main"
-							"sidebarRight"
-							"footer";
-
-		grid-template-columns: 100%;
-		grid-template-rows: 2rem
-							1fr 
-							2fr
-							1fr 
-							2rem;
-	}
-
-}
 
 /* mer tilpasning: custom css styles */
 
@@ -326,6 +309,68 @@ textarea {
 	box-sizing: border-box;
 }
 
+aside.hg-left {
+	margin: 0.5rem 1.3rem;
+	text-align: center;
+}
+
 .hg-right {
 	text-align: center;
+}
+
+/* til skjermer smalere enn 600px */
+
+@media screen and (max-width: 600px) {
+	.hg {
+		grid-template-areas: "header"
+							"sidebarLeft"
+							"main"
+							"sidebarRight"
+							"footer";
+
+		grid-template-columns: 100%;
+		grid-template-rows: 2rem
+							14rem 
+							5fr
+							1fr 
+							2rem;
+	}
+
+	.flexContainer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-flow: row wrap;
+		text-align: left;
+		justify-content: center;  /*? aligner i miten av element*/
+		padding: 0;
+		margin: 0;
+	}
+
+	
+	.flexBox {
+		padding: 0;
+		margin: 0;
+		flex: 1;
+	}
+	
+	.flexBox2 {
+		padding: 0;
+		margin: 0;
+		flex: 1.6;
+	}
+
+	hr { display: none; }
+	
+	aside h1 {
+		text-align: left;
+		margin-top: 0.1rem;
+		font-size: 1.0rem;
+		display: none /* vet ikke omtrengs */
+	}
+	
+	aside.hg-left {
+		margin: 0;
+		padding: 0.6rem 0.5rem;
+}
+
 }

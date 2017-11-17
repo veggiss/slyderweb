@@ -8,145 +8,158 @@
 	<title>Slyderweb - editor</title>
 	<link href="css/cssGrid.css" rel="stylesheet" type="text/css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/>
-<!-- dette gjør at ikke kan zoome på smal skjerm...	<meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+	<!-- dette gjør at ikke kan zoome på smal skjerm...	<meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
 
 <body class="hg">
 	<nav class="hg-header">
-		<!-- Rekkefølgen er motsatt -->
 		<header class="logo">
 			<a class="noLinkStyle" href="index.html">SlyderWeb</a>
 		</header>
-		<menuitem class="right">
-		<a href="index.html">Presentations</a>
-		</menuitem>
-		<menuitem class="right">
-		<a href="editor.html">Editor</a>
-		</menuitem>
-		<menuitem class="right">
-		<a href="">Show</a>
-		</menuitem>
-		<menuitem class="right">
-		<a href="">Settings</a>
-		</menuitem>
-		<menuitem class="right">
-		<a href="">Sign out</a>
-		</menuitem>
-		<menuitem class="right">
-		<a href="">Sign in</a>
-		</menuitem>
+		<!-- Rekkefølgen er motsatt -->
+		<nav id="navlist">
+			<menuitem class="right">
+			<a href="index.html">Presentations</a>
+			</menuitem>
+			<menuitem class="right">
+			<a href="editor.html">Editor</a>
+			</menuitem>
+			<menuitem class="right">
+			<a href="">Show</a>
+			</menuitem>
+			<menuitem class="right">
+			<a href="">Settings</a>
+			</menuitem>
+			<menuitem class="right">
+			<a href="">Sign out</a>
+			</menuitem>
+			<menuitem class="right">
+			<a href="">Sign in</a>
+			</menuitem>
+		</nav>
 	</nav>
 
 	<main class="hg-main centered">
 
 		<div id="ratioContainer1">
-		<div id="ratioContainer2">
-		<div id="editGrid">
-			<div class="content" name="text" style="font-size: 25px;">Title</div>
-			<div class="content" name="text" style="top: 120px">Some paragraph</div>
-		</div>
-		</div>
+			<div id="ratioContainer2">
+				<div id="editGrid">
+					<div class="content" name="text" style="font-size: 25px;">Title</div>
+					<div class="content" name="text" style="top: 120px">Some paragraph</div>
+				</div>
+			</div>
 		</div>
 
-		<button id="presmodeBtn"> < </button>
-		<button id="presmodeBtn">Save page</button>
-		<button id="presmodeBtn">Preview page (F11)</button>
-		<button id="presmodeBtn"> > </button>
-				
-		<section id="notes">
-			<h4>Presentation notes</h4>
-			<textarea placeholder="Enter notes here"></textarea>
-		</section>
+		<button id="presmodeBtn">
+			< </button>
+				<button id="presmodeBtn">Save page</button>
+				<button id="presmodeBtn">Preview page (F11)</button>
+				<button id="presmodeBtn"> > </button>
+
+				<section id="notes">
+					<h4>Presentation notes</h4>
+					<textarea placeholder="Enter notes here"></textarea>
+
+					<ul class="hidden">
+						<li>IMAGE</li>
+						<li>set size
+							<input type="checkbox" />Lock ratio</li>
+						<input placeholder="width" type="number" />
+						<input placeholder="height" type="number" />
+						</li>
+						<li>
+							<button>Crop</button>
+						</li>
+					</ul>
+				</section>
 
 	</main>
 
-	<aside class="hg-left centered">
+	<aside class="hg-left">
+		
 		<h1>Options</h1>
-
-		<ul class="hidden">
-			<li>ELEMENTS</li>
-			<li>Add
-				<button>text</button>
-				<button>image</button>
+		<hr>
+		<div class="flexContainer">
+			<div class="flexBox">
+				ELEMENTS <br>
+				<ul class="hidden">
+				<li>Add
+					<button>text</button>
+					<button>image</button>
+				</li>
 				<li>Move
 					<button>^</button>
 					<button>v</button>
 				</li>
-				<li>Text style
+			</ul>
+
+				
+			</div>
+			<hr>
+			<div class="flexBox2">
+				PRESENTATION <br>
+				<button id="newPresbtn">New page</button>
+				<button id="newPresbtn">Duplicate page</button>
+				<button id="newPresbtn">Delete current page</button><br>
+				Page template
 					<select>
-						<option>Title</option>
-						<option>None</option>
-						<option>Header 1</option>
-						<option>Header 2</option>
-						<option>Header 3</option>
-						<option selected>Paragraph</option>
-						<option>Quote</option>
+						<option selected>Default</option>
+						<option>Columns</option>
+						<option>Titlepage</option>
+						<option>Image</option>
 					</select>
-				</li>
-		</ul>
-		<hr>
-		<ul class="hidden">
-			<li>PRESENTATION</li>
-			<button id="newPresbtn">New page</button>
-			<button id="newPresbtn">Duplicate page</button>
-			<button id="newPresbtn">Delete current page</button>
-			<li>Page template
-				<select>
-					<option selected>Default</option>
-					<option>Columns</option>
-					<option>Titlepage</option>
-					<option>Image</option>
-				</select>
-				<button id="editTemplatesbtn">Edit templates</button>
-			</li>
-			<li>presentation style
-				<select>
-					<option selected>Default</option>
-					<option>Dark</option>
-					<option>Light</option>
-					<option>Formal</option>
-					<option>Moon</option>
-					<option>Warm</option>
-				</select>
-				<button id="editStylesbtn">Edit styles</button>
-			</li>
-			<li>background color
-				<select>
-					<option selected>Style default</option>
-					<option>Black</option>
-					<option>Red</option>
-					<option>Blue</option>
-				</select>
-				<button id="colorPickerbtn">Color picker</button>
-			</li>
+					<button id="editTemplatesbtn">Edit templates</button>
+			</div>
+			<hr>
+			<div class="flexBox2">
+				STYLING <br>
+					Text style
+						<select>
+							<option>Title</option>
+							<option>None</option>
+							<option>Header 1</option>
+							<option>Header 2</option>
+							<option>Header 3</option>
+							<option selected>Paragraph</option>
+							<option>Quote</option>
+						</select><br>
+				Presentation style
+					<select>
+						<option selected>Default</option>
+						<option>Dark</option>
+						<option>Light</option>
+						<option>Formal</option>
+						<option>Moon</option>
+						<option>Warm</option>
+					</select>
+					<button id="editStylesbtn">Edit styles</button><br>
+				Background color
+					<select>
+						<option selected>Style default</option>
+						<option>Black</option>
+						<option>Red</option>
+						<option>Blue</option>
+					</select>
+					<button id="colorPickerbtn">Color picker</button>
+			</div>
 			<hr>
 
-			<ul class="hidden">
-				<li>IMAGE</li>
-				<li>set size
-					<input type="checkbox" />Lock ratio</li>
-				<input placeholder="width" type="number" />
-				<input placeholder="height" type="number" />
-				</li>
-				<li>
-					<button>Crop</button>
-				</li>
-			</ul>
+		</div>
 	</aside>
 
 	<aside class="hg-right">
-		
+
 		<h1>Slides</h1>
 		<button id="presmodeBtn">Presentation mode (F5)</button>
 		<section id="slideView" class="centered">
-				
+
 			<ul class="hidden">
 				<li>Slide 1</li>
 				<li>Slide 2</li>
 				<li>Slide 3</li>
 			</ul>
-			<button id="presmodeBtn">Export presentation</button>			
+			<button id="presmodeBtn">Export presentation</button>
 			<button id="newPresbtn">+ New presentation</button>
 		</section>
 
