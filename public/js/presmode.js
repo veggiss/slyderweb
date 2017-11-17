@@ -1,59 +1,118 @@
 let presmodeBtn = document.getElementById("presmodeBtn");
-let page = document.getElementById("editGrid");
-let sw = screen.width;
-let sh = screen.height;
-let scaleRatio = (sh / 360) * 100;
+let lastPage;
 
 presmodeBtn.onclick = goFullScreen;
 
+let fsEvents = {
+	nextPageKeys: function(e) {
+		if (presmode) {
+			e.preventDefault();
+			
+			let key = e.which || e.keyCode;
+			if (key === 39) {
+				btnEvent.nextPage();
+			} else if (key === 37) {
+				btnEvent.prevPage();
+			}
 
+			lockCursor();
+		}
+	},
+
+	nextPageClick: function(e) {
+		if (presmode) {
+			e.preventDefault();
+
+			let click = e.which;
+
+			if (click === 1) {
+				btnEvent.nextPage();
+			} else if (click === 3) {
+				btnEvent.prevPage();
+			}
+
+			lockCursor();
+		}
+	},
+
+	preventMenu: function(e) {
+		if (presmode) {
+			e.preventDefault();
+		}
+	}
+}
 
 function goFullScreen() {
-	if(page.requestFullscreen) {
+	lockGrid();
+
+	if(editGrid.requestFullscreen) {
 		document.addEventListener('fullscreenchange', exitHandler);
-		page.requestFullscreen();
-	} else if(page.mozRequestFullScreen) {
+		editGrid.requestFullscreen();
+	} else if(editGrid.mozRequestFullScreen) {
 		document.addEventListener('mozfullscreenchange', exitHandler);
-		page.mozRequestFullScreen();
-	} else if(page.webkitRequestFullscreen) {
+		editGrid.mozRequestFullScreen();
+	} else if(editGrid.webkitRequestFullscreen) {
 		document.addEventListener('webkitfullscreenchange', exitHandler);
-		page.webkitRequestFullscreen();
-	} else if(page.msRequestFullscreen) {
+		editGrid.webkitRequestFullscreen();
+	} else if(editGrid.msRequestFullscreen) {
 		document.addEventListener('MSFullscreenChange', exitHandler);
-		page.msRequestFullscreen();
+		editGrid.msRequestFullscreen();
 	}
-
-	page.style.bottom = "0";
-	page.style.right = "0"
-	page.style.zoom = scaleRatio + "%";
-	page.style.borderStyle = "none";
-	for (let e of content) {
-		e.style.borderStyle = "none";
-	}
-	presmode = true;
-
 }
 
-function exitHandler()
-{
-	function resetSize() {
-		page.style.bottom = "50px";
-		page.style.right = "50px"
-		page.style.zoom = "100%";
-		page.style.borderStyle = "dashed";
-		for (let e of content) {
-			e.style.borderStyle = "solid";
-		}
-		presmode = false;
+//Issue #4 Firefox not scaling content properly
+function lockGrid() {
+	domEvent.removeSelected()
+
+	lastPage = currentPage;
+	currentPage = 1;
+	init.loadContent(currentPage);
+
+	lockCursor();
+
+	editGrid.style.right = "0px";
+	editGrid.style.borderStyle = "none";
+	editGrid.style.zoom = (screen.height / parseInt(editGrid.style.height)) * 100 + "%";
+
+	presmode = true;
+}
+
+function lockCursor() {
+	for (let e of content) {
+		let element = domEvent.getParent(editGrid, e);
+		element.style.cursor = "default";
+	}
+}
+
+function resetGrid() {
+	currentPage = lastPage;
+	init.loadContent(currentPage);
+
+	for (let e of content) {
+		let element = domEvent.getParent(editGrid, e);
+		element.style.borderStyle = "solid";
+		element.style.cursor = "pointer";
 	}
 
+	editGrid.style.right = "-25%";
+	editGrid.style.zoom = "100%";
+	editGrid.style.borderStyle = "dashed";
+
+	presmode = false;
+}
+
+function exitHandler() {
     if (document.webkitIsFullScreen === false) {
-        resetSize();
+        resetGrid();
     } else if (document.mozFullScreen === false) {
-        resetSize();
+        resetGrid();
     } else if (document.msFullscreenElement === false) {
-        resetSize();
+        resetGrid();
     } else if (document.fullscreenElement === false) {
-    	resetSize();
+    	resetGrid();
     }
 }
+
+document.addEventListener('keydown', fsEvents.nextPageKeys);
+document.addEventListener('mousedown', fsEvents.nextPageClick);
+document.addEventListener('contextmenu', fsEvents.preventMenu);
