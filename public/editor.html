@@ -37,35 +37,62 @@
 		</menuitem>
 	</nav>
 
-	<main class="hg-main">
-		<button id="presmodeBtn">Presentation mode</button>
+	<main class="hg-main centered">
+
 		<div id="editGrid">
 			<div class="content" name="text" style="font-size: 25px;">Title</div>
 			<div class="content" name="text" style="top: 120px">Some paragraph</div>
 		</div>
 
-
+		<button id="presmodeBtn">Presentation (F5)</button>
+		<button id="presmodeBtn">Preview page (F11)</button>
+		
+		
 		<section id="notes">
-			<h1> Presentation notes</h1>
+			<h4>Presentation notes</h4>
 			<textarea placeholder="Enter notes here"></textarea>
 		</section>
 
 	</main>
 
-
-
-
-	<aside class="hg-left">Options
+	<aside class="hg-left">
+		<h1>Options</h1>
 
 		<ul class="hidden">
-			<li>ADD ELEMENT</li>
-			<li>
-				<button>Text</button>
-				<button>Image</button>
-			</li>
+			<li>ELEMENTS</li>
+			<li>Add
+				<button>text</button>
+				<button>image</button>
+				<li>Move
+					<button>^</button>
+					<button>v</button>
+				</li>
+				<li>Text style
+					<select>
+						<option>Title</option>
+						<option>None</option>
+						<option>Header 1</option>
+						<option>Header 2</option>
+						<option>Header 3</option>
+						<option selected>Paragraph</option>
+						<option>Quote</option>
+					</select>
+				</li>
 		</ul>
+		<hr>
 		<ul class="hidden">
-			<li>CHANGE</li>
+			<li>PRESENTATION</li>
+			<li>New page</li>
+			<li>Delete page</li>
+			<li>Page template
+				<select>
+					<option selected>Default</option>
+					<option>Columns</option>
+					<option>Titlepage</option>
+					<option>Image</option>
+				</select>
+				<button id="editTemplatesbtn">Edit templates</button>
+			</li>
 			<li>presentation style
 				<select>
 					<option selected>Default</option>
@@ -77,111 +104,43 @@
 				</select>
 				<button id="editStylesbtn">Edit styles</button>
 			</li>
-			<li>page template
-				<select>
-					<option selected>Default</option>
-					<option>Columns</option>
-					<option>Titlepage</option>
-					<option>Image</option>
-				</select>
-				<button id="editTemplatesbtn">Edit templates</button>
-			</li>
-			<li>Element alignment
-				<button>Left</button>
-				<button>Center</button>
-				<button>Right</button>
-			</li>
 			<li>background color
 				<select>
-					<option selected>Default</option>
+					<option selected>Style default</option>
 					<option>Black</option>
 					<option>Red</option>
 					<option>Blue</option>
 				</select>
 				<button id="colorPickerbtn">Color picker</button>
 			</li>
-			<li>slides ratio
-				<select>
-					<option selected>16:9</option>
-					<option>Self-defined</option>
-					<option>Auto</option>
-					<option>4:3</option>
-					<option>16:10</option>
-				</select>
-			</li>
-			<li>move element</li>
-			<li>
-				<button>up/above</button>
-				<button>down/below</button>
-			</li>
-		</ul>
-		<ul class="hidden">
-			<li>TEXT</li>
-			<li>element style
-				<select>
-					<option>Title</option>
-					<option>None</option>
-					<option>Header 1</option>
-					<option>Header 2</option>
-					<option>Header 3</option>
-					<option selected>Paragraph</option>
-					<option>Quote</option>
-				</select>
-			</li>
-			<li>size
-				<input type="number" value="12" />
-			</li>
-			<li>style
-				<button>b</button>
-				<button>i</button>
-				<button>u</button>
-			</li>
-			<li>font
-				<select>
-					<option>Arial</option>
-					<option selected>Verdana</option>
-					<option>Times New Roman</option>
-				</select>
-			</li>
-			<li>color
-				<select>
-					<option selected>Default</option>
-					<option>Black</option>
-					<option>Red</option>
-					<option>Blue</option>
-				</select>
-				<button id="colorPickerbtn">Color picker</button>
-			</li>
-			<li>list
-				<ul>
-					<li>bullet list</li>
-					<li>ordered list</li>
-				</ul>
-			</li>
-		</ul>
-		<ul class="hidden">
-			<li>IMAGE</li>
-			<li>set size
+			<hr>
+
+			<ul class="hidden">
+				<li>IMAGE</li>
+				<li>set size
+					<input type="checkbox" />Lock ratio</li>
 				<input placeholder="width" type="number" />
 				<input placeholder="height" type="number" />
-			</li>
-			<li>
-				<input type="checkbox" />Lock ratio</li>
-			<li>
-				<button>Crop</button>
-			</li>
-		</ul>
+				</li>
+				<li>
+					<button>Crop</button>
+				</li>
+			</ul>
 	</aside>
 
-	<aside class="hg-right">Slides
-
+	<aside class="hg-right">
+		
+		<h1>Slides</h1>
 		<section id="slideView" class="centered">
-			<h1>Slides overview</h1>
+				<button id="newPresbtn">New page</button>
+				<button id="newPresbtn">Copy page</button>
+				<button id="newPresbtn">Delete current page</button>
 			<ul class="hidden">
 				<li>Slide 1</li>
 				<li>Slide 2</li>
 				<li>Slide 3</li>
 			</ul>
+						<button id="newPresbtn">New presentation</button>
 		</section>
 
 	</aside>

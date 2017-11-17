@@ -12,23 +12,25 @@ html, body, section {
 }
 
 body {
-	color: rgb(227, 17, 71);
-	background-color: #000; /*#333; */
+	color: #fff;
+	background-color: #000;
 	font-family: Lato, Verdana, sans-serif;
 }
 
 nav, footer {
 	background-color: rgb(214, 196, 196);
+	font-size: 0.9rem;
 }
-
 
 /*main {
 
 }*/
 
 aside { /* Brukes bare ved presetasjoneditor */
-	border-right:1px solid rgb(19, 17, 17);
-	padding: 1rem;
+	/*border-right:1px solid rgb(19, 17, 17);*/
+	color:  rgb(214, 196, 196);
+	background-color: #000;
+	font-size: 0.8rem;
 }
 
 .blueDiv {
@@ -54,8 +56,8 @@ aside { /* Brukes bare ved presetasjoneditor */
 
 button {
 	box-shadow: none;
-	background-color: #ccc;
-	/*appearance: none; */
+	color: rgb(214, 196, 196); /* fin gråfarge: #ccc;*/
+	background-color: #444;
 	padding: 0.2em 1.2em;
 	margin: 0.2em;
 	font-size:0.8em;
@@ -65,7 +67,8 @@ button {
 
 
 button:hover {
-	background-color: rgb(214, 196, 196);
+	background-color: #888;
+	color: #fff;
 	margin: 0.2em;
 	cursor: pointer;
 }
@@ -91,6 +94,8 @@ fieldset {
 
 h1 {
 	text-align: center;
+	padding: 0.1rem;
+	margin: 0;
 }
 
 hr {
@@ -118,7 +123,9 @@ p {
 	margin: 0.6em 2px;
 }
 
-
+li {
+	padding: 0.2rem;
+}
 
 
 
@@ -173,34 +180,34 @@ ul.hidden li {
 #editGrid {
 	position: relative;
 	background: white;
-	/*border: 0.2em solid gray;*/
-	/*top: 1.8em;
-	left: 15em;*/
-	/* original size
-	width: 640px;
-	height: 360px;*/
-	width: 355px;
+	border: 0.2em solid gray;
+	/* original size width: 640px; height: 360px;*/
+	/*width: 355px; height: 200px;*/
+	width: 100%;
 	height: 200px;
 	color: black;
+	margin: 0 auto;
 }
 
 #notes {
-	/*top: calc(200px + 2.6em);*/
 	background: gray;
+	margin: 0 auto;
+	width: 100%;
 }
 
-#notes h1 {
+#notes h4 {
 	color:  rgb(214, 196, 196);
 	margin: 0.3em 0em;
+	text-align: center;
+	font-size: 0.9rem;
 }
 
 textarea {
 	border: none;
-	width: 353px;
-	height: 200px;
+	width: 100%;
+	height: 150px;
 	background: rgb(214, 196, 196);
-	padding: 0.4em;
-	margin: 0;
+	font-size: 0.8rem;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -252,6 +259,7 @@ textarea {
 /* Define grid areas */
 .hg-header { grid-area: header; }
 .hg-footer { grid-area: footer; }
+/*.hg-editgrid { grid-area: editgrid; }*/
 .hg-main { grid-area: main; }
 .hg-left { grid-area: sidebarLeft; }
 .hg-right { grid-area: sidebarRight; }
@@ -259,12 +267,13 @@ textarea {
 .hg {
 	display: grid;
 	grid-template-areas: "header header header"
+						/*"sidebarLeft editgrid sidebarRight"*/
 						"sidebarLeft main sidebarRight"
 						"footer footer footer";
 								
 	grid-template-columns: 1fr 60% 1fr; 
 	
-	grid-template-rows: 3rem
+	grid-template-rows: 2rem
 						1fr
 						2rem;
 								
@@ -276,10 +285,11 @@ textarea {
 @media screen and (max-width: 600px) {
 	.hg {
 		grid-template-areas: "header"
-									"sidebarLeft"
-									"main"
-									"sidebarRight"
-									"footer";
+							"sidebarLeft"
+							/*"editgrid"*/
+							"main"
+							"sidebarRight"
+							"footer";
 
 		grid-template-columns: 100%;
 		grid-template-rows: 4rem
@@ -297,4 +307,16 @@ textarea {
 	justify-content: center;  /*? aligner i miten av element*/
 	align-items: center;    /*???? aligner i høyden*/
 	text-align: center;  /* så ingen virkning av med justify-content*/
+}
+
+.hg-header,
+.hg-left,
+.hg-right,
+.hg-main,
+.hg-editgrid {
+	padding: 0.8rem;
+}
+
+.hg-right {
+	text-align: center;
 }
