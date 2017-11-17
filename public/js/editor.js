@@ -24,9 +24,10 @@ let toolbar_alignLeft = document.getElementById('toolbar_alignLeft');
 let toolbar_alignCenter = document.getElementById('toolbar_alignCenter');
 let toolbar_alignRight = document.getElementById('toolbar_alignRight');
 
-//Exttra stuff for toolbar
+//Extra stuff for toolbar
 let colorPicker = document.getElementById('colorPicker');
 let shadowPicker = document.getElementById('shadowPicker');
+document.execCommand('styleWithCSS', false, true);
 colorPicker.style.display = "none";
 shadowPicker.style.display = "none";
 
@@ -102,7 +103,9 @@ let init = {
 		let lastSelected;
 		let toolbar_fontSize_selector = toolbar_fontSize.firstElementChild;
 		let colorPickerChildren = colorPicker.getElementsByTagName('input');
+		let shadowPickerChildren = shadowPicker.getElementsByTagName('input');
 		let colorPickerSat = colorPicker.querySelector('[name = sat]');
+		let removeShadowBtn = document.getElementById('removeShadowBtn');
 
 		let colors = {
 			hue: 150,
@@ -111,7 +114,12 @@ let init = {
 			sat: 50
 		}
 
-		document.execCommand('styleWithCSS', false, true);
+		let shadows = {
+			cordX: 5,
+			cordY: 5,
+			feather: 5
+		}
+
 		colorPickerSat.style = `background-color: hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha});`;
 
 		for (let i = 1; i <= 7; i ++) {
@@ -155,19 +163,43 @@ let init = {
 
 		for (let element of colorPickerChildren) {
 			element.addEventListener('input', e => {
-				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
-
 				let name = element.parentElement.getAttribute('name');
 				colors[name] = element.value;
-				colorPickerSat.style = `background-color: ${hsla}`;
+				
+				let shadow = `${shadows.cordX}px ${shadows.cordY}px ${shadows.feather}px`;
+				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
+				colorPickerSat.style.backgroundColor = hsla;
 
 				if (lastSelected === toolbar_txtColor) {
 					document.execCommand('foreColor', false, hsla);
 				} else if (lastSelected === toolbar_bgColor) {
 					document.execCommand('BackColor', false, hsla);
+				} else if (lastSelected === toolbar_shadow) {
+					console.log("lolo");
+					selected.style.textShadow = `${shadow} ${hsla}`;
+					console.log()
 				}
 			});
 		}
+
+		for (let element of shadowPickerChildren) {
+			element.addEventListener('input', e => {
+				let name = element.parentElement.getAttribute('name');
+				shadows[name] = element.value;
+
+				let shadow = `${shadows.cordX}px ${shadows.cordY}px ${shadows.feather}px`;
+				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
+
+				if (lastSelected === toolbar_shadow) {
+					selected.style.textShadow = `${shadow} ${hsla}`;
+				}
+			});
+		}
+
+		removeShadowBtn.addEventListener('click', e => {
+			selected.style.textShadow = '';
+		});
+
 
 		toolbar_bulletList.addEventListener('mousedown', e => {
 			document.execCommand("insertunorderedlist");

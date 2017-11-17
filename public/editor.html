@@ -4,140 +4,10 @@
 <head>
 	<meta charset="utf-8" />
   	<title>Slyderweb</title>
+  	<link rel="stylesheet" type="text/css" href="./css/editor.css">
 </head>
 
-<style type="text/css">
-	#editGrid {
-		position: absolute;
-		margin: auto;
-		left: 0; right: -25%;
-		top: 0; bottom: 0;
-		border-radius: 5px;
-		border-style: dashed;
-		border-width: thin;
-		border-color: gray;
-		background-color: white;
-	}
-
-	#textToolBar {
-		position: absolute;
-		display: none;
-		width: 472px;
-		height: 0px;
-		left: 0; right: 0;
-		top: 155px; bottom: 0;
-	}
-
-	#textToolBar ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		background-color: #EEE;
-		border-radius: 5px;
-		border-style: solid;
-		border-width: thin;
-		border-color: gray;
-	}
-
-	#textToolBar ul li {
-		padding: 2px;
-		float: left;
-	}
-
-	#textToolBar ul li * {
-		display: inline-block;
-		color: black;
-		text-align: center;
-		text-decoration: none;
-	}
-
-	#textToolBar ul li select, ul li input {
-		background-color: #EEE;
-		width: 40px;
-		padding: 6px 0px;
-	}
-
-	#textToolBar ul li img {
-		background-color: #EEE;
-		height: 15px;
-		padding: 6px 6px;
-	}
-
-	#textToolBar ul li span {
-		padding: 6px 14px;
-	}
-
-	#textToolBar ul li *:hover {
-		cursor: pointer;
-		background-color: #888;
-	}
-
-	#notesTxt {
-		width: 200px; 
-		height: 50px; 
-    	resize: both;
-		border-radius: 5px;
-		border-style: solid;
-		border-width: thin;
-		border-color: gray;
-		overflow: auto;
-	}
-
-	#colorPicker, #shadowPicker {
-		position: absolute;
-		z-index: 100;
-		text-align: center;
-		width: 200px;
-		height: 200px;
-		padding: 5px;
-		background-color: lightgray;
-		border-radius: 5px;
-		border-style: solid;
-		border-width: thin;
-		border-color: gray;
-	}
-
-	#colorPicker [name = hue] {
-		background: linear-gradient(to right, red, orange, yellow, green, blue, indigo,violet);
-	}
-
-	#colorPicker [name = light] {
-		background: linear-gradient(to right, black, white);
-	}
-
-	#colorPicker [name = alpha] {
-		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQYV2NkQID/ICYjNgGwDEwSpAJFAACKfwQDF+r+wwAAAABJRU5ErkJggg==), linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
-	}
-
-	#colorPicker div, #shadowPicker div {
-		border-radius: 5px;
-		border-style: solid;
-		border-width: thin;
-		border-color: gray;
-	}
-
-	#colorPicker input, #shadowPicker input {
-		position: relative;
-		width: 100%;
-		top: 1px;
-		right: 2px;
-	}
-
-	.content {
-		position: absolute;
-		overflow: hidden;
-		text-align: center;
-		word-wrap: break-word;
-		padding: 10px;
-		border: thin solid transparent;
-		user-select: none;
-		cursor: pointer;
-	}
-</style>
 <body>
-	<!--<input id="colorPicker" type="color">-->
-
 	<div id="colorPicker">
 		Hue
 		<div name="hue">
@@ -158,19 +28,20 @@
 	</div>
 
 	<div id="shadowPicker">
-		<div name="preview" style="font-size: 25px; padding: 15px; text-shadow: 5px 5px 5px">T</div>
-		X
+		Position X
 		<div name="cordX">
 			<input type="range" min="-50" max="50" value="5">
 		</div>
-		Y
+		Position Y
 		<div name="cordY">
 			<input type="range" min="-50" max="50" value="5">
 		</div>
 		Feather
 		<div name="feather">
-			<input type="range" min="0" max="100" value="5">
+			<input type="range" min="0" max="20" value="5">
 		</div>
+		<br>
+		<button id="removeShadowBtn">Remove</button>
 	</div>
 
 	<div id="editGrid"></div>
@@ -236,9 +107,9 @@
 			</li>
 		</ul>
 	</div>
-</body>
 
-<script type="text/javascript" src="js/editor.js"></script>
-<script type="text/javascript" src="js/presmode.js"></script>
+	<script type="text/javascript" src="./js/editor.js"></script>
+	<script type="text/javascript" src="./js/presmode.js"></script>
+</body>
 
 </html>
