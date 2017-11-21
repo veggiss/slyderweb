@@ -39,21 +39,21 @@ createuser_btn.addEventListener("click", () => {
 
 
 function getUser(username) {
-	fetch(newRequest('GET', '/user', {
+	fetch(util.newRequest('GET', '/user', {
 		username: username
 	})).then(res =>{
 	    return res.json();
 	}).then(res => {
 	    console.log(res);
 	}).catch(err => {
-	    printError(err);
+	    util.printError(err);
 	});
 }
 
 // Legger til sha1 hash passord kryptering fra klient side:
 function login(username, password) {
     let hashPassword = sha1(password);
-	fetch(newRequest('POST', '/user/login', {
+	fetch(util.newRequest('POST', '/user/login', {
 		username: username,
 		password: hashPassword
 	})).then(res => {
@@ -61,14 +61,14 @@ function login(username, password) {
 	    	console.log('Login success');
 		}
 	}).catch(err => {
-	    printError(err);
+	    util.printError(err);
 	});
 }
 
 function newUser(user) {
     user.password = sha1(user.password);
 
-	fetch(newRequest('POST', '/user', {
+	fetch(util.newRequest('POST', '/user', {
 		username: user.username,
 		password: user.password,
 		firstname: user.firstname,
@@ -77,53 +77,8 @@ function newUser(user) {
 	})).then(res => {
 	    if (res.status === 201) {
 			console.log(`User '${user.username}' created`);
-            
 		}
 	}).catch(err => {
-	    printError(err);
+	    util.printError(err);
 	});
-}
-
-function newRequest(type, path, params) {
-	let request;
-
-	if (type == "GET") {
-		request = new Request(path + uriParams(params), {
-			method: 'GET',
-			headers:{
-				"content-type":"application/json"
-			}
-		});
-	} else if (type == 'PUT') {
-		request = new Request(path + uriParams(params), {
-			method: 'PUT',
-			headers:{
-				"Content-type":"application/json"
-			}
-		});
-	} else if (type == 'POST') {
-		request = new Request(path, {
-			method: 'POST',
-			body: JSON.stringify(params),
-			headers:{
-				"Content-type":"application/json"
-			}
-		});
-	}
-
-	return request;
-}
-
-function uriParams(params) {
-	let esc = encodeURIComponent;
-	let query = Object.keys(params).map(k => esc(k) + '=' + esc(params[k])).join('&');
-	return '?' + query;
-}
-
-function printError(...lines) {
-	if(DEBUG){
-		lines.forEach(item => {
-			console.error(item);
-		});
-	}
 }
