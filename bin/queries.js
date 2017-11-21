@@ -65,6 +65,7 @@ function loginUser(req, res, next) {
             if (!err) {
                 if (query.rows.length > 0) {
                     if(query.rows[0].password === password) {
+                        req.session.username = username;
                         res.statusMessage = 'Login success';
                         res.status(200).end();
                         res.next = true;
@@ -86,7 +87,7 @@ function loginUser(req, res, next) {
             next();
         });
     } else {
-        res.statusMessage = 'Username contains no or illigal characters';
+        res.statusMessage = 'Username or password contains no or illigal characters';
         res.status(403).end();
     }
 }
@@ -165,10 +166,9 @@ function newUser(req, res, next) {
 function updatePresentation(req, res, next) {
     let presObject = req.body.presentation;
     let uid = presObject.uid;
-    let author = 'veggis';
+    let author = req.session.username;
     let name = presObject.name;
     let body = presObject.body;
-    let presExistInDb = false;
 
     if(ut.isNotEmpty(uid.toString())) {
         if (ut.isNotEmpty(body.toString(), author)) {
@@ -181,7 +181,7 @@ function updatePresentation(req, res, next) {
             client.query(sql, params, (err, query) => {
                 if (!err) {
                     if (query.rowCount > 0) {
-                        res.statusMessage = `Presentation ${uid} saved`;
+                        res.statusMessage = `Presentation #${uid} saved`;
                         res.status(200).end();
                     } else {
                         res.statusMessage = "Presentation does not exist, proceed to create new";
@@ -212,7 +212,7 @@ function updatePresentation(req, res, next) {
 
 function newPresentation(req, res, next) {
     let presObject = req.body.presentation;
-    let author = 'veggis';
+    let author = req.session.username;
     let name = ut.isNotEmpty(presObject.name) ? presObject.name : 'My presentation';
     let body = presObject.body;
 

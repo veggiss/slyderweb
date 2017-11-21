@@ -1,17 +1,30 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 
 global.appRoot = path.resolve(__dirname);
 global.ut = require(appRoot + '/bin/util');
 const db = require(appRoot + '/bin/queries');
-
 const app = express();
+const pgPool = ut.newPool();
 
+app.enable('trust proxy');
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static('public'));
+
 app.use(bodyParser.json());
-app.enable('trust proxy');
+app.use(session({
+    store: new pgSession({
+        pool : pgPool,
+        tableName: 'sessions'
+    }),
+    secret: 'uia2017mm200slyderweb',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {maxAge: 60 * 60 * 1000, secure: false} //Secure should only be true with https connections
+}));
 
 // Get
 app.get('/user', db.getUser, ut.logEvent);
@@ -19,7 +32,7 @@ app.get('/user', db.getUser, ut.logEvent);
 // Post
 app.post('/user', db.newUser, ut.logEvent);
 app.post('/user/login', db.loginUser, ut.logEvent, db.setLastlogin, ut.logEvent);
-app.post('/user/presentation', db.updatePresentation, ut.logEvent, db.newPresentation, ut.logEvent);
+app.post('/user/presentation', ut.userAuth, db.updatePresentation, ut.logEvent, db.newPresentation, ut.logEvent);
 
 app.listen(app.get('port'), function() {
     ut.print('-----------------------------');

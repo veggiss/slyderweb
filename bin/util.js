@@ -1,15 +1,30 @@
-const {Client} = require('pg');
+const pg = require('pg');
+const {Client} = pg;
+const {Pool} = pg;
 //connectionString = process.env.DATABASE_URL <- Allways upload to git and heroku with this
-const connectionString = process.env.DATABASE_URL;
+const connectionString = 'postgres://qmmmxfpbnkmfuu:61353f3ff055d0833425f0eb668e4eeae4455cbc102ce1703bdf7a0371a466ee@ec2-46-51-187-253.eu-west-1.compute.amazonaws.com:5432/dau7n64ghf76jc';
 const heroku = connectionString == process.env.DATABASE_URL;
 
 function newClient() {
     let client = new Client({
         connectionString: connectionString,
-        ssl:true
+        ssl: true,
     });
 
     return client;
+}
+
+function newPool() {
+    let pool = new Pool({
+        connectionString: connectionString,
+        ssl: true,
+        max: 3,
+        min: 0,
+        idleTimeoutMillis: 30 * 1000,
+        connectionTimeoutMillis: 2 * 1000
+    });
+
+    return pool;
 }
 
 function noSymbols(...str) {
@@ -70,10 +85,23 @@ function print(...lines) {
     });
 }
 
+function userAuth(req, res, next) {
+    if (req.session.username) {
+        res.authenticated = true;
+        next();
+    } else {
+        res.authenticated = false;
+        res.statusMessage = 'User not logged in';
+        res.status(401).end();
+    }
+}
+
 module.exports = {
     noSymbols : noSymbols,
     isNotEmpty : isNotEmpty,
     print : print,
     newClient : newClient,
-    logEvent : logEvent
+    newPool : newPool,
+    logEvent : logEvent,
+    userAuth : userAuth
 }
