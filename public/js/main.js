@@ -1,5 +1,3 @@
-const DEBUG = false;
-
 // User info
 let userinfo_input = document.getElementById('userinfo_input');
 let userinfo_btn = document.getElementById('userinfo_btn');
@@ -52,10 +50,9 @@ function getUser(username) {
 
 // Legger til sha1 hash passord kryptering fra klient side:
 function login(username, password) {
-    let hashPassword = sha1(password);
 	fetch(util.newRequest('POST', '/user/login', {
 		username: username,
-		password: hashPassword
+		password: sha1(password)
 	})).then(res => {
 	    if (res.status === 200) {
 	    	console.log('Login success');
@@ -66,11 +63,9 @@ function login(username, password) {
 }
 
 function newUser(user) {
-    user.password = sha1(user.password);
-
 	fetch(util.newRequest('POST', '/user', {
 		username: user.username,
-		password: user.password,
+		password: sha1(user.password),
 		firstname: user.firstname,
 		lastname: user.lastname,
 		mail: user.mail

@@ -7,6 +7,7 @@ let util = {
 		if (type == "GET") {
 			request = new Request(path + this.uriParams(params), {
 				method: 'GET',
+				credentials: 'same-origin',
 				headers:{
 					"content-type":"application/json"
 				}
@@ -14,6 +15,7 @@ let util = {
 		} else if (type == 'PUT') {
 			request = new Request(path + this.uriParams(params), {
 				method: 'PUT',
+				credentials: 'same-origin',
 				headers:{
 					"Content-type":"application/json"
 				}
@@ -21,6 +23,7 @@ let util = {
 		} else if (type == 'POST') {
 			request = new Request(path, {
 				method: 'POST',
+				credentials: 'same-origin',
 				body: JSON.stringify(params),
 				headers:{
 					"Content-type":"application/json"
