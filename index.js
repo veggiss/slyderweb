@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 global.appRoot = path.resolve(__dirname);
+global.ut = require(appRoot + '/bin/util');
 const db = require(appRoot + '/bin/queries');
-const ut = require(appRoot + '/bin/util');
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.get('/user', db.getUser, ut.logEvent);
 // Post
 app.post('/user', db.newUser, ut.logEvent);
 app.post('/user/login', db.loginUser, ut.logEvent, db.setLastlogin, ut.logEvent);
-
+app.post('/user/presentation', db.updatePresentation, ut.logEvent, db.newPresentation, ut.logEvent);
 
 app.listen(app.get('port'), function() {
     ut.print('-----------------------------');

@@ -1,5 +1,6 @@
 //Editor related
 let editGrid	= document.getElementById('editGrid');
+let newPresentationBtn = document.getElementById('newPresentationBtn');
 let savePageBtn = document.getElementById('savePageBtn');
 let loadprevBtn = document.getElementById('loadprevBtn');
 let loadnextBtn = document.getElementById('loadnextBtn');
@@ -34,9 +35,15 @@ shadowPicker.style.display = "none";
 
 //Globals
 let presentation = {
-	page_1: {
-		content: '',
-		notes: ''
+	uid: '',
+	author: '',
+	name: '',
+	presmode: 'false',
+	body: {
+		page_1: {
+			content: '',
+			notes: ''
+		}
 	}
 }
 
@@ -44,6 +51,7 @@ let originX = 0;
 let originY = 0;
 let editing = false;
 let presmode = false;
+let offlineMode = false;
 let currentPage = 1;
 let selected, content, presLength;
 
@@ -77,8 +85,13 @@ let init = {
 			// Save events coming
 		});
 
+		presNameInput.addEventListener('input', e => {
+			presentation.name = presNameInput.value.trim();
+			console.log(presentation);
+		});
+
 		notesTxt.addEventListener('input', e => {
-			presentation["page_" + currentPage].notes = notesTxt.innerHTML;
+			presentation.body["page_" + currentPage].notes = notesTxt.innerHTML;
 		});
 
 		document.addEventListener('keydown', e => {
@@ -175,7 +188,7 @@ let init = {
 				let shadow = `${shadows.cordX}px ${shadows.cordY}px ${shadows.feather}px`;
 				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
 				colorPickerSat.style.backgroundColor = hsla;
-				
+
 				if (lastSelected === toolbar_txtColor) {
 					document.execCommand('foreColor', false, hsla);
 				} else if (lastSelected === toolbar_hiliteColor) {
@@ -229,7 +242,7 @@ let init = {
 	},
 
 	loadContent: function() {
-		let presObject = presentation["page_" + currentPage];
+		let presObject = presentation.body["page_" + currentPage];
 		notesTxt.innerHTML = "";
 
 		currentPageTxt.innerHTML = 'Current page: ' + currentPage;
@@ -237,7 +250,7 @@ let init = {
 		notesTxt.innerHTML = presObject.notes;
 
 		content = editGrid.getElementsByTagName("*");
-		presLength = Object.keys(presentation).length;
+		presLength = Object.keys(presentation.body).length;
 
 		for (let element of content) {
 			let parent = domEvent.getParent(editGrid, element);
@@ -291,6 +304,38 @@ let init = {
 let btnEvent = {
 	saveCurrentPage: function() {
 		domEvent.removeSelected();
+
+		fetch(util.newRequest('POST', '/user/presentation', {
+			presentation: presentation
+		})).then(res => {
+			return res.json();
+		}).then(res => {
+			if (res.uid) {
+				presentation.uid = res.uid;
+				presentation.author = res.author;
+				presentation.name = res.name;
+			}
+		}).catch(err => {
+		    util.printError(err);
+		});
+	},
+
+	newPresentation: function() {
+	    presentation = {
+	        uid: '',
+	        author: '',
+	        name: '',
+	        presmode: 'false',
+	        body: {
+	            page_1: {
+	                content: '',
+	                notes: ''
+	            }
+	        }
+	    }
+
+	    currentPage = 1;
+	    init.loadContent(currentPage);
 	},
 
 	prevPage: function() {
@@ -304,7 +349,7 @@ let btnEvent = {
 	nextPage: function() {
 		domEvent.removeSelected();
 
-		presLength = Object.keys(presentation).length;
+		presLength = Object.keys(presentation.body).length;
 
 		if (currentPage < presLength) {
 			currentPage++;
@@ -314,9 +359,9 @@ let btnEvent = {
 
 	newPage: function() {
 		for (let i = presLength; i >= currentPage + 1; i--) {
-			presentation['page_' + (i + 1)] = presentation['page_' + i];
+			presentation.body['page_' + (i + 1)] = presentation.body['page_' + i];
 		}
-		presentation['page_' + (currentPage + 1)] = {content: '', notes: ''};
+		presentation.body['page_' + (currentPage + 1)] = {content: '', notes: ''};
 		btnEvent.nextPage();
 	},
 
@@ -414,7 +459,7 @@ let domEvent = {
 	},
 
 	savePage: function() {
-		let presObject = presentation["page_" + currentPage];
+		let presObject = presentation.body["page_" + currentPage];
 		presObject.content = editGrid.innerHTML;
 		presObject.notes = notesTxt.innerHTML;
 	},
@@ -543,6 +588,7 @@ let domEvent = {
 }
 
 savePageBtn.onclick = btnEvent.saveCurrentPage;
+newPresentationBtn.onclick = btnEvent.newPresentation;
 loadprevBtn.onclick = btnEvent.prevPage;
 loadnextBtn.onclick = btnEvent.nextPage;
 newPageBtn.onclick = btnEvent.newPage;

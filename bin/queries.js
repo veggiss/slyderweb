@@ -1,5 +1,3 @@
-const ut = require(appRoot + '/bin/util');
-
 // Returns user info
 function getUser(req, res, next) {
     let username = req.query.username;
@@ -25,10 +23,10 @@ function getUser(req, res, next) {
                         presentations: query.rows[0].presentations,
                         profileimg: query.rows[0].profileimg
                     }
-
-                    res.send(clientResponse);
                     res.statusMessage = 'User found';
-                    res.status(200).end();
+                    res.status(200);
+                    res.send(clientResponse);
+                    res.end();
                 } else {
                     // If query did not return a row
                     res.statusMessage = 'Could not find user';
@@ -111,6 +109,7 @@ function setLastlogin(req, res, next) {
                 res.statusMessage = 'There was a problem setting lastlogin';
                 res.status(500).end();
             }
+
             client.end();
             next();
         });
@@ -153,6 +152,7 @@ function newUser(req, res, next) {
 
                 res.err = err;
             }
+
             client.end();
             next();
         });
@@ -162,9 +162,103 @@ function newUser(req, res, next) {
     }
 }
 
+function updatePresentation(req, res, next) {
+    let presObject = req.body.presentation;
+    let uid = presObject.uid;
+    let author = 'veggis';
+    let name = presObject.name;
+    let body = presObject.body;
+    let presExistInDb = false;
+
+    if(ut.isNotEmpty(uid.toString())) {
+        if (ut.isNotEmpty(body.toString(), author)) {
+            let client = ut.newClient();
+            let sql = 'UPDATE presentations SET body = $1, name = $2 WHERE author = $3 AND id = $4';
+            let params = [body, name, author, uid];
+
+            client.connect();
+
+            client.query(sql, params, (err, query) => {
+                if (!err) {
+                    if (query.rowCount > 0) {
+                        res.statusMessage = `Presentation ${uid} saved`;
+                        res.status(200).end();
+                    } else {
+                        res.statusMessage = "Presentation does not exist, proceed to create new";
+                        res.status(200);
+                        res.next = true;
+                    }
+                } else {
+                    res.err = err;
+                    res.statusMessage = 'There was a problem saving presentation';
+                    res.status(500).end();
+                }
+
+                client.end();
+                next();
+            });
+        } else {
+            res.statusMessage = 'Presentation object malformed';
+            res.status(403).end();
+            next();
+        }
+    } else {
+        res.statusMessage = "Presentation does not exist, proceed to create new";
+        res.status(200);
+        res.next = true;
+        next();
+    }
+}
+
+function newPresentation(req, res, next) {
+    let presObject = req.body.presentation;
+    let author = 'veggis';
+    let name = ut.isNotEmpty(presObject.name) ? presObject.name : 'My presentation';
+    let body = presObject.body;
+
+    if(ut.isNotEmpty(author, body.toString())) {
+        let client = ut.newClient();
+        let sql = 'INSERT INTO presentations(author, name, body) VALUES($1, $2, $3) RETURNING id';
+        let params = [author, name, body];
+
+        client.connect();
+
+        client.query(sql, params, (err, query) => {
+            if (!err) {
+                if (query.rows.length > 0) {
+                    res.statusMessage = 'New presentation added';
+                    res.status(201);
+                    res.send({
+                        uid: query.rows[0].id,
+                        author: author,
+                        name: name
+                    });
+                    res.end();
+                } else {
+                    res.statusMessage = 'Query did not return id';
+                    res.status(409).end();
+                }
+            } else {
+                res.statusMessage = 'There was a problem creating new presentation';
+                res.status(500).end();
+                res.err = err;
+            }
+
+            client.end();
+            next();
+        });
+    } else {
+        res.statusMessage = 'Author or body is empty';
+        res.status(403).end();
+        next();
+    }
+}
+
 module.exports = {
     getUser : getUser,
     loginUser : loginUser,
     setLastlogin : setLastlogin,
-    newUser : newUser
+    newUser : newUser,
+    updatePresentation : updatePresentation,
+    newPresentation : newPresentation
 }
