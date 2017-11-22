@@ -567,13 +567,37 @@ function lagTextBox(){
 	let box = document.createElement('div');
 	let top = parseInt(ratioContainer1.offsetHeight) / 2;
 	let left = parseInt(ratioContainer1.offsetWidth) / 2;
-	let fontSize = top * 0.18;
+	let topFraction = top*0.58;
+	let leftFraction = left*0.56;
+	let fontSize = 5 * top * 0.04;  /* 5 er utgangspunktet*/
 	console.log(fontSize);
 	box.className = 'content';
 	box.setAttribute('name', 'text');
-	box.style = `font-size: ${fontSize}px; width: 12rem; border-color: transparent; position: relative; left: 33%; top: 43%;`;
+	box.style = `font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
 	box.innerHTML = 'Enter text';
 	editGrid.appendChild(box);
 	init.addDefaultEvents(box);
 	init.addEventsText(box);
+}
+
+// dette kan vel vegard legge inn på en eller annen måte slik han vil ha det
+window.onresize = function(){
+	//få tak i elementer
+	contentArray = editGrid.getElementsByTagName("*");
+	console.log(contentArray);
+	let top = parseInt(ratioContainer1.offsetHeight) / 2;
+	let left = parseInt(ratioContainer1.offsetWidth) / 2;
+	let topFraction = top*0.58;
+	let leftFraction = left*0.56;
+	let fraction = 0.04;
+	let storedFontsize = 5; /* få tak i */
+	let fontSize = storedFontsize * topFraction * fraction;
+	/*
+	for (i=0;i < contentArray.length; i++){
+		contentArray[i].
+		element.style = `font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px`;
+	}*/
+	/*bilder
+	let width = get width * brøkdel
+	let height = get height * brøkdel*/
 }

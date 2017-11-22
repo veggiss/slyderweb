@@ -1,12 +1,11 @@
 /************************************************************************
 Layout in order, form elements, other elements, classes and ids
-Authors: Silje U.
 *************************************************************************/
 
 /* Layout in order */
 
 html {
-	font-size: 62.5%;   /* gjør at man kan oppgi rem som 1/10 pt-størrelse */
+	font-size: 62.5%;   /* gjør at man kan oppgi rem som 1/10 pt-størrelse 1.2 rem = 12 pt */
 }
 
 html, body, section, main {
@@ -361,7 +360,7 @@ textarea {
 	grid-template-columns: 1fr 60% 1fr; 
 	
 	grid-template-rows: 2.2rem
-						400px    /* gir opp relativt....1fr...*/
+						1fr    /* gir opp relativt....1fr...*/
 						2.2rem;
 								
 	min-height: 100vh /* ellers trekker footeren seg opp */
