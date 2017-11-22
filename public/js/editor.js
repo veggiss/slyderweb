@@ -1,5 +1,6 @@
 //Editor related
 let editGrid	= document.getElementById('editGrid');
+let ratioContainer1	= document.getElementById('ratioContainer1');
 let savePageBtn = document.getElementById('savePageBtn');
 let loadprevBtn = document.getElementById('loadprevBtn');
 let loadnextBtn = document.getElementById('loadnextBtn');
@@ -52,7 +53,7 @@ let init = {
 	loadGrid: function() {
 		let pressedDelKey = false;
 
-		//editGrid.style.width = (screen.width * 0.5) + "px";
+		//editGrid.style.width = (screen.width * 0.5) + "px";  Changed to ratioContainer and CSS
 		//editGrid.style.height = (screen.height * 0.5) + "px";
 
 		editGrid.addEventListener('mousedown', e => {
@@ -324,11 +325,12 @@ let btnEvent = {
 		domEvent.removeSelected();
 
 		let box = document.createElement('div');
-		let top = parseInt(editGrid.style.height) / 2;
-		let left = parseInt(editGrid.style.width) / 2;
+		let top = parseInt(ratioContainer1.style.height) / 2;
+		console.log(ratioContainer1.style.height);
+		let left = parseInt(ratioContainer1.style.width) / 2;
 		box.className = 'content';
 		box.setAttribute('name', 'text');
-		box.style = `font-size: 25px; width: 150px; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px;`;
+		box.style = `font-size: 2rem; width: 150px; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px;`;
 		box.innerHTML = 'Enter text';
 		editGrid.appendChild(box);
 		init.addDefaultEvents(box);
@@ -542,6 +544,7 @@ let domEvent = {
 	}
 }
 
+
 savePageBtn.onclick = btnEvent.saveCurrentPage;
 loadprevBtn.onclick = btnEvent.prevPage;
 loadnextBtn.onclick = btnEvent.nextPage;
@@ -549,6 +552,28 @@ newPageBtn.onclick = btnEvent.newPage;
 newTextBoxBtn.onclick = btnEvent.newTextBox;
 exportToFileBtn.onclick = btnEvent.exportToFile;
 
+
 init.loadGrid();
 init.loadContent();
 init.loadToolbar();
+
+// FOR TESTING
+
+lagTextBox();
+
+function lagTextBox(){
+	domEvent.removeSelected();
+
+	let box = document.createElement('div');
+	let top = parseInt(ratioContainer1.offsetHeight) / 2;
+	let left = parseInt(ratioContainer1.offsetWidth) / 2;
+	let fontSize = top * 0.18;
+	console.log(fontSize);
+	box.className = 'content';
+	box.setAttribute('name', 'text');
+	box.style = `font-size: ${fontSize}px; width: 12rem; border-color: transparent; position: relative; left: 33%; top: 43%;`;
+	box.innerHTML = 'Enter text';
+	editGrid.appendChild(box);
+	init.addDefaultEvents(box);
+	init.addEventsText(box);
+}

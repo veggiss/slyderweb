@@ -44,7 +44,7 @@
 
 		<div id="ratioContainer1">
 			<div id="ratioContainer2">
-				<div id="editGrid">
+				<div id="editGrid" onresize="resizeContent()">
 					<div class="content" name="text" style="font-size: 25px;">Title</div>
 					<div class="content" name="text" style="top: 120px">Some paragraph</div>
 				</div>
@@ -68,7 +68,6 @@
 							<input type="checkbox" />Lock ratio</li>
 						<input placeholder="width" type="number" />
 						<input placeholder="height" type="number" />
-						</li>
 						<li>
 							<button>Crop</button>
 						</li>

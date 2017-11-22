@@ -361,7 +361,7 @@ textarea {
 	grid-template-columns: 1fr 60% 1fr; 
 	
 	grid-template-rows: 2.2rem
-						1fr
+						400px    /* gir opp relativt....1fr...*/
 						2.2rem;
 								
 	min-height: 100vh /* ellers trekker footeren seg opp */
