@@ -1,5 +1,5 @@
 // lagrer resultatet fra anonym function, dette blir gjort for å forhindre navn konflikt (at ikke ting henter det samme)
-const profile = (function ()
+const userprofile = (function ()
 {// ================================================
 	const PAGE_ID_PREFIX          = "page-";
 	const PAGE_CLASS              = "page";
@@ -23,9 +23,8 @@ const profile = (function ()
     	for (let key in pages) {
       	pages[key].classList.remove(PAGE_CLASS_VISIBLE);
       }
-      profile.showPage(window.location.hash);
+      this.showPage(window.location.hash);
 
-			// 
       const menuItems = document.getElementsByClassName(MENU_ITEM_CLASS);
       for (let i = 0; i < menuItems.length; i++) {
         const elm  = menuItems[i];
@@ -70,11 +69,11 @@ const profile = (function ()
 }// ================================================
 )();
 
-profile.update();
+userprofile.update();
 
 window.onhashchange = function () {
-	profile.update();
+	userprofile.update();
 }
 
 
-console.log(profile);
+// console.log(profile);
