@@ -34,6 +34,32 @@ let util = {
 		return request;
 	},
 
+	getPresList: function() {
+		let list = fetch(util.newRequest('GET', '/user/preslist', {})).then(res => {
+		    return res.json();
+		}).then(res => {
+			return res;
+		}).catch(err => {
+		    util.printError(err);
+		});
+
+		return list;
+	},
+
+	isNotEmpty: function(...str) {
+	    let state = true;
+
+	    str.forEach(item => {
+	        if (item == null || item == undefined) {
+	            state = false;
+	        } else if(!item.replace(/\s/g, "").length > 0) {
+	            state = false;
+	        }
+	    });
+
+	    return state;
+	},
+
 	uriParams: function(params) {
 		let esc = encodeURIComponent;
 		let query = Object.keys(params).map(k => esc(k) + '=' + esc(params[k])).join('&');
