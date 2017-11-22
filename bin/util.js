@@ -2,7 +2,8 @@ const pg = require('pg');
 const {Client} = pg;
 const {Pool} = pg;
 //connectionString = process.env.DATABASE_URL <- Allways upload to git and heroku with this
-const connectionString = process.env.DATABASE_URL;
+const connectionString = 'postgres://qmmmxfpbnkmfuu:61353f3ff055d0833425f0eb668e4eeae4455cbc102ce1703bdf7a0371a466ee@ec2-46-51-187-253.eu-west-1.compute.amazonaws.com:5432/dau7n64ghf76jc';
+const connectionPort = process.env.PORT || 8080;
 const heroku = connectionString == process.env.DATABASE_URL;
 
 function newClient() {
@@ -25,6 +26,14 @@ function newPool() {
     });
 
     return pool;
+}
+
+function corsSettings(req, res, next) {
+    res.header('Access-Control-Allow-Origin', `http://localhost:${connectionPort}`);
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+    res.header('Access-Control-Allow-Headers', 'content-type');
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
 }
 
 function noSymbols(...str) {
@@ -103,5 +112,7 @@ module.exports = {
     newClient : newClient,
     newPool : newPool,
     logEvent : logEvent,
-    userAuth : userAuth
+    userAuth : userAuth,
+    connectionPort : connectionPort,
+    corsSettings : corsSettings
 }
