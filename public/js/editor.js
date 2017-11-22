@@ -557,7 +557,8 @@ init.loadGrid();
 init.loadContent();
 init.loadToolbar();
 
-// FOR TESTING
+
+// VIS ELEMENT VED LOAD FOR TESTING
 
 lagTextBox();
 
@@ -569,10 +570,10 @@ function lagTextBox(){
 	let left = parseInt(ratioContainer1.offsetWidth) / 2;
 	let topFraction = top*0.58;
 	let leftFraction = left*0.56;
-	let fontSize = 5 * top * 0.04;  /* 5 er utgangspunktet*/
+	let fontSize = 5 * top * 0.04;  // 5 er utgangspunktet
 	console.log(fontSize);
 	box.className = 'content';
-	box.setAttribute('name', 'text');
+	box.setAttribute('name', 'text', 'class');
 	box.style = `font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
 	box.innerHTML = 'Enter text';
 	editGrid.appendChild(box);
@@ -580,24 +581,25 @@ function lagTextBox(){
 	init.addEventsText(box);
 }
 
-// dette kan vel vegard legge inn på en eller annen måte slik han vil ha det
+
+// Resizing elements based on editGrid size upon resize -----------------
+
 window.onresize = function(){
-	//få tak i elementer
-	contentArray = editGrid.getElementsByTagName("*");
-	console.log(contentArray);
+	//få tak i tekstelementer
+	let styleArray = document.getElementsByName("text");
+	console.log(styleArray);
 	let top = parseInt(ratioContainer1.offsetHeight) / 2;
 	let left = parseInt(ratioContainer1.offsetWidth) / 2;
 	let topFraction = top*0.58;
 	let leftFraction = left*0.56;
 	let fraction = 0.04;
-	let storedFontsize = 5; /* få tak i */
+	let storedFontsize = 5; // how to get this
 	let fontSize = storedFontsize * topFraction * fraction;
-	/*
-	for (i=0;i < contentArray.length; i++){
-		contentArray[i].
-		element.style = `font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px`;
-	}*/
-	/*bilder
-	let width = get width * brøkdel
-	let height = get height * brøkdel*/
+	// how to manipulate style of elements 
+	
+	for (i=0;i < styleArray.length; i++){
+		styleArray[i].style.fontSize=`${fontSize}px`;
+		/*`font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px`;*/
+	}
+	// må legges inn for bilder og annet
 }

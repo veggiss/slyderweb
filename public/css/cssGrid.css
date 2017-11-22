@@ -185,9 +185,11 @@ ul.hidden {
 	box-sizing: border-box;
 }
 
+/*
 #editGrid:active {
 	border: 0.2em solid cyan;
 }
+*/
 
 #notesSection {  /* var nesten finere uten */
 	background: gray;
