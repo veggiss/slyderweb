@@ -254,11 +254,78 @@ function newPresentation(req, res, next) {
     }
 }
 
+function getPresList(req, res, next) {
+    let username = req.session.username;
+    let client = ut.newClient();
+    let sql = 'SELECT name FROM presentations WHERE author = $1';
+    let params = [username];
+
+    client.connect();
+
+    client.query(sql, params, (err, query) => {
+        if (!err) {
+            res.statusMessage = 'Found some presentations';
+            res.status(200);
+            res.send(query.rows);
+            res.end();
+        } else {
+            res.statusMessage = 'There was a problem getting presentation list';
+            res.status(500).end();
+            res.err = err;
+        }
+
+        client.end();
+        next();
+    });
+}
+
+function getPresenation(req, res, next) {
+    let username = req.session.username;
+    let presName = req.query.name;
+
+    let client = ut.newClient();
+    let sql = 'SELECT * FROM presentations WHERE author = $1 AND name = $2';
+    let params = [username, presName];
+
+    client.connect();
+
+    client.query(sql, params, (err, query) => {
+        if (!err) {
+            if (query.rows.length > 0) {
+                let presentation = {
+                    uid: query.rows[0].id,
+                    author: query.rows[0].author,
+                    name: query.rows[0].name,
+                    presmode: query.rows[0].presmode,
+                    body: query.rows[0].body
+                }
+
+                res.statusMessage = 'Found presentation';
+                res.status(200);
+                res.send(presentation);
+                res.end();
+            } else {
+                res.statusMessage = `Could not find presentation '${presName}'`;
+                res.satus(404).end();
+            }
+        } else {
+            res.statusMessage = 'There was a problem getting presentation list';
+            res.status(500).end();
+            res.err = err;
+        }
+
+        client.end();
+        next();
+    });
+}
+
 module.exports = {
-    getUser : getUser,
-    loginUser : loginUser,
-    setLastlogin : setLastlogin,
-    newUser : newUser,
-    updatePresentation : updatePresentation,
-    newPresentation : newPresentation
+    getUser: getUser,
+    loginUser: loginUser,
+    setLastlogin: setLastlogin,
+    newUser: newUser,
+    updatePresentation: updatePresentation,
+    newPresentation: newPresentation,
+    getPresList: getPresList,
+    getPresenation: getPresenation
 }

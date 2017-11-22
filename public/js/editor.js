@@ -7,6 +7,8 @@ let loadnextBtn = document.getElementById('loadnextBtn');
 let newTextBoxBtn = document.getElementById('newTextBoxBtn');
 let presNameInput = document.getElementById('presNameInput');
 let currentPageTxt = document.getElementById('currentPageTxt');
+let presListSelect = document.getElementById('presListSelect');
+let loadPresBtn = document.getElementById('loadPresBtn');
 let notesTxt = document.getElementById('notesTxt');
 
 //Text toolbar stuff
@@ -47,19 +49,21 @@ let presentation = {
 	}
 }
 
+
 let originX = 0;
 let originY = 0;
 let editing = false;
 let presmode = false;
-let offlineMode = false;
 let currentPage = 1;
 let selected, content, presLength;
+let presList = Promise.resolve(util.getPresList());
 
 // -- Initalize content
 let init = {
 	loadGrid: function() {
-		let pressedDelKey = false;
+		this.loadPresList();
 
+		let pressedDelKey = false;
 		editGrid.style.width = (screen.width * 0.5) + "px";
 		editGrid.style.height = (screen.height * 0.5) + "px";
 
@@ -264,6 +268,17 @@ let init = {
 		}
 	},
 
+	loadPresList() {
+		presList.then((res) => {
+			res.forEach(item => {//<option value="Arial" style="font-family: 'Arial';">Arial</option>
+				let optionDom = document.createElement('option');
+				optionDom.value = item.name;
+				optionDom.innerHTML = item.name;
+				presListSelect.appendChild(optionDom);
+			})
+		});
+	},
+
 	addDefaultEvents: function(element) {
 		element.addEventListener('mousedown', e => {
 			if (!editing && e.target != undefined) {
@@ -302,6 +317,36 @@ let init = {
 
 // -- Button functions
 let btnEvent = {
+	loadSelectedPres() {
+	    if (confirm("Save changes?") == true) {
+	        btnEvent.saveCurrentPage();
+	    }
+
+		let selection = presListSelect.value;
+
+		if (selection) {
+			fetch(util.newRequest('GET', '/user/presentation', {
+				name: selection
+			})).then(res => {
+			    return res.json();
+			}).then(res => {
+				console.log(res);
+				if (util.isNotEmpty(res.uid.toString(), res.author, res.name)) {
+					currentPage = 1;
+					presentation.uid = res.uid;
+					presentation.author = res.author;
+					presentation.name = res.name;
+					presentation.body = res.body;
+					presentation.presmode = 'false'
+
+					init.loadContent();
+				}
+			}).catch(err => {
+			    util.printError(err);
+			});
+		}
+	},
+
 	saveCurrentPage: function() {
 		domEvent.removeSelected();
 
@@ -594,6 +639,7 @@ loadnextBtn.onclick = btnEvent.nextPage;
 newPageBtn.onclick = btnEvent.newPage;
 newTextBoxBtn.onclick = btnEvent.newTextBox;
 exportToFileBtn.onclick = btnEvent.exportToFile;
+loadPresBtn.onclick = btnEvent.loadSelectedPres;
 
 init.loadGrid();
 init.loadContent();
