@@ -599,7 +599,7 @@ function lagTextBox() {
 	console.log(fontSize);
 	demotextbox.className = 'content';
 	demotextbox.setAttribute('name', 'text');
-	demotextbox.style = `color: red; font-size: ${fontSize}px; width: ${fontSize * 7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
+	demotextbox.style = `color: red; font-size: ${fontSize}px; width: ${fontSize * 10}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
 	demotextbox.innerHTML = 'DemonTextBox';
 	editGrid.appendChild(demotextbox);
 	init.addDefaultEvents(demotextbox);
@@ -607,26 +607,45 @@ function lagTextBox() {
 	console.log("Dette er koden");
 	console.log(demotextbox);
 	//	console.log(demotextbox.outerHTML);
-
 	//	localStorage.setItem("demotextbox", demotextbox.outerhtml);
 }
 
 
 // Resizing elements based on editGrid size upon resize -----------------
 window.onresize = function () {
+	
+	// defining sizes
 	let top = parseInt(ratioContainer1.offsetHeight) / 2;
 	let left = parseInt(ratioContainer1.offsetWidth) / 2;
 	let topFraction = top * 0.58;
+	console.log("topfraction" + topFraction);
 	let leftFraction = left * 0.56;
 	let fraction = 0.04;
 	let storedFontsize = 5; // how to get this
 	let fontSize = storedFontsize * topFraction * fraction;
-	console.log("resize!" + fontSize);
-	//få tak i tekstelementer
+	console.log(fontSize);
+	
+	// retrieving text elements
 	var textArray = document.getElementsByName('text')
 	console.log(textArray);
-	for (i = 0; i = textArray.length; i++) {
-		textArray[i].style = `font-size: ${fontSize}px; width: ${fontSize * 7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px`;
+	// updating size
+	for (i = 0; i < textArray.length; i++) {
+		textArray[i].style.fontSize = `${fontSize}px`;
+		textArray[i].style.width = `${fontSize * 10}px`;
+		textArray[i].style.left = `${leftFraction}px`;
+		textArray[i].style.top = `${topFraction}px`;
 	}
+
+	// retrieving image elements
+	var imgArray = document.getElementsByName('img')
+	console.log(imgArray);
+	// updating size
+	for (i = 0; i < imgArray.length; i++) {
+		imgArray[i].style.width = `${topFraction * 15}px`;
+        //img.style.width = "250px";
+		imgArray[i].style.left = `${leftFraction}px`;
+		imgArray[i].style.top = `${topFraction}px`;
+	}
+	
+	//og andre typer elementer
 }
-	// må legges inn for bilder og annet
