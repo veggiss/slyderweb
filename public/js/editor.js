@@ -441,7 +441,7 @@ let domEvent = {
 						img.className = 'content'
 						img.name = 'img';
 						img.src = e.target.result;
-						img.style.width = "250px";
+						img.style.width = "50px";
 						img.style.height = "auto";
 						img.draggable = false;
 
@@ -558,6 +558,8 @@ init.loadContent();
 init.loadToolbar();
 
 
+/* SILJES KODE START */
+
 // VIS ELEMENT VED LOAD FOR TESTING
 
 var demotextbox;
@@ -599,8 +601,8 @@ function lagTextBox() {
 	console.log(fontSize);
 	demotextbox.className = 'content';
 	demotextbox.setAttribute('name', 'text');
-	demotextbox.style = `color: red; font-size: ${fontSize}px; width: ${fontSize * 10}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
-	demotextbox.innerHTML = 'DemonTextBox';
+	demotextbox.style = `color: red; position: relative; font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
+	demotextbox.innerHTML = 'DemoTextBox';
 	editGrid.appendChild(demotextbox);
 	init.addDefaultEvents(demotextbox);
 	init.addEventsText(demotextbox);
@@ -612,40 +614,74 @@ function lagTextBox() {
 
 
 // Resizing elements based on editGrid size upon resize -----------------
+
+//utgangspunktstørrelse
+let editGridHeight = parseInt(ratioContainer1.offsetHeight);
+let editGridWidth = parseInt(ratioContainer1.offsetWidth);
+
 window.onresize = function () {
 	
 	// defining sizes
-	let top = parseInt(ratioContainer1.offsetHeight) / 2;
-	let left = parseInt(ratioContainer1.offsetWidth) / 2;
-	let topFraction = top * 0.58;
-	console.log("topfraction" + topFraction);
-	let leftFraction = left * 0.56;
+	let halfHeight = parseInt(ratioContainer1.offsetHeight) / 2;
+	let halfWidth = parseInt(ratioContainer1.offsetWidth) / 2;
+	let topFraction = halfHeight * 0.58;
+	//console.log("topfraction" + topFraction);
+	let leftFraction = halfWidth * 0.56;
 	let fraction = 0.04;
+	let gridFraction = 0.004;
 	let storedFontsize = 5; // how to get this
 	let fontSize = storedFontsize * topFraction * fraction;
-	console.log(fontSize);
+	//console.log(fontSize);
 	
 	// retrieving text elements
 	var textArray = document.getElementsByName('text')
-	console.log(textArray);
+	
 	// updating size
 	for (i = 0; i < textArray.length; i++) {
+		
+		//hent eksisterende bredde og høyde
+		let leftpos = parseInt(textArray[i].offsetLeft);
+		let toppos = parseInt(textArray[i].offsetTop);
+		console.log("toppos: " + toppos);
+		
+		// hva er dette av editgrid
+		console.log("edH" + editGridHeight)
+		let leftposFraction = leftpos/editGridWidth;
+		let topposFraction = toppos/editGridHeight;
+		
+		// lag ny posisjon
+		let left = leftposFraction * halfWidth * 2;
+		let top = topposFraction * halfHeight * 2;
+		console.log("top" + top);
+		console.log("Height " + halfHeight * 2);
+		
+		//textstørrelse
 		textArray[i].style.fontSize = `${fontSize}px`;
-		textArray[i].style.width = `${fontSize * 10}px`;
-		textArray[i].style.left = `${leftFraction}px`;
-		textArray[i].style.top = `${topFraction}px`;
-	}
+		textArray[i].style.width = `${fontSize*7}px`;
 
+		//angi ny posisjon
+		textArray[i].style.left = `${left}px`;
+		textArray[i].style.top = `${top}px`;
+
+	}
+	
 	// retrieving image elements
 	var imgArray = document.getElementsByName('img')
-	console.log(imgArray);
+	//console.log(imgArray);
 	// updating size
 	for (i = 0; i < imgArray.length; i++) {
-		imgArray[i].style.width = `${topFraction * 15}px`;
-        //img.style.width = "250px";
-		imgArray[i].style.left = `${leftFraction}px`;
-		imgArray[i].style.top = `${topFraction}px`;
+		imgArray[i].style.width = `${topFraction/2}px`;
+        console.log(topFraction * 5);
+		//imgArray[i].style.left = `${leftFraction}px`;
+		//imgArray[i].style.top = `${topFraction}px`;
 	}
 	
 	//og andre typer elementer
+	
+	// endre høyde bredde igjen, ved hver resize
+	editGridHeight = parseInt(ratioContainer1.offsetHeight);
+	editGridWidth = parseInt(ratioContainer1.offsetWidth);
+	halfHeight = editGridHeight/2;
+	halfWidth = editGridWidth/2;
+	
 }
