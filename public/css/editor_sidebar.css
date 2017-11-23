@@ -15,12 +15,12 @@
   text-align: center;
   cursor: default;
 	box-shadow: 0 0 20px #202021;
+  overflow: -moz-scrollbars-none;
 }
 
 .side-bar::-webkit-scrollbar {
 	display: none; visibility: hidden;
 }
-
 .side-bar section div {
   display: table;
 	margin: auto;
