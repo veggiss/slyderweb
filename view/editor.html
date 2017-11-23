@@ -4,7 +4,9 @@
 <head>
 	<meta charset="utf-8" />
   	<title>Slyderweb</title>
+  	<link rel="stylesheet" type="text/css" href="./css/main.css">
   	<link rel="stylesheet" type="text/css" href="./css/editor_sidebar.css">
+  	<link rel="stylesheet" type="text/css" href="./css/editor_pagenav.css">
   	<link rel="stylesheet" type="text/css" href="./css/editor_grid.css">
   	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -101,40 +103,63 @@
 		</ul>
 	</div>
 
-	<div class="sideNav">
+	<div class="side-bar">
 		<main>
 		  <input id="toggle_page" type="checkbox">
-		  <label for="toggle_page">Presentation</label>
+		  <label for="toggle_page">Slyde</label>
 		  <div id="expand_page">
 		    <section>
-				<div id="newTextBoxBtn">
+				<div>
+					<text>Title</text>
+					<input id="presNameInput" name="notes" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0">
+				</div>
+
+				<div id="newPresentationBtn">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;"">library_add</t><br>
 						<t>New</t>
 					</span>
 				</div>
-				<div id="newTextBoxBtn">
+				<div id="presmodeBtn">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;"">play_arrow</t><br>
 						<t>Start</t>
 					</span>
 				</div>
-				<div id="newTextBoxBtn">
+				<div id="previewmodeBtn">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;"">details</t><br>
 						<t>Preview</t>
 					</span>
 				</div>
-				<div id="newTextBoxBtn">
+				<div id="savePageBtn">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;"">cloud_upload</t><br>
 						<t>Save</t>
 					</span>
 				</div>
-				<div id="newTextBoxBtn">
+				<div style="cursor: not-allowed;">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;"">folder_shared</t><br>
-						<t>My slides</t>
+						<t>My slydes</t>
+					</span>
+				</div>
+				<div id="exportToFileBtn">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">archive</t><br>
+						<t>Export</t>
+					</span>
+				</div>
+				<div style="cursor: not-allowed;">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">unarchive</t><br>
+						<t>Import</t>
+					</span>
+				</div>
+				<div style="cursor: not-allowed;">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">delete</t><br>
+						<t>Delete</t>
 					</span>
 				</div>
 		    </section>
@@ -152,13 +177,13 @@
 						<t>Textbox</t>
 					</span>
 				</div>
-				<div>
+				<div style="cursor: not-allowed;">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;">crop_original</t><br>
 						<t>Image</t>
 					</span>
 				</div>
-				<div>
+				<div style="cursor: not-allowed;">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;">web_asset</t><br>
 						<t>Iframe</t>
@@ -173,19 +198,19 @@
 		  <label for="toggle_tools">Tools</label>
 		  <div id="expand_tools">
 		    <section>
-				<div>
+				<div style="cursor: not-allowed;">
 					<span>
 						<t>Scale</t>
 						<input name="range" type="range" min="1" max="100" value="50">
 					</span>
 				</div>
-				<div>
+				<div style="cursor: not-allowed;">
 					<span>
 						<t>Rotation</t>
 						<input name="range" type="range" min="1" max="100" value="50">
 					</span>
 				</div>
-				<div>
+				<div style="cursor: not-allowed;">
 					<span>
 						<t>Border</t>
 						<input name="range" type="range" min="1" max="100" value="50">
@@ -200,13 +225,13 @@
 		  <label for="toggle_background">Styles</label>
 		  <div id="expand_background">
 		    <section>
-				<div>
+				<div style="cursor: not-allowed;">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;">color_lens</t><br>
 						<t>Background</t>
 					</span>
 				</div>
-				<div>
+				<div style="cursor: not-allowed;">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;">art_track</t><br>
 						<t>Templates</t>
@@ -215,27 +240,51 @@
 		    </section>
 		  </div>
 		</main>
+
+		<main>
+		  <input id="toggle_notes" type="checkbox">
+		  <label for="toggle_notes">Notes</label>
+		  <div id="expand_notes">
+			<div>
+				<div id="notesTxt" name="notes" contenteditable="true"></div>
+			</div>
+		  </div>
+		</main>
 	</div>
 
-		<button id="presmodeBtn">Presentation mode</button>
-		<button id="newPresentationBtn">New presentation</button>
-		<button id="savePageBtn">Save page</button>
-		<button id="loadprevBtn">Prev page</button>
-		<button id="loadnextBtn">Next page</button>
-		<button id="newPageBtn">New page</button>
-		<span id='currentPageTxt'>Current page:</span>
-		<br><br>
-	
-		<button id="exportToFileBtn">Export presentation</button>
-		<input id="presNameInput" type="text" placeholder="Name" style="width:100px">
-		<select id="presListSelect" style="width: 100px"></select>
-		<button id="loadPresBtn">Load presentation</button>
-		<br><br>Notes:<br>
-		<div id="notesTxt" contenteditable="true"></div>
+	<div id="pageNav" class="page-nav noselect">
+		<section>
+			<div>
+				<span name="btn">
+					<t id="currentPageTxt" class="material-icons"></t>
+				</span>
+			</div>
+			<div id="loadprevBtn">
+				<span name="btn">
+					<t class="material-icons">keyboard_arrow_left</t>
+				</span>
+			</div>
+			<div id="loadnextBtn">
+				<span name="btn">
+					<t class="material-icons">keyboard_arrow_right</t>
+				</span>
+			</div>
+			<div id="newPageBtn">
+				<span name="btn">
+					<t class="material-icons">add</t>
+				</span>
+			</div>
+		</section>
+	</div>
+
+		<select id="presListSelect" style="width: 100px; display: none; visibility: hidden;"></select>
+		<button id="loadPresBtn" style="display: none; visibility: hidden;">Load presentation</button>
+		
 
 	<script type="text/javascript" src="./js/util.js"></script>
 	<script type="text/javascript" src="./js/editor.js"></script>
 	<script type="text/javascript" src="./js/presmode.js"></script>
+	<script type="text/javascript" src="./js/pagenav.js"></script>
 </body>
 
 </html>

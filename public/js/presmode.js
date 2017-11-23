@@ -1,7 +1,14 @@
-let presmodeBtn = document.getElementById("presmodeBtn");
+let presmodeBtn = document.getElementById('presmodeBtn');
+let previewmodeBtn = document.getElementById('previewmodeBtn');
 let lastPage;
 
-presmodeBtn.onclick = goFullScreen;
+presmodeBtn.addEventListener('click', function(){
+    goFullScreen(1);
+});
+
+previewmodeBtn.addEventListener('click', function(){
+    goFullScreen(currentPage);
+});
 
 let fsEvents = {
 	nextPageKeys: function(e) {
@@ -42,8 +49,8 @@ let fsEvents = {
 	}
 }
 
-function goFullScreen() {
-	lockGrid();
+function goFullScreen(page) {
+	lockGrid(page);
 
 	if(editGrid.requestFullscreen) {
 		document.addEventListener('fullscreenchange', exitHandler);
@@ -61,11 +68,11 @@ function goFullScreen() {
 }
 
 //Issue #4 Firefox not scaling content properly
-function lockGrid() {
-	domEvent.removeSelected()
+function lockGrid(page) {
+	domEvent.removeSelected();
 
 	lastPage = currentPage;
-	currentPage = 1;
+	currentPage = page;
 	init.loadContent(currentPage);
 
 	lockCursor();

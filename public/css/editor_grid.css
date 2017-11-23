@@ -1,3 +1,7 @@
+body {
+	overflow: hidden;
+}
+
 #editGrid {
 	position: absolute;
 	margin: auto;
@@ -8,6 +12,7 @@
 	border-width: thin;
 	border-color: gray;
 	background-color: white;
+	box-shadow: 0 0 20px #e5e5e5;
 }
 
 #textToolBar {
@@ -61,17 +66,6 @@
 #textToolBar ul li *:hover {
 	cursor: pointer;
 	background-color: #888;
-}
-
-#notesTxt {
-	width: 200px; 
-	height: 50px; 
-	resize: both;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: thin;
-	border-color: gray;
-	overflow: auto;
 }
 
 #colorPicker, #shadowPicker {

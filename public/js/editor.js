@@ -10,6 +10,7 @@ let currentPageTxt = document.getElementById('currentPageTxt');
 let presListSelect = document.getElementById('presListSelect');
 let loadPresBtn = document.getElementById('loadPresBtn');
 let notesTxt = document.getElementById('notesTxt');
+let pageNav = document.getElementById('pageNav');
 
 //Text toolbar stuff
 let textToolBar = document.getElementById('textToolBar');
@@ -66,6 +67,7 @@ let init = {
 		let pressedDelKey = false;
 		editGrid.style.width = (screen.width * 0.5) + "px";
 		editGrid.style.height = (screen.height * 0.5) + "px";
+		pageNav.style.top = (editGrid.offsetTop +editGrid.offsetHeight) + "px";
 
 		editGrid.addEventListener('mousedown', e => {
 			if (e.target === editGrid && selected != undefined) {
@@ -91,7 +93,6 @@ let init = {
 
 		presNameInput.addEventListener('input', e => {
 			presentation.name = presNameInput.value.trim();
-			console.log(presentation);
 		});
 
 		notesTxt.addEventListener('input', e => {
@@ -249,12 +250,12 @@ let init = {
 		let presObject = presentation.body["page_" + currentPage];
 		notesTxt.innerHTML = "";
 
-		currentPageTxt.innerHTML = 'Current page: ' + currentPage;
 		editGrid.innerHTML = presObject.content;
 		notesTxt.innerHTML = presObject.notes;
 
 		content = editGrid.getElementsByTagName("*");
 		presLength = Object.keys(presentation.body).length;
+		currentPageTxt.innerHTML = `filter_${currentPage}filter_${presLength}`;
 
 		for (let element of content) {
 			let parent = domEvent.getParent(editGrid, element);
@@ -330,7 +331,6 @@ let btnEvent = {
 			})).then(res => {
 			    return res.json();
 			}).then(res => {
-				console.log(res);
 				if (util.isNotEmpty(res.uid.toString(), res.author, res.name)) {
 					currentPage = 1;
 					presentation.uid = res.uid;
@@ -366,21 +366,27 @@ let btnEvent = {
 	},
 
 	newPresentation: function() {
-	    presentation = {
-	        uid: '',
-	        author: '',
-	        name: '',
-	        presmode: 'false',
-	        body: {
-	            page_1: {
-	                content: '',
-	                notes: ''
-	            }
-	        }
-	    }
+	    if (confirm("Are you sure?") == true) {
+		    if (confirm("Save changes?") == true) {
+		        btnEvent.saveCurrentPage();
+		    }
 
-	    currentPage = 1;
-	    init.loadContent(currentPage);
+		    presentation = {
+		        uid: '',
+		        author: '',
+		        name: '',
+		        presmode: 'false',
+		        body: {
+		            page_1: {
+		                content: '',
+		                notes: ''
+		            }
+		        }
+		    }
+
+		    currentPage = 1;
+		    init.loadContent(currentPage);
+	    }
 	},
 
 	prevPage: function() {
@@ -428,7 +434,7 @@ let btnEvent = {
 	exportToFile: function() {
 		domEvent.removeSelected();
 		
-		let presObject = JSON.stringify(presentation);
+		let presObject = btoa(JSON.stringify(presentation));
 		let download = document.createElement('a');
 		let presName = presNameInput.value.replace(/\s/g, "").length > 0 ? presNameInput.value : 'no_name';
 
@@ -545,12 +551,12 @@ let domEvent = {
 						let result = e.target.result;
 						let base64 = result.split(',').pop();
 						let decoded = window.atob(base64);
-						presentation = JSON.parse(decoded);
+						presentation = JSON.parse(atob(decoded));
 						currentPage = 1;
 						init.loadContent();
 					});
 				} else {
-					console.log(`Cannot import file '${obj.name}' :'(`);
+					alert(`Could not import file '${obj.name}' :(`);
 				}
 			}
 		}
