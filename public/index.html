@@ -1,14 +1,15 @@
 <!--  slides.com-inspirert layout. holy grail with CSS grid -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta charset="utf-8" />
 	<title>Slyderweb - homepage</title>
-	<link href="css/cssGrid.css" rel="stylesheet" type="text/css" />
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="./css/index.css" />
+	<link rel="stylesheet" type="text/css" href="./css/lightStyle.css" />
+	<!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'> -->
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+	<!-- dette hindrer zomming på smal skjerm: <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
 
 <body class="hg">
@@ -72,26 +73,27 @@
 			</fieldset>
 			<hr>
 		</section>
-		<section class="blueDiv">
-			<div class="textContainer">
+		<div class="blueDiv">
+			<section class="textContainer">
+				<h1>Header 1</h1>
+				<h2>Header 2</h2>
+				<h3>Header 3</h3>
+				<h4>Header 4</h4>
+				<h5>Header 5</h5>
+				<p>
+					What is slyderWeb? You tell me?
+				</p>
+			</section>
+		</div>
+		<div class="redDiv">
+			<section class="textContainer">
 				<p>
 					What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is
 					slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb?
 				</p>
-			</div>
-		</section>
-		<!--<section class="blackDiv">
-			<div class="textContainer">
-				<p>
-					What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is
-					slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb?
-				</p>
-			</div>
-		</section> -->
+			</section>
+		</div>
 	</main>
-
-	<aside class="hg-left" style="display:none;"></aside>
-	<aside class="hg-right" style="display:none;"></aside>
 
 	<footer class="hg-footer">
 		<!-- kanskje vi ikke trenger dette -->
@@ -105,7 +107,7 @@
 
 </body>
 
-	<script type="text/javascript" src="./js/main.js"></script>
-	<script type="text/javascript" src="./js/sha1.min.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="./js/sha1.min.js"></script>
 
 </html>

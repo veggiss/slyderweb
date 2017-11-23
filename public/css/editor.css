@@ -1,5 +1,44 @@
-#editGrid {
+/******************************************************************
+
+Stylesheet for editor.html
+
+	Contents:
+	- editGrid
+	- Toolbars
+	- Sidebar
+	- Presentation notes
+	- slideView
+	- cssGrid
+
+*******************************************************************/
+
+/* editGrid */
+
+#ratioContainer1 {
+	width:100%;
+	background: yellow;
+}
+
+#ratioContainer2 {
+	width:100%;
+	padding-bottom: 56.25%;  /* this gives a 16:9 div */
+	background: orange;
+	position: relative;
+}
+
+
+#editGrid { /* original size width: 640px; height: 360px;*/
 	position: absolute;
+	top: 0; bottom: 0; left: 0; right: 0;
+	background: white;
+	color: black;
+	border: 0.1em solid gray;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+/* OLD
+#editGrid {
 	margin: auto;
 	left: 0; right: -25%;
 	top: 0; bottom: 0;
@@ -7,8 +46,25 @@
 	border-style: dashed;
 	border-width: thin;
 	border-color: gray;
-	background-color: white;
 }
+*/
+
+/* trengs ikke?
+#editGrid:active {
+	border: 0.2em solid cyan;
+}
+*/
+
+/* trengs denne? */
+#currentPageTxt {
+	font-size: 1rem;
+}
+
+
+
+
+
+/* Toolbars */
 
 #textToolBar {
 	position: absolute;
@@ -63,16 +119,6 @@
 	background-color: #888;
 }
 
-#notesTxt {
-	width: 200px; 
-	height: 50px; 
-	resize: both;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: thin;
-	border-color: gray;
-	overflow: auto;
-}
 
 #colorPicker, #shadowPicker {
 	position: absolute;
@@ -114,6 +160,67 @@
 	right: 2px;
 }
 
+
+/* Sidebar */
+
+
+
+/* Presentation notes */
+
+#notesSection {  /* var nesten finere uten */
+	background: gray;
+	margin: 0 auto;
+	width: 100%;
+	height: 10.3rem;
+	max-width: 500px;
+}
+
+#notesSection h4 {
+	color:  rgb(214, 196, 196);
+	margin: 0.3em 0em;
+	text-align: center;
+}
+
+textarea {
+	border: none;
+	height: 80px;
+	width: 100%;
+	padding: 0.2rem 1rem;
+	background: rgb(214, 196, 196);
+	font-size: 1.0rem;
+	font-family: Verdana, Tahoma, sans-serif;
+	box-sizing: border-box;
+}
+
+
+
+/* OLD 
+#notesTxt {
+	width: 200px; 
+	height: 50px; 
+	resize: both;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: thin;
+	border-color: gray;
+}
+*/
+	overflow: auto;
+
+
+
+
+
+
+/* slideView */
+
+#slideView {
+	padding: 0.2em 1em;
+	font-size: 0.7em;
+	box-sizing: border-box;
+}
+
+
 .content {
 	position: absolute;
 	overflow: hidden;
@@ -123,4 +230,134 @@
 	border: thin solid transparent;
 	user-select: none;
 	cursor: pointer;
+}
+
+/*
+.content { gammel
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+*/
+
+
+
+/* ******* * * * * * */
+/* cssGrid * * * * * */
+/* ******* * * * * * */
+/* Holy Grail Layout with CSS Grid */
+		/* borrowed code */
+		
+/* Define grid areas */
+.hg-header { grid-area: header; }
+.hg-footer { grid-area: footer; }
+.hg-main { grid-area: main; }
+.hg-left { grid-area: sidebarLeft; }
+.hg-right { grid-area: sidebarRight; }
+
+.hg {
+	display: grid;
+	grid-template-areas: "header header header"
+						/*"sidebarLeft editgrid sidebarRight"*/
+						"sidebarLeft main sidebarRight"
+						"footer footer footer";
+								
+	grid-template-columns: 1fr 60% 1fr; 
+	
+	grid-template-rows: 2.2rem
+						1fr    /* gir opp relativt....1fr...*/
+						2.2rem;
+								
+	min-height: 100vh /* ellers trekker footeren seg opp */
+}
+
+
+/* mer tilpasning: custom css styles */
+
+.hg-header, .hg-footer {
+	display: flex;
+	justify-content: center;  /*? aligner i miten av element*/
+	align-items: center;    /*???? aligner i høyden*/
+	text-align: center;  /* så ingen virkning av med justify-content*/
+}
+
+.hg-header,
+.hg-left,
+.hg-right,
+.hg-main,
+.hg-editgrid {
+	padding: 0rem;
+	box-sizing: border-box;
+}
+
+aside.hg-left {
+	margin: 0.5rem 1.3rem;
+	text-align: center;
+}
+
+.hg-right {
+	text-align: center;
+}
+
+
+
+
+/* til skjermer smalere enn 600px */
+
+@media screen and (max-width: 600px) {
+	.hg {
+		grid-template-areas: "header"
+							"sidebarLeft"
+							"main"
+							"sidebarRight"
+							"footer";
+
+		grid-template-columns: 100%;
+		grid-template-rows: 2rem
+							14rem 
+							4fr
+							1fr 
+							2rem;
+	}
+
+	.flexContainer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-flow: row wrap;
+		text-align: left;
+		justify-content: center;  /*? aligner i miten av element*/
+		padding: 0;
+		margin: 0;
+	}
+
+	
+	.flexBox {
+		padding: 0;
+		margin: 0;
+		flex: 1;
+	}
+	
+	.flexBox2 {
+		padding: 0;
+		margin: 0;
+		flex: 1.6;
+	}
+
+	hr { display: none; }
+	
+	aside h1 {
+		text-align: left;
+		margin-top: 0.1rem;
+		font-size: 1.0rem;
+		display: none /* vet ikke omtrengs */
+	}
+	
+	aside.hg-left {
+		margin: 0;
+		padding: 0.6rem 0.5rem;
+}
+
 }

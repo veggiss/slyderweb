@@ -1,0 +1,121 @@
+/******************************************************************
+
+Stylesheet for editor.html
+
+	Contents:
+/* Text contents */
+/* Layout */
+/* Smal skjerm */
+
+*******************************************************************/
+
+
+/* Text contents */
+
+.blueDiv {
+	width: 100%;
+	background-color: darkblue;
+	color: white;
+}
+
+.redDiv {
+	width: 100%;
+	background-color: red;
+	color: black;
+}
+
+.textContainer {
+	padding: 10px; 
+	max-width: 32em; /* for å angi en leselig linjelengde */
+	margin: 0 auto;
+}
+
+
+
+/* Layout */
+header {
+	height: 2.5rem;
+	padding: 0.2rem;
+	
+}
+
+nav {
+	height: 2.5rem;
+	
+}
+
+body {
+	margin-top: 2.5rem;
+	width: 100%;
+}
+
+main {
+	width: 100%;
+	
+}
+
+
+footer {
+	height: 2.2rem;
+	bottom-margin: 0;
+}
+
+
+/* Holy Grail Layout with CSS Grid */
+		
+/* Define grid areas */
+/*
+.hg-header { grid-area: header; }
+.hg-footer { grid-area: footer; }
+.hg-main { grid-area: main; }
+
+.hg {
+	display: grid;
+	grid-template-areas: "header header"
+						"main main"
+						"footer footer"
+								
+	grid-template-columns: 1fr 1fr; 
+	
+	grid-template-rows: 2.2rem
+						1fr    /* gir opp relativt....1fr...*/
+					/*	2.2rem;
+								
+	/*min-height: 100vh /* ellers trekker footeren seg opp */
+	/*
+}
+
+
+/* mer tilpasning: custom css styles */
+/*
+.hg-header, .hg-footer {
+	display: flex;
+	justify-content: center;  /*? aligner i miten av element*/
+	/*align-items: center;    /*???? aligner i høyden*/
+	/*text-align: center;  /* så ingen virkning av med justify-content*/
+/*}
+
+.hg-header,
+.hg-left,
+.hg-right,
+.hg-main,
+.hg-editgrid {
+	padding: 0rem;
+	box-sizing: border-box;
+}
+
+aside.hg-left {
+	margin: 0.5rem 1.3rem;
+	text-align: center;
+}
+
+.hg-right {
+	text-align: center;
+}
+
+*/
+
+
+/* Smal skjerm */
+
+/* maxwidth 400px*/

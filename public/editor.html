@@ -1,15 +1,13 @@
-<!--  slides.com-inspirert layout. holy grail with CSS grid -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta charset="utf-8" />
 	<title>Slyderweb - editor</title>
-	<link href="css/cssGrid.css" rel="stylesheet" type="text/css" />
-	<!-- <link rel="stylesheet" type="text/css" href="./css/editor.css" />  -->
+	<link rel="stylesheet" type="text/css" href="./css/editor.css" />
+	<link rel="stylesheet" type="text/css" href="./css/lightStyle.css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
-	<!-- dette gjør at ikke kan zoome på smal skjerm...	<meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<!-- dette hindrer zooming på smal skjerm: <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
 
 <body class="hg">
@@ -52,123 +50,123 @@
 		</div>
 
 		<button id="loadprevBtn">
-			 Prev </button>
-				<button id="savePageBtn">Save page</button>
-				<span id='currentPageTxt'>Current page:</span>
-				<button id="presmodeBtn">Preview page (F11)</button>
-				<button id="loadnextBtn"> Next  </button>
+			Prev </button>
+		<button id="savePageBtn">Save page</button>
+		<span id='currentPageTxt'>Current page:</span>
+		<button id="presmodeBtn">Preview page (F11)</button>
+		<button id="loadnextBtn"> Next </button>
 
-				<section id="notesSection">
-					<h4>Presentation notes</h4>
-					<textarea id="notesTxt" placeholder="Enter notes here"></textarea>
+		<section id="notesSection">
+			<h4>Presentation notes</h4>
+			<textarea id="notesTxt" placeholder="Enter notes here"></textarea>
 
-					<ul class="hidden">
-						<li>IMAGE</li>
-						<li>set size
-							<input type="checkbox" />Lock ratio</li>
-						<input placeholder="width" type="number" />
-						<input placeholder="height" type="number" />
-						<li>
-							<button>Crop</button>
-						</li>
-					</ul>
+			<ul class="hidden">
+				<li>IMAGE</li>
+				<li>set size
+					<input type="checkbox" />Lock ratio</li>
+				<input placeholder="width" type="number" />
+				<input placeholder="height" type="number" />
+				<li>
+					<button>Crop</button>
+				</li>
+			</ul>
 
-					<div id="colorPicker">
-						Hue
-						<div name="hue">
-							<input type="range" min="0" max="300" value="150">
-						</div>
-						Light
-						<div name="light">
-							<input type="range" min="0" max="100" value="50">
-						</div>
-						Alpha
-						<div name="alpha">
-							<input type="range" min="-0.1" max="1" step="0.01" value="1">
-						</div>
-						Saturation
-						<div name="sat">
-							<input type="range" min="0" max="100" value="50">
-						</div>
-					</div>
+			<div id="colorPicker">
+				Hue
+				<div name="hue">
+					<input type="range" min="0" max="300" value="150">
+				</div>
+				Light
+				<div name="light">
+					<input type="range" min="0" max="100" value="50">
+				</div>
+				Alpha
+				<div name="alpha">
+					<input type="range" min="-0.1" max="1" step="0.01" value="1">
+				</div>
+				Saturation
+				<div name="sat">
+					<input type="range" min="0" max="100" value="50">
+				</div>
+			</div>
 
-					<div id="shadowPicker">
-						Position X
-						<div name="cordX">
-							<input type="range" min="-50" max="50" value="5">
-						</div>
-						Position Y
-						<div name="cordY">
-							<input type="range" min="-50" max="50" value="5">
-						</div>
-						Feather
-						<div name="feather">
-							<input type="range" min="0" max="20" value="5">
-						</div>
-						<br>
-						<button id="removeShadowBtn">Remove</button>
-					</div>
+			<div id="shadowPicker">
+				Position X
+				<div name="cordX">
+					<input type="range" min="-50" max="50" value="5">
+				</div>
+				Position Y
+				<div name="cordY">
+					<input type="range" min="-50" max="50" value="5">
+				</div>
+				Feather
+				<div name="feather">
+					<input type="range" min="0" max="20" value="5">
+				</div>
+				<br>
+				<button id="removeShadowBtn">Remove</button>
+			</div>
 
-					<div id="textToolBar">
-						<ul>
-							<li id="toolbar_font" class="toolbar_dropdown">
-								<select>
-									<option value="Arial" style="font-family: 'Arial';">Arial</option>
-									<option value="Courier" style="font-family: 'Courier';">Courier</option>
-									<option value="Helvetica" style="font-family: 'Helvetica';">Helvetica</option>
-									<option value="Times" style="font-family: 'Times';">Times</option>
-									<option value="Verdana" style="font-family: 'Verdana';">Verdana</option>
-								</select>
-							</li>
-							<li id="toolbar_fontSize">
-								<select></select>
-							</li>
-							<li id="toolbar_bold">
-								<span>
-									<b>B</b>
-								</span>
-							</li>
-							<li id="toolbar_italic">
-								<span>
-									<i>I</i>
-								</span>
-							</li>
-							<li id="toolbar_underline">
-								<span style="text-decoration: underline;">U</span>
-							</li>
-							<li id="toolbar_shadow">
-								<span style="text-shadow: 2px 2px #bfbfbf;">S</span>
-							</li>
-							<li id="toolbar_txtColor">
-								<span style="color: #ff8787">C</span>
-							</li>
-							<li id="toolbar_hiliteColor">
-								<span>
-									<mark style="background-color: #ff8787">H</mark>
-								</span>
-							</li>
-							<li id="toolbar_bgColor">
-								<img src="http://www.free-icons-download.net/images/background-color-icon-4552.png">
-							</li>
-							<li id="toolbar_bulletList">
-								<img src="http://dryicons.com/uploads/icon/preview/7192/bulleted_list.png">
-							</li>
-							<li id="toolbar_numberList">
-								<img src="http://dryicons.com/uploads/icon/preview/7221/numbered_list.png">
-							</li>
-							<li id="toolbar_alignLeft">
-								<img src="http://downloadicons.net/sites/default/files/align-left-icon-4549.png">
-							</li>
-							<li id="toolbar_alignCenter">
-								<img src="http://downloadicons.net/sites/default/files/align-justify-icon-4548.png">
-							</li>
-							<li id="toolbar_alignRight">
-								<img src="http://downloadicons.net/sites/default/files/align-right-icon-4550.png">
-							</li>
-						</ul>
-					</div>
+			<div id="textToolBar">
+				<ul>
+					<li id="toolbar_font" class="toolbar_dropdown">
+						<select>
+							<option value="Arial" style="font-family: 'Arial';">Arial</option>
+							<option value="Courier" style="font-family: 'Courier';">Courier</option>
+							<option value="Helvetica" style="font-family: 'Helvetica';">Helvetica</option>
+							<option value="Times" style="font-family: 'Times';">Times</option>
+							<option value="Verdana" style="font-family: 'Verdana';">Verdana</option>
+						</select>
+					</li>
+					<li id="toolbar_fontSize">
+						<select></select>
+					</li>
+					<li id="toolbar_bold">
+						<span>
+							<b>B</b>
+						</span>
+					</li>
+					<li id="toolbar_italic">
+						<span>
+							<i>I</i>
+						</span>
+					</li>
+					<li id="toolbar_underline">
+						<span style="text-decoration: underline;">U</span>
+					</li>
+					<li id="toolbar_shadow">
+						<span style="text-shadow: 2px 2px #bfbfbf;">S</span>
+					</li>
+					<li id="toolbar_txtColor">
+						<span style="color: #ff8787">C</span>
+					</li>
+					<li id="toolbar_hiliteColor">
+						<span>
+							<mark style="background-color: #ff8787">H</mark>
+						</span>
+					</li>
+					<li id="toolbar_bgColor">
+						<img src="http://www.free-icons-download.net/images/background-color-icon-4552.png">
+					</li>
+					<li id="toolbar_bulletList">
+						<img src="http://dryicons.com/uploads/icon/preview/7192/bulleted_list.png">
+					</li>
+					<li id="toolbar_numberList">
+						<img src="http://dryicons.com/uploads/icon/preview/7221/numbered_list.png">
+					</li>
+					<li id="toolbar_alignLeft">
+						<img src="http://downloadicons.net/sites/default/files/align-left-icon-4549.png">
+					</li>
+					<li id="toolbar_alignCenter">
+						<img src="http://downloadicons.net/sites/default/files/align-justify-icon-4548.png">
+					</li>
+					<li id="toolbar_alignRight">
+						<img src="http://downloadicons.net/sites/default/files/align-right-icon-4550.png">
+					</li>
+				</ul>
+			</div>
 
-				</section>
+		</section>
 
 	</main>
 

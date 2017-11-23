@@ -1,121 +1,52 @@
-/************************************************************************
-Layout-elementer først, deretter resterende elementer, til sist klasser og id-er alfabetisk.
-Forfatter: Silje U.
-*************************************************************************/
+/*************************************
 
+Common style elements for slyderweb
 
-/* Layout hiearkisk ********************************/
-html,
-body {
+*************************************/
+
+/* ? Reset */
+
+html {
+	font-size: 62.5%;   /* gjør at man kan oppgi rem som 1/10 pt-størrelse 1.2 rem = 12 pt */
+}
+
+html, body, section, main {
 	margin: 0;
 	padding: 0;
-	width: 100%;
-	height: 100%;
-	font-size:0.9em;
 }
 
 body {
-	color: rgb(227, 17, 71);
-	background-color: #000; /*#333; */
-	font-family: lato;
-	margin: 0 auto;
-}
-
-nav {
-	background-color: rgb(214, 196, 196);
-	height: 1.4em;
-	padding: 0.2em 1em;
-}
-
-aside { /* Brukes bare ved presetasjoneditor */
-	width: 14em; /* Tilpasset innhold i sidebar */
-	background-color:rgb(19, 17, 17);
-	float: left;
-	padding: 0.3em 0.5em;
-	height: 100%;
-}
-
-main { /*Sentrert */
-	/*height: 100%; blir kvitt unødvendig mellomrom over footer */
-	margin: 0 auto;
-	margin-bottom: 2em;  /* Tilsvarer footerens høyde */
-	height: 100%;
-}
-
-section {
-	padding: 0;
-	margin: 0;
-}
-
-.blueDiv {
-	width: 100%;
-	background-color: darkblue;
-	color: red;
-}
-
-.blackDiv {
-	width: 100%;
-	background-color: #000;
-	color: red;
-}
-
-.textContainer {
-	padding: 10px; 
-	max-width: 32em; /* for å angi en leselig linjelengde */
-	margin: 0 auto;
-}
-
-footer {
-	width: 100%;
-	background-color: white;
-	height: 1.7em;
-	padding: 0.6em 0;
-	text-align: center;
-	margin-bottom: 0px;
-	position: absolute;
-}
-
-/* Non-layout elements  *************************************/
-
-button {
-	box-shadow: none;
-	background-color: #ccc;
-	/*appearance: none; */
-	padding: 0.2em 1.2em;
-	margin: 0.2em;
-	font-size:0.8em;
-	border-radius: 4px;
-	border-style: none;
-}
-
-button:active {
 	color: #fff;
-	background-color: rgb(227, 17, 71);
-	margin: 0.2em;
+	background-color: #000;
+	font-family: 'Lato', 'Verdana', sans-serif;
 }
 
-fieldset {
-	border: none;
+main {
+	font-size: 1.2rem;
 }
 
-h1 {
-	text-align: center;
+aside {
+	/*border-right:1px solid rgb(19, 17, 17);*/
+	color:  rgb(214, 196, 196);
+	background-color: #000;
+	margin: 0.5rem 0.3rem;
 }
 
-hr {
-	border: 0;
-	border-top: 1px dotted #fff;
+
+/*  header-stuff */
+
+nav, footer {
+	background-color: rgb(214, 196, 196);
+	font-size: 1.2rem;
 }
 
-input, select {
-	width: auto;
-	margin: 0.4em;
-	font-size:0.8em;
+header {
+	padding-right: 1.5rem;
 }
 
 menuitem a {
 	color: red; 
-	padding: 0 0.2em;
+	padding: 0 0.3em;
 	text-decoration: none;
 }
 
@@ -128,42 +59,6 @@ menuitem a:visited {
 	color: black;
 }
 
-p {
-	margin: 0.6em 2px;
-}
-
-
-
-
-
-/* ***************************************************************************  */
-/* IDs and classes
-/* ***************************************************************************  */
-
-#divContainer {
-	margin-top: 10px;
-	padding-top: 10px;
-	margin: 0 auto;
-}
-
-.centered {
-	text-align: center;
-}
-
-.content {
-	position: absolute;  
-	border-style: solid;
-	overflow: hidden;
-	text-align: center;
-	padding: 10px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
 .logo {
 	color: rgb(227, 17, 71);
 	display: inline;
@@ -171,92 +66,224 @@ p {
 	font-weight: bold;
 }
 
-.right {
-	float: right;
-	padding: 0 2px;
+
+
+
+
+/* Form elements  */
+
+button {
+	box-shadow: none;
+	color: rgb(214, 196, 196); /* fin gråfarge: #ccc;*/
+	background-color: #444;
+	padding: 0.3rem 0.7rem;
+	margin: 0.2rem 0.07rem;
+	font-size:0.9rem;
+	border-radius: 4px;
+	border-style: none;
 }
 
-ul.hidden {
+
+button:hover {
+	background-color: #888;
+	color: #fff;
+	margin: 0.2em;
+	cursor: pointer;
+}
+
+button:active {
+	color: #fff;
+	background-color: rgb(227, 17, 71);
+	margin: 0.2em;
+}
+
+fieldset {
+	border: none;
+}	
+	
+	input, select {
+	width: auto;
+	margin: 0.4em;
+	font-size:0.8em;
+}
+
+
+
+	
+/* inline elements */
+
+h1 {
+	text-align: center;
+	padding: 0.1rem;
+	margin: 0;
+}
+
+h2
+
+
+h3
+
+h4
+
+h5
+
+
+p {
+	margin: 0.6em 2px;
+}
+
+
+
+li {
+	padding: 0.2rem;
+}
+
+
+ul {
+	margin: 0.2rem 0;
+}
+
+
+ol {
+	
+}
+
+
+hr {
+	border: 0;
+	border-top: 1px dotted #fff;
+}
+
+
+
+
+/**********************/
+/*   Useful classes   */
+/**********************/
+
+.centered {
+	text-align: center;
+}
+
+
+ul.hidden { 
 	padding-left: 0;
-}
-
-ul.hidden li {
 	list-style: none;
 }
 
-#editGrid {
-	position: absolute;  
-	background: white;
-	border: 0.2em solid gray;
-	top: 1.8em;
-	left: 15em;
-	/* original size
-	width: 640px;
-	height: 360px;*/
-	width: 355px;
-	height: 200px;
-	color: black;
+
+
+/* Holy Grail Layout with CSS Grid */
+		/* borrowed code */
+		
+/* Define grid areas */
+.hg-header { grid-area: header; }
+.hg-footer { grid-area: footer; }
+/*.hg-editgrid { grid-area: editgrid; }*/
+.hg-main { grid-area: main; }
+.hg-left { grid-area: sidebarLeft; }
+.hg-right { grid-area: sidebarRight; }
+
+.hg {
+	display: grid;
+	grid-template-areas: "header header header"
+						/*"sidebarLeft editgrid sidebarRight"*/
+						"sidebarLeft main sidebarRight"
+						"footer footer footer";
+								
+	grid-template-columns: 1fr 60% 1fr; 
+	
+	grid-template-rows: 2.2rem
+						1fr    /* gir opp relativt....1fr...*/
+						2.2rem;
+								
+	min-height: 100vh /* ellers trekker footeren seg opp */
 }
 
-#notes {
-	position: absolute;
-	top: calc(200px + 2.6em);
-	background: gray;
-	left: 15em;
+
+/* mer tilpasning: custom css styles */
+
+.hg-header, .hg-footer {
+	display: flex;
+	justify-content: center;  /*? aligner i miten av element*/
+	align-items: center;    /*???? aligner i høyden*/
+	text-align: center;  /* så ingen virkning av med justify-content*/
 }
 
-#notes h1 {
-	color:  rgb(214, 196, 196);
-	margin: 0.3em 0em;
+.hg-header,
+.hg-left,
+.hg-right,
+.hg-main,
+.hg-editgrid {
+	padding: 0rem;
+	box-sizing: border-box;
 }
 
-textarea {
-	border: none;
-	width: 353px;
-	height: 200px;
-	background: rgb(214, 196, 196);
-	padding: 0.4em;
-	margin: 0;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+aside.hg-left {
+	margin: 0.5rem 1.3rem;
+	text-align: center;
 }
 
-#slideView {
-	position: absolute;
-	right: 0;
-	padding: 0.2em 2em;
-	margin: 0 auto;
-	font-size: 0.7em;
+.hg-right {
+	text-align: center;
 }
 
-@media only screen and (min-width: 900px) {
-	aside {
-		width: 22em;
+
+
+
+/* til skjermer smalere enn 600px */
+
+@media screen and (max-width: 600px) {
+	.hg {
+		grid-template-areas: "header"
+							"sidebarLeft"
+							"main"
+							"sidebarRight"
+							"footer";
+
+		grid-template-columns: 100%;
+		grid-template-rows: 2rem
+							14rem 
+							4fr
+							1fr 
+							2rem;
 	}
 
-	#editGrid {
-		left: 23em;
-		width: 800px;
-		height: 450px;
+	.flexContainer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-flow: row wrap;
+		text-align: left;
+		justify-content: center;  /*? aligner i miten av element*/
+		padding: 0;
+		margin: 0;
 	}
 
-	#notes {
-		top: calc(450px + 2.6em);
-		left: 23em;
+	
+	.flexBox {
+		padding: 0;
+		margin: 0;
+		flex: 1;
+	}
+	
+	.flexBox2 {
+		padding: 0;
+		margin: 0;
+		flex: 1.6;
 	}
 
-	textarea {
-		width: 802px;
-		columns: 2 1em;
-		box-sizing: border-box;
-		padding: 0.6em 4em;
-		font-size: 1.6em;
+	hr { display: none; }
+	
+	aside h1 {
+		text-align: left;
+		margin-top: 0.1rem;
+		font-size: 1.0rem;
+		display: none /* vet ikke omtrengs */
 	}
+	
+	aside.hg-left {
+		margin: 0;
+		padding: 0.6rem 0.5rem;
+}
 
-	#slideView {
-		position: absolute;
-		right: 10vh;
-		padding: 0.2em 2em;
-		margin: 0 auto;
-		font-size: 1.2em;
-	}
 }
