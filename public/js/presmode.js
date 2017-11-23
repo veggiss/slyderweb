@@ -101,7 +101,7 @@ function resetGrid() {
 		element.style.cursor = "pointer";
 	}
 
-	editGrid.style.right = "-25%";
+	editGrid.style.right = "-5%";
 	editGrid.style.zoom = "100%";
 	editGrid.style.borderStyle = "dashed";
 

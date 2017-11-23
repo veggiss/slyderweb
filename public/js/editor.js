@@ -65,8 +65,8 @@ let init = {
 		this.loadPresList();
 
 		let pressedDelKey = false;
-		editGrid.style.width = (screen.width * 0.5) + "px";
-		editGrid.style.height = (screen.height * 0.5) + "px";
+		editGrid.style.width = (screen.width * 0.65) + "px";
+		editGrid.style.height = (screen.height * 0.65) + "px";
 		pageNav.style.top = (editGrid.offsetTop +editGrid.offsetHeight) + "px";
 
 		editGrid.addEventListener('mousedown', e => {
