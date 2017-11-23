@@ -1,6 +1,6 @@
 //Editor related
-let editGrid	= document.getElementById('editGrid');
-let ratioContainer1	= document.getElementById('ratioContainer1');
+let editGrid = document.getElementById('editGrid');
+let ratioContainer1 = document.getElementById('ratioContainer1');
 let savePageBtn = document.getElementById('savePageBtn');
 let loadprevBtn = document.getElementById('loadprevBtn');
 let loadnextBtn = document.getElementById('loadnextBtn');
@@ -50,7 +50,7 @@ let selected, content, presLength;
 
 // -- Initalize content
 let init = {
-	loadGrid: function() {
+	loadGrid: function () {
 		let pressedDelKey = false;
 
 		//editGrid.style.width = (screen.width * 0.5) + "px";  Changed to ratioContainer and CSS
@@ -100,7 +100,7 @@ let init = {
 		});
 	},
 
-	loadToolbar: function() {
+	loadToolbar: function () {
 		// Add font size options to selector
 		let lastSelected;
 		let toolbar_fontSize_selector = toolbar_fontSize.firstElementChild;
@@ -124,7 +124,7 @@ let init = {
 
 		colorPickerSat.style = `background-color: hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha});`;
 
-		for (let i = 1; i <= 7; i ++) {
+		for (let i = 1; i <= 7; i++) {
 			toolbar_fontSize_selector.innerHTML += `<option value=${i}>${i}</option>`;
 		}
 
@@ -138,7 +138,7 @@ let init = {
 
 		toolbar_bold.addEventListener('mousedown', e => {
 			document.execCommand('bold');
-		});	
+		});
 
 		toolbar_italic.addEventListener('mousedown', e => {
 			document.execCommand('italic');
@@ -172,11 +172,11 @@ let init = {
 			element.addEventListener('input', e => {
 				let name = element.parentElement.getAttribute('name');
 				colors[name] = element.value;
-				
+
 				let shadow = `${shadows.cordX}px ${shadows.cordY}px ${shadows.feather}px`;
 				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
 				colorPickerSat.style.backgroundColor = hsla;
-				
+
 				if (lastSelected === toolbar_txtColor) {
 					document.execCommand('foreColor', false, hsla);
 				} else if (lastSelected === toolbar_hiliteColor) {
@@ -229,7 +229,7 @@ let init = {
 		});
 	},
 
-	loadContent: function() {
+	loadContent: function () {
 		let presObject = presentation["page_" + currentPage];
 		notesTxt.value = "";
 
@@ -252,7 +252,7 @@ let init = {
 		}
 	},
 
-	addDefaultEvents: function(element) {
+	addDefaultEvents: function (element) {
 		element.addEventListener('mousedown', e => {
 			if (!editing && e.target != undefined) {
 				let element = domEvent.getParent(editGrid, e.target);
@@ -278,7 +278,7 @@ let init = {
 		});
 	},
 
-	addEventsText: function(element) {
+	addEventsText: function (element) {
 		element.addEventListener('dblclick', e => {
 			e.preventDefault();
 
@@ -290,11 +290,11 @@ let init = {
 
 // -- Button functions
 let btnEvent = {
-	saveCurrentPage: function() {
+	saveCurrentPage: function () {
 		domEvent.removeSelected();
 	},
 
-	prevPage: function() {
+	prevPage: function () {
 		domEvent.removeSelected();
 		if (currentPage > 1) {
 			currentPage--;
@@ -302,7 +302,7 @@ let btnEvent = {
 		}
 	},
 
-	nextPage: function() {
+	nextPage: function () {
 		domEvent.removeSelected();
 
 		presLength = Object.keys(presentation).length;
@@ -313,15 +313,15 @@ let btnEvent = {
 		}
 	},
 
-	newPage: function() {
+	newPage: function () {
 		for (let i = presLength; i >= currentPage + 1; i--) {
 			presentation['page_' + (i + 1)] = presentation['page_' + i];
 		}
-		presentation['page_' + (currentPage + 1)] = {content: '', notes: ''};
+		presentation['page_' + (currentPage + 1)] = { content: '', notes: '' };
 		btnEvent.nextPage();
 	},
 
-	newTextBox: function() {
+	newTextBox: function () {
 		domEvent.removeSelected();
 
 		let box = document.createElement('div');
@@ -337,9 +337,9 @@ let btnEvent = {
 		init.addEventsText(box);
 	},
 
-	exportToFile: function() {
+	exportToFile: function () {
 		domEvent.removeSelected();
-		
+
 		let presObject = JSON.stringify(presentation);
 		let download = document.createElement('a');
 		let presName = presNameInput.value.replace(/\s/g, "").length > 0 ? presNameInput.value : 'no_name';
@@ -384,7 +384,7 @@ let domEvent = {
 		}
 	},
 
-	setToolbarPos: function(element) {
+	setToolbarPos: function (element) {
 		let top = parseInt(element.style.top);
 		let left = parseInt(element.style.left);
 		let offsetTop = parseInt(editGrid.offsetTop);
@@ -393,10 +393,10 @@ let domEvent = {
 		textToolBar.style.left = (left + offsetLeft) + "px";
 	},
 
-	checkClickedToolbar: function() {
+	checkClickedToolbar: function () {
 		let clicked = false;
 		let mTarget = document.querySelectorAll(":hover");
-			
+
 		for (let element of mTarget) {
 			if (element === textToolBar || element === colorPicker || element === shadowPicker) {
 				clicked = true;
@@ -406,7 +406,7 @@ let domEvent = {
 		return clicked;
 	},
 
-	getParent: function(parent, element) {
+	getParent: function (parent, element) {
 		if (parent != undefined && element != undefined) {
 			while (element.parentElement != parent) {
 				element = element.parentElement;
@@ -415,13 +415,13 @@ let domEvent = {
 		}
 	},
 
-	savePage: function() {
+	savePage: function () {
 		let presObject = presentation["page_" + currentPage];
 		presObject.content = editGrid.innerHTML;
 		presObject.notes = notesTxt.value;
 	},
 
-	dropFile: function(e) {
+	dropFile: function (e) {
 		e.preventDefault();
 
 		let files = e.dataTransfer.files;
@@ -432,7 +432,7 @@ let domEvent = {
 			} else {
 				if (obj.type.includes("image")) {
 					let reader = new FileReader();
-					
+
 					reader.readAsDataURL(obj);
 
 					reader.onload = (e => {
@@ -450,7 +450,7 @@ let domEvent = {
 					});
 				} else if (obj.name.split('.').pop() === 'slyderweb') {
 					let reader = new FileReader();
-					
+
 					reader.readAsDataURL(obj);
 
 					reader.onload = (e => {
@@ -469,8 +469,8 @@ let domEvent = {
 	},
 
 
-	setEditMode: function(element, editable) {
-		if(!presmode && !editing) {
+	setEditMode: function (element, editable) {
+		if (!presmode && !editing) {
 			element.setAttribute("contenteditable", editable);
 			element.focus();
 			element.style.resize = "both";
@@ -482,8 +482,8 @@ let domEvent = {
 		}
 	},
 
-	removeEditMode: function(element) {
-		if(!presmode && editing) {
+	removeEditMode: function (element) {
+		if (!presmode && editing) {
 			element.contentEditable = false;
 			element.style.resize = "none";
 			element.style.cursor = "pointer";
@@ -495,8 +495,8 @@ let domEvent = {
 		}
 	},
 
-	setSelected: function(element) {
-		if(!presmode) {
+	setSelected: function (element) {
+		if (!presmode) {
 			if (selected != undefined) {
 				this.removeSelected();
 			}
@@ -506,8 +506,8 @@ let domEvent = {
 		}
 	},
 
-	removeSelected: function() {
-		if(!presmode) {
+	removeSelected: function () {
+		if (!presmode) {
 			if (selected != undefined) {
 				this.removeEditMode(selected);
 
@@ -520,24 +520,24 @@ let domEvent = {
 		}
 	},
 
-	dragElement: function(e, element) {
-		if(!presmode && element != undefined) {
+	dragElement: function (e, element) {
+		if (!presmode && element != undefined) {
 			document.onmouseup = this.closeDragElement;
 
-		    let x = originX - e.clientX;
-		    let y = originY - e.clientY;
-		    let offsetX = element.offsetLeft - x;
-		    let offsetY = element.offsetTop - y;
+			let x = originX - e.clientX;
+			let y = originY - e.clientY;
+			let offsetX = element.offsetLeft - x;
+			let offsetY = element.offsetTop - y;
 
-		    originX = e.clientX;
-		    originY = e.clientY;
-		    element.style.left = offsetX + "px";
-		    element.style.top = offsetY + "px";
-	    }
+			originX = e.clientX;
+			originY = e.clientY;
+			element.style.left = offsetX + "px";
+			element.style.top = offsetY + "px";
+		}
 	},
 
-	closeDragElement: function(e) {
-		if(!presmode) {
+	closeDragElement: function (e) {
+		if (!presmode) {
 			document.onmouseup = null;
 			document.onmousemove = null;
 		}
@@ -560,46 +560,73 @@ init.loadToolbar();
 
 // VIS ELEMENT VED LOAD FOR TESTING
 
+var demotextbox;
+
+/*
+//dom pars hack https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro
+function htmlToElement(html){
+  var element = document.createElement('div');
+  element.innerHTML = html;
+  return(element);
+}
+*/
+/*
+//load local storage 
+if (localStorage.getItem("demotextbox")) {
+	let demotextboxString = localStorage.getItem("demotextbox");
+	console.log(demotextboxString);
+	var demotextbox = htmlToElement(demotextboxString);
+	console.log(demotextbox);
+	editGrid.innerHTML = demotextbox;
+}
+//else create journal object
+else {
+	lagTextBox();
+}
+*/
+
 lagTextBox();
 
-function lagTextBox(){
+function lagTextBox() {
 	domEvent.removeSelected();
 
-	let box = document.createElement('div');
+	var demotextbox = document.createElement('div');
 	let top = parseInt(ratioContainer1.offsetHeight) / 2;
 	let left = parseInt(ratioContainer1.offsetWidth) / 2;
-	let topFraction = top*0.58;
-	let leftFraction = left*0.56;
+	let topFraction = top * 0.58;
+	let leftFraction = left * 0.56;
 	let fontSize = 5 * top * 0.04;  // 5 er utgangspunktet
 	console.log(fontSize);
-	box.className = 'content';
-	box.setAttribute('name', 'text', 'class');
-	box.style = `font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
-	box.innerHTML = 'Enter text';
-	editGrid.appendChild(box);
-	init.addDefaultEvents(box);
-	init.addEventsText(box);
+	demotextbox.className = 'content';
+	demotextbox.setAttribute('name', 'text');
+	demotextbox.style = `color: red; font-size: ${fontSize}px; width: ${fontSize * 7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px;`;
+	demotextbox.innerHTML = 'DemonTextBox';
+	editGrid.appendChild(demotextbox);
+	init.addDefaultEvents(demotextbox);
+	init.addEventsText(demotextbox);
+	console.log("Dette er koden");
+	console.log(demotextbox);
+	//	console.log(demotextbox.outerHTML);
+
+	//	localStorage.setItem("demotextbox", demotextbox.outerhtml);
 }
 
 
 // Resizing elements based on editGrid size upon resize -----------------
-
-window.onresize = function(){
-	//få tak i tekstelementer
-	let styleArray = document.getElementsByName("text");
-	console.log(styleArray);
+window.onresize = function () {
 	let top = parseInt(ratioContainer1.offsetHeight) / 2;
 	let left = parseInt(ratioContainer1.offsetWidth) / 2;
-	let topFraction = top*0.58;
-	let leftFraction = left*0.56;
+	let topFraction = top * 0.58;
+	let leftFraction = left * 0.56;
 	let fraction = 0.04;
 	let storedFontsize = 5; // how to get this
 	let fontSize = storedFontsize * topFraction * fraction;
-	// how to manipulate style of elements 
-	
-	for (i=0;i < styleArray.length; i++){
-		styleArray[i].style.fontSize=`${fontSize}px`;
-		/*`font-size: ${fontSize}px; width: ${fontSize*7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px`;*/
+	console.log("resize!" + fontSize);
+	//få tak i tekstelementer
+	var textArray = document.getElementsByName('text')
+	console.log(textArray);
+	for (i = 0; i = textArray.length; i++) {
+		textArray[i].style = `font-size: ${fontSize}px; width: ${fontSize * 7}px; border-color: transparent; left: ${leftFraction}px; top: ${topFraction}px`;
 	}
-	// må legges inn for bilder og annet
 }
+	// må legges inn for bilder og annet
