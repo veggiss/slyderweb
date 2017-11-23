@@ -4,10 +4,14 @@
 <head>
 	<meta charset="utf-8" />
   	<title>Slyderweb</title>
-  	<link rel="stylesheet" type="text/css" href="./css/editor.css">
+  	<link rel="stylesheet" type="text/css" href="./css/editor_sidebar.css">
+  	<link rel="stylesheet" type="text/css" href="./css/editor_grid.css">
+  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+	<div id="editGrid"></div>
+
 	<div id="colorPicker">
 		Hue
 		<div name="hue">
@@ -43,23 +47,6 @@
 		<br>
 		<button id="removeShadowBtn">Remove</button>
 	</div>
-
-	<div id="editGrid"></div>
-	<button id="presmodeBtn">Presentation mode</button>
-	<button id="newPresentationBtn">New presentation</button>
-	<button id="savePageBtn">Save page</button>
-	<button id="loadprevBtn">Prev page</button>
-	<button id="loadnextBtn">Next page</button>
-	<button id="newPageBtn">New page</button>
-	<span id='currentPageTxt'>Current page:</span>
-	<br><br>
-	<button id="newTextBoxBtn">New text box</button>
-	<button id="exportToFileBtn">Export presentation</button>
-	<input id="presNameInput" type="text" placeholder="Name" style="width:100px">
-	<select id="presListSelect" style="width: 100px"></select>
-	<button id="loadPresBtn">Load presentation</button>
-	<br><br>Notes:<br>
-	<div id="notesTxt" contenteditable="true"></div>
 
 	<div id="textToolBar">
 		<ul>
@@ -113,6 +100,139 @@
 			</li>
 		</ul>
 	</div>
+
+	<div class="sideNav">
+		<main>
+		  <input id="toggle_page" type="checkbox">
+		  <label for="toggle_page">Presentation</label>
+		  <div id="expand_page">
+		    <section>
+				<div id="newTextBoxBtn">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">library_add</t><br>
+						<t>New</t>
+					</span>
+				</div>
+				<div id="newTextBoxBtn">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">play_arrow</t><br>
+						<t>Start</t>
+					</span>
+				</div>
+				<div id="newTextBoxBtn">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">details</t><br>
+						<t>Preview</t>
+					</span>
+				</div>
+				<div id="newTextBoxBtn">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">cloud_upload</t><br>
+						<t>Save</t>
+					</span>
+				</div>
+				<div id="newTextBoxBtn">
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;"">folder_shared</t><br>
+						<t>My slides</t>
+					</span>
+				</div>
+		    </section>
+		  </div>
+		</main>
+
+		<main>
+		  <input id="toggle_elements" type="checkbox">
+		  <label for="toggle_elements">Add</label>
+		  <div id="expand_elements">
+		    <section>
+				<div id="newTextBoxBtn">
+					<span name="btn">
+						<t style="font-size: 26px;font-family: Georgia;">T</t><br>
+						<t>Textbox</t>
+					</span>
+				</div>
+				<div>
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;">crop_original</t><br>
+						<t>Image</t>
+					</span>
+				</div>
+				<div>
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;">web_asset</t><br>
+						<t>Iframe</t>
+					</span>
+				</div>
+		    </section>
+		  </div>
+		</main>
+
+		<main>
+		  <input id="toggle_tools" type="checkbox">
+		  <label for="toggle_tools">Tools</label>
+		  <div id="expand_tools">
+		    <section>
+				<div>
+					<span>
+						<t>Scale</t>
+						<input name="range" type="range" min="1" max="100" value="50">
+					</span>
+				</div>
+				<div>
+					<span>
+						<t>Rotation</t>
+						<input name="range" type="range" min="1" max="100" value="50">
+					</span>
+				</div>
+				<div>
+					<span>
+						<t>Border</t>
+						<input name="range" type="range" min="1" max="100" value="50">
+					</span>
+				</div>
+		    </section>
+		  </div>
+		</main>
+
+		<main>
+		  <input id="toggle_background" type="checkbox">
+		  <label for="toggle_background">Styles</label>
+		  <div id="expand_background">
+		    <section>
+				<div>
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;">color_lens</t><br>
+						<t>Background</t>
+					</span>
+				</div>
+				<div>
+					<span name="btn">
+						<t class="material-icons" style="font-size: 26px;">art_track</t><br>
+						<t>Templates</t>
+					</span>
+				</div>
+		    </section>
+		  </div>
+		</main>
+	</div>
+
+		<button id="presmodeBtn">Presentation mode</button>
+		<button id="newPresentationBtn">New presentation</button>
+		<button id="savePageBtn">Save page</button>
+		<button id="loadprevBtn">Prev page</button>
+		<button id="loadnextBtn">Next page</button>
+		<button id="newPageBtn">New page</button>
+		<span id='currentPageTxt'>Current page:</span>
+		<br><br>
+	
+		<button id="exportToFileBtn">Export presentation</button>
+		<input id="presNameInput" type="text" placeholder="Name" style="width:100px">
+		<select id="presListSelect" style="width: 100px"></select>
+		<button id="loadPresBtn">Load presentation</button>
+		<br><br>Notes:<br>
+		<div id="notesTxt" contenteditable="true"></div>
+
 	<script type="text/javascript" src="./js/util.js"></script>
 	<script type="text/javascript" src="./js/editor.js"></script>
 	<script type="text/javascript" src="./js/presmode.js"></script>
