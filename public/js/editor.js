@@ -11,6 +11,9 @@ let presListSelect = document.getElementById('presListSelect');
 let loadPresBtn = document.getElementById('loadPresBtn');
 let notesTxt = document.getElementById('notesTxt');
 let pageNav = document.getElementById('pageNav');
+let mySlydesModal = document.getElementById('mySlydesModal');
+let mySlydesBtn = document.getElementById('mySlydesBtn');
+let mySlydesContent = document.getElementById('mySlydesContent');
 
 //Text toolbar stuff
 let textToolBar = document.getElementById('textToolBar');
@@ -62,8 +65,6 @@ let presList = Promise.resolve(util.getPresList());
 // -- Initalize content
 let init = {
 	loadGrid: function() {
-		this.loadPresList();
-
 		let pressedDelKey = false;
 		editGrid.style.width = (screen.width * 0.65) + "px";
 		editGrid.style.height = (screen.height * 0.65) + "px";
@@ -114,6 +115,12 @@ let init = {
 
 		document.addEventListener('keyup', e => {
 			pressedDelKey = false;
+		});
+
+		window.addEventListener('click', e => {
+			if (e.target == mySlydesModal) {
+				mySlydesModal.style.display = 'none';
+			}
 		});
 	},
 
@@ -270,12 +277,19 @@ let init = {
 	},
 
 	loadPresList() {
-		presList.then((res) => {
-			res.forEach(item => {//<option value="Arial" style="font-family: 'Arial';">Arial</option>
-				let optionDom = document.createElement('option');
-				optionDom.value = item.name;
-				optionDom.innerHTML = item.name;
-				presListSelect.appendChild(optionDom);
+		Promise.resolve(util.getPresList()).then((res) => {
+			mySlydesContent.innerHTML = "";
+			res.forEach(item => {
+				let optionDom = document.createElement('section');
+				let hr = document.createElement('hr');
+				optionDom.classList.add('mySlydesContent')
+				optionDom.innerHTML = "&emsp;Title: " + item.name;;
+				mySlydesContent.appendChild(optionDom);
+				mySlydesContent.appendChild(hr);
+				optionDom.addEventListener('click', e => {
+					btnEvent.loadSelectedPres(item.name);
+					mySlydesModal.style.display = 'none';
+				});
 			})
 		});
 	},
@@ -318,16 +332,19 @@ let init = {
 
 // -- Button functions
 let btnEvent = {
-	loadSelectedPres() {
+	openMySlydes() {
+		init.loadPresList();
+		mySlydesModal.style.display = 'inline-block';
+	},
+
+	loadSelectedPres(name) {
 	    if (confirm("Save changes?") == true) {
 	        btnEvent.saveCurrentPage();
 	    }
 
-		let selection = presListSelect.value;
-
-		if (selection) {
+		if (name) {
 			fetch(util.newRequest('GET', '/user/presentation', {
-				name: selection
+				name: name
 			})).then(res => {
 			    return res.json();
 			}).then(res => {
@@ -645,7 +662,7 @@ loadnextBtn.onclick = btnEvent.nextPage;
 newPageBtn.onclick = btnEvent.newPage;
 newTextBoxBtn.onclick = btnEvent.newTextBox;
 exportToFileBtn.onclick = btnEvent.exportToFile;
-loadPresBtn.onclick = btnEvent.loadSelectedPres;
+mySlydesBtn.onclick = btnEvent.openMySlydes;
 
 init.loadGrid();
 init.loadContent();

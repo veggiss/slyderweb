@@ -104,65 +104,64 @@
 
 	<div class="side-bar">
 		<main>
-		  <input id="toggle_page" type="checkbox">
-		  <label for="toggle_page">Slyde</label>
-		  <div id="expand_page">
-		    <section>
-				<div>
-					<text>Title</text>
-					<input id="presNameInput" name="notes" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0">
-				</div>
-
-				<div id="newPresentationBtn">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">library_add</t><br>
-						<t>New</t>
-					</span>
-				</div>
-				<div id="presmodeBtn">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">play_arrow</t><br>
-						<t>Start</t>
-					</span>
-				</div>
-				<div id="previewmodeBtn">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">details</t><br>
-						<t>Preview</t>
-					</span>
-				</div>
-				<div id="savePageBtn">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">cloud_upload</t><br>
-						<t>Save</t>
-					</span>
-				</div>
-				<div style="cursor: not-allowed;">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">folder_shared</t><br>
-						<t>My slydes</t>
-					</span>
-				</div>
-				<div id="exportToFileBtn">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">archive</t><br>
-						<t>Export</t>
-					</span>
-				</div>
-				<div style="cursor: not-allowed;">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">unarchive</t><br>
-						<t>Import</t>
-					</span>
-				</div>
-				<div style="cursor: not-allowed;">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;"">delete</t><br>
-						<t>Delete</t>
-					</span>
-				</div>
-		    </section>
-		  </div>
+			<input id="toggle_page" type="checkbox">
+			<label for="toggle_page">Slyde</label>
+			<div id="expand_page">
+				<section>
+					<div>
+						<text>Title</text>
+						<input id="presNameInput" name="notes" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0">
+					</div>
+					<div id="newPresentationBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">library_add</t><br>
+							<t>New</t>
+						</span>
+					</div>
+					<div id="presmodeBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">play_arrow</t><br>
+							<t>Start</t>
+						</span>
+					</div>
+					<div id="previewmodeBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">details</t><br>
+							<t>Preview</t>
+						</span>
+					</div>
+					<div id="savePageBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">cloud_upload</t><br>
+							<t>Save</t>
+						</span>
+					</div>
+					<div id="mySlydesBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">folder_shared</t><br>
+							<t>My slydes</t>
+						</span>
+					</div>
+					<div id="exportToFileBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">archive</t><br>
+							<t>Export</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">unarchive</t><br>
+							<t>Import</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;"">delete</t><br>
+							<t>Delete</t>
+						</span>
+					</div>
+			    </section>
+		  	</div>
 		</main>
 
 		<main>
@@ -274,6 +273,16 @@
 				</span>
 			</div>
 		</section>
+	</div>
+
+	<div id="mySlydesModal" class="modal">
+	  <div class="modal-content" style="width: 30%; min-width: 50px">
+	    <span class="close">&times;</span><br>
+	    <p class="material-icons">folder_shared</p><br>
+	    <div id="mySlydesContainer">
+	    	<div id="mySlydesContent"></div>
+	    </div>
+	  </div>
 	</div>
 
 		<select id="presListSelect" style="width: 100px; display: none; visibility: hidden;"></select>
