@@ -59,17 +59,6 @@
 			<h4>Presentation notes</h4>
 			<textarea id="notesTxt" placeholder="Enter notes here"></textarea>
 
-			<ul class="hidden">
-				<li>IMAGE</li>
-				<li>set size
-					<input type="checkbox" />Lock ratio</li>
-				<input placeholder="width" type="number" />
-				<input placeholder="height" type="number" />
-				<li>
-					<button class="dark">Crop</button>
-				</li>
-			</ul>
-
 			<div id="colorPicker">
 				Hue
 				<div name="hue">
@@ -169,7 +158,7 @@
 
 	</main>
 
-	<aside class="hg-left">
+	<aside class="hg-left centered">
 
 		<h1>Actions</h1>
 		<hr>
@@ -239,11 +228,20 @@
 				<button id="colorPickerbtn" class="dark">Color picker</button>
 			</div>
 			<hr>
-
+			<ul class="hidden">
+					<li>IMAGE</li>
+					<li>set size
+						<input type="checkbox" />Lock ratio</li>
+					<input placeholder="width" type="number" />
+					<input placeholder="height" type="number" />
+					<li>
+						<button class="dark">Crop</button>
+					</li>
+				</ul>
 		</div>
 	</aside>
 
-	<aside class="hg-right">
+	<aside class="hg-right centered">
 
 		<h1>Slides</h1>
 		<button id="presmodeBtn" class="dark">Presentation mode (F5)</button>

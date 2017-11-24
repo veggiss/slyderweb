@@ -49,17 +49,17 @@ Stylesheet for editor.html
 }
 */
 
-/* trengs ikke?
+/* trengs ikke? for å vise at editgrid er aktiv
 #editGrid:active {
-	border: 0.2em solid cyan;
+	border: 0.1em solid cyan;
 }
 */
 
-/* trengs denne? */
+/* trengs denne? For å style currentpage-tekst. kanskje gi bakgrunn.
 #currentPageTxt {
 	font-size: 1rem;
 }
-
+*/
 
 
 
@@ -183,7 +183,7 @@ Stylesheet for editor.html
 
 textarea {
 	border: none;
-	height: 80px;
+	height: 100%;
 	width: 100%;
 	padding: 0.2rem 1rem;
 	/* background: rgb(214, 196, 196); */
@@ -191,8 +191,8 @@ textarea {
 	font-family: Verdana, Tahoma, sans-serif;
 	box-sizing: border-box;
 	border: thin solid gray; 
+	overflow: auto;
 }
-
 
 
 /* OLD 
@@ -200,11 +200,7 @@ textarea {
 	width: 200px; 
 	height: 50px; 
 	resize: both;
-}
-*/
-	overflow: auto;
-
-
+}*/
 
 
 
@@ -229,8 +225,8 @@ textarea {
 	cursor: pointer;
 }
 
-/*
-.content { gammel
+/* gammel. trengs?
+.content {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -242,12 +238,11 @@ textarea {
 
 
 
-/* ******* * * * * * */
-/* cssGrid * * * * * */
+/* * * * * * * * * * * * * * * * * */
+/* cssGrid * * * * * * * * * * * * */
 /* Holy Grail Layout with CSS Grid */
-/* borrowed code     */
-/* ******* * * * * * */
-		
+/* ******* * * * * * * * * * * * * */
+
 		
 /* Define grid areas */
 .hg-header { grid-area: header; }
@@ -268,17 +263,18 @@ textarea {
 						1fr;
 						/* 2.2rem; */
 								
-	min-height: 100vh /* ellers trekker footeren seg opp */
+	min-height: 100vh /* ellers trekker footeren seg opp. Eller for å fylle skjermen */
 }
 
 
-/* mer tilpasning: custom css styles */
+/* * * * * * * * * * * * * * * * * */
+/* Custom css styles */
 
 .hg-header, .hg-footer {
 	display: flex;
-	justify-content: center;  /*? aligner i miten av element*/
-	align-items: center;    /*???? aligner i høyden*/
-	text-align: center;  /* så ingen virkning av med justify-content*/
+	justify-content: center; /* aligner i midten av element*/
+	align-items: center;    /*? aligner i høyden */
+	text-align: center;   /* så sammen med justify-content*/
 }
 
 .hg-header,
@@ -286,24 +282,11 @@ textarea {
 .hg-right,
 .hg-main,
 .hg-editgrid {
-	margin:0;
-	box-sizing: border-box;
+	margin:0; /* dette overstyrer alt som skulle stå i f. eks. lightStyle for foreldreelementer*/
 }
-
-aside.hg-left {
-	text-align: center;
-	padding: 2rem; 
-}
-
-.hg-right {
-	text-align: center;
-}
-
-
 
 
 /* til skjermer smalere enn 600px */
-
 @media screen and (max-width: 600px) {
 	.hg {
 		grid-template-areas: "header"
