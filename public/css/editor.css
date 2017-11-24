@@ -253,7 +253,7 @@ textarea {
 		
 /* Define grid areas */
 .hg-header { grid-area: header; }
-.hg-footer { grid-area: footer; }
+/* .hg-footer { grid-area: footer; } */
 .hg-main { grid-area: main; }
 .hg-left { grid-area: sidebarLeft; }
 .hg-right { grid-area: sidebarRight; }
@@ -261,17 +261,16 @@ textarea {
 .hg {
 	display: grid;
 	grid-template-areas: "header header header"
-						/*"sidebarLeft editgrid sidebarRight"*/
 						"sidebarLeft main sidebarRight"
-						"footer footer footer";
+						/* "footer footer footer"; */
 								
 	grid-template-columns: 1fr 60% 1fr; 
 	
 	grid-template-rows: 2.2rem
 						1fr    /* gir opp relativt....1fr...*/
-						2.2rem;
+						/* 2.2rem; */
 								
-	min-height: 100vh /* ellers trekker footeren seg opp */
+	/* min-height: 100vh /* ellers trekker footeren seg opp */ */
 }
 
 
