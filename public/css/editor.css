@@ -168,17 +168,17 @@ Stylesheet for editor.html
 /* Presentation notes */
 
 #notesSection {  /* var nesten finere uten */
-	background: gray;
+	background: #000;
 	margin: 0 auto;
 	width: 100%;
 	height: 10.3rem;
 	max-width: 500px;
+	vertical-align: middle;
+	color:  white;
 }
 
 #notesSection h4 {
-	color:  rgb(214, 196, 196);
 	margin: 0.3em 0em;
-	text-align: center;
 }
 
 textarea {
@@ -186,10 +186,11 @@ textarea {
 	height: 80px;
 	width: 100%;
 	padding: 0.2rem 1rem;
-	background: rgb(214, 196, 196);
-	font-size: 1.0rem;
+	/* background: rgb(214, 196, 196); */
+	font-size: 1.4rem;
 	font-family: Verdana, Tahoma, sans-serif;
 	box-sizing: border-box;
+	border: thin solid gray; 
 }
 
 
@@ -199,10 +200,6 @@ textarea {
 	width: 200px; 
 	height: 50px; 
 	resize: both;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: thin;
-	border-color: gray;
 }
 */
 	overflow: auto;
