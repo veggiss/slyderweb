@@ -17,16 +17,20 @@ html, body, section, main {
 
 body {
 	color: #000;
-	background: gray;
-	/*background-image: rutete*/
+	background:white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVQoU2NkwA6kGBgYniFLMaKpQ1aAohhdIbr5cMUwhRhWoesAKSSoCKSGkNVwg4mxGmwjySbCrCA5eDA8CAAGVAslgCPX9wAAAABJRU5ErkJggg==) repeat;
 	font-family: 'Lato', 'Verdana', sans-serif;
 	font-size: 1.6rem; /* this sets the baseline size. hs are set by ems in browser*/
 }
 
-main {
-	
-	background-color: #eff;
+
+main {}
+
+
+.myDiv{
+   background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVQoU2NkwA6kGBgYniFLMaKpQ1aAohhdIbr5cMUwhRhWoesAKSSoCKSGkNVwg4mxGmwjySbCrCA5eDA8CAAGVAslgCPX9wAAAABJRU5ErkJggg==
+   ) repeat;
 }
+
 
 aside {
 	/*border-right:1px solid rgb(19, 17, 17);*/
@@ -35,55 +39,67 @@ aside {
 	margin: 0.5rem 0.3rem;
 }
 
+footer {
+	background-color: cyan;
+}
+
 
 
 /*  header-stuff */
 
 header {
-	padding-right: 1.5rem;
-	box-shadow: 10px 10px 5px #888888;
-	background-color: cyan;
-	text-align: center;
+	background-color: olive;
+	/*border-bottom: solid 1px #666;*/
+	box-shadow: 0px 1px 5px #999;
+	padding: 0.4em 0;
 }
 
-nav, footer {
-	text-align: center;
+.verticallyCenterDiv {
+	position: relative;
+    top: 50%; 
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 
-menuitem a {
-	color: red; 
-	padding: 0 0.3em;
+nav {
+	vertical-align: middle;
+	display: inline;
+}
+
+header a{
 	text-decoration: none;
+	color: white;
+	padding: 0.5em 0.3em;
+	/* align-content: center; */
+	display: inline;
 }
 
-menuitem a:visited {
-	color: maroon;
-}
-
-.noLinkStyle {
-	text-decoration: none;
+header a:hover {
+	background-color: #AA6;
 	color: black;
+	text-shadow: none;
 }
 
 .logo {
-	color: rgb(227, 17, 71);
+	/* margin:0; */
+	padding: 0 0.5em;
 	display: inline;
-	font-size: 1.2em;
+	font-size: 2.0rem;
 	font-weight: bold;
+	text-shadow: 0px 0px 8px black;
+	font-family: Lucida Console, Courier, monospace;
 }
 
-
-
-
+logo a{ 	color: white;}
 
 /* Form elements  */
 
 button {
 	box-shadow: none;
 	color: rgb(214, 196, 196); /* fin gråfarge: #ccc;*/
-	background-color: #444;
-	padding: 0.3rem 0.7rem;
+	background-color: #555;
+	padding: 0.4rem 1.0rem;
 	margin: 0.2rem 0.07rem;
 	font-size:0.9rem;
 	border-radius: 4px;
@@ -164,4 +180,9 @@ hr {
 ul.hidden { 
 	padding-left: 0;
 	list-style: none;
+}
+
+.noLinkStyle {
+	text-decoration: none;
+	color: black;
 }

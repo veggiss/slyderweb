@@ -12,15 +12,15 @@ Stylesheet for editor.html
 
 /* Text contents */
 
-.blueDiv {
+.coloredDiv1 {
 	width: 100%;
-	background-color: darkblue;
+	background-color: maroon;
 	color: white;
 }
 
-.redDiv {
+.coloredDiv2 {
 	width: 100%;
-	background-color: red;
+	background-color: olive;
 	color: black;
 }
 
@@ -33,31 +33,27 @@ Stylesheet for editor.html
 
 
 /* Layout */
-header {
-	height: 2.5rem;
-	padding: 0.2rem;
-	
-}
-
-nav {
-	height: 2.5rem;
-	
-}
-
-body {
-	margin-top: 2.5rem;
+html, body, main {
 	width: 100%;
 }
+
+header {
+	width: 100%;
+	height: 1.5em;
+	display: inline;
+	position: absolute;
+}
+
 
 main {
-	width: 100%;
+	padding-top: 2.4em;
+	min-height: 92vh;
 	
 }
 
 
 footer {
-	height: 2.2rem;
-	bottom-margin: 0;
+	height: 2.2em;
 }
 
 
