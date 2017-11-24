@@ -557,13 +557,15 @@ init.loadGrid();
 init.loadContent();
 init.loadToolbar();
 
-
+/*******************  */
 /* SILJES KODE START */
 
-// VIS ELEMENT VED LOAD FOR TESTING
+// global vars
+let demotextbox;
 
-var demotextbox;
 
+
+// localStorage: behold elementene selv om reloader siden
 /*
 //dom pars hack https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro
 function htmlToElement(html){
@@ -587,6 +589,8 @@ else {
 }
 */
 
+
+// lag demotekstbox
 lagTextBox();
 
 function lagTextBox() {
@@ -613,17 +617,22 @@ function lagTextBox() {
 }
 
 
-// Resizing elements based on editGrid size upon resize -----------------
-
-//utgangspunktstørrelse
-let editGridHeight = parseInt(ratioContainer1.offsetHeight);
-let editGridWidth = parseInt(ratioContainer1.offsetWidth);
+// RESIZING ELEMENTS UPON WINDOW RESIZE -----------------------------------------
+/* hacky stuff */
+// original editgrid size
+let editGridHeight = parseFloat(ratioContainer1.offsetHeight);
+let editGridWidth = parseFloat(ratioContainer1.offsetWidth);
+const OriginalEditGridHeight = parseFloat(ratioContainer1.offsetHeight);
+const OriginalEditGridWidth = parseFloat(ratioContainer1.offsetWidth);
+console.log("original egw: " + editGridWidth);
 
 window.onresize = function () {
 	
 	// defining sizes
-	let halfHeight = parseInt(ratioContainer1.offsetHeight) / 2;
-	let halfWidth = parseInt(ratioContainer1.offsetWidth) / 2;
+	let halfHeight = parseFloat(ratioContainer1.offsetHeight) / 2;
+	let halfWidth = parseFloat(ratioContainer1.offsetWidth) / 2;
+	let Height = parseFloat(ratioContainer1.offsetHeight);
+	let Width = parseFloat(ratioContainer1.offsetWidth);
 	let topFraction = halfHeight * 0.58;
 	//console.log("topfraction" + topFraction);
 	let leftFraction = halfWidth * 0.56;
@@ -631,29 +640,31 @@ window.onresize = function () {
 	let gridFraction = 0.004;
 	let storedFontsize = 5; // how to get this
 	let fontSize = storedFontsize * topFraction * fraction;
+	let fractionOfOriginal = Width/OriginalEditGridWidth;
+	console.log("fOO: " + fractionOfOriginal);
 	//console.log(fontSize);
 	
 	// retrieving text elements
-	var textArray = document.getElementsByName('text')
+	let textArray = document.getElementsByName('text')
 	
-	// updating size
+	// updating text elements size
 	for (i = 0; i < textArray.length; i++) {
 		
-		//hent eksisterende bredde og høyde
-		let leftpos = parseInt(textArray[i].offsetLeft);
-		let toppos = parseInt(textArray[i].offsetTop);
-		console.log("toppos: " + toppos);
+		//hent elements plassering
+		let leftpos = parseFloat(textArray[i].offsetLeft);
+		let toppos = parseFloat(textArray[i].offsetTop);
+		//console.log("toppos: " + toppos);
 		
-		// hva er dette av editgrid
-		console.log("edH" + editGridHeight)
+		// brøkdel av opprinnelig editGrid-størrelse
+		//console.log("edHeight: " + editGridHeight)
 		let leftposFraction = leftpos/editGridWidth;
 		let topposFraction = toppos/editGridHeight;
 		
-		// lag ny posisjon
-		let left = leftposFraction * halfWidth * 2;
-		let top = topposFraction * halfHeight * 2;
-		console.log("top" + top);
-		console.log("Height " + halfHeight * 2);
+		// finn ny posisjon
+		let left = leftposFraction * Width;
+		let top = topposFraction * Height;
+		//console.log("top" + top);
+		//console.log("Height " + halfHeight * 2);
 		
 		//textstørrelse
 		textArray[i].style.fontSize = `${fontSize}px`;
@@ -668,19 +679,47 @@ window.onresize = function () {
 	// retrieving image elements
 	var imgArray = document.getElementsByName('img')
 	//console.log(imgArray);
-	// updating size
+	
+	// updating image size
 	for (i = 0; i < imgArray.length; i++) {
-		imgArray[i].style.width = `${topFraction/2}px`;
-        console.log(topFraction * 5);
-		//imgArray[i].style.left = `${leftFraction}px`;
-		//imgArray[i].style.top = `${topFraction}px`;
+		
+		//hent elements plassering
+		let leftpos = parseFloat(imgArray[i].offsetLeft);
+		let toppos = parseFloat(imgArray[i].offsetTop);
+		//console.log("toppos: " + toppos);
+		
+		// brøkdel av opprinnelig editGrid-størrelse
+		//console.log("edHeight: " + editGridHeight)
+		let leftposFraction = leftpos/editGridWidth;
+		let topposFraction = toppos/editGridHeight;
+		
+		// finn ny posisjon
+		let left = leftposFraction * Width;
+		let top = topposFraction * Height;
+		//console.log("top" + top);
+		//console.log("Height " + halfHeight * 2);
+	
+		//angi ny posisjon
+		imgArray[i].style.left = `${left}px`;
+		imgArray[i].style.top = `${top}px`;
+		
+		//bredde
+		let width = parseFloat(imgArray[i].offsetWidth);
+		console.log("w: " + width);
+		/*let widthFraction = width/editGridWidth;
+		console.log("egw: " + editGridWidth);
+		console.log("wf: " + widthFraction);*/
+		width = width * fractionOfOriginal;
+		console.log("w2: " + width);
+		imgArray[i].style.width = `${width}px`;
+		
 	}
+	// andre typer element
 	
-	//og andre typer elementer
-	
-	// endre høyde bredde igjen, ved hver resize
-	editGridHeight = parseInt(ratioContainer1.offsetHeight);
-	editGridWidth = parseInt(ratioContainer1.offsetWidth);
+
+	// angi ny størrelse for editGrid
+	editGridHeight = parseFloat(ratioContainer1.offsetHeight);
+	editGridWidth = parseFloat(ratioContainer1.offsetWidth);
 	halfHeight = editGridHeight/2;
 	halfWidth = editGridWidth/2;
 	

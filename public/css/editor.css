@@ -32,22 +32,10 @@ Stylesheet for editor.html
 	top: 0; bottom: 0; left: 0; right: 0;
 	background: white;
 	color: black;
-	border: 0.1em solid gray;
-	margin: 0 auto;
+	border: thin dashed gray;
 	box-sizing: border-box;
+	margin: 0 auto;
 }
-
-/* OLD
-#editGrid {
-	margin: auto;
-	left: 0; right: -25%;
-	top: 0; bottom: 0;
-	border-radius: 5px;
-	border-style: dashed;
-	border-width: thin;
-	border-color: gray;
-}
-*/
 
 /* trengs ikke? for å vise at editgrid er aktiv
 #editGrid:active {
@@ -161,7 +149,19 @@ Stylesheet for editor.html
 }
 
 
+
+
+
+
+
 /* Sidebar */
+
+
+
+
+
+
+
 
 
 
@@ -205,6 +205,8 @@ textarea {
 
 
 
+
+
 /* slideView */
 
 #slideView {
@@ -238,11 +240,12 @@ textarea {
 
 
 
+
+
+
 /* * * * * * * * * * * * * * * * * */
 /* cssGrid * * * * * * * * * * * * */
-/* Holy Grail Layout with CSS Grid */
 /* ******* * * * * * * * * * * * * */
-
 		
 /* Define grid areas */
 .hg-header { grid-area: header; }
@@ -267,7 +270,6 @@ textarea {
 }
 
 
-/* * * * * * * * * * * * * * * * * */
 /* Custom css styles */
 
 .hg-header, .hg-footer {
