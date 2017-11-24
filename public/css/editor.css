@@ -283,6 +283,7 @@ textarea {
 .hg-main,
 .hg-editgrid {
 	margin:0; /* dette overstyrer alt som skulle stå i f. eks. lightStyle for foreldreelementer*/
+	box-sizing: border-box;
 }
 
 
