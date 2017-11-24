@@ -6,21 +6,27 @@ Stylesheet for editor.html
 /* Text contents */
 /* Layout */
 /* Smal skjerm */
-
-*******************************************************************/
+/*******************************************************************/
 
 
 /* Text contents */
 
-.coloredDiv1 {
+.colored1 {
 	width: 100%;
-	background-color: maroon;
+	background: olive;
 	color: white;
 }
 
-.coloredDiv2 {
+	
+.colored2 {
 	width: 100%;
-	background-color: olive;
+	background: maroon;
+	color: white;
+}
+
+.colored3 {
+	width: 100%;
+	background: rgba(130,130,0,0.4);
 	color: black;
 }
 
@@ -33,12 +39,12 @@ Stylesheet for editor.html
 
 
 /* Layout */
-html, body, main {
+html, body, main, header {
 	width: 100%;
+	height: 100%;
 }
 
 header {
-	width: 100%;
 	height: 1.5em;
 	display: inline;
 	position: absolute;
@@ -47,8 +53,6 @@ header {
 
 main {
 	padding-top: 2.4em;
-	min-height: 92vh;
-	
 }
 
 

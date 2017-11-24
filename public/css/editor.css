@@ -247,9 +247,10 @@ textarea {
 
 /* ******* * * * * * */
 /* cssGrid * * * * * */
-/* ******* * * * * * */
 /* Holy Grail Layout with CSS Grid */
-		/* borrowed code */
+/* borrowed code     */
+/* ******* * * * * * */
+		
 		
 /* Define grid areas */
 .hg-header { grid-area: header; }
@@ -261,16 +262,16 @@ textarea {
 .hg {
 	display: grid;
 	grid-template-areas: "header header header"
-						"sidebarLeft main sidebarRight"
+						"sidebarLeft main sidebarRight";
 						/* "footer footer footer"; */
 								
 	grid-template-columns: 1fr 60% 1fr; 
 	
-	grid-template-rows: 2.2rem
-						1fr    /* gir opp relativt....1fr...*/
+	grid-template-rows: 2.3em    
+						1fr;
 						/* 2.2rem; */
 								
-	/* min-height: 100vh /* ellers trekker footeren seg opp */ */
+	min-height: 100vh /* ellers trekker footeren seg opp */
 }
 
 
@@ -288,13 +289,13 @@ textarea {
 .hg-right,
 .hg-main,
 .hg-editgrid {
-	padding: 0rem;
+	margin:0;
 	box-sizing: border-box;
 }
 
 aside.hg-left {
-	margin: 0.5rem 1.3rem;
 	text-align: center;
+	padding: 2rem; 
 }
 
 .hg-right {
