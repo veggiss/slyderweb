@@ -152,7 +152,7 @@ let btnEvent = {
 		let left = parseInt(editGrid.style.width) / 2;
 		box.className = 'content';
 		box.setAttribute('name', 'text');
-		box.style = `font-size: 25px; width: 150px; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px;`;
+		box.style = `font-size: 25px; width: 150px; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px; list-style-position: inside;`;
 		box.innerHTML = 'Enter text';
 		editGrid.appendChild(box);
 		init.addDefaultEvents(box);
