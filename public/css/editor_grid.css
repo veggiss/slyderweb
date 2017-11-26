@@ -5,13 +5,12 @@ body {
 #editGrid {
 	position: absolute;
 	margin: auto;
-	left: 0; right: -5%;
+	left: 15%; right: 0;
 	top: 0; bottom: 0;
 	border-radius: 5px;
 	border-style: dashed;
 	border-width: thin;
 	border-color: gray;
-	background-color: white;
 	box-shadow: 0 0 20px #e5e5e5;
 }
 
@@ -70,7 +69,7 @@ body {
 
 #colorPicker, #shadowPicker {
 	position: absolute;
-	z-index: 100;
+	z-index: 1500;
 	text-align: center;
 	width: 200px;
 	height: 200px;

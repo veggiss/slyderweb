@@ -168,13 +168,15 @@ function updatePresentation(req, res, next) {
     let uid = presObject.uid;
     let author = req.session.username;
     let name = presObject.name;
+    let bgColors = presObject.bgColors;
+    let originHeight = presObject.originHeight;
     let body = presObject.body;
 
     if(ut.isNotEmpty(uid.toString())) {
         if (ut.isNotEmpty(body.toString(), author)) {
             let client = ut.newClient();
-            let sql = 'UPDATE presentations SET body = $1, name = $2 WHERE author = $3 AND id = $4';
-            let params = [body, name, author, uid];
+            let sql = 'UPDATE presentations SET body = $1, name = $2, bgcolors = $3, originheight = $4 WHERE author = $5 AND id = $6';
+            let params = [body, name, bgColors, originHeight, author, uid];
 
             client.connect();
 
@@ -214,12 +216,14 @@ function newPresentation(req, res, next) {
     let presObject = req.body.presentation;
     let author = req.session.username;
     let name = ut.isNotEmpty(presObject.name) ? presObject.name : 'My presentation';
+    let bgColors = presObject.bgColors;
+    let originHeight = presObject.originHeight;
     let body = presObject.body;
 
     if(ut.isNotEmpty(author, body.toString())) {
         let client = ut.newClient();
-        let sql = 'INSERT INTO presentations(author, name, body) VALUES($1, $2, $3) RETURNING id';
-        let params = [author, name, body];
+        let sql = 'INSERT INTO presentations(author, name, bgcolors, originheight, body) VALUES($1, $2, $3, $4, $5) RETURNING id';
+        let params = [author, name, bgColors, originHeight, body];
 
         client.connect();
 
@@ -257,14 +261,14 @@ function newPresentation(req, res, next) {
 function getPresList(req, res, next) {
     let username = req.session.username;
     let client = ut.newClient();
-    let sql = 'SELECT name FROM presentations WHERE author = $1';
+    let sql = 'SELECT name, id FROM presentations WHERE author = $1';
     let params = [username];
 
     client.connect();
 
     client.query(sql, params, (err, query) => {
         if (!err) {
-            res.statusMessage = 'Found some presentations';
+            res.statusMessage = 'Found some presentation';
             res.status(200);
             res.send(query.rows);
             res.end();
@@ -272,10 +276,10 @@ function getPresList(req, res, next) {
             res.statusMessage = 'There was a problem getting presentation list';
             res.status(500).end();
             res.err = err;
+            next();
         }
 
         client.end();
-        next();
     });
 }
 
@@ -297,6 +301,7 @@ function getPresenation(req, res, next) {
                     author: query.rows[0].author,
                     name: query.rows[0].name,
                     presmode: query.rows[0].presmode,
+                    bgColors: query.rows[0].bgcolors,
                     body: query.rows[0].body
                 }
 

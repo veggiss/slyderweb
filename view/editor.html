@@ -7,7 +7,7 @@
   	<link rel="stylesheet" type="text/css" href="./css/main.css">
   	<link rel="stylesheet" type="text/css" href="./css/editor_sidebar.css">
   	<link rel="stylesheet" type="text/css" href="./css/editor_grid.css">
-  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -102,7 +102,7 @@
 		</ul>
 	</div>
 
-	<div class="side-bar">
+	<div class="side-bar noselect">
 		<main>
 			<input id="toggle_page" type="checkbox">
 			<label for="toggle_page">Slyde</label>
@@ -110,7 +110,7 @@
 				<section>
 					<div>
 						<text>Title</text>
-						<input id="presNameInput" name="notes" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0">
+						<input id="presNameInput" name="notes" placeholder="My slyde" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0">
 					</div>
 					<div id="newPresentationBtn">
 						<span name="btn">
@@ -148,7 +148,7 @@
 							<t>Export</t>
 						</span>
 					</div>
-					<div style="cursor: not-allowed;">
+					<div id="importBtn">
 						<span name="btn">
 							<t class="material-icons" style="font-size: 26px;"">unarchive</t><br>
 							<t>Import</t>
@@ -202,7 +202,7 @@
 						<input name="range" type="range" min="1" max="100" value="50">
 					</span>
 				</div>
-				<div style="cursor: not-allowed;">
+				<div>
 					<span>
 						<t>Rotation</t>
 						<input name="range" type="range" min="1" max="100" value="50">
@@ -223,7 +223,7 @@
 		  <label for="toggle_background">Styles</label>
 		  <div id="expand_background">
 		    <section>
-				<div style="cursor: not-allowed;">
+				<div id="changeBgBtn">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;">color_lens</t><br>
 						<t>Background</t>
@@ -276,22 +276,49 @@
 	</div>
 
 	<div id="mySlydesModal" class="modal">
-	  <div class="modal-content" style="width: 30%; min-width: 50px">
-	    <span class="close">&times;</span><br>
-	    <p class="material-icons">folder_shared</p><br>
+	  <div class="modal-content noselect" style="width: 30%; min-width: 50px;">
+	    <div class="material-icons" style="font-size: 35px; cursor: default; color: #3d3d3d">folder_shared</div><hr>
 	    <div id="mySlydesContainer">
 	    	<div id="mySlydesContent"></div>
 	    </div>
 	  </div>
 	</div>
 
-		<select id="presListSelect" style="width: 100px; display: none; visibility: hidden;"></select>
-		<button id="loadPresBtn" style="display: none; visibility: hidden;">Load presentation</button>
-		
-
-	<script type="text/javascript" src="./js/util.js"></script>
-	<script type="text/javascript" src="./js/editor.js"></script>
-	<script type="text/javascript" src="./js/presmode.js"></script>
+	<div id="colorBgPanel" class="side-bar noselect bg-bar">
+		<section>
+			<div>
+				<span>
+					<t>Color</t>
+					<div class="bg-colors" id="bgColorDiv"></div>
+				</span>
+			</div>
+			<div>
+				<span>
+					<t>Rotation</t>
+					<input id="gradRotationRange" name="range" type="range" min="-180" max="180" value="0">
+				</span>
+			</div>
+			<div style="margin-top: 15px; margin-bottom: -15px">
+				<span>
+					<t">Gradients</t>
+				</span>
+			</div>
+			<div id="gradientListDiv"></div>
+			<div>
+				<span>
+					<t id="addGradientBtn" class="material-icons">add</t>
+					<t id="removeGradientBtn" class="material-icons">remove</t>
+				</span>
+			</div>
+		</section>
+	</div>
 </body>
+
+<script type="text/javascript" src="./js/util.js"></script>
+<script type="text/javascript" src="./js/editor/init.js"></script>
+<script type="text/javascript" src="./js/editor/btnevents.js"></script>
+<script type="text/javascript" src="./js/editor/domevents.js"></script>
+<script type="text/javascript" src="./js/editor/presmode.js"></script>
+<script type="text/javascript" src="./js/editor/load.js"></script>
 
 </html>
