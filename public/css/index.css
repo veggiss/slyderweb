@@ -1,22 +1,19 @@
 /******************************************************************
-
-Stylesheet for editor.html
+Stylesheet for editor.html. 
 
 	Contents:
-/* Text contents */
-/* Layout */
-/* Smal skjerm */
+	/* Styling frontpage text backgrounds */
+	/* Layout */
+	/* Smal skjerm */
 /*******************************************************************/
 
-
-/* Text contents */
+/* Styling frontpage text backgrounds */
 
 .colored1 {
 	width: 100%;
 	background: olive;
 	color: white;
 }
-
 	
 .colored2 {
 	width: 100%;
@@ -39,6 +36,7 @@ Stylesheet for editor.html
 
 
 /* Layout */
+
 html, body, main, header {
 	width: 100%;
 	height: 100%;
@@ -50,11 +48,10 @@ header {
 	position: absolute;
 }
 
-
 main {
 	padding-top: 2.4em;
 }
 
 
-/* Smal skjerm */
+/* TODO Smal skjerm */
 /* maxwidth 400px*/

@@ -1,15 +1,40 @@
-const {Client} = require('pg');
+const pg = require('pg');
+const {Client} = pg;
+const {Pool} = pg;
 //connectionString = process.env.DATABASE_URL <- Allways upload to git and heroku with this
 const connectionString = process.env.DATABASE_URL;
+const connectionPort = process.env.PORT || 8080;
 const heroku = connectionString == process.env.DATABASE_URL;
 
 function newClient() {
     let client = new Client({
         connectionString: connectionString,
-        ssl:true
+        ssl: true,
     });
 
     return client;
+}
+
+function newPool() {
+    let pool = new Pool({
+        connectionString: connectionString,
+        ssl: true,
+        max: 3,
+        min: 0,
+        idleTimeoutMillis: 30 * 1000,
+        connectionTimeoutMillis: 2 * 1000
+    });
+
+    return pool;
+}
+
+function corsSettings(req, res, next) {
+    res.header('Access-Control-Allow-Origin', `http://localhost:${connectionPort}`);
+    res.header('Access-Control-Allow-Origin', `https://slyderweb.herokuapp.com:${connectionPort}`);
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+    res.header('Access-Control-Allow-Headers', 'content-type');
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
 }
 
 function noSymbols(...str) {
@@ -70,10 +95,25 @@ function print(...lines) {
     });
 }
 
+function userAuth(req, res, next) {
+    if (req.session.username) {
+        res.authenticated = true;
+        next();
+    } else {
+        res.authenticated = false;
+        res.statusMessage = 'User not logged in';
+        res.status(401).end();
+    }
+}
+
 module.exports = {
     noSymbols : noSymbols,
     isNotEmpty : isNotEmpty,
     print : print,
     newClient : newClient,
-    logEvent : logEvent
+    newPool : newPool,
+    logEvent : logEvent,
+    userAuth : userAuth,
+    connectionPort : connectionPort,
+    corsSettings : corsSettings
 }

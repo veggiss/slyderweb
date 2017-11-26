@@ -4,262 +4,362 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Slyderweb - editor</title>
-	<link rel="stylesheet" type="text/css" href="../public/css/lightStyle.css" />
-	<link rel="stylesheet" type="text/css" href="../public/css/editor.css" />
+	<link rel="stylesheet" type="text/css" href="./css/main.css" />
+	<link rel="stylesheet" type="text/css" href="./css/editor/grid.css">
+	<link rel="stylesheet" type="text/css" href="./css/editor/sidebar.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
-	<!-- dette hindrer zooming på smal skjerm: <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body class="hg">
-	<header class="hg-header centered">
+<header class="centered">
 		<nav>
 			<menuitem class="logo">
-			<a href="index.html">SlyderWeb</a>
+			<a href="/">SlyderWeb</a>
 			</menuitem>
-			<menuitem>
-			<a href="userprofile.html#presentations">Presentations</a>
-			</menuitem>
-			<menuitem>
-			<a href="editor.html">Editor</a>
-			</menuitem>
-			<menuitem>
-			<a href="userprofile.html">Settings</a>
-			</menuitem>
-			<menuitem>
 			<a href="">Sign in/out</a>
 			</menuitem>
 			<menuitem>
-			<a href="">Help</a>
+				<a href="userprofile#presentations">Presentations</a>
 			</menuitem>
-			<a href="">About</a>
+			<menuitem>
+			<a href="/editor">Editor</a>
+			</menuitem>
+			<menuitem>
+			<a href="userprofile">Settings</a>
+			</menuitem>
+			<menuitem>
+			<menuitem>
+			<a href="/help">Help</a>
+			</menuitem>
+			<a href="/about">About</a>
 			</menuitem>
 		</nav>
 	</header>
 
-	<main class="hg-main centered">
+	<div id="editGrid"></div>
 
-		<div id="ratioContainer1">
-			<div id="ratioContainer2">
-				<div id="editGrid">
-					<div class="content" name="text" style="font-size: 25px;">Title</div>
-					<div class="content" name="text" style="top: 120px">Some paragraph</div>
+	<div id="colorPicker">
+		Hue
+		<div name="hue">
+			<input type="range" min="0" max="300" value="150">
+		</div>
+		Light
+		<div name="light">
+			<input type="range" min="0" max="100" value="50">
+		</div>
+		Alpha
+		<div name="alpha">
+			<input type="range" min="-0.1" max="1" step="0.01" value="1">
+		</div>
+		Saturation
+		<div name="sat">
+			<input type="range" min="0" max="100" value="50">
+		</div>
+	</div>
+
+	<div id="shadowPicker">
+		Position X
+		<div name="cordX">
+			<input type="range" min="-50" max="50" value="5">
+		</div>
+		Position Y
+		<div name="cordY">
+			<input type="range" min="-50" max="50" value="5">
+		</div>
+		Feather
+		<div name="feather">
+			<input type="range" min="0" max="20" value="5">
+		</div>
+		<br>
+		<button id="removeShadowBtn">Remove</button>
+	</div>
+
+	<div id="textToolBar">
+		<ul>
+			<li id="toolbar_font" class="toolbar_dropdown">
+				<select>
+					<option value="Arial" style="font-family: 'Arial';">Arial</option>
+					<option value="Courier" style="font-family: 'Courier';">Courier</option>
+					<option value="Helvetica" style="font-family: 'Helvetica';">Helvetica</option>
+					<option value="Times" style="font-family: 'Times';">Times</option>
+					<option value="Verdana" style="font-family: 'Verdana';">Verdana</option>
+				</select>
+			</li>
+			<li id="toolbar_fontSize">
+				<select></select>
+			</li>
+			<li id="toolbar_bold">
+				<span>
+					<b>B</b>
+				</span>
+			</li>
+			<li id="toolbar_italic">
+				<span>
+					<i>I</i>
+				</span>
+			</li>
+			<li id="toolbar_underline">
+				<span style="text-decoration: underline;">U</span>
+			</li>
+			<li id="toolbar_shadow">
+				<span style="text-shadow: 2px 2px #bfbfbf;">S</span>
+			</li>
+			<li id="toolbar_txtColor">
+				<span style="color: #ff8787">C</span>
+			</li>
+			<li id="toolbar_hiliteColor">
+				<span>
+					<mark style="background-color: #ff8787">H</mark>
+				</span>
+			</li>
+			<li id="toolbar_bgColor">
+				<img src="http://www.free-icons-download.net/images/background-color-icon-4552.png">
+			</li>
+			<li id="toolbar_bulletList">
+				<img src="http://dryicons.com/uploads/icon/preview/7192/bulleted_list.png">
+			</li>
+			<li id="toolbar_numberList">
+				<img src="http://dryicons.com/uploads/icon/preview/7221/numbered_list.png">
+			</li>
+			<li id="toolbar_alignLeft">
+				<img src="http://downloadicons.net/sites/default/files/align-left-icon-4549.png">
+			</li>
+			<li id="toolbar_alignCenter">
+				<img src="http://downloadicons.net/sites/default/files/align-justify-icon-4548.png">
+			</li>
+			<li id="toolbar_alignRight">
+				<img src="http://downloadicons.net/sites/default/files/align-right-icon-4550.png">
+			</li>
+		</ul>
+	</div>
+
+	<div class="side-bar noselect">
+		<main>
+			<input id="toggle_page" type="checkbox">
+			<label for="toggle_page">Slyde</label>
+			<div id="expand_page">
+				<section>
+					<div>
+						<text>Title</text>
+						<input id="presNameInput" name="notes" placeholder="My slyde" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0">
+					</div>
+					<div id="newPresentationBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;" ">library_add</t><br>
+							<t>New</t>
+						</span>
+					</div>
+					<div id="presmodeBtn ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">play_arrow</t>
+							<br>
+							<t>Start</t>
+						</span>
+					</div>
+					<div id="previewmodeBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;" ">details</t><br>
+							<t>Preview</t>
+						</span>
+					</div>
+					<div id="savePageBtn ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">cloud_upload</t>
+							<br>
+							<t>Save</t>
+						</span>
+					</div>
+					<div id="mySlydesBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;" ">folder_shared</t><br>
+							<t>My slydes</t>
+						</span>
+					</div>
+					<div id="exportToFileBtn ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">archive</t>
+							<br>
+							<t>Export</t>
+						</span>
+					</div>
+					<div id="importBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;" ">unarchive</t><br>
+							<t>Import</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed; ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">delete</t>
+							<br>
+							<t>Delete</t>
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_elements" type="checkbox">
+			<label for="toggle_elements">Add</label>
+			<div id="expand_elements">
+				<section>
+					<div id="newTextBoxBtn">
+						<span name="btn">
+							<t style="font-size: 26px;font-family: Georgia;">T</t>
+							<br>
+							<t>Textbox</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">crop_original</t>
+							<br>
+							<t>Image</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">web_asset</t>
+							<br>
+							<t>Iframe</t>
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_tools" type="checkbox">
+			<label for="toggle_tools">Tools</label>
+			<div id="expand_tools">
+				<section>
+					<div style="cursor: not-allowed;">
+						<span>
+							<t>Scale</t>
+							<input id="scaleRange" name="range" type="range" min="1" max="10" value="5">
+						</span>
+					</div>
+					<div>
+						<span>
+							<t>Rotation</t>
+							<input name="range" type="range" min="1" max="100" value="50">
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span>
+							<t>Border</t>
+							<input name="range" type="range" min="1" max="100" value="50">
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_background" type="checkbox">
+			<label for="toggle_background">Styles</label>
+			<div id="expand_background">
+				<section>
+					<div id="changeBgBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">color_lens</t>
+							<br>
+							<t>Background</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">art_track</t>
+							<br>
+							<t>Templates</t>
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_notes" type="checkbox">
+			<label for="toggle_notes">Notes</label>
+			<div id="expand_notes">
+				<div>
+					<div id="notesTxt" name="notes" contenteditable="true"></div>
 				</div>
+			</div>
+		</main>
+	</div>
+
+	<div id="pageNav" class="page-nav noselect">
+		<section>
+			<div>
+				<span name="btn">
+					<t id="currentPageTxt" class="material-icons"></t>
+				</span>
+			</div>
+			<div id="loadprevBtn">
+				<span name="btn">
+					<t class="material-icons">keyboard_arrow_left</t>
+				</span>
+			</div>
+			<div id="loadnextBtn">
+				<span name="btn">
+					<t class="material-icons">keyboard_arrow_right</t>
+				</span>
+			</div>
+			<div id="newPageBtn">
+				<span name="btn">
+					<t class="material-icons">add</t>
+				</span>
+			</div>
+		</section>
+	</div>
+
+	<div id="mySlydesModal" class="modal">
+		<div class="modal-content noselect" style="width: 30%; min-width: 50px;">
+			<div class="material-icons" style="font-size: 35px; cursor: default; color: #3d3d3d">folder_shared</div>
+			<hr>
+			<div id="mySlydesContainer">
+				<div id="mySlydesContent"></div>
 			</div>
 		</div>
+	</div>
 
-		<button id="loadprevBtn" class="dark">
-			Prev </button>
-		<button id="savePageBtn" class="dark">Save page</button>
-		<span id='currentPageTxt' class="dark">Current page:</span>
-		<button id="presmodeBtn" class="dark">Preview page (F11)</button>
-		<button id="loadnextBtn" class="dark"> Next </button>
-
-		<section id="notesSection">
-			<h4>Presentation notes</h4>
-			<textarea id="notesTxt" placeholder="Enter notes here"></textarea>
-
-			<div id="colorPicker">
-				Hue
-				<div name="hue">
-					<input type="range" min="0" max="300" value="150">
-				</div>
-				Light
-				<div name="light">
-					<input type="range" min="0" max="100" value="50">
-				</div>
-				Alpha
-				<div name="alpha">
-					<input type="range" min="-0.1" max="1" step="0.01" value="1">
-				</div>
-				Saturation
-				<div name="sat">
-					<input type="range" min="0" max="100" value="50">
-				</div>
+	<div id="colorBgPanel" class="side-bar noselect bg-bar">
+		<section>
+			<div>
+				<span>
+					<t>Color</t>
+					<div class="bg-colors" id="bgColorDiv"></div>
+				</span>
 			</div>
-
-			<div id="shadowPicker">
-				Position X
-				<div name="cordX">
-					<input type="range" min="-50" max="50" value="5">
-				</div>
-				Position Y
-				<div name="cordY">
-					<input type="range" min="-50" max="50" value="5">
-				</div>
-				Feather
-				<div name="feather">
-					<input type="range" min="0" max="20" value="5">
-				</div>
-				<br>
-				<button id="removeShadowBtn">Remove</button>
+			<div>
+				<span>
+					<t>Rotation</t>
+					<input id="gradRotationRange" name="range" type="range" min="-180" max="180" value="0">
+				</span>
 			</div>
-
-			<div id="textToolBar">
-				<ul>
-					<li id="toolbar_font" class="toolbar_dropdown">
-						<select>
-							<option value="Arial" style="font-family: 'Arial';">Arial</option>
-							<option value="Courier" style="font-family: 'Courier';">Courier</option>
-							<option value="Helvetica" style="font-family: 'Helvetica';">Helvetica</option>
-							<option value="Times" style="font-family: 'Times';">Times</option>
-							<option value="Verdana" style="font-family: 'Verdana';">Verdana</option>
-						</select>
-					</li>
-					<li id="toolbar_fontSize">
-						<select></select>
-					</li>
-					<li id="toolbar_bold">
-						<span>
-							<b>B</b>
-						</span>
-					</li>
-					<li id="toolbar_italic">
-						<span>
-							<i>I</i>
-						</span>
-					</li>
-					<li id="toolbar_underline">
-						<span style="text-decoration: underline;">U</span>
-					</li>
-					<li id="toolbar_shadow">
-						<span style="text-shadow: 2px 2px #bfbfbf;">S</span>
-					</li>
-					<li id="toolbar_txtColor">
-						<span style="color: #ff8787">C</span>
-					</li>
-					<li id="toolbar_hiliteColor">
-						<span>
-							<mark style="background-color: #ff8787">H</mark>
-						</span>
-					</li>
-					<li id="toolbar_bgColor">
-						<img src="http://www.free-icons-download.net/images/background-color-icon-4552.png">
-					</li>
-					<li id="toolbar_bulletList">
-						<img src="http://dryicons.com/uploads/icon/preview/7192/bulleted_list.png">
-					</li>
-					<li id="toolbar_numberList">
-						<img src="http://dryicons.com/uploads/icon/preview/7221/numbered_list.png">
-					</li>
-					<li id="toolbar_alignLeft">
-						<img src="http://downloadicons.net/sites/default/files/align-left-icon-4549.png">
-					</li>
-					<li id="toolbar_alignCenter">
-						<img src="http://downloadicons.net/sites/default/files/align-justify-icon-4548.png">
-					</li>
-					<li id="toolbar_alignRight">
-						<img src="http://downloadicons.net/sites/default/files/align-right-icon-4550.png">
-					</li>
-				</ul>
+			<div style="margin-top: 15px; margin-bottom: -15px">
+				<span>
+					<t>Gradients</t>
+				</span>
 			</div>
-
+			<div id="gradientListDiv "></div>
+			<div>
+				<span>
+					<t id="addGradientBtn " class="material-icons ">add</t>
+					<t id="removeGradientBtn " class="material-icons ">remove</t>
+				</span>
+			</div>
 		</section>
-
-	</main>
-
-	<aside class="hg-left centered">
-
-		<h1>Actions</h1>
-		<hr>
-		<div class="flexContainer">
-			<div class="flexBox">
-				ELEMENTS
-				<br>
-				<ul class="hidden">
-					<li>Add
-						<button id="newTextBoxBtn" class="dark">txt</button>
-						<button class="dark">img</button>
-					</li>
-					<li>Move
-						<button class="dark">^</button>
-						<button class="dark">v</button>
-					</li>
-				</ul>
-
-
-			</div>
-			<hr>
-			<div class="flexBox2">
-				PRESENTATION
-				<br>
-				<button id="newPageBtn" class="dark">New page</button>
-				<button id="newPresbtn" class="dark">Duplicate page</button>
-				<button id="newPresbtn" class="dark">Delete current page</button>
-				<br> Page template
-				<select>
-					<option selected>Default</option>
-					<option>Columns</option>
-					<option>Titlepage</option>
-					<option>Image</option>
-				</select>
-				<button id="editTemplatesbtn" class="dark">Edit templates</button>
-			</div>
-			<hr>
-			<div class="flexBox2">
-				STYLING
-				<br> Text style
-				<select>
-					<option>Title</option>
-					<option>None</option>
-					<option>Header 1</option>
-					<option>Header 2</option>
-					<option>Header 3</option>
-					<option selected>Paragraph</option>
-					<option>Quote</option>
-				</select>
-				<br> Presentation style
-				<select>
-					<option selected>Default</option>
-					<option>Dark</option>
-					<option>Light</option>
-					<option>Formal</option>
-					<option>Moon</option>
-					<option>Warm</option>
-				</select>
-				<button id="editStylesbtn" class="dark">Edit styles</button>
-				<br> Background color
-				<select>
-					<option selected>Style default</option>
-					<option>Black</option>
-					<option>Red</option>
-					<option>Blue</option>
-				</select>
-				<button id="colorPickerbtn" class="dark">Color picker</button>
-			</div>
-			<hr>
-			<ul class="hidden">
-				<li>IMAGE</li>
-				<li>set size
-					<input type="checkbox" />Lock ratio</li>
-				<input placeholder="width" type="number" />
-				<input placeholder="height" type="number" />
-				<li>
-					<button class="dark">Crop</button>
-				</li>
-			</ul>
-		</div>
-	</aside>
-
-	<aside class="hg-right centered">
-
-		<h1>Slides</h1>
-		<button id="presmodeBtn" class="dark">Presentation mode (F5)</button>
-		<section id="slideView" class="centered">
-
-			<ul class="hidden">
-				<li>Slide 1</li>
-				<li>Slide 2</li>
-				<li>Slide 3</li>
-			</ul>
-			<button id="exportToFileBtn" class="dark">Export</button>
-			<input id="presNameInput" type="text" placeholder="Presentation name" style="width:5rem">
-			<button id="newPresbtn" class="dark">+ New presentation</button>
-		</section>
-
-	</aside>
-
-	<script type="text/javascript" src="../public/js/editor.js"></script>
-	<script type="text/javascript" src="../public/js/presmode.js"></script>
+	</div>
 </body>
+
+<script type="text/javascript " src="./js/util.js "></script>
+<script type="text/javascript " src="./js/editor/init.js "></script>
+<script type="text/javascript " src="./js/editor/btnevents.js "></script>
+<script type="text/javascript " src="./js/editor/domevents.js "></script>
+<script type="text/javascript " src="./js/editor/presmode.js "></script>
+<script type="text/javascript " src="./js/editor/load.js "></script>
 
 </html>

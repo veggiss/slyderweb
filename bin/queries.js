@@ -1,5 +1,3 @@
-const ut = require(appRoot + '/bin/util');
-
 // Returns user info
 function getUser(req, res, next) {
     let username = req.query.username;
@@ -25,10 +23,10 @@ function getUser(req, res, next) {
                         presentations: query.rows[0].presentations,
                         profileimg: query.rows[0].profileimg
                     }
-
-                    res.send(clientResponse);
                     res.statusMessage = 'User found';
-                    res.status(200).end();
+                    res.status(200);
+                    res.send(clientResponse);
+                    res.end();
                 } else {
                     // If query did not return a row
                     res.statusMessage = 'Could not find user';
@@ -67,6 +65,7 @@ function loginUser(req, res, next) {
             if (!err) {
                 if (query.rows.length > 0) {
                     if(query.rows[0].password === password) {
+                        req.session.username = username;
                         res.statusMessage = 'Login success';
                         res.status(200).end();
                         res.next = true;
@@ -88,7 +87,7 @@ function loginUser(req, res, next) {
             next();
         });
     } else {
-        res.statusMessage = 'Username contains no or illigal characters';
+        res.statusMessage = 'Username or password contains no or illigal characters';
         res.status(403).end();
     }
 }
@@ -111,6 +110,7 @@ function setLastlogin(req, res, next) {
                 res.statusMessage = 'There was a problem setting lastlogin';
                 res.status(500).end();
             }
+
             client.end();
             next();
         });
@@ -153,6 +153,7 @@ function newUser(req, res, next) {
 
                 res.err = err;
             }
+
             client.end();
             next();
         });
@@ -162,9 +163,193 @@ function newUser(req, res, next) {
     }
 }
 
+function updatePresentation(req, res, next) {
+    let author = req.session.username;
+
+    if (author) {
+        let presObject = req.body.presentation;
+        let uid = presObject.uid;
+        let name = presObject.name;
+        let bgColors = presObject.bgColors;
+        let originHeight = presObject.originHeight;
+        let body = presObject.body;
+
+        if(ut.isNotEmpty(uid.toString())) {
+            if (ut.isNotEmpty(body.toString(), author)) {
+                let client = ut.newClient();
+                let sql = 'UPDATE presentations SET body = $1, name = $2, bgcolors = $3, originheight = $4 WHERE author = $5 AND id = $6';
+                let params = [body, name, bgColors, originHeight, author, uid];
+
+                client.connect();
+
+                client.query(sql, params, (err, query) => {
+                    if (!err) {
+                        if (query.rowCount > 0) {
+                            res.statusMessage = `Presentation #${uid} saved`;
+                            res.status(200).end();
+                        } else {
+                            res.statusMessage = "Presentation does not exist, proceed to create new";
+                            res.status(200);
+                            res.next = true;
+                        }
+                    } else {
+                        res.err = err;
+                        res.statusMessage = 'There was a problem saving presentation';
+                        res.status(500).end();
+                    }
+
+                    client.end();
+                    next();
+                });
+            } else {
+                res.statusMessage = 'Presentation object malformed';
+                res.status(403).end();
+                next();
+            }
+        } else {
+            res.statusMessage = "Presentation does not exist, proceed to create new";
+            res.status(200);
+            res.next = true;
+            next();
+        }
+    } else {
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
+    }
+}
+
+function newPresentation(req, res, next) {
+    let presObject = req.body.presentation;
+    let author = req.session.username;
+    let name = ut.isNotEmpty(presObject.name) ? presObject.name : 'My presentation';
+    let bgColors = presObject.bgColors;
+    let originHeight = presObject.originHeight;
+    let body = presObject.body;
+
+    if(ut.isNotEmpty(author, body.toString())) {
+        let client = ut.newClient();
+        let sql = 'INSERT INTO presentations(author, name, bgcolors, originheight, body) VALUES($1, $2, $3, $4, $5) RETURNING id';
+        let params = [author, name, bgColors, originHeight, body];
+
+        client.connect();
+
+        client.query(sql, params, (err, query) => {
+            if (!err) {
+                if (query.rows.length > 0) {
+                    res.statusMessage = 'New presentation added';
+                    res.status(201);
+                    res.send({
+                        uid: query.rows[0].id,
+                        author: author,
+                        name: name
+                    });
+                    res.end();
+                } else {
+                    res.statusMessage = 'Query did not return id';
+                    res.status(409).end();
+                }
+            } else {
+                res.statusMessage = 'There was a problem creating new presentation';
+                res.status(500).end();
+                res.err = err;
+            }
+
+            client.end();
+            next();
+        });
+    } else {
+        res.statusMessage = 'Author or body is empty';
+        res.status(401).end();
+        next();
+    }
+}
+
+function getPresList(req, res, next) {
+    let username = req.session.username;
+
+    if (username) {
+        let client = ut.newClient();
+        let sql = 'SELECT name, id FROM presentations WHERE author = $1';
+        let params = [username];
+
+        client.connect();
+
+        client.query(sql, params, (err, query) => {
+            if (!err) {
+                res.statusMessage = 'Found some presentation';
+                res.status(200);
+                res.send(query.rows);
+                res.end();
+            } else {
+                res.statusMessage = 'There was a problem getting presentation list';
+                res.status(500).end();
+                res.err = err;
+                next();
+            }
+
+            client.end();
+        });
+    } else {
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
+    }
+}
+
+function getPresenation(req, res, next) {
+    let username = req.session.username;
+
+    if (username) {
+        let presName = req.query.name;
+
+        let client = ut.newClient();
+        let sql = 'SELECT * FROM presentations WHERE author = $1 AND name = $2';
+        let params = [username, presName];
+
+        client.connect();
+
+        client.query(sql, params, (err, query) => {
+            if (!err) {
+                if (query.rows.length > 0) {
+                    let presentation = {
+                        uid: query.rows[0].id,
+                        author: query.rows[0].author,
+                        name: query.rows[0].name,
+                        presmode: query.rows[0].presmode,
+                        bgColors: query.rows[0].bgcolors,
+                        originHeight: query.rows[0].originheight,
+                        body: query.rows[0].body
+                    }
+
+                    res.statusMessage = 'Found presentation';
+                    res.status(200);
+                    res.send(presentation);
+                    res.end();
+                } else {
+                    res.statusMessage = `Could not find presentation '${presName}'`;
+                    res.satus(404).end();
+                }
+            } else {
+                res.statusMessage = 'There was a problem getting presentation list';
+                res.status(500).end();
+                res.err = err;
+            }
+
+            client.end();
+            next();
+        });
+    } else {
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
+    }
+}
+
 module.exports = {
-    getUser : getUser,
-    loginUser : loginUser,
-    setLastlogin : setLastlogin,
-    newUser : newUser
+    getUser: getUser,
+    loginUser: loginUser,
+    setLastlogin: setLastlogin,
+    newUser: newUser,
+    updatePresentation: updatePresentation,
+    newPresentation: newPresentation,
+    getPresList: getPresList,
+    getPresenation: getPresenation
 }
