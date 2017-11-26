@@ -2,7 +2,7 @@ const pg = require('pg');
 const {Client} = pg;
 const {Pool} = pg;
 //connectionString = process.env.DATABASE_URL <- Allways upload to git and heroku with this
-const connectionString = process.env.PORT;
+const connectionString = process.env.DATABASE_URL;
 const connectionPort = process.env.PORT || 8080;
 const heroku = connectionString == process.env.DATABASE_URL;
 
