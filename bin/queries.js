@@ -302,6 +302,7 @@ function getPresenation(req, res, next) {
                     name: query.rows[0].name,
                     presmode: query.rows[0].presmode,
                     bgColors: query.rows[0].bgcolors,
+                    originHeight: query.rows[0].originheight,
                     body: query.rows[0].body
                 }
 

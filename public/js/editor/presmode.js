@@ -56,6 +56,7 @@ let fsEvents = {
 			});
 		} else {
 			editGrid.style.left = "0px";
+			editGrid.style.top = "0px";
 			editGrid.style.zoom = (screen.height / parseInt(editGrid.style.height)) * 100 + "%";
 		}
 
