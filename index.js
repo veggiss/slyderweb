@@ -24,7 +24,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     //Secure should only be true with https connections (e.g heroku)
-    cookie: {maxAge: 60 * 60 * 1000, secure: true}
+    cookie: {maxAge: 60 * 60 * 1000, secure: false}
 }));
 
 // Get
