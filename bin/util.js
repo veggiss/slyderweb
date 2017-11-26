@@ -30,6 +30,7 @@ function newPool() {
 
 function corsSettings(req, res, next) {
     res.header('Access-Control-Allow-Origin', `http://localhost:${connectionPort}`);
+    res.header('Access-Control-Allow-Origin', `https://slyderweb.herokuapp.com:${connectionPort}`);
     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
     res.header('Access-Control-Allow-Headers', 'content-type');
     res.header('Access-Control-Allow-Credentials', true);
