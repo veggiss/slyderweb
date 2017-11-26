@@ -308,17 +308,20 @@ let init = {
 
 	loadPresList() {
 		Promise.resolve(util.getPresList()).then((res) => {
-			mySlydesContent.innerHTML = "";
-			res.forEach(item => {
-				let optionDom = document.createElement('section');
-				optionDom.classList.add('mySlydesContent')
-				optionDom.innerHTML = "&emsp;Title: " + item.name;
-				mySlydesContent.appendChild(optionDom);
-				optionDom.addEventListener('click', e => {
-					btnEvent.loadSelectedPres(item.name, item.id);
-					mySlydesModal.style.display = 'none';
+			if (res) {
+				mySlydesContent.innerHTML = "";
+				res.forEach(item => {
+					let optionDom = document.createElement('section');
+					optionDom.classList.add('mySlydesContent')
+					optionDom.innerHTML = "&emsp;Title: " + item.name;
+					mySlydesContent.appendChild(optionDom);
+					optionDom.addEventListener('click', e => {
+						btnEvent.loadSelectedPres(item.name, item.id);
+						mySlydesModal.style.display = 'none';
+					});
+					mySlydesModal.style.display = 'inline-block';
 				});
-			})
+			}
 		});
 	},
 

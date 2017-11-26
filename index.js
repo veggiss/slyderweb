@@ -24,7 +24,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     //Secure should only be true with https connections (e.g heroku)
-    cookie: {maxAge: 60 * 60 * 1000, secure: false}
+    cookie: {maxAge: 60 * 60 * 1000, secure: true}
 }));
 
 // Get
@@ -34,11 +34,7 @@ app.get('/user/presentation', ut.userAuth, db.getPresenation, ut.logEvent);
 
 // Page navigation
 app.get('/editor', (req, res) => {
-    if (req.session.username) {
-        res.sendFile(appRoot + '/view/editor.html');
-    } else {
-        res.redirect('/');
-    }
+    res.sendFile(appRoot + '/view/editor.html');
 });
 app.get('/', (req, res) => {
     res.sendFile(appRoot + '/view/index.html');

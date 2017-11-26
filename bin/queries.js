@@ -164,51 +164,57 @@ function newUser(req, res, next) {
 }
 
 function updatePresentation(req, res, next) {
-    let presObject = req.body.presentation;
-    let uid = presObject.uid;
     let author = req.session.username;
-    let name = presObject.name;
-    let bgColors = presObject.bgColors;
-    let originHeight = presObject.originHeight;
-    let body = presObject.body;
 
-    if(ut.isNotEmpty(uid.toString())) {
-        if (ut.isNotEmpty(body.toString(), author)) {
-            let client = ut.newClient();
-            let sql = 'UPDATE presentations SET body = $1, name = $2, bgcolors = $3, originheight = $4 WHERE author = $5 AND id = $6';
-            let params = [body, name, bgColors, originHeight, author, uid];
+    if (author) {
+        let presObject = req.body.presentation;
+        let uid = presObject.uid;
+        let name = presObject.name;
+        let bgColors = presObject.bgColors;
+        let originHeight = presObject.originHeight;
+        let body = presObject.body;
 
-            client.connect();
+        if(ut.isNotEmpty(uid.toString())) {
+            if (ut.isNotEmpty(body.toString(), author)) {
+                let client = ut.newClient();
+                let sql = 'UPDATE presentations SET body = $1, name = $2, bgcolors = $3, originheight = $4 WHERE author = $5 AND id = $6';
+                let params = [body, name, bgColors, originHeight, author, uid];
 
-            client.query(sql, params, (err, query) => {
-                if (!err) {
-                    if (query.rowCount > 0) {
-                        res.statusMessage = `Presentation #${uid} saved`;
-                        res.status(200).end();
+                client.connect();
+
+                client.query(sql, params, (err, query) => {
+                    if (!err) {
+                        if (query.rowCount > 0) {
+                            res.statusMessage = `Presentation #${uid} saved`;
+                            res.status(200).end();
+                        } else {
+                            res.statusMessage = "Presentation does not exist, proceed to create new";
+                            res.status(200);
+                            res.next = true;
+                        }
                     } else {
-                        res.statusMessage = "Presentation does not exist, proceed to create new";
-                        res.status(200);
-                        res.next = true;
+                        res.err = err;
+                        res.statusMessage = 'There was a problem saving presentation';
+                        res.status(500).end();
                     }
-                } else {
-                    res.err = err;
-                    res.statusMessage = 'There was a problem saving presentation';
-                    res.status(500).end();
-                }
 
-                client.end();
+                    client.end();
+                    next();
+                });
+            } else {
+                res.statusMessage = 'Presentation object malformed';
+                res.status(403).end();
                 next();
-            });
+            }
         } else {
-            res.statusMessage = 'Presentation object malformed';
-            res.status(403).end();
+            res.statusMessage = "Presentation does not exist, proceed to create new";
+            res.status(200);
+            res.next = true;
             next();
         }
     } else {
-        res.statusMessage = "Presentation does not exist, proceed to create new";
-        res.status(200);
-        res.next = true;
-        next();
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
     }
 }
 
@@ -253,76 +259,88 @@ function newPresentation(req, res, next) {
         });
     } else {
         res.statusMessage = 'Author or body is empty';
-        res.status(403).end();
+        res.status(401).end();
         next();
     }
 }
 
 function getPresList(req, res, next) {
     let username = req.session.username;
-    let client = ut.newClient();
-    let sql = 'SELECT name, id FROM presentations WHERE author = $1';
-    let params = [username];
 
-    client.connect();
+    if (username) {
+        let client = ut.newClient();
+        let sql = 'SELECT name, id FROM presentations WHERE author = $1';
+        let params = [username];
 
-    client.query(sql, params, (err, query) => {
-        if (!err) {
-            res.statusMessage = 'Found some presentation';
-            res.status(200);
-            res.send(query.rows);
-            res.end();
-        } else {
-            res.statusMessage = 'There was a problem getting presentation list';
-            res.status(500).end();
-            res.err = err;
-            next();
-        }
+        client.connect();
 
-        client.end();
-    });
+        client.query(sql, params, (err, query) => {
+            if (!err) {
+                res.statusMessage = 'Found some presentation';
+                res.status(200);
+                res.send(query.rows);
+                res.end();
+            } else {
+                res.statusMessage = 'There was a problem getting presentation list';
+                res.status(500).end();
+                res.err = err;
+                next();
+            }
+
+            client.end();
+        });
+    } else {
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
+    }
 }
 
 function getPresenation(req, res, next) {
     let username = req.session.username;
-    let presName = req.query.name;
 
-    let client = ut.newClient();
-    let sql = 'SELECT * FROM presentations WHERE author = $1 AND name = $2';
-    let params = [username, presName];
+    if (username) {
+        let presName = req.query.name;
 
-    client.connect();
+        let client = ut.newClient();
+        let sql = 'SELECT * FROM presentations WHERE author = $1 AND name = $2';
+        let params = [username, presName];
 
-    client.query(sql, params, (err, query) => {
-        if (!err) {
-            if (query.rows.length > 0) {
-                let presentation = {
-                    uid: query.rows[0].id,
-                    author: query.rows[0].author,
-                    name: query.rows[0].name,
-                    presmode: query.rows[0].presmode,
-                    bgColors: query.rows[0].bgcolors,
-                    originHeight: query.rows[0].originheight,
-                    body: query.rows[0].body
+        client.connect();
+
+        client.query(sql, params, (err, query) => {
+            if (!err) {
+                if (query.rows.length > 0) {
+                    let presentation = {
+                        uid: query.rows[0].id,
+                        author: query.rows[0].author,
+                        name: query.rows[0].name,
+                        presmode: query.rows[0].presmode,
+                        bgColors: query.rows[0].bgcolors,
+                        originHeight: query.rows[0].originheight,
+                        body: query.rows[0].body
+                    }
+
+                    res.statusMessage = 'Found presentation';
+                    res.status(200);
+                    res.send(presentation);
+                    res.end();
+                } else {
+                    res.statusMessage = `Could not find presentation '${presName}'`;
+                    res.satus(404).end();
                 }
-
-                res.statusMessage = 'Found presentation';
-                res.status(200);
-                res.send(presentation);
-                res.end();
             } else {
-                res.statusMessage = `Could not find presentation '${presName}'`;
-                res.satus(404).end();
+                res.statusMessage = 'There was a problem getting presentation list';
+                res.status(500).end();
+                res.err = err;
             }
-        } else {
-            res.statusMessage = 'There was a problem getting presentation list';
-            res.status(500).end();
-            res.err = err;
-        }
 
-        client.end();
-        next();
-    });
+            client.end();
+            next();
+        });
+    } else {
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
+    }
 }
 
 module.exports = {

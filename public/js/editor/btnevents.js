@@ -43,7 +43,6 @@ let btnEvent = {
 
 	openMySlydes: function() {
 		init.loadPresList();
-		mySlydesModal.style.display = 'inline-block';
 	},
 
 	loadSelectedPres: function(name, uid) {
@@ -84,7 +83,11 @@ let btnEvent = {
 		fetch(util.newRequest('POST', '/user/presentation', {
 			presentation: presentation
 		})).then(res => {
-			return res.json();
+			if (res.status == 401) {
+				alert('You need to be logged in to do that!');
+			} else {
+				return res.json();
+			}
 		}).then(res => {
 			if (res.uid) {
 				presentation.uid = res.uid;

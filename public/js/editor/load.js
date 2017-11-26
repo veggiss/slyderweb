@@ -46,7 +46,6 @@ let presmodeBtn 			= document.getElementById('presmodeBtn');
 let previewmodeBtn 			= document.getElementById('previewmodeBtn');
 //Various vars
 let fileDialog 				= document.createElement('input');
-let presList 				= Promise.resolve(util.getPresList());
 let editing, presmode, pressedDelKey = false;
 let originX, originY, gradRotation   = 0;
 //Presentation object

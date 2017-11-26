@@ -36,7 +36,11 @@ let util = {
 
 	getPresList: function() {
 		let list = fetch(util.newRequest('GET', '/user/preslist', {})).then(res => {
-		    return res.json();
+			if (res.status == 401) {
+				alert('You need to be logged in to do that!');
+			} else {
+				return res.json();
+			}
 		}).then(res => {
 			return res;
 		}).catch(err => {
