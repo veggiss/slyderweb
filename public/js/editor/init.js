@@ -371,9 +371,12 @@ let init = {
 	transfromScale: function() {
 		let max = Math.max(presentation.originHeight, screen.height);
 		let min = Math.min(presentation.originHeight, screen.height);
-		console.log(max, min);
-		let scale = min / max;
-		console.log(scale);
+		let scale;
+		if (screen.height < presentation.originHeight) {
+			scale = min / max;
+		} else {
+			scale = max / min;
+		}
 		editGrid.childNodes.forEach(item => {
 			item.style.transform = `scale(${scale}`;
 			item.style.transformOrigin = '0 0';
