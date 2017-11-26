@@ -1,6 +1,6 @@
 //Editor related
 let editGrid = document.getElementById('editGrid');
-let ratioContainer1 = document.getElementById('ratioContainer1');
+//let ratioContainer1 = document.getElementById('ratioContainer1');
 let savePageBtn = document.getElementById('savePageBtn');
 let loadprevBtn = document.getElementById('loadprevBtn');
 let loadnextBtn = document.getElementById('loadnextBtn');
@@ -560,6 +560,8 @@ init.loadToolbar();
 /*******************  */
 /* SILJES KODE START */
 
+
+
 // global vars
 let demotextbox;
 
@@ -591,7 +593,7 @@ else {
 
 
 // lag demotekstbox
-lagTextBox();
+/*lagTextBox();
 
 function lagTextBox() {
 	domEvent.removeSelected();
@@ -620,7 +622,7 @@ function lagTextBox() {
 // RESIZING ELEMENTS UPON WINDOW RESIZE -----------------------------------------
 /* hacky stuff */
 // original editgrid size
-let editGridHeight = parseFloat(ratioContainer1.offsetHeight);
+/*let editGridHeight = parseFloat(ratioContainer1.offsetHeight);
 let editGridWidth = parseFloat(ratioContainer1.offsetWidth);
 const OriginalEditGridHeight = parseFloat(ratioContainer1.offsetHeight);
 const OriginalEditGridWidth = parseFloat(ratioContainer1.offsetWidth);
@@ -709,7 +711,7 @@ window.onresize = function () {
 		/*let widthFraction = width/editGridWidth;
 		console.log("egw: " + editGridWidth);
 		console.log("wf: " + widthFraction);*/
-		width = width * fractionOfOriginal;
+		/*width = width * fractionOfOriginal;
 		console.log("w2: " + width);
 		imgArray[i].style.width = `${width}px`;
 		
@@ -723,4 +725,4 @@ window.onresize = function () {
 	halfHeight = editGridHeight/2;
 	halfWidth = editGridWidth/2;
 	
-}
+}*/
