@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
 	<meta charset="utf-8" />
 	<title>Slyderweb - editor</title>
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 	<link rel="stylesheet" type="text/css" href="./css/editor/sidebar.css">
-  	<link rel="stylesheet" type="text/css" href="./css/editor/editor.css">
-  	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" type="text/css" href="./css/editor/editor.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 </head>
 
 <body>
 	<header class="centered">
-			<nav>
-				<menuitem class="logo">
-				<a href="/">SlyderWeb</a>
-				</menuitem>
-				<a href="">Sign in/out</a>
-				</menuitem>
-				<menuitem>
-					<a href="userprofile#presentations">Presentations</a>
-				</menuitem>
-				<menuitem>
-				<a href="/editor">Editor</a>
-				</menuitem>
-				<menuitem>
-				<a href="userprofile">Settings</a>
-				</menuitem>
-				<menuitem>
-				<menuitem>
-				<a href="/help">Help</a>
-				</menuitem>
-				<a href="/about">About</a>
-				</menuitem>
-			</nav>
-		</header>
+		<nav>
+			<menuitem class="logo">
+			<a href="/">SlyderWeb</a>
+			</menuitem>
+			<a href="">Sign in/out</a>
+			</menuitem>
+			<menuitem>
+			<a href="userprofile#presentations">Presentations</a>
+			</menuitem>
+			<menuitem>
+			<a href="/editor">Editor</a>
+			</menuitem>
+			<menuitem>
+			<a href="userprofile">Settings</a>
+			</menuitem>
+			<menuitem>
+			<menuitem>
+			<a href="/help">Help</a>
+			</menuitem>
+			<a href="/about">About</a>
+			</menuitem>
+		</nav>
+	</header>
 
 	<div id="editGrid"></div>
 
@@ -89,10 +91,14 @@
 				<select></select>
 			</li>
 			<li id="toolbar_bold">
-				<span><b>B</b></span>
+				<span>
+					<b>B</b>
+				</span>
 			</li>
 			<li id="toolbar_italic">
-				<span><i>I</i></span>
+				<span>
+					<i>I</i>
+				</span>
 			</li>
 			<li id="toolbar_underline">
 				<span style="text-decoration: underline;">U</span>
@@ -104,7 +110,9 @@
 				<span style="color: #ff8787">C</span>
 			</li>
 			<li id="toolbar_hiliteColor">
-				<span><mark style="background-color: #ff8787">H</mark></span>
+				<span>
+					<mark style="background-color: #ff8787">H</mark>
+				</span>
 			</li>
 			<li id="toolbar_bgColor">
 				<img src="http://www.free-icons-download.net/images/background-color-icon-4552.png">
@@ -139,139 +147,148 @@
 					</div>
 					<div id="newPresentationBtn">
 						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">library_add</t><br>
+							<t class="material-icons" style="font-size: 26px;" ">library_add</t><br>
 							<t>New</t>
 						</span>
 					</div>
-					<div id="presmodeBtn">
-						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">play_arrow</t><br>
+					<div id="presmodeBtn ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">play_arrow</t>
+							<br>
 							<t>Start</t>
 						</span>
 					</div>
 					<div id="previewmodeBtn">
 						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">details</t><br>
+							<t class="material-icons" style="font-size: 26px;" ">details</t><br>
 							<t>Preview</t>
 						</span>
 					</div>
-					<div id="savePageBtn">
-						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">cloud_upload</t><br>
+					<div id="savePageBtn ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">cloud_upload</t>
+							<br>
 							<t>Save</t>
 						</span>
 					</div>
 					<div id="mySlydesBtn">
 						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">folder_shared</t><br>
+							<t class="material-icons" style="font-size: 26px;" ">folder_shared</t><br>
 							<t>My slydes</t>
 						</span>
 					</div>
-					<div id="exportToFileBtn">
-						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">archive</t><br>
+					<div id="exportToFileBtn ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">archive</t>
+							<br>
 							<t>Export</t>
 						</span>
 					</div>
 					<div id="importBtn">
 						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">unarchive</t><br>
+							<t class="material-icons" style="font-size: 26px;" ">unarchive</t><br>
 							<t>Import</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed; ">
+						<span name="btn ">
+							<t class="material-icons " style="font-size: 26px; "">delete</t>
+							<br>
+							<t>Delete</t>
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_elements" type="checkbox">
+			<label for="toggle_elements">Add</label>
+			<div id="expand_elements">
+				<section>
+					<div id="newTextBoxBtn">
+						<span name="btn">
+							<t style="font-size: 26px;font-family: Georgia;">T</t>
+							<br>
+							<t>Textbox</t>
 						</span>
 					</div>
 					<div style="cursor: not-allowed;">
 						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;"">delete</t><br>
-							<t>Delete</t>
+							<t class="material-icons" style="font-size: 26px;">crop_original</t>
+							<br>
+							<t>Image</t>
 						</span>
 					</div>
-			    </section>
-		  	</div>
-		</main>
-
-		<main>
-		  <input id="toggle_elements" type="checkbox">
-		  <label for="toggle_elements">Add</label>
-		  <div id="expand_elements">
-		    <section>
-				<div id="newTextBoxBtn">
-					<span name="btn">
-						<t style="font-size: 26px;font-family: Georgia;">T</t><br>
-						<t>Textbox</t>
-					</span>
-				</div>
-				<div style="cursor: not-allowed;">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;">crop_original</t><br>
-						<t>Image</t>
-					</span>
-				</div>
-				<div style="cursor: not-allowed;">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;">web_asset</t><br>
-						<t>Iframe</t>
-					</span>
-				</div>
-		    </section>
-		  </div>
-		</main>
-
-		<main>
-		  <input id="toggle_tools" type="checkbox">
-		  <label for="toggle_tools">Tools</label>
-		  <div id="expand_tools">
-		    <section>
-				<div style="cursor: not-allowed;">
-					<span>
-						<t>Scale</t>
-						<input id="scaleRange" name="range" type="range" min="-10" max="10" value="1" step="0.1">
-					</span>
-				</div>
-				<div>
-					<span>
-						<t>Rotation</t>
-						<input id="rotationRange" name="range" type="range" min="-180" max="180" value="0">
-					</span>
-				</div>
-				<div style="cursor: not-allowed;">
-					<span>
-						<t>Border</t>
-						<input name="range" type="range" min="1" max="100" value="50">
-					</span>
-				</div>
-		    </section>
-		  </div>
-		</main>
-
-		<main>
-		  <input id="toggle_background" type="checkbox">
-		  <label for="toggle_background">Styles</label>
-		  <div id="expand_background">
-		    <section>
-				<div id="changeBgBtn">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;">color_lens</t><br>
-						<t>Background</t>
-					</span>
-				</div>
-				<div style="cursor: not-allowed;">
-					<span name="btn">
-						<t class="material-icons" style="font-size: 26px;">art_track</t><br>
-						<t>Templates</t>
-					</span>
-				</div>
-		    </section>
-		  </div>
-		</main>
-
-		<main>
-		  <input id="toggle_notes" type="checkbox">
-		  <label for="toggle_notes">Notes</label>
-		  <div id="expand_notes">
-			<div>
-				<div id="notesTxt" name="notes" contenteditable="true"></div>
+					<div style="cursor: not-allowed;">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">web_asset</t>
+							<br>
+							<t>Iframe</t>
+						</span>
+					</div>
+				</section>
 			</div>
-		  </div>
+		</main>
+
+		<main>
+			<input id="toggle_tools" type="checkbox">
+			<label for="toggle_tools">Tools</label>
+			<div id="expand_tools">
+				<section>
+					<div style="cursor: not-allowed;">
+						<span>
+							<t>Scale</t>
+							<input id="scaleRange" name="range" type="range" min="-10" max="10" value="1" step="0.1">
+						</span>
+					</div>
+					<div>
+						<span>
+							<t>Rotation</t>
+							<input id="rotationRange" name="range" type="range" min="-180" max="180" value="0">
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span>
+							<t>Border</t>
+							<input name="range" type="range" min="1" max="100" value="50">
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_background" type="checkbox">
+			<label for="toggle_background">Styles</label>
+			<div id="expand_background">
+				<section>
+					<div id="changeBgBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">color_lens</t>
+							<br>
+							<t>Background</t>
+						</span>
+					</div>
+					<div style="cursor: not-allowed;">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">art_track</t>
+							<br>
+							<t>Templates</t>
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_notes" type="checkbox">
+			<label for="toggle_notes">Notes</label>
+			<div id="expand_notes">
+				<div>
+					<div id="notesTxt" name="notes" contenteditable="true"></div>
+				</div>
+			</div>
 		</main>
 	</div>
 
@@ -301,12 +318,13 @@
 	</div>
 
 	<div id="mySlydesModal" class="modal">
-	  <div class="modal-content noselect" style="width: 30%; min-width: 50px;">
-	    <div class="material-icons" style="font-size: 35px; cursor: default; color: #3d3d3d">folder_shared</div><hr>
-	    <div id="mySlydesContainer">
-	    	<div id="mySlydesContent"></div>
-	    </div>
-	  </div>
+		<div class="modal-content noselect" style="width: 30%; min-width: 50px;">
+			<div class="material-icons" style="font-size: 35px; cursor: default; color: #3d3d3d">folder_shared</div>
+			<hr>
+			<div id="mySlydesContainer">
+				<div id="mySlydesContent"></div>
+			</div>
+		</div>
 	</div>
 
 	<div id="colorBgPanel" class="side-bar noselect bg-bar">
@@ -344,4 +362,5 @@
 <script type="text/javascript" src="./js/editor/domevents.js"></script>
 <script type="text/javascript" src="./js/editor/presmode.js"></script>
 <script type="text/javascript" src="./js/editor/load.js"></script>
+
 </html>
