@@ -31,10 +31,9 @@ let fsEvents = {
 
 	lockGrid: function(page, browserType) {
 		domEvent.removeSelected();
-
 		lastPage = currentPage;
 		currentPage = page;
-		init.loadContent(currentPage);
+		init.loadContent();
 
 		fsEvents.lockCursor();
 
@@ -56,7 +55,6 @@ let fsEvents = {
 			editGrid.style.top = "0px";
 			editGrid.style.zoom = (screen.height / editGrid.offsetHeight) * 100 +"%";
 		}
-
 		presmode = true;
 	},
 

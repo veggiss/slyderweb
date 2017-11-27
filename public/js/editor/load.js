@@ -48,13 +48,13 @@ let presmodeBtn 			= document.getElementById('presmodeBtn');
 let previewmodeBtn 			= document.getElementById('previewmodeBtn');
 //Various vars
 let fileDialog 				= document.createElement('input');
-let editing, presmode, pressedDelKey = false;
 let originX, originY, gradRotation   = 0;
+let editing, presmode, pressedDelKey, transformed = false;
 //Presentation object
 let currentPage 			= 1;
 let presentation 			= init.newPresObject();
 //To be defined later
-let selected, copySelected, content, presLength, lastSelected, lastPage, originTop, originLeft;
+let selected, copySelected, scale, content, presLength, lastSelected, lastPage, originTop, originLeft;
 //Button events
 savePageBtn.onclick 		= btnEvent.saveCurrentPage;
 newPresentationBtn.onclick 	= btnEvent.newPresentation;

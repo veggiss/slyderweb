@@ -91,17 +91,6 @@ let init = {
 		});
 	},
 
-	getTransform(element) {
-		let scale = element.style.transform.split('scale(')[1];
-		scale = scale.split(')')[0];
-		let rotate = element.style.transform.split('rotate(')[1];
-		rotate = rotate.split(')')[0];
-		return {
-			scale: parseFloat(scale),
-			rotate: parseFloat(rotate)
-		}
-	},
-
 	mouseEvent: function(e) {
 		if ((e.target === editGrid || e.target === document.documentElement) && selected != undefined) {
 			domEvent.removeSelected();
@@ -333,7 +322,10 @@ let init = {
 		presLength = Object.keys(presentation.body).length;
 		currentPageTxt.innerHTML = `filter_${currentPage}filter_${presLength}`;
 		domEvent.setBgColor();
-		init.transformScale();
+
+		if (!transformed) {
+			init.transformScale();
+		}
 
 		for (let element of content) {
 			let parent = domEvent.getParent(editGrid, element);
@@ -412,10 +404,11 @@ let init = {
 		});
 	},
 
+	//Scales content to fit clients current window compared to last saved window height (basic scale matrix)
+	//This can only be run once, or everytime if nothing has been done to any elements (when elements still have scale ratio from previous save)
 	transformScale: function() {
 		let max = Math.max(presentation.originHeight, screen.height);
 		let min = Math.min(presentation.originHeight, screen.height);
-		let scale;
 
 		if (screen.height < presentation.originHeight) {
 			scale = min / max;
@@ -423,13 +416,28 @@ let init = {
 			scale = max / min;
 		}
 
+		console.log('scale: ' + scale);
+
 		editGrid.childNodes.forEach(item => {
 			let trans = init.getTransform(item);
+			console.log('transscale: ' + trans.scale);
+			console.log('combined: ' + scale * trans.scale);
 			item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
 			item.style.transformOrigin = '0 0';
-			item.style.top = (parseInt(item.style.top) * scale) + 'px';
-			item.style.left = (parseInt(item.style.left) * scale) + 'px';
+			item.style.top = (item.offsetTop * scale) + 'px';
+			item.style.left = (item.offsetLeft * scale) + 'px';
 		});
+	},
+
+	getTransform(element) {
+		let scale = element.style.transform.split('scale(')[1];
+		scale = scale.split(')')[0];
+		let rotate = element.style.transform.split('rotate(')[1];
+		rotate = rotate.split(')')[0];
+		return {
+			scale: parseFloat(scale),
+			rotate: parseFloat(rotate)
+		}
 	},
 
 	newPresObject: function() {
