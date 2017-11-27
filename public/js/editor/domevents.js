@@ -35,6 +35,11 @@ let domEvent = {
 			colorPicker.style.top = (e.clientY - 220) + "px";
 			colorPicker.style.left = (e.clientX) + "px";
 			colorPicker.style.display = "inline-block";
+
+			if(colorPicker.offsetTop < 0) {
+				colorPicker.style.top = 0;
+			}
+
 		} else {
 			colorPicker.style.display = "none";
 			shadowPicker.style.display = "none";
@@ -51,6 +56,11 @@ let domEvent = {
 			shadowPicker.style.top = colorPicker.style.top;
 			shadowPicker.style.left = (left + parseInt(colorPicker.offsetWidth) + 2) + "px";
 			shadowPicker.style.display = "inline-block";
+
+			if(colorPicker.offsetTop < 0) {
+				colorPicker.style.top = 0;
+				shadowPicker.style.top = 0;
+			}
 		} else {
 			colorPicker.style.display = "none";
 			shadowPicker.style.display = "none";
@@ -58,12 +68,16 @@ let domEvent = {
 	},
 
 	setToolbarPos: function(element) {
-		let top = parseInt(element.style.top);
-		let left = parseInt(element.style.left);
+		let top = element.offsetTop;
+		let left = element.offsetLeft;
 		let offsetTop = parseInt(editGrid.offsetTop);
 		let offsetLeft = parseInt(editGrid.offsetLeft);
 		textToolBar.style.top = (top + offsetTop - 50) + "px";
 		textToolBar.style.left = (left + offsetLeft) + "px";
+
+		if ((textToolBar.offsetLeft + textToolBar.offsetWidth) > window.innerWidth) {
+			textToolBar.style.left = textToolBar.offsetLeft - ((textToolBar.offsetLeft + textToolBar.offsetWidth) - window.innerWidth) + "px";
+		}
 	},
 
 	checkClickedToolbar: function() {

@@ -146,6 +146,20 @@ let init = {
 					mySlydesModal.style.display = 'none';
 				} else if (colorBgPanel.style.display != 'none') {
 					colorBgPanel.style.display = 'none';
+				}//ctrl 17 c 67 - v 86
+			} else if (e.ctrlKey && key == 67) {
+				if (selected != undefined) {
+					copySelected = selected.cloneNode(true);
+				}
+			} else if (e.ctrlKey && key == 86) {
+				if (copySelected != undefined) {
+					let newCopy = copySelected.cloneNode(true);
+					newCopy.style.top = (editGrid.offsetTop / 2) + 'px';
+					newCopy.style.left = (editGrid.offsetLeft / 2) + 'px';
+					init.addDefaultEvents(newCopy);
+					init.addEventsText(newCopy);
+					editGrid.appendChild(newCopy);
+					domEvent.setSelected(newCopy);
 				}
 			}
 		} else if (presmode) {

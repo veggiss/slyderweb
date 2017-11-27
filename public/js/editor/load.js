@@ -54,7 +54,7 @@ let originX, originY, gradRotation   = 0;
 let currentPage 			= 1;
 let presentation 			= init.newPresObject();
 //To be defined later
-let selected, content, presLength, lastSelected, lastPage, originTop, originLeft;
+let selected, copySelected, content, presLength, lastSelected, lastPage, originTop, originLeft;
 //Button events
 savePageBtn.onclick 		= btnEvent.saveCurrentPage;
 newPresentationBtn.onclick 	= btnEvent.newPresentation;
