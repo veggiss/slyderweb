@@ -29,7 +29,6 @@ let fsEvents = {
 		fsEvents.lockGrid(page, browserType);
 	},
 
-	//Issue #4 Firefox not scaling content properly
 	lockGrid: function(page, browserType) {
 		domEvent.removeSelected();
 
@@ -44,22 +43,19 @@ let fsEvents = {
 		//Since firefox is hipster, it needs a special transformation for scaling
 		if (browserType === 'moz') {
 			let scale = screen.height / parseInt(editGrid.style.height);
-			editGrid.style.transform = `scale(${scale}`;
-			editGrid.style.transformOrigin = '0 0';
-			editGrid.style.top = (parseInt(editGrid.style.top) * scale) + 'px';
-			editGrid.style.left = (parseInt(editGrid.style.left) * scale) + 'px';
 			editGrid.childNodes.forEach(item => {
-				item.style.transform = editGrid.style.transform;
-				item.style.transformOrigin = '0 0';
-				item.style.top = (parseInt(item.style.top) * scale) + 'px';
-				item.style.left = (parseInt(item.style.left) * scale) + 'px';
+				/*let trans = init.getTransform(item);
+				let itemScale = screen.height / parseInt(item.style.height);
+				item.style.transform = `scale(${scale}) rotate(${trans.rotate}deg)`;
+				item.style.transformOrigin = '0 0';*/
+				/*item.style.top = ((item.offsetTop * scale)) + 'px';
+				item.style.left = ((item.offsetLeft * scale) (item.offsetTop/2)) + 'px';*/
 			});
 		} else {
 			editGrid.style.left = "0px";
 			editGrid.style.top = "0px";
-			editGrid.style.zoom = (screen.height / parseInt(editGrid.style.height)) * 100 + "%";
+			editGrid.style.zoom = (screen.height / editGrid.offsetHeight) * 100 +"%";
 		}
-
 
 		presmode = true;
 	},
@@ -87,9 +83,9 @@ let fsEvents = {
 		if (browserType === 'moz') {
 			editGrid.style.transform = `scale(${1}`;
 			editGrid.style.transformOrigin = '0 0';
-			let children = editGrid.childNodes;
-			children.forEach(item => {
-				item.style.transform = editGrid.style.transform;
+			editGrid.childNodes.forEach(item => {
+				let trans = init.getTransform(item);
+				item.style.transform = `scale(${trans.scale}) rotate(${trans.rotate}deg)`;
 				item.style.transformOrigin = '0 0';
 			});
 		} else {

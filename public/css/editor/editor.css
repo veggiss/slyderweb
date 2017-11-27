@@ -16,20 +16,19 @@ Stylesheet for editor.html
 
 body {
 	overflow: hidden;
+	background-color: #fcfcfc;
 }
 
 #editGrid {
 	position: absolute;
-	width: 640px;
-	height: 360px;
-	left: 25%; top: 10%;
-	border-radius: 5px;
-	background-color: #fcfcfc;
-	box-shadow: 0 0 20px #e5e5e5;
 	margin: auto;
+	left: 15%; right: 0;
+	top: 0; bottom: 0;
+	border-radius: 5px;
 	border-style: dashed;
 	border-width: thin;
 	border-color: gray;
+	box-shadow: 0 0 20px #e5e5e5;
 }
 
 .content {

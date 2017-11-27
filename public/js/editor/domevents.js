@@ -110,6 +110,7 @@ let domEvent = {
 						img.className = 'content'
 						img.name = 'img';
 						img.src = e.target.result;
+						img.style.transform = 'scale(1) rotate(0)';
 						img.style.width = "250px";
 						img.style.height = "auto";
 						img.draggable = false;
