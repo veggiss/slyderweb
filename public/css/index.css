@@ -1,0 +1,57 @@
+/******************************************************************
+Stylesheet for editor.html. 
+
+	Contents:
+	/* Styling frontpage text backgrounds */
+	/* Layout */
+	/* Smal skjerm */
+/*******************************************************************/
+
+/* Styling frontpage text backgrounds */
+
+.colored1 {
+	width: 100%;
+	background: olive;
+	color: white;
+}
+	
+.colored2 {
+	width: 100%;
+	background: maroon;
+	color: white;
+}
+
+.colored3 {
+	width: 100%;
+	background: rgba(130,130,0,0.4);
+	color: black;
+}
+
+.textContainer {
+	padding: 10px; 
+	max-width: 32em; /* for å angi en leselig linjelengde */
+	margin: 0 auto;
+}
+
+
+
+/* Layout */
+
+html, body, main, header {
+	width: 100%;
+	height: 100%;
+}
+
+header {
+	height: 1.5em;
+	display: inline;
+	position: absolute;
+}
+
+main {
+	padding-top: 2.4em;
+}
+
+
+/* TODO Smal skjerm */
+/* maxwidth 400px*/
