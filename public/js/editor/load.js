@@ -17,6 +17,8 @@ let importBtn 				= document.getElementById('importBtn');
 let changeBgBtn 			= document.getElementById('changeBgBtn');
 let gradRotationRange 		= document.getElementById('gradRotationRange');
 let colorBgPanel 			= document.getElementById('colorBgPanel');
+let scaleRange 				= document.getElementById('scaleRange');
+let rotationRange 			= document.getElementById('rotationRange');
 //Text toolbar stuff
 let textToolBar 			= document.getElementById('textToolBar');
 let toolbar_font 			= document.getElementById('toolbar_font');

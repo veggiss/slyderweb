@@ -66,13 +66,40 @@ let init = {
 			domEvent.setBgColor();
 		});
 
-		presmodeBtn.addEventListener('click', function(){
+		presmodeBtn.addEventListener('click', e => {
 			fsEvents.goFullScreen(1);
 		});
 
-		previewmodeBtn.addEventListener('click', function(){
+		previewmodeBtn.addEventListener('click', e => {
 			fsEvents.goFullScreen(currentPage);
 		});
+
+		scaleRange.addEventListener('input', e => {
+			if(selected != undefined) {
+				let trans = init.getTransform(selected);
+				selected.style.transform = `scale(${e.target.value}) rotate(${trans.rotate}deg)`;
+				selected.style.transformOrigin = '0 0';
+			}
+		});
+
+		rotationRange.addEventListener('input', e => {
+			if(selected != undefined) {
+				let trans = init.getTransform(selected);
+				selected.style.transform = `scale(${trans.scale}) rotate(${e.target.value}deg)`;
+				selected.style.transformOrigin = '0 0';
+			}
+		});
+	},
+
+	getTransform(element) {
+		let scale = element.style.transform.split('scale(')[1];
+		scale = scale.split(')')[0];
+		let rotate = element.style.transform.split('rotate(')[1];
+		rotate = rotate.split(')')[0];
+		return {
+			scale: parseFloat(scale),
+			rotate: parseFloat(rotate)
+		}
 	},
 
 	mouseEvent: function(e) {
@@ -259,7 +286,6 @@ let init = {
 			selected.style.textShadow = '';
 		});
 
-
 		toolbar_bulletList.addEventListener('mousedown', e => {
 			document.execCommand("insertunorderedlist");
 		});
@@ -292,7 +318,7 @@ let init = {
 		presLength = Object.keys(presentation.body).length;
 		currentPageTxt.innerHTML = `filter_${currentPage}filter_${presLength}`;
 		domEvent.setBgColor();
-		init.transfromScale();
+		init.transformScale();
 
 		for (let element of content) {
 			let parent = domEvent.getParent(editGrid, element);
@@ -371,17 +397,20 @@ let init = {
 		});
 	},
 
-	transfromScale: function() {
+	transformScale: function() {
 		let max = Math.max(presentation.originHeight, screen.height);
 		let min = Math.min(presentation.originHeight, screen.height);
 		let scale;
+
 		if (screen.height < presentation.originHeight) {
 			scale = min / max;
 		} else {
 			scale = max / min;
 		}
+
 		editGrid.childNodes.forEach(item => {
-			item.style.transform = `scale(${scale}`;
+			let trans = init.getTransform(item);
+			item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
 			item.style.transformOrigin = '0 0';
 			item.style.top = (parseInt(item.style.top) * scale) + 'px';
 			item.style.left = (parseInt(item.style.left) * scale) + 'px';
