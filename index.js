@@ -32,13 +32,26 @@ app.get('/user', db.getUser, ut.logEvent);
 app.get('/user/preslist', ut.userAuth, db.getPresList, ut.logEvent);
 app.get('/user/presentation', ut.userAuth, db.getPresenation, ut.logEvent);
 
-// Page navigation  Her lukter det funksjon
+// Page navigation
 app.get('/editor', (req, res) => {
     res.sendFile(appRoot + '/view/editor.html');
 });
+
+// gammel forside
 app.get('/', (req, res) => {
     res.sendFile(appRoot + '/view/index.html');
 });
+
+/*
+app.get('/', (req, res) => {
+	if (req.session.username) {
+		res.sendFile(appRoot + '/view/userprofile.html#presentations');
+	} else {
+		res.sendFile(appRoot + '/view/index.html');
+	}
+});
+*/
+
 app.get('/userprofile', (req, res) => {
     res.sendFile(appRoot + '/view/userprofile.html');
 });
@@ -48,6 +61,15 @@ app.get('/help', (req, res) => {
 app.get('/about', (req, res) => {
     res.sendFile(appRoot + '/view/about.html');
 });
+
+/*
+app.get('/login', (req, res) => {
+	if (req.session.username) {
+		res.sendFile(appRoot + '/view/userprofile.html');
+	}
+});
+*/
+
 
 
 // Post
