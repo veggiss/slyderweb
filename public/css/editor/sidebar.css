@@ -5,16 +5,16 @@
 
 .side-bar {
 	position: absolute;
-	z-index: 1000;
+	z-index: 3999;
 	width: 150px;
 	height: 100vh;
 	overflow-y: scroll;
-	background-color: #3d3d3d;
+	background-color: olive;
 	font-family: Courier;
 	font-size: 12px;
   text-align: center;
   cursor: default;
-	box-shadow: 0 0 20px #202021;
+	box-shadow: 1px 0px 5px #999;
   overflow: -moz-scrollbars-none;
 }
 
@@ -24,7 +24,7 @@
 .side-bar section div {
   display: table;
 	margin: auto;
-	color: #ccc;
+	color: #eee;
 	cursor: pointer;
 	margin-top: 10px;
 }
@@ -46,6 +46,7 @@
 
 .side-bar [name=btn]:hover {
 	background-color: #494949;
+  opacity: 0.7;
     -webkit-transition: .2s;
     transition: background-color .2s;
 }
@@ -57,6 +58,7 @@
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
+    margin-left: 0px;
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
@@ -101,11 +103,11 @@
   display: block;
   padding: 0.5em;
   border-bottom: 1px solid #CCC;
-  color: #666;
+  color: #eee;
 }
 
 .side-bar main label:hover {
-  color: #aaa;
+  color: #fff;
 }
 
 .side-bar main label::before {
@@ -191,7 +193,7 @@
   width: 75px;
   margin-top: 205px;
   padding: 15px;
-  color: #999;
+  color: #ccc;
   max-height: 30vh;
 }
 
