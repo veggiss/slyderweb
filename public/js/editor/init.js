@@ -6,8 +6,9 @@ let init = {
 		colorBgPanel.style.display 	= 'none';
 		addImagePanel.style.display = 'none';
 		fileDialog.type 			= 'file';
-		editGrid.style.width		= (screen.width * 0.65) + 'px';
 		editGrid.style.height		= (screen.height * 0.65) + 'px';
+		editGrid.style.width		= (screen.width * 0.65) + 'px';
+		//editGrid.style.width		= (parseInt(editGrid.style.height) * (4/3)) + 'px';
 		pageNav.style.top 			= (editGrid.offsetTop + editGrid.offsetHeight) + "px";
 
 		//We need this for hsla coloring with execCommand
@@ -91,6 +92,13 @@ let init = {
 			}
 		});
 
+		borderRange.addEventListener('input', e => {
+			if (selected != undefined) {
+				borderRange.max = borderRange.offsetWidth;
+				selected.style.borderRadius = e.target.value + 'px';
+			}
+		});
+
 		addImageBtn.addEventListener('click', e => {
 			if (addImagePanel.style.display === 'none') {
 				addImagePanel.style.display = "block";
@@ -133,6 +141,9 @@ let init = {
 		if ((e.target === editGrid || e.target === document.documentElement)) {
 			addImagePanel.style.display = 'none';
 			colorBgPanel.style.display = 'none';
+			textToolBar.style.display = 'none';
+			colorPicker.style.display = 'none';
+			shadowPicker.style.display = 'none';
 		}
 
 		if (presmode) {

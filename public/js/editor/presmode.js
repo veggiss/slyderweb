@@ -33,11 +33,13 @@ let fsEvents = {
 		domEvent.removeSelected();
 		lastPage = currentPage;
 		currentPage = page;
+		presHeight = editGrid.style.height;
+		presWidth = editGrid.style.width;
 		init.loadContent();
-
 		fsEvents.lockCursor();
 
 		editGrid.style.borderStyle = "none";
+		editGrid.style.width = screen.width + 'px';
 
 		//Since firefox is hipster, it needs a special transformation for scaling
 		if (browserType === 'moz') {
@@ -89,6 +91,9 @@ let fsEvents = {
 		} else {
 			editGrid.style.zoom = "100%";
 		}
+
+		editGrid.style.height = presHeight;
+		editGrid.style.width = presWidth;
 
 		presmode = false;
 	},

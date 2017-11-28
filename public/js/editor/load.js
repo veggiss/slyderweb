@@ -18,6 +18,7 @@ let changeBgBtn 			= document.getElementById('changeBgBtn');
 let gradRotationRange 		= document.getElementById('gradRotationRange');
 let colorBgPanel 			= document.getElementById('colorBgPanel');
 let scaleRange 				= document.getElementById('scaleRange');
+let borderRange 			= document.getElementById('borderRange');
 let rotationRange 			= document.getElementById('rotationRange');
 let addImageBtn 			= document.getElementById('addImageBtn');
 let addIframeBtn 			= document.getElementById('addIframeBtn');
@@ -60,7 +61,7 @@ let editing, presmode, pressedDelKey = false;
 let currentPage 			= 1;
 let presentation 			= init.newPresObject();
 //To be defined later
-let selected, copySelected, scale, content, presLength, lastSelected, lastPage, originTop, originLeft;
+let selected, copySelected, scale, content, presLength, lastSelected, lastPage, originTop, originLeft, presWidth, presHeight;
 //Button events
 savePageBtn.onclick 		= btnEvent.saveCurrentPage;
 newPresentationBtn.onclick 	= btnEvent.newPresentation;
