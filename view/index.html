@@ -12,8 +12,7 @@
 <body>
 	<header class="centered colorScheme">
 		<nav>
-			<menuitem class="logo">
-			<a href="/">SlyderWeb</a>
+			<a href="/" class="logo">SlyderWeb</a>
 			</menuitem>
 			<menuitem>
 			<a href="userprofile#presentations">Presentations</a>
@@ -25,13 +24,15 @@
 			<a href="userprofile">Profile</a>
 			</menuitem>
 			<menuitem>
-			<menuitem>
 			<a href="/help">Help</a>
 			</menuitem>
+			<menuitem>
 			<a href="/about">About</a>
 			</menuitem>
+			<menuitem>
 			<a href="/login">Login</a>
 			</menuitem>
+			<menuitem>
 			<a href="/signup">Sign up</a>
 			</menuitem>
 		</nav>
@@ -47,9 +48,8 @@
 			<button>
 				<a class="noLinkStyle" href="/editor">Try now</a>
 			</button>
-			<button>
-				<a class="noLinkStyle" href="/signup">Sign up</a>
-			</button>
+			<button id="openCreateUserModalbtn">Sign up</button>
+			<button id="openSignInModalbtn">Sign in</button>
 		</section>
 		</div>
 		<div class="colored3">
@@ -65,31 +65,6 @@
 		</div>
 		<section class="centered">
 			<fieldset>
-				<h3>Sign in</h3>
-				<input type="text" id="login_username" placeholder="Username">
-				<br>
-				<input type="text" id="login_password" placeholder="Password">
-				<br>
-				<button id="login_btn">Sign in</button>
-			</fieldset>
-			<hr>
-			<fieldset>
-				<h3>Create new user</h3>
-				Username:
-				<input type="text" id="createuser_username">
-				<br> Password:
-				<input type="text" id="createuser_password">
-				<br> First name:
-				<input type="text" id="createuser_firstname">
-				<br> Last name:
-				<input type="text" id="createuser_lastname">
-				<br> e-mail address:
-				<input type="text" id="createuser_mail">
-				<br>
-				<button id="createuser_btn">Create user</button>
-			</fieldset>
-			<hr>
-			<fieldset>
 				<h3>User details</h3>
 				<input type="text" id="userinfo_input" placeholder="Username">
 				<button id="userinfo_btn">Find user</button>
@@ -97,7 +72,93 @@
 			<hr>
 		</section>
 	</main>
+
+	<!-- Sign in modal -->
+
+	<div id="modal_signIn" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<fieldset>
+				<h3 class="modal-content">Sign in</h3>
+					<input type="text" id="login_username" placeholder="Username">
+					<br>
+					<input type="text" id="login_password" placeholder="Password">
+					<br>
+					<button id="login_btn">Sign in</button>
+		</div>
+	</div>
+
+
+	<!-- Sign up modal -->
+
+	<div id="modal_createUser" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h3 class="modal-header">Create new user</h3>
+			Username:
+			<input type="text" id="createuser_username">
+			<br> Password:
+			<input type="text" id="createuser_password">
+			<br> First name:
+			<input type="text" id="createuser_firstname">
+			<br> Last name:
+			<input type="text" id="createuser_lastname">
+			<br> e-mail address:
+			<input type="text" id="createuser_mail">
+			<br>
+			<button id="createuser_btn">Create user</button>
+			<button id="cancel_btn">Cancel</button>
+		</div>
+	</div>
+
+
 </body>
+
+<script>
+	// Get the modal
+	let modal_signIn = document.getElementById('modal_signIn');
+	let modal_createUser = document.getElementById('modal_createUser');
+
+	// Get the button that opens the modal
+	let openSignInModalbtn = document.getElementById("openSignInModalbtn");
+	let openCreateUserModalbtn = document.getElementById("openCreateUserModalbtn");
+	let cancelbtn = document.getElementById("cancelbtn");
+
+	// Get the <span> element that closes the modal
+	let span = document.getElementsByClassName("close")[0];
+	let spanTwo = document.getElementsByClassName("close")[1];
+
+	// When the user clicks on the button, open the modal 
+	//openSignInModalbtn.onclick = openModal(modal_SignIn);
+	openSignInModalbtn.onclick = function () {
+		modal_signIn.style.display = "block";
+	}
+	openCreateUserModalbtn.onclick = function () {
+		modal_createUser.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function () {
+		modal_signIn.style.display = "none";
+	}
+	spanTwo.onclick = function () {
+		modal_createUser.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function (event) {
+		if (event.target == modal_signIn) {
+			modal_signIn.style.display = "none";
+		} else if (event.target == modal_createUser) {
+			modal_createUser.style.display = "none";
+		}
+	}
+
+	keyevent
+
+
+</script>
+
 <script type="text/javascript" src="./js/util.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/sha1.min.js"></script>

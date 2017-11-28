@@ -60,24 +60,21 @@ nav {
 header a {
 	text-decoration: none;
 	color: white;
-	padding: 0.5em 0.3em;
+	padding: 0.6em 0.3em;
 	/* align-content: center; */
 	display: inline;
 }
 
-header a:hover {
+menuitem a:hover {
 	background-color: #AA6;
 	color: black;
-	text-shadow: none;
 }
 
 .logo {
-	/* margin:0; */
-	padding: 0 0.5em;
+	padding: 0 1em;
 	display: inline;
-	font-size: 2.0rem;
 	font-weight: bold;
-	text-shadow: 0px 0px 8px black;
+	text-shadow: 0px 0px 6px black;
 	font-family: Lucida Console, Courier, monospace;
 }
 
@@ -169,3 +166,52 @@ ul.hidden { padding-left: 0; list-style: none;}
 .colorScheme { background-color: olive; color: white;}
 
 /* TODO Smal skjerm */
+
+
+
+
+/* Modals */
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.modal-header { }
+
+.modal-closed {
+	display: none;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
