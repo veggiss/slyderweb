@@ -141,7 +141,7 @@ let init = {
 
 		backgroundSection.forEach(item => {
 			item.addEventListener('click', e => {
-				btnEvent.loadTemplate('image', item);
+				btnEvent.loadTemplate('background', item);
 			})
 		});
 	},

@@ -15,3 +15,22 @@ let template_arrange = {
 		}
 	}
 }
+
+let template_background = {
+	'template_background_1': {
+		'color': ['rgb(169, 255, 186)', 'white'],
+		'rotation': '0'
+	},
+	'template_background_2': {
+		'color': ['rgb(223, 230, 127)', 'rgb(251, 246, 214)', 'white'],
+		'rotation': '111'
+	},
+	'template_background_3': {
+		'color': ['rgb(223, 230, 127)', 'rgb(219, 238, 241)', 'rgb(251, 244, 244)', 'rgb(189, 197, 230)', 'rgb(239, 245, 230)', 'rgb(219, 241, 241)'],
+		'rotation': '3'
+	},
+	'template_background_4': {
+		'color': ['rgb(220, 220, 220)', 'rgb(193, 215, 246)'],
+		'rotation': '0'
+	}
+}

@@ -54,7 +54,7 @@ let btnEvent = {
 	},
 
 	loadTemplate(type, item) {
-		if (type == "arrange") {
+		if (type == 'arrange') {
 			let presObject = presentation.body['page_' + currentPage];
 			let templateObject = template_arrange.body[item.name];
 			let templateContent = templateObject.content;
@@ -62,9 +62,13 @@ let btnEvent = {
 				templateContent = init.transformTemplate(1080, templateObject.content);
 			}
 			presObject.content += templateContent;
-			templatesModal.style.display = 'none';
 			init.loadContent();
+		} else if (type == 'background') {
+			gradRotation = template_background[item.name].rotation;
+			presentation.bgColors = template_background[item.name].color;
+			domEvent.setBgColor();
 		}
+		templatesModal.style.display = 'none';
 	},
 
 	loadSelectedPres: function(name, uid) {
