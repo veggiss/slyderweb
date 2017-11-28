@@ -4,8 +4,8 @@ let init = {
 		colorPicker.style.display 	= "none";
 		shadowPicker.style.display 	= "none";
 		colorBgPanel.style.display 	= 'none';
+		addImagePanel.style.display = 'none';
 		fileDialog.type 			= 'file';
-		fileDialog.accept 			= '.slyderweb';
 		editGrid.style.width		= (screen.width * 0.65) + 'px';
 		editGrid.style.height		= (screen.height * 0.65) + 'px';
 		pageNav.style.top 			= (editGrid.offsetTop + editGrid.offsetHeight) + "px";
@@ -53,6 +53,7 @@ let init = {
 		});
 
 		importBtn.addEventListener('click', e => {
+			fileDialog.accept = '.slyderweb';
 			fileDialog.click();
 		});
 
@@ -89,11 +90,49 @@ let init = {
 				selected.style.transformOrigin = '0 0';
 			}
 		});
+
+		addImageBtn.addEventListener('click', e => {
+			if (addImagePanel.style.display === 'none') {
+				addImagePanel.style.display = "block";
+			} else {
+				addImagePanel.style.display = "none";
+			}
+		});
+
+		addImgFromLinkBtn.addEventListener('click', e => {
+			let link = prompt("Enter image link", "");
+			if (util.isNotEmpty(link) && link.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+				let img = domEvent.newImage(link);
+				editGrid.appendChild(img);
+				init.addDefaultEvents(img);
+			}
+			addImagePanel.style.display = "none";
+		});
+
+		addImgFromLocalBtn.addEventListener('click', e => {
+			fileDialog.accept = 'image/*';
+			fileDialog.click();
+			addImagePanel.style.display = "none";
+		});
+
+		addIframeBtn.addEventListener('click', e => {
+			let link = prompt("Enter iframe link", "");
+			if (util.isNotEmpty(link)) {
+				let iframe = domEvent.newIframe(link);
+				editGrid.appendChild(iframe);
+				init.addDefaultEvents(iframe);
+			}
+		});
 	},
 
 	mouseEvent: function(e) {
 		if ((e.target === editGrid || e.target === document.documentElement) && selected != undefined) {
 			domEvent.removeSelected();
+		}
+
+		if ((e.target === editGrid || e.target === document.documentElement)) {
+			addImagePanel.style.display = 'none';
+			colorBgPanel.style.display = 'none';
 		}
 
 		if (presmode) {
@@ -133,18 +172,21 @@ let init = {
 					}
 				} else if (mySlydesModal.style.display != 'none') {
 					mySlydesModal.style.display = 'none';
-				} else if (colorBgPanel.style.display != 'none') {
+				} else if (colorBgPanel.style.display != 'none' || addImagePanel.style.display != 'none') {
 					colorBgPanel.style.display = 'none';
-				}//ctrl 17 c 67 - v 86
+					addImagePanel.style.display = 'none';
+				}
 			} else if (e.ctrlKey && key == 67) {
 				if (selected != undefined) {
 					copySelected = selected.cloneNode(true);
 				}
 			} else if (e.ctrlKey && key == 86) {
 				if (copySelected != undefined) {
+					let height = parseInt(editGrid.style.height) / 2;
+					let width = parseInt(editGrid.style.width) / 2;
+					copySelected.style.top = (height) + 'px';
+					copySelected.style.left = (width) + 'px';
 					let newCopy = copySelected.cloneNode(true);
-					newCopy.style.top = (editGrid.offsetTop / 2) + 'px';
-					newCopy.style.left = (editGrid.offsetLeft / 2) + 'px';
 					init.addDefaultEvents(newCopy);
 					init.addEventsText(newCopy);
 					editGrid.appendChild(newCopy);
@@ -422,7 +464,7 @@ let init = {
 	},
 
 	//Scales content to fit clients current window compared to last saved window height (basic scale matrix)
-	//This can only be run once, or everytime if nothing has been done to any elements (when elements still have scale ratio from previous save)
+	//This can only be run once (when elements still have scale ratio from previous save)
 	transformScale: function() {
 		if (presentation.originHeight != screen.height) {
 			let max = Math.max(presentation.originHeight, screen.height);

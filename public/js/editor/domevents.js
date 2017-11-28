@@ -108,27 +108,49 @@ let domEvent = {
 		presObject.notes = notesTxt.innerHTML;
 	},
 
+	newImage: function(src) {
+		let img = document.createElement('img');
+
+		img.className = 'content'
+		img.name = 'img';
+		img.src = src;
+		img.style.transform = 'scale(1) rotate(0)';
+		img.style.width = "250px";
+		img.style.height = "auto";
+		img.draggable = false;
+
+		return img;
+	},
+
+	newIframe: function(src) {
+		let container = document.createElement('div');
+		let iframe = document.createElement('iframe');
+
+		container.className = 'content'
+		iframe.src = src;
+		container.style.transform = 'scale(1) rotate(0)';
+		iframe.draggable = false;
+		iframe.style.height = '250px';
+		container.draggable = false;
+		container.appendChild(iframe);
+		container.style.width = "auto";
+		container.style.height = ((parseInt(iframe.style.height)) + 50) + 'px';
+
+		return container;
+	},
+
 	loadFile: function(files) {
 		for (let obj of files) {
 			if (parseInt(obj.size) > 10485760) {
 				alert('Files over 10mb is not allowed');
 			} else {
-				if (obj.type.includes("image")) {
+				if (obj.type.includes('image')) {
 					let reader = new FileReader();
 					
 					reader.readAsDataURL(obj);
 
 					reader.onload = (e => {
-						let img = document.createElement('img');
-
-						img.className = 'content'
-						img.name = 'img';
-						img.src = e.target.result;
-						img.style.transform = 'scale(1) rotate(0)';
-						img.style.width = "250px";
-						img.style.height = "auto";
-						img.draggable = false;
-
+						let img = domEvent.newImage(e.target.result);
 						editGrid.appendChild(img);
 						init.addDefaultEvents(img);
 					});

@@ -19,6 +19,8 @@ let gradRotationRange 		= document.getElementById('gradRotationRange');
 let colorBgPanel 			= document.getElementById('colorBgPanel');
 let scaleRange 				= document.getElementById('scaleRange');
 let rotationRange 			= document.getElementById('rotationRange');
+let addImageBtn 			= document.getElementById('addImageBtn');
+let addIframeBtn 			= document.getElementById('addIframeBtn');
 //Text toolbar stuff
 let textToolBar 			= document.getElementById('textToolBar');
 let toolbar_font 			= document.getElementById('toolbar_font');
@@ -35,11 +37,15 @@ let toolbar_numberList 		= document.getElementById('toolbar_numberList');
 let toolbar_alignLeft 		= document.getElementById('toolbar_alignLeft');
 let toolbar_alignCenter 	= document.getElementById('toolbar_alignCenter');
 let toolbar_alignRight 		= document.getElementById('toolbar_alignRight');
-//Background color stuff
+//Background color bar stuff
 let bgColorDiv 				= document.getElementById('bgColorDiv');
 let addGradientBtn 			= document.getElementById('addGradientBtn');
 let removeGradientBtn 		= document.getElementById('removeGradientBtn');
 let gradientListDiv 		= document.getElementById('gradientListDiv');
+//Add image bar stuff
+let addImagePanel 			= document.getElementById('addImagePanel');
+let addImgFromLinkBtn 		= document.getElementById('addImgFromLinkBtn');
+let addImgFromLocalBtn 		= document.getElementById('addImgFromLocalBtn');
 //Extra stuff for toolbar
 let colorPicker 			= document.getElementById('colorPicker');
 let shadowPicker 			= document.getElementById('shadowPicker');
