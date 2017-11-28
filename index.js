@@ -37,12 +37,11 @@ app.get('/editor', (req, res) => {
     res.sendFile(appRoot + '/view/editor.html');
 });
 
-// gammel forside
+/* gammel forside
 app.get('/', (req, res) => {
     res.sendFile(appRoot + '/view/index.html');
-});
+});*/
 
-/*
 app.get('/', (req, res) => {
 	if (req.session.username) {
 		res.sendFile(appRoot + '/view/userprofile.html#presentations');
@@ -50,7 +49,6 @@ app.get('/', (req, res) => {
 		res.sendFile(appRoot + '/view/index.html');
 	}
 });
-*/
 
 app.get('/userprofile', (req, res) => {
     res.sendFile(appRoot + '/view/userprofile.html');
@@ -62,13 +60,14 @@ app.get('/about', (req, res) => {
     res.sendFile(appRoot + '/view/about.html');
 });
 
-/*
 app.get('/login', (req, res) => {
-	if (req.session.username) {
-		res.sendFile(appRoot + '/view/userprofile.html');
-	}
+	//if (req.session.username) {  at den automatisk logger inn fra cookie?
+	res.sendFile(appRoot + '/view/login.html');
 });
-*/
+
+app.get('/signup', (req, res) => {
+    res.sendFile(appRoot + '/view/signup.html');
+});
 
 
 

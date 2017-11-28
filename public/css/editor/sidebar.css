@@ -9,12 +9,11 @@
 	width: 150px;
 	height: 100vh;
 	overflow-y: scroll;
-	background-color: #3d3d3d;
 	font-family: Courier;
 	font-size: 12px;
   text-align: center;
   cursor: default;
-	box-shadow: 0 0 20px #202021;
+  box-shadow: 0 0 20px #202021;
   overflow: -moz-scrollbars-none;
 }
 
