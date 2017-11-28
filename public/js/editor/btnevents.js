@@ -45,6 +45,28 @@ let btnEvent = {
 		init.loadPresList();
 	},
 
+	openTemplates: function() {
+		if (templatesModal.style.display == 'none') {
+			templatesModal.style.display = 'inline-block';
+		} else {
+			templatesModal.style.display = 'none';
+		}
+	},
+
+	loadTemplate(type, item) {
+		if (type == "arrange") {
+			let presObject = presentation.body['page_' + currentPage];
+			let templateObject = template_arrange.body[item.name];
+			let templateContent = templateObject.content;
+			if (template_arrange.originHeight != screen.height) {
+				templateContent = init.transformTemplate(1080, templateObject.content);
+			}
+			presObject.content += templateContent;
+			templatesModal.style.display = 'none';
+			init.loadContent();
+		}
+	},
+
 	loadSelectedPres: function(name, uid) {
 	    if (confirm("Save changes?") == true) {
 	        btnEvent.saveCurrentPage();

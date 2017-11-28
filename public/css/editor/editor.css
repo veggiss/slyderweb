@@ -19,7 +19,7 @@ body {
 	background-color: #fcfcfc;
 }
 
-#editGrid {
+.editGrid {
 	position: absolute;
 	margin: auto;
 	left: 15%; right: 0;

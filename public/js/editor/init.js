@@ -23,8 +23,9 @@ let init = {
 		});
 
 		document.addEventListener('click', e => {
-			if (e.target == mySlydesModal) {
+			if (e.target == mySlydesModal || e.target == templatesModal) {
 				mySlydesModal.style.display = 'none';
+				templatesModal.style.display = 'none';
 			}
 		});
 
@@ -131,6 +132,18 @@ let init = {
 				init.addDefaultEvents(iframe);
 			}
 		});
+
+		arrangeSection.forEach(item => {
+			item.addEventListener('click', e => {
+				btnEvent.loadTemplate('arrange', item);
+			})
+		});
+
+		backgroundSection.forEach(item => {
+			item.addEventListener('click', e => {
+				btnEvent.loadTemplate('image', item);
+			})
+		});
 	},
 
 	mouseEvent: function(e) {
@@ -188,11 +201,11 @@ let init = {
 					addImagePanel.style.display = 'none';
 				}
 			} else if (e.ctrlKey && key == 67) {
-				if (selected != undefined) {
+				if (selected != undefined && !editing) {
 					copySelected = selected.cloneNode(true);
 				}
 			} else if (e.ctrlKey && key == 86) {
-				if (copySelected != undefined) {
+				if (copySelected != undefined && !editing) {
 					let height = parseInt(editGrid.style.height) / 2;
 					let width = parseInt(editGrid.style.width) / 2;
 					copySelected.style.top = (height) + 'px';
@@ -203,23 +216,23 @@ let init = {
 					editGrid.appendChild(newCopy);
 					domEvent.setSelected(newCopy);
 				}
-			} else if (key == 39) {
+			} else if (key == 39 && !editing) {
 				if (selected != undefined) {
 					selected.style.left = (selected.offsetLeft += 1) + "px";
 				} else {
 					btnEvent.nextPage();
 				}
-			} else if (key == 37) {
+			} else if (key == 37 && !editing) {
 				if (selected != undefined) {
 					selected.style.left = (selected.offsetLeft -= 1) + "px";
 				} else {
 					btnEvent.prevPage();
 				}
-			} else if (key == 38) {
+			} else if (key == 38 && !editing) {
 				if (selected != undefined) {
 					selected.style.top = (selected.offsetTop -= 1) + "px";
 				}
-			} else if (key == 40) {
+			} else if (key == 40 && !editing) {
 				if (selected != undefined) {
 					selected.style.top = (selected.offsetTop += 1) + "px";
 				}
@@ -480,6 +493,7 @@ let init = {
 		if (presentation.originHeight != screen.height) {
 			let max = Math.max(presentation.originHeight, screen.height);
 			let min = Math.min(presentation.originHeight, screen.height);
+			let scale;
 
 			if (screen.height < presentation.originHeight) {
 				scale = min / max;
@@ -497,6 +511,39 @@ let init = {
 
 			presentation.originHeight = screen.height;
 			domEvent.savePage();
+		}
+	},
+
+	transformTemplate: function(originHeight, htmlContent) {
+		if (originHeight != screen.height) {
+			let max = Math.max(originHeight, screen.height);
+			let min = Math.min(originHeight, screen.height);
+			let tempDiv = document.createElement('div');
+			let scale;
+
+			tempDiv.innerHTML = htmlContent;
+
+			tempDiv.childNodes.forEach(item => {
+				let trans = init.getTransform(item);
+				let scale;
+				if (screen.height < presentation.originHeight) {
+					scale = min / max;
+					item.style.transform = `scale(${trans.scale * scale}) rotate(${trans.rotate}deg)`;
+					item.style.transformOrigin = '0 0';
+					item.style.top = (parseInt(item.style.top) * scale) + 'px';
+					item.style.left = (parseInt(item.style.left) * scale) + 'px';
+				} else {
+					scale = max / min;
+					item.style.transform = `scale(${trans.scale/scale}) rotate(${trans.rotate}deg)`;
+					item.style.transformOrigin = '0 0';
+					item.style.top = (parseInt(item.style.top) / scale) + 'px';
+					item.style.left = (parseInt(item.style.left) / scale) + 'px';
+				}
+			});
+
+			let returnContent = tempDiv.innerHTML;
+			tempDiv.remove();
+			return returnContent;
 		}
 	},
 

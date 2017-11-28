@@ -10,9 +10,6 @@ let presNameInput 			= document.getElementById('presNameInput');
 let currentPageTxt 			= document.getElementById('currentPageTxt');
 let notesTxt 				= document.getElementById('notesTxt');
 let pageNav 				= document.getElementById('pageNav');
-let mySlydesModal 			= document.getElementById('mySlydesModal');
-let mySlydesBtn 			= document.getElementById('mySlydesBtn');
-let mySlydesContent 		= document.getElementById('mySlydesContent');
 let importBtn 				= document.getElementById('importBtn');
 let changeBgBtn 			= document.getElementById('changeBgBtn');
 let gradRotationRange 		= document.getElementById('gradRotationRange');
@@ -53,6 +50,16 @@ let shadowPicker 			= document.getElementById('shadowPicker');
 //Presmode stuff
 let presmodeBtn 			= document.getElementById('presmodeBtn');
 let previewmodeBtn 			= document.getElementById('previewmodeBtn');
+//My slydes modal stuff
+let mySlydesModal 			= document.getElementById('mySlydesModal');
+let mySlydesBtn 			= document.getElementById('mySlydesBtn');
+let mySlydesContent 		= document.getElementById('mySlydesContent');
+//Templates modal stuff
+let templatesModal 			= document.getElementById('templatesModal');
+let templatesBtn 			= document.getElementById('templatesBtn');
+let templatesContent 		= document.getElementById('templatesContent');
+let arrangeSection 			= document.getElementById('arrangeSection').querySelectorAll('img');
+let backgroundSection 		= document.getElementById('backgroundSection').querySelectorAll('img');
 //Various vars
 let fileDialog 				= document.createElement('input');
 let originX, originY, gradRotation   = 0;
@@ -61,7 +68,7 @@ let editing, presmode, pressedDelKey = false;
 let currentPage 			= 1;
 let presentation 			= init.newPresObject();
 //To be defined later
-let selected, copySelected, scale, content, presLength, lastSelected, lastPage, originTop, originLeft, presWidth, presHeight;
+let selected, copySelected, content, presLength, lastSelected, lastPage, originTop, originLeft, presWidth, presHeight;
 //Button events
 savePageBtn.onclick 		= btnEvent.saveCurrentPage;
 newPresentationBtn.onclick 	= btnEvent.newPresentation;
@@ -74,6 +81,7 @@ mySlydesBtn.onclick 		= btnEvent.openMySlydes;
 addGradientBtn.onclick 		= btnEvent.addGradient;
 removeGradientBtn.onclick	= btnEvent.removeGradient;
 changeBgBtn.onclick			= btnEvent.toggleBgPanel;
+templatesBtn.onclick 		= btnEvent.openTemplates;
 //Load everything
 init.loadGrid();
 init.loadContent();

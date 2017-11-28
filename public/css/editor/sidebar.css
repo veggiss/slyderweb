@@ -5,7 +5,7 @@
 
 .side-bar {
 	position: absolute;
-	z-index: 3999;
+	z-index: 2000;
 	width: 150px;
 	height: 100vh;
 	overflow-y: scroll;
@@ -160,10 +160,20 @@
   cursor: pointer;
 }
 
-#mySlydesContainer {
+.mySlydesContainer {
   height: auto;
   max-height: 50vh;
   overflow-y: auto;
+}
+
+.templatesImg {
+  display: inline-flex;
+  border: 1px solid #888;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 50%;
 }
 
 .mySlydesContent {

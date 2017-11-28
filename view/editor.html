@@ -36,7 +36,7 @@
 			</nav>
 		</header>
 
-	<div id="editGrid"></div>
+	<div id="editGrid" class="editGrid"></div>
 
 	<div id="colorPicker">
 		Hue
@@ -224,13 +224,13 @@
 				<div>
 					<span>
 						<t>Scale</t>
-						<input id="scaleRange" name="range" type="range" min="-10" max="10" value="1" step="0.1">
+						<input id="scaleRange" name="range" type="range" min="0" max="10" value="1" step="0.1">
 					</span>
 				</div>
 				<div>
 					<span>
 						<t>Rotation</t>
-						<input id="rotationRange" name="range" type="range" min="-180" max="180" value="0">
+						<input id="rotationRange" name="range" type="range" min="0" max="360" value="0">
 					</span>
 				</div>
 				<div>
@@ -254,7 +254,7 @@
 						<t>Background</t>
 					</span>
 				</div>
-				<div style="cursor: not-allowed;">
+				<div id="templatesBtn">
 					<span name="btn">
 						<t class="material-icons" style="font-size: 26px;">art_track</t><br>
 						<t>Templates</t>
@@ -303,23 +303,45 @@
 	<div id="mySlydesModal" class="modal">
 	  <div class="modal-content noselect" style="width: 30%; min-width: 50px;">
 	    <div class="material-icons" style="font-size: 35px; cursor: default; color: #3d3d3d">folder_shared</div><hr>
-	    <div id="mySlydesContainer">
+	    <div class="mySlydesContainer">
 	    	<div id="mySlydesContent"></div>
 	    </div>
 	  </div>
 	</div>
 
+	<div id="templatesModal" class="modal">
+	  <div class="modal-content noselect" style="width: 30%; min-width: 50px;">
+	    <div class="material-icons" style="font-size: 35px; cursor: default; color: #3d3d3d">art_track</div><hr>
+	    <div class="mySlydesContainer">
+		    <div id="arrangeSection">
+		    	<h4>Arrange</h4>
+		    	<img name="template_arrange_1" class="templatesImg" src="./img/template_arrange_1.png" style="width: 45%">
+		    	<img name="template_arrange_2" class="templatesImg" src="./img/template_arrange_2.png" style="width: 45%">
+		    	<img name="template_arrange_3" class="templatesImg" src="./img/template_arrange_3.png" style="width: 45%">
+		    	<img name="template_arrange_4" class="templatesImg" src="./img/template_arrange_4.png" style="width: 45%">
+		    </div>
+		    <div id="backgroundSection">
+		    	<h4>Backgrounds</h4>
+		    	<img name="template_background_1" class="templatesImg" src="./img/template_background_1.png" style="width: 45%">
+		    	<img name="template_background_2" class="templatesImg" src="./img/template_background_2.png" style="width: 45%">
+		    	<img name="template_background_3" class="templatesImg" src="./img/template_background_3.png" style="width: 45%">
+		    	<img name="template_background_4" class="templatesImg" src="./img/template_background_4.png" style="width: 45%">
+		    </div>
+	    </div>
+	  </div>
+	</div>
+
 	<div id="addImagePanel" class="side-bar noselect img-bar">
-			<div id="addImgFromLinkBtn">
-				<span name="btn">
-					<t>Link</t>
-				</span>
-			</div>
-			<div id="addImgFromLocalBtn">
-				<span name="btn">
-					<t>Local</t>
-				</span>
-			</div>
+		<div id="addImgFromLinkBtn">
+			<span name="btn">
+				<t>Link</t>
+			</span>
+		</div>
+		<div id="addImgFromLocalBtn">
+			<span name="btn">
+				<t>Local</t>
+			</span>
+		</div>
 	</div>
 
 	<div id="colorBgPanel" class="side-bar noselect bg-bar">
@@ -356,5 +378,6 @@
 <script type="text/javascript" src="./js/editor/btnevents.js"></script>
 <script type="text/javascript" src="./js/editor/domevents.js"></script>
 <script type="text/javascript" src="./js/editor/presmode.js"></script>
+<script type="text/javascript" src="./js/editor/templates.js"></script>
 <script type="text/javascript" src="./js/editor/load.js"></script>
 </html>
