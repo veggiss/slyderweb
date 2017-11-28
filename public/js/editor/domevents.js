@@ -103,7 +103,6 @@ let domEvent = {
 	},
 
 	savePage: function() {
-		transformed = true;
 		let presObject = presentation.body["page_" + currentPage];
 		presObject.content = editGrid.innerHTML;
 		presObject.notes = notesTxt.innerHTML;
@@ -144,10 +143,8 @@ let domEvent = {
 						let decoded = window.atob(base64);
 						presentation = JSON.parse(atob(decoded));
 						currentPage = 1;
-						transformed = false;
 						init.updateBgSidebar();
 						init.loadContent();
-						transformed = true;
 					});
 				} else {
 					alert(`Could not import file '${obj.name}' :(`);

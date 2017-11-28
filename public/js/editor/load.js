@@ -49,7 +49,7 @@ let previewmodeBtn 			= document.getElementById('previewmodeBtn');
 //Various vars
 let fileDialog 				= document.createElement('input');
 let originX, originY, gradRotation   = 0;
-let editing, presmode, pressedDelKey, transformed = false;
+let editing, presmode, pressedDelKey = false;
 //Presentation object
 let currentPage 			= 1;
 let presentation 			= init.newPresObject();

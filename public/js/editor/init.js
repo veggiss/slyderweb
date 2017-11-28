@@ -150,6 +150,26 @@ let init = {
 					editGrid.appendChild(newCopy);
 					domEvent.setSelected(newCopy);
 				}
+			} else if (key == 39) {
+				if (selected != undefined) {
+					selected.style.left = (selected.offsetLeft += 1) + "px";
+				} else {
+					btnEvent.nextPage();
+				}
+			} else if (key == 37) {
+				if (selected != undefined) {
+					selected.style.left = (selected.offsetLeft -= 1) + "px";
+				} else {
+					btnEvent.prevPage();
+				}
+			} else if (key == 38) {
+				if (selected != undefined) {
+					selected.style.top = (selected.offsetTop -= 1) + "px";
+				}
+			} else if (key == 40) {
+				if (selected != undefined) {
+					selected.style.top = (selected.offsetTop += 1) + "px";
+				}
 			}
 		} else if (presmode) {
 			if (key === 39 || key === 37) {
@@ -322,10 +342,7 @@ let init = {
 		presLength = Object.keys(presentation.body).length;
 		currentPageTxt.innerHTML = `filter_${currentPage}filter_${presLength}`;
 		domEvent.setBgColor();
-
-		if (!transformed) {
-			init.transformScale();
-		}
+		init.transformScale();
 
 		for (let element of content) {
 			let parent = domEvent.getParent(editGrid, element);
@@ -407,26 +424,27 @@ let init = {
 	//Scales content to fit clients current window compared to last saved window height (basic scale matrix)
 	//This can only be run once, or everytime if nothing has been done to any elements (when elements still have scale ratio from previous save)
 	transformScale: function() {
-		let max = Math.max(presentation.originHeight, screen.height);
-		let min = Math.min(presentation.originHeight, screen.height);
+		if (presentation.originHeight != screen.height) {
+			let max = Math.max(presentation.originHeight, screen.height);
+			let min = Math.min(presentation.originHeight, screen.height);
 
-		if (screen.height < presentation.originHeight) {
-			scale = min / max;
-		} else {
-			scale = max / min;
+			if (screen.height < presentation.originHeight) {
+				scale = min / max;
+			} else {
+				scale = max / min;
+			}
+
+			editGrid.childNodes.forEach(item => {
+				let trans = init.getTransform(item);
+				item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
+				item.style.transformOrigin = '0 0';
+				item.style.top = (item.offsetTop * scale) + 'px';
+				item.style.left = (item.offsetLeft * scale) + 'px';
+			});
+
+			presentation.originHeight = screen.height;
+			domEvent.savePage();
 		}
-
-		console.log('scale: ' + scale);
-
-		editGrid.childNodes.forEach(item => {
-			let trans = init.getTransform(item);
-			console.log('transscale: ' + trans.scale);
-			console.log('combined: ' + scale * trans.scale);
-			item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
-			item.style.transformOrigin = '0 0';
-			item.style.top = (item.offsetTop * scale) + 'px';
-			item.style.left = (item.offsetLeft * scale) + 'px';
-		});
 	},
 
 	getTransform(element) {

@@ -66,7 +66,6 @@ let btnEvent = {
 					presentation.bgColors = res.bgColors;
 					presentation.originHeight = res.originHeight;
 					presentation.body = res.body;
-					transformed = false;
 					init.updateBgSidebar();
 					init.loadContent();
 				}
@@ -79,10 +78,6 @@ let btnEvent = {
 	},
 
 	saveCurrentPage: function() {
-		//Hacky method for keeping ratios correct
-		if (transformed) {
-			presentation.originHeight = screen.height;
-		}
 		domEvent.removeSelected();
 
 		fetch(util.newRequest('POST', '/user/presentation', {
@@ -165,9 +160,6 @@ let btnEvent = {
 	},
 
 	exportToFile: function() {
-		//Hacky methods for keeping height ratios correct
-		let originalHeight = presentation.originHeight;
-		presentation.originHeight = screen.height;
 		domEvent.removeSelected();
 		
 		let presObject = btoa(JSON.stringify(presentation));
@@ -179,6 +171,5 @@ let btnEvent = {
 		editGrid.appendChild(download);
 		download.click();
 		editGrid.removeChild(download);
-		presentation.originHeight = originalHeight;
 	}
 }
