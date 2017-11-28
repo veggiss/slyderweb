@@ -226,7 +226,7 @@ function newPresentation(req, res, next) {
     let originHeight = presObject.originHeight;
     let body = presObject.body;
 
-    if(ut.isNotEmpty(author, body.toString())) {
+    if(author) {
         let client = ut.newClient();
         let sql = 'INSERT INTO presentations(author, name, bgcolors, originheight, body) VALUES($1, $2, $3, $4, $5) RETURNING id';
         let params = [author, name, bgColors, originHeight, body];
@@ -258,7 +258,7 @@ function newPresentation(req, res, next) {
             next();
         });
     } else {
-        res.statusMessage = 'Author or body is empty';
+        res.statusMessage = 'Not logged in';
         res.status(401).end();
         next();
     }
@@ -299,11 +299,11 @@ function getPresenation(req, res, next) {
     let username = req.session.username;
 
     if (username) {
-        let presName = req.query.name;
+        let uid = req.query.uid;
 
         let client = ut.newClient();
-        let sql = 'SELECT * FROM presentations WHERE author = $1 AND name = $2';
-        let params = [username, presName];
+        let sql = 'SELECT * FROM presentations WHERE author = $1 AND id = $2';
+        let params = [username, uid];
 
         client.connect();
 
@@ -326,7 +326,7 @@ function getPresenation(req, res, next) {
                     res.end();
                 } else {
                     res.statusMessage = `Could not find presentation '${presName}'`;
-                    res.satus(404).end();
+                    res.status(404).end();
                 }
             } else {
                 res.statusMessage = 'There was a problem getting presentation list';
@@ -334,6 +334,36 @@ function getPresenation(req, res, next) {
                 res.err = err;
             }
 
+            client.end();
+            next();
+        });
+    } else {
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
+    }
+}
+
+function deletePresentation(req, res, next) {
+    let username = req.session.username;
+
+    if (username) {
+        let uid = req.body.uid;
+        let presName = req.body.name;
+
+        let client = ut.newClient();
+        let sql = 'DELETE FROM presentations WHERE author = $1 AND id = $2 AND name = $3';
+        let params = [username, uid, presName];
+
+        client.connect();
+
+        client.query(sql, params, (err, query) => {
+            if (!err) {
+                res.statusMessage = 'Deleted presentation';
+                res.status(200).end();
+            } else {
+                res.statusMessage = `Could not find presentation '${presName}'`;
+                res.status(404).end();
+            }
             client.end();
             next();
         });
@@ -351,5 +381,6 @@ module.exports = {
     updatePresentation: updatePresentation,
     newPresentation: newPresentation,
     getPresList: getPresList,
-    getPresenation: getPresenation
+    getPresenation: getPresenation,
+    deletePresentation: deletePresentation
 }

@@ -432,7 +432,7 @@ let init = {
 					optionDom.innerHTML = "&emsp;Title: " + item.name;
 					mySlydesContent.appendChild(optionDom);
 					optionDom.addEventListener('click', e => {
-						btnEvent.loadSelectedPres(item.name, item.id);
+						btnEvent.loadSelectedPres(item.id);
 						mySlydesModal.style.display = 'none';
 					});
 					mySlydesModal.style.display = 'inline-block';

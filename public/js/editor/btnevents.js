@@ -71,14 +71,13 @@ let btnEvent = {
 		templatesModal.style.display = 'none';
 	},
 
-	loadSelectedPres: function(name, uid) {
+	loadSelectedPres: function(uid) {
 	    if (confirm("Save changes?") == true) {
 	        btnEvent.saveCurrentPage();
 	    }
 
-		if (name && uid) {
+		if (uid) {
 			fetch(util.newRequest('GET', '/user/presentation', {
-				name: name,
 				uid: uid
 			})).then(res => {
 			    return res.json();
@@ -100,6 +99,21 @@ let btnEvent = {
 			});
 		} else {
 			util.printError('Could not get presentation: undefined values');
+		}
+	},
+
+	deletePresentation: function() {
+		if (presentation.uid) {
+			fetch(util.newRequest('DELETE', '/user/presentation', {
+				uid: presentation.uid,
+				name: presentation.name
+			})).then(res => {
+			    if(res.status === 200) {
+			    	console.log('Slyde deleted');
+			    }
+			}).catch(err => {
+			    util.printError(err);
+			});
 		}
 	},
 

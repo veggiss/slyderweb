@@ -32,7 +32,7 @@ app.get('/user', db.getUser, ut.logEvent);
 app.get('/user/preslist', ut.userAuth, db.getPresList, ut.logEvent);
 app.get('/user/presentation', ut.userAuth, db.getPresenation, ut.logEvent);
 
-// Page navigation  Her lukter det funksjon
+// Page navigation
 app.get('/editor', (req, res) => {
     res.sendFile(appRoot + '/view/editor.html');
 });
@@ -54,6 +54,9 @@ app.get('/about', (req, res) => {
 app.post('/user', db.newUser, ut.logEvent);
 app.post('/user/login', db.loginUser, ut.logEvent, db.setLastlogin, ut.logEvent);
 app.post('/user/presentation', ut.userAuth, db.updatePresentation, ut.logEvent, db.newPresentation, ut.logEvent);
+
+// Delete
+app.delete('/user/presentation', ut.userAuth, db.deletePresentation, ut.logEvent);
 
 app.listen(app.get('port'), function() {
     ut.print('-----------------------------');
