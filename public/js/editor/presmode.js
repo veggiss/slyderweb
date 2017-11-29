@@ -94,7 +94,7 @@ let fsEvents = {
 
 		editGrid.style.height = presHeight;
 		editGrid.style.width = presWidth;
-
+		pageNav.style.top = (editGrid.offsetTop + editGrid.offsetHeight) + "px";
 		presmode = false;
 	},
 

@@ -5,6 +5,7 @@ let init = {
 		shadowPicker.style.display 	= "none";
 		colorBgPanel.style.display 	= 'none';
 		addImagePanel.style.display = 'none';
+		templatesModal.style.display= 'none';
 		fileDialog.type 			= 'file';
 		editGrid.style.height		= (screen.height * 0.65) + 'px';
 		editGrid.style.width		= (screen.width * 0.65) + 'px';

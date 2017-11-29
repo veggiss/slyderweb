@@ -106,6 +106,7 @@ let domEvent = {
 		let presObject = presentation.body["page_" + currentPage];
 		presObject.content = editGrid.innerHTML;
 		presObject.notes = notesTxt.innerHTML;
+		localStorage.setItem('presentation', JSON.stringify(presentation));
 	},
 
 	newImage: function(src) {

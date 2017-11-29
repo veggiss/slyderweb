@@ -68,7 +68,7 @@ let originX, originY, gradRotation   = 0;
 let editing, presmode, pressedDelKey = false;
 //Presentation object
 let currentPage 			= 1;
-let presentation 			= init.newPresObject();
+let presentation 			= JSON.parse(localStorage.getItem('presentation')) || init.newPresObject();
 //To be defined later
 let selected, copySelected, content, presLength, lastSelected, lastPage, originTop, originLeft, presWidth, presHeight;
 //Button events

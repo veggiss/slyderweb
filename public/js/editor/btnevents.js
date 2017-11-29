@@ -72,7 +72,7 @@ let btnEvent = {
 	},
 
 	loadSelectedPres: function(uid) {
-	    if (confirm("Save changes?") == true) {
+	    if (confirm("Save changes?") === true) {
 	        btnEvent.saveCurrentPage();
 	    }
 
@@ -104,16 +104,18 @@ let btnEvent = {
 
 	deletePresentation: function() {
 		if (presentation.uid) {
-			fetch(util.newRequest('DELETE', '/user/presentation', {
-				uid: presentation.uid,
-				name: presentation.name
-			})).then(res => {
-			    if(res.status === 200) {
-			    	console.log('Slyde deleted');
-			    }
-			}).catch(err => {
-			    util.printError(err);
-			});
+			if (confirm("Are you sure you want to delete slyde?") === true) {
+				fetch(util.newRequest('DELETE', '/user/presentation', {
+					uid: presentation.uid,
+					name: presentation.name
+				})).then(res => {
+				    if(res.status === 200) {
+				    	console.log('Slyde deleted');
+				    }
+				}).catch(err => {
+				    util.printError(err);
+				});
+			}
 		}
 	},
 
@@ -140,8 +142,8 @@ let btnEvent = {
 	},
 
 	newPresentation: function() {
-	    if (confirm("Are you sure?") == true) {
-		    if (confirm("Save changes?") == true) {
+	    if (confirm("Are you sure?") === true) {
+		    if (confirm("Save changes?") === true) {
 		        btnEvent.saveCurrentPage();
 		    }
 
@@ -185,24 +187,26 @@ let btnEvent = {
 	},
 
 	deletePage: function() {
-		let presLength = Object.keys(presentation.body).length;
+		if (confirm("Are you sure you want to delete page?") === true) {
+			let presLength = Object.keys(presentation.body).length;
 
-		if (presLength == 1 && presLength == 1) {
-			presentation.body['page_' + currentPage].content = '';
-			presentation.body['page_' + currentPage].notes = '';
-		} else {
-			for (let i = currentPage; i <= presLength; i++) {
-				presentation.body['page_' + i] = presentation.body['page_' + (i + 1)];
+			if (presLength == 1 && presLength == 1) {
+				presentation.body['page_' + currentPage].content = '';
+				presentation.body['page_' + currentPage].notes = '';
+			} else {
+				for (let i = currentPage; i <= presLength; i++) {
+					presentation.body['page_' + i] = presentation.body['page_' + (i + 1)];
+				}
+
+				delete presentation.body['page_' + presLength];
+
+				if (presLength == currentPage) {
+					currentPage--;
+				}
 			}
 
-			delete presentation.body['page_' + presLength];
-
-			if (presLength == currentPage) {
-				currentPage--;
-			}
+			init.loadContent();
 		}
-		
-		init.loadContent();
 	},
 
 	newTextBox: function() {
