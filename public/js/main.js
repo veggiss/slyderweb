@@ -8,6 +8,8 @@ let login_password = document.getElementById('login_password');
 let login_btn = document.getElementById('login_btn');
 let hrfSignIn = document.getElementById('hrfSignIn');
 let hrfSignOut = document.getElementById('hrfSignOut');
+let hrfSignUp = document.getElementById('hrfSignUp');
+let hrfProfile = document.getElementById('hrfProfile');
 
 
 // Create user
@@ -20,8 +22,8 @@ let createuser_btn = document.getElementById('createuser_btn');
 
 //Main code
 
-window.onload = function(){
-    setSignedInOut();
+window.onload = function () {
+	setSignedInOut();
 }
 
 userinfo_btn.addEventListener("click", () => {
@@ -48,12 +50,12 @@ createuser_btn.addEventListener("click", () => {
 function getUser(username) {
 	fetch(util.newRequest('GET', '/user', {
 		username: username
-	})).then(res =>{
-	    return res.json();
+	})).then(res => {
+		return res.json();
 	}).then(res => {
-	    console.log(res);
+		console.log(res);
 	}).catch(err => {
-	    util.printError(err);
+		util.printError(err);
 	});
 }
 
@@ -63,30 +65,34 @@ function login(username, password) {
 		username: username,
 		password: sha1(password)
 	})).then(res => {
-	    if (res.status === 200) {
-	    	console.log('Login success');
-            location.reload();
+		if (res.status === 200) {
+			console.log('Login success');
+			location.reload();
 		}
 	}).catch(err => {
-	    util.printError(err);
+		util.printError(err);
 	});
 }
 
 //Denne funksjonen sjekker om brukeren er autentisert.
 // er brukeren logget inn setter vi hrfSignOut og hrfSignIn riktig.
-function setSignedInOut(){
-	fetch(util.newRequest('GET', '/user/isLogged', {})).then(res =>{      
-        if(res.status === 200){
-            hrfSignIn.style.display = 'none';
-            hrfSignOut.style.display = 'inline';
-        }else{
-            hrfSignIn.style.display = 'inline';
-            hrfSignOut.style.display = 'none';
-        } 
+function setSignedInOut() {
+	fetch(util.newRequest('GET', '/user/isLogged', {})).then(res => {
+		if (res.status === 200) {
+			hrfSignIn.style.display = 'none';
+			hrfSignUp.style.display = 'none';
+			hrfSignOut.style.display = 'inline';
+			hrfProfile.style.display = 'inline';
+		} else {
+			hrfSignIn.style.display = 'inline';
+			hrfSignUp.style.display = 'inline';
+			hrfSignOut.style.display = 'none';
+			hrfProfile.style.display = 'none';
+		}
 	}).catch(err => {
-	    util.printError(err);
+		util.printError(err);
 	});
-} 
+}
 
 function newUser(user) {
 	fetch(util.newRequest('POST', '/user', {
@@ -96,10 +102,10 @@ function newUser(user) {
 		lastname: user.lastname,
 		mail: user.mail
 	})).then(res => {
-	    if (res.status === 201) {
+		if (res.status === 201) {
 			console.log(`User '${user.username}' created`);
 		}
 	}).catch(err => {
-	    util.printError(err);
+		util.printError(err);
 	});
 }
