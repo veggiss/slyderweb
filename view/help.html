@@ -3,7 +3,7 @@
 
 <head>
 	<meta chartset="utf-8" />
-	<title>Slyderweb - home</title>
+	<title>Slyderweb - help</title>
 	<link rel="stylesheet" type="text/css" href="./css/main.css" />
 	<link rel="stylesheet" type="text/css" href="./css/index.css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
@@ -12,7 +12,12 @@
 <body>
 	<header class="centered colorScheme">
 		<nav>
-			<a href="/" class="logo">SlyderWeb</a>
+			<menuitem class="logo">
+			<a href="/">SlyderWeb</a>
+			</menuitem>
+			<menuitem class="signInOut">
+			<a id="hrfSignIn" href="login">Sign in</a>
+			<a id="hrfSignOut" href="user/logout">Sign out</a>
 			</menuitem>
 			<menuitem>
 			<a href="userprofile#presentations">Presentations</a>
@@ -24,15 +29,11 @@
 			<a href="userprofile">Profile</a>
 			</menuitem>
 			<menuitem>
+			<menuitem>
 			<a href="/help">Help</a>
 			</menuitem>
-			<menuitem>
 			<a href="/about">About</a>
 			</menuitem>
-			<menuitem>
-			<a href="/login">Login</a>
-			</menuitem>
-			<menuitem>
 			<a href="/signup">Sign up</a>
 			</menuitem>
 		</nav>
@@ -60,7 +61,6 @@
 	</main>
 </body>
 <script type="text/javascript" src="./js/util.js"></script>
-<script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/sha1.min.js"></script>
 
 </html>

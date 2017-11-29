@@ -312,6 +312,7 @@ let init = {
 		notesTxt.innerHTML = "";
 
 		editGrid.innerHTML = presObject.content;
+		presNameInput.value = presentation.name;
 		notesTxt.innerHTML = presObject.notes;
 
 		content = editGrid.getElementsByTagName("*");

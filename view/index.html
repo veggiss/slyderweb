@@ -3,40 +3,41 @@
 
 <head>
 	<meta chartset="utf-8" />
-	<title>Slyderweb - home</title>
+	<title>Slyderweb</title>
 	<link rel="stylesheet" type="text/css" href="./css/main.css" />
 	<link rel="stylesheet" type="text/css" href="./css/index.css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 </head>
 
 <body>
-	<header class="centered colorScheme">
-		<nav>
-			<a href="/" class="logo">SlyderWeb</a>
-			</menuitem>
-			<menuitem>
-			<a href="userprofile#presentations">Presentations</a>
-			</menuitem>
-			<menuitem>
-			<a href="/editor">Editor</a>
-			</menuitem>
-			<menuitem>
-			<a href="userprofile">Profile</a>
-			</menuitem>
-			<menuitem>
-			<a href="/help">Help</a>
-			</menuitem>
-			<menuitem>
-			<a href="/about">About</a>
-			</menuitem>
-			<menuitem>
-			<a href="/login">Login</a>
-			</menuitem>
-			<menuitem>
-			<a href="/signup">Sign up</a>
-			</menuitem>
-		</nav>
-	</header>
+		<header class="centered colorScheme">
+				<nav>
+					<menuitem class="logo">
+					<a href="/">SlyderWeb</a>
+					</menuitem>
+					<menuitem class="signInOut">
+					<a id="hrfSignIn" href="login">Sign in</a>
+					<a id="hrfSignOut" href="user/logout">Sign out</a>
+					</menuitem>
+					<menuitem>
+					<a href="userprofile#presentations">Presentations</a>
+					</menuitem>
+					<menuitem>
+					<a href="/editor">Editor</a>
+					</menuitem>
+					<menuitem>
+					<a href="userprofile">Profile</a>
+					</menuitem>
+					<menuitem>
+					<menuitem>
+					<a href="/help">Help</a>
+					</menuitem>
+					<a href="/about">About</a>
+					</menuitem>
+					<a href="/signup">Sign up</a>
+					</menuitem>
+				</nav>
+			</header>
 
 	<main>
 		<section class="textContainer">
@@ -82,12 +83,12 @@
 				<h3 class="modal-header">Sign in</h3>
 				<hr>
 				<div class="modal-body centered">
-				<input type="text" id="login_username" placeholder="Username">
-				<br>
-				<input type="text" id="login_password" placeholder="Password">
-				<br>
-				<button id="login_btn">Sign in</button>
-			</div>
+					<input type="text" id="login_username" placeholder="Username">
+					<br>
+					<input type="text" id="login_password" placeholder="Password">
+					<br>
+					<button id="login_btn">Sign in</button>
+				</div>
 		</div>
 	</div>
 
