@@ -79,12 +79,15 @@
 		<div class="modal-content">
 			<span class="close">&times;</span>
 			<fieldset>
-				<h3 class="modal-content">Sign in</h3>
-					<input type="text" id="login_username" placeholder="Username">
-					<br>
-					<input type="text" id="login_password" placeholder="Password">
-					<br>
-					<button id="login_btn">Sign in</button>
+				<h3 class="modal-header">Sign in</h3>
+				<hr>
+				<div class="modal-body centered">
+				<input type="text" id="login_username" placeholder="Username">
+				<br>
+				<input type="text" id="login_password" placeholder="Password">
+				<br>
+				<button id="login_btn">Sign in</button>
+			</div>
 		</div>
 	</div>
 
@@ -95,19 +98,22 @@
 		<div class="modal-content">
 			<span class="close">&times;</span>
 			<h3 class="modal-header">Create new user</h3>
-			Username:
-			<input type="text" id="createuser_username">
-			<br> Password:
-			<input type="text" id="createuser_password">
-			<br> First name:
-			<input type="text" id="createuser_firstname">
-			<br> Last name:
-			<input type="text" id="createuser_lastname">
-			<br> e-mail address:
-			<input type="text" id="createuser_mail">
-			<br>
-			<button id="createuser_btn">Create user</button>
-			<button id="cancel_btn">Cancel</button>
+			<hr>
+			<div class="modal-body centered">
+				<p class="neutralText">Username</p>
+				<input type="text" id="createuser_username" placeholder="username">
+				<p class="neutralText">Password:</p>
+				<input type="text" id="createuser_password" placeholder="password">
+				<p class="neutralText">First name:</p>
+				<input type="text" id="createuser_firstname" placeholder="first name">
+				<p class="neutralText">Last name:</p>
+				<input type="text" id="createuser_lastname" placeholder="last name">
+				<p class="neutralText">E-mail address:</p>
+				<input type="text" id="createuser_mail" placeholder="email">
+				<br>
+				<button id="createuser_btn">Create user</button>
+				<button id="cancel_btn">Cancel</button>
+			</div>
 		</div>
 	</div>
 
@@ -122,11 +128,14 @@
 	// Get the button that opens the modal
 	let openSignInModalbtn = document.getElementById("openSignInModalbtn");
 	let openCreateUserModalbtn = document.getElementById("openCreateUserModalbtn");
-	let cancelbtn = document.getElementById("cancelbtn");
+	let cancel_btn = document.getElementById("cancel_btn");
 
 	// Get the <span> element that closes the modal
 	let span = document.getElementsByClassName("close")[0];
 	let spanTwo = document.getElementsByClassName("close")[1];
+
+	//for styling
+	modal_signIn.style.display = "block";
 
 	// When the user clicks on the button, open the modal 
 	//openSignInModalbtn.onclick = openModal(modal_SignIn);
@@ -138,6 +147,11 @@
 	}
 
 	// When the user clicks on <span> (x), close the modal
+
+	cancel_btn.onclick = function () {
+		modal_createUser.style.display = "none";
+	}
+
 	span.onclick = function () {
 		modal_signIn.style.display = "none";
 	}
@@ -153,9 +167,6 @@
 			modal_createUser.style.display = "none";
 		}
 	}
-
-	keyevent
-
 
 </script>
 

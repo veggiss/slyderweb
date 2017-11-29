@@ -149,7 +149,7 @@ li { padding: 0.2rem;}
 
 ul { margin: 0.2rem 0;}
 
-hr { border: 0; border-top: 1px dotted #fff;}
+hr { border-top: 1px dotted rgb(198, 195, 195); margin: 2px; }
 
 
 
@@ -160,6 +160,8 @@ hr { border: 0; border-top: 1px dotted #fff;}
 .centered { text-align: center;}
 
 ul.hidden { padding-left: 0; list-style: none;}
+
+.neutralText { padding: 0; margin: 0;}
 
 .noLinkStyle { text-decoration: none; color: black;}
 
@@ -189,13 +191,20 @@ ul.hidden { padding-left: 0; list-style: none;}
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    margin: 20% auto; /* 15% from the top and centered */
+    /*border: 1px solid #888;*/
+	width: 80%; /* Could be more or less, depending on screen size */
+	max-width: 500px;
 }
 
-.modal-header { }
+.modal-header { 
+	text-align: center;
+	font-size: 2.0rem;
+}
+
+.modal-body {
+	padding: 6px 20px;
+}
 
 .modal-closed {
 	display: none;
@@ -204,7 +213,7 @@ ul.hidden { padding-left: 0; list-style: none;}
 /* The Close Button */
 .close {
     color: #aaa;
-    float: right;
+	float: right;
     font-size: 28px;
     font-weight: bold;
 }
@@ -214,4 +223,23 @@ ul.hidden { padding-left: 0; list-style: none;}
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#createuser_btn {
+	float: left;
+	background: green;
+	width: 50%;
+	border-radius: none;
+}
+
+#cancel_btn {
+	border-radius: none;
+	width: 49%;	
+	float: right;
+	background: red;
+}
+
+#login_btn {
+	background: olive;
+	color: white;
 }
