@@ -17,68 +17,65 @@ app.use(bodyParser.json());
 app.use(ut.corsSettings);
 app.use(session({
     store: new pgSession({
-        pool : pgPool,
+        pool: pgPool,
         tableName: 'sessions'
     }),
     secret: 'uia2017mm200slyderweb',
     resave: false,
     saveUninitialized: false,
     //Secure should only be true with https connections (e.g heroku)
-    cookie: {maxAge: 60 * 60 * 1000, secure: false}
+    cookie: { maxAge: 60 * 60 * 1000, secure: false }
 }));
 
 // Get
 app.get('/user', db.getUser, ut.logEvent);
 app.get('/user/preslist', ut.userAuth, db.getPresList, ut.logEvent);
 app.get('/user/presentation', ut.userAuth, db.getPresenation, ut.logEvent);
-app.get('/user/userauth', ut.userAuth, ut.logEvent);
-app.get('/user/logout', db.logoutUser, ut.logEvent);
+app.get('/user/isLogged', ut.userAuth, db.isLogged);
+app.get('/user/logout', ut.userAuth, db.logoutUser, ut.logEvent);
 
 // Page navigation
 app.get('/editor', (req, res) => {
     res.sendFile(appRoot + '/view/editor.html');
 });
 
-/* gammel forside
 app.get('/', (req, res) => {
-    res.sendFile(appRoot + '/view/index.html');
-});*/
-
-app.get('/', (req, res) => {
-	if (req.session.username) {
-		res.sendFile(appRoot + '/view/userprofile.html#presentations');
-	} else {
-		res.sendFile(appRoot + '/view/index.html');
-	}
+    if (req.session.username) {
+        res.sendFile(appRoot + '/view/userprofile.html#presentations');
+    } else {
+        res.sendFile(appRoot + '/view/index.html');
+    }
 });
 
 app.get('/userprofile', (req, res) => {
     res.sendFile(appRoot + '/view/userprofile.html');
 });
+
 app.get('/help', (req, res) => {
     res.sendFile(appRoot + '/view/help.html');
 });
+
 app.get('/about', (req, res) => {
     res.sendFile(appRoot + '/view/about.html');
 });
 
 app.get('/login', (req, res) => {
-	//if (req.session.username) {  at den automatisk logger inn fra cookie?
-	res.sendFile(appRoot + '/view/login.html');
+    res.sendFile(appRoot + '/view/login.html');
 });
 
 app.get('/signup', (req, res) => {
     res.sendFile(appRoot + '/view/signup.html');
 });
 
-
-
 // Post
 app.post('/user', db.newUser, ut.logEvent);
 app.post('/user/login', db.loginUser, ut.logEvent, db.setLastlogin, ut.logEvent);
 app.post('/user/presentation', ut.userAuth, db.updatePresentation, ut.logEvent, db.newPresentation, ut.logEvent);
 
-app.listen(app.get('port'), function() {
+// Delete
+app.delete('/user/presentation', ut.userAuth, db.deletePresentation, ut.logEvent);
+
+app.listen(app.get('port'), function () {
     ut.print('-----------------------------');
     ut.print('       Server started');
     ut.print(`    http://localhost:${ut.connectionPort}`);

@@ -2,7 +2,7 @@ const pg = require('pg');
 const {Client} = pg;
 const {Pool} = pg;
 //connectionString = process.env.DATABASE_URL <- Allways upload to git and heroku with this
-const connectionString = process.env.DATABASE_URL;
+const connectionString = 'postgres://qmmmxfpbnkmfuu:61353f3ff055d0833425f0eb668e4eeae4455cbc102ce1703bdf7a0371a466ee@ec2-46-51-187-253.eu-west-1.compute.amazonaws.com:5432/dau7n64ghf76jc';
 const connectionPort = process.env.PORT || 8080;
 const heroku = connectionString == process.env.DATABASE_URL;
 
@@ -98,12 +98,7 @@ function print(...lines) {
 function userAuth(req, res, next) {
     if (req.session.username) {
         res.authenticated = true;
-        res.statusMessage = 'User logged in';
-    
-        res.status(200).end();
-        //Denne funksjonen fungerte ikke med next
-        //next();
-             
+        next();
     } else {
         res.authenticated = false;
         res.statusMessage = 'User not logged in';

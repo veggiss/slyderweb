@@ -20,8 +20,8 @@ let createuser_btn = document.getElementById('createuser_btn');
 
 //Main code
 
-window.onload=function(){
-    var test = setSignedInOut();
+window.onload = function(){
+    setSignedInOut();
 }
 
 userinfo_btn.addEventListener("click", () => {
@@ -75,15 +75,13 @@ function login(username, password) {
 //Denne funksjonen sjekker om brukeren er autentisert.
 // er brukeren logget inn setter vi hrfSignOut og hrfSignIn riktig.
 function setSignedInOut(){
-	fetch(util.newRequest('GET', '/user/userauth', {
-		username: ""
-	})).then(res =>{        
+	fetch(util.newRequest('GET', '/user/isLogged', {})).then(res =>{      
         if(res.status === 200){
-            hrfSignIn.style.display='none';
-            hrfSignOut.style.display='inline';
+            hrfSignIn.style.display = 'none';
+            hrfSignOut.style.display = 'inline';
         }else{
-            hrfSignIn.style.display='inline';
-            hrfSignOut.style.display='none';
+            hrfSignIn.style.display = 'inline';
+            hrfSignOut.style.display = 'none';
         } 
 	}).catch(err => {
 	    util.printError(err);

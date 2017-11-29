@@ -29,21 +29,22 @@
 			<a href="/editor">Editor</a>
 			</menuitem>
 			<menuitem>
-			<a href="userprofile">Profile</a>
+			<a href="/userprofile">Profile</a>
 			</menuitem>
-			<menuitem>
 			<menuitem>
 			<a href="/help">Help</a>
 			</menuitem>
+			<menuitem>
 			<a href="/about">About</a>
 			</menuitem>
+			<menuitem>
 			<a href="/signup">Sign up</a>
 			</menuitem>
 		</nav>
 	</header>
 
 
-	<div id="editGrid"></div>
+	<div id="editGrid" class="editGrid"></div>
 
 	<div id="colorPicker">
 		Hue
@@ -140,7 +141,7 @@
 		</ul>
 	</div>
 
-	<div class="side-bar noselect colorScheme">
+	<div class="side-bar noselect">
 		<main>
 			<input id="toggle_page" type="checkbox">
 			<label for="toggle_page">Slyde</label>
@@ -148,7 +149,7 @@
 				<section>
 					<div>
 						<text>Title</text>
-						<input id="presNameInput" name="notes" placeholder="My slyde" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0">
+						<input id="presNameInput" name="notes" placeholder="My slyde" style="width: 95%; height: 20px; font-family: Courier; text-align: center; margin-top: 0; margin-left: 2px;">
 					</div>
 					<div id="newPresentationBtn">
 						<span name="btn">
@@ -199,7 +200,7 @@
 							<t>Import</t>
 						</span>
 					</div>
-					<div style="cursor: not-allowed;">
+					<div id="deletePresBtn">
 						<span name="btn">
 							<t class="material-icons" style="font-size: 26px;">delete</t>
 							<br>
@@ -211,33 +212,33 @@
 		</main>
 
 		<main>
-			<input id="toggle_elements" type="checkbox">
-			<label for="toggle_elements">Add</label>
-			<div id="expand_elements">
-				<section>
-					<div id="newTextBoxBtn">
-						<span name="btn">
-							<t style="font-size: 26px;font-family: Georgia;">T</t>
-							<br>
-							<t>Textbox</t>
-						</span>
-					</div>
-					<div style="cursor: not-allowed;">
-						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;">crop_original</t>
-							<br>
-							<t>Image</t>
-						</span>
-					</div>
-					<div style="cursor: not-allowed;">
-						<span name="btn">
-							<t class="material-icons" style="font-size: 26px;">web_asset</t>
-							<br>
-							<t>Iframe</t>
-						</span>
-					</div>
-				</section>
-			</div>
+			<<<<<<< HEAD <input id="toggle_elements" type="checkbox">
+				<label for="toggle_elements">Add</label>
+				<div id="expand_elements">
+					<section>
+						<div id="newTextBoxBtn">
+							<span name="btn">
+								<t style="font-size: 26px;font-family: Georgia;">T</t>
+								<br>
+								<t>Textbox</t>
+							</span>
+						</div>
+						<div style="cursor: not-allowed;">
+							<span name="btn">
+								<t class="material-icons" style="font-size: 26px;">crop_original</t>
+								<br>
+								<t>Image</t>
+							</span>
+						</div>
+						<div style="cursor: not-allowed;">
+							<span name="btn">
+								<t class="material-icons" style="font-size: 26px;">web_asset</t>
+								<br>
+								<t>Iframe</t>
+							</span>
+						</div>
+					</section>
+				</div>
 		</main>
 
 		<main>
@@ -288,6 +289,100 @@
 					</div>
 				</section>
 			</div>
+			=======
+			<input id="toggle_elements" type="checkbox">
+			<label for="toggle_elements">Add</label>
+			<div id="expand_elements">
+				<section>
+					<div id="newTextBoxBtn">
+						<span name="btn">
+							<t style="font-size: 26px;font-family: Georgia;">T</t>
+							<br>
+							<t>Textbox</t>
+						</span>
+					</div>
+					<div id="addImageBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">crop_original</t>
+							<br>
+							<t>Image</t>
+						</span>
+					</div>
+					<div id="addIframeBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">web_asset</t>
+							<br>
+							<t>Iframe</t>
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_tools" type="checkbox">
+			<label for="toggle_tools">Tools</label>
+			<div id="expand_tools">
+				<section>
+					<div>
+						<span>
+							<t>Scale</t>
+							<input id="scaleRange" name="range" type="range" min="0" max="10" value="1" step="0.1">
+						</span>
+					</div>
+					<div>
+						<span>
+							<t>Rotation</t>
+							<input id="rotationRange" name="range" type="range" min="0" max="360" value="0">
+						</span>
+					</div>
+					<div>
+						<span>
+							<t>Border</t>
+							<input id="borderRange" name="range" type="range" min="0" max="100" value="0">
+						</span>
+					</div>
+					<div>
+						<span>
+							<t>Layer</t>
+						</span>
+					</div>
+					<div>
+						<span id="layerDownBtn" name="btn">
+							<t class="material-icons" style="font-size: 26px;">keyboard_arrow_down</t>
+							<br>
+						</span>
+						<span id="layerUpBtn" name="btn">
+							<t class="material-icons" style="font-size: 26px;">keyboard_arrow_up</t>
+							<br>
+						</span>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<main>
+			<input id="toggle_background" type="checkbox">
+			<label for="toggle_background">Styles</label>
+			<div id="expand_background">
+				<section>
+					<div id="changeBgBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">color_lens</t>
+							<br>
+							<t>Background</t>
+						</span>
+					</div>
+					<div id="templatesBtn">
+						<span name="btn">
+							<t class="material-icons" style="font-size: 26px;">art_track</t>
+							<br>
+							<t>Templates</t>
+						</span>
+					</div>
+				</section>
+			</div>
+			>>>>>>> master
 		</main>
 
 		<main>
@@ -303,24 +398,29 @@
 
 	<div id="pageNav" class="page-nav noselect">
 		<section>
-			<div>
-				<span name="btn">
-					<t id="currentPageTxt" class="material-icons"></t>
-				</span>
-			</div>
 			<div id="loadprevBtn">
-				<span name="btn">
+				<span>
 					<t class="material-icons">keyboard_arrow_left</t>
 				</span>
 			</div>
+			<div>
+				<span>
+					<t id="currentPageTxt"></t>
+				</span>
+			</div>
 			<div id="loadnextBtn">
-				<span name="btn">
+				<span>
 					<t class="material-icons">keyboard_arrow_right</t>
 				</span>
 			</div>
 			<div id="newPageBtn">
-				<span name="btn">
+				<span>
 					<t class="material-icons">add</t>
+				</span>
+			</div>
+			<div id="deletePageBtn">
+				<span>
+					<t class="material-icons">remove</t>
 				</span>
 			</div>
 		</section>
@@ -333,6 +433,42 @@
 			<div id="mySlydesContainer">
 				<div id="mySlydesContent"></div>
 			</div>
+		</div>
+	</div>
+
+	<div id="templatesModal" class="modal">
+		<div class="modal-content noselect" style="width: 30%; min-width: 50px;">
+			<div class="material-icons" style="font-size: 35px; cursor: default; color: #3d3d3d">art_track</div>
+			<hr>
+			<div class="mySlydesContainer">
+				<div id="arrangeSection">
+					<h4>Arrange</h4>
+					<img name="template_arrange_1" class="templatesImg" src="./img/template_arrange_1.PNG">
+					<img name="template_arrange_2" class="templatesImg" src="./img/template_arrange_2.PNG">
+					<img name="template_arrange_3" class="templatesImg" src="./img/template_arrange_3.PNG">
+					<img name="template_arrange_4" class="templatesImg" src="./img/template_arrange_4.PNG">
+				</div>
+				<div id="backgroundSection">
+					<h4>Backgrounds</h4>
+					<img name="template_background_1" class="templatesImg" src="./img/template_background_1.PNG">
+					<img name="template_background_2" class="templatesImg" src="./img/template_background_2.PNG">
+					<img name="template_background_3" class="templatesImg" src="./img/template_background_3.PNG">
+					<img name="template_background_4" class="templatesImg" src="./img/template_background_4.PNG">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="addImagePanel" class="side-bar noselect img-bar">
+		<div id="addImgFromLinkBtn">
+			<span name="btn">
+				<t>Link</t>
+			</span>
+		</div>
+		<div id="addImgFromLocalBtn">
+			<span name="btn">
+				<t>Local</t>
+			</span>
 		</div>
 	</div>
 
@@ -370,6 +506,7 @@
 <script type="text/javascript" src="./js/editor/btnevents.js"></script>
 <script type="text/javascript" src="./js/editor/domevents.js"></script>
 <script type="text/javascript" src="./js/editor/presmode.js"></script>
+<script type="text/javascript" src="./js/editor/templates.js"></script>
 <script type="text/javascript" src="./js/editor/load.js"></script>
 
 </html>

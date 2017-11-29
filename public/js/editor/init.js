@@ -4,11 +4,14 @@ let init = {
 		colorPicker.style.display 	= "none";
 		shadowPicker.style.display 	= "none";
 		colorBgPanel.style.display 	= 'none';
+		addImagePanel.style.display = 'none';
+		templatesModal.style.display= 'none';
 		fileDialog.type 			= 'file';
-		fileDialog.accept 			= '.slyderweb';
-		editGrid.style.width		= (screen.width * 0.65) + 'px';
 		editGrid.style.height		= (screen.height * 0.65) + 'px';
+		editGrid.style.width		= (screen.width * 0.65) + 'px';
+		//editGrid.style.width		= (parseInt(editGrid.style.height) * (4/3)) + 'px';
 		pageNav.style.top 			= (editGrid.offsetTop + editGrid.offsetHeight) + "px";
+		pageNav.style.width 		= editGrid.offsetWidth + "px";
 
 		//We need this for hsla coloring with execCommand
 		document.execCommand('styleWithCSS', false, true);
@@ -22,10 +25,15 @@ let init = {
 		});
 
 		document.addEventListener('click', e => {
-			if (e.target == mySlydesModal) {
+			if (e.target == mySlydesModal || e.target == templatesModal) {
 				mySlydesModal.style.display = 'none';
+				templatesModal.style.display = 'none';
 			}
 		});
+
+		window.onresize = e => {
+			pageNav.style.top = (editGrid.offsetTop + editGrid.offsetHeight) + "px";
+		}
 
 		editGrid.addEventListener('dragenter', e => {
 			e.preventDefault();
@@ -53,6 +61,7 @@ let init = {
 		});
 
 		importBtn.addEventListener('click', e => {
+			fileDialog.accept = '.slyderweb';
 			fileDialog.click();
 		});
 
@@ -89,22 +98,71 @@ let init = {
 				selected.style.transformOrigin = '0 0';
 			}
 		});
-	},
 
-	getTransform(element) {
-		let scale = element.style.transform.split('scale(')[1];
-		scale = scale.split(')')[0];
-		let rotate = element.style.transform.split('rotate(')[1];
-		rotate = rotate.split(')')[0];
-		return {
-			scale: parseFloat(scale),
-			rotate: parseFloat(rotate)
-		}
+		borderRange.addEventListener('input', e => {
+			if (selected != undefined) {
+				borderRange.max = borderRange.offsetWidth;
+				selected.style.borderRadius = e.target.value + 'px';
+			}
+		});
+
+		addImageBtn.addEventListener('click', e => {
+			if (addImagePanel.style.display === 'none') {
+				addImagePanel.style.display = "block";
+			} else {
+				addImagePanel.style.display = "none";
+			}
+		});
+
+		addImgFromLinkBtn.addEventListener('click', e => {
+			let link = prompt("Enter image link", "");
+			if (util.isNotEmpty(link) && link.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+				let img = domEvent.newImage(link);
+				editGrid.appendChild(img);
+				init.addDefaultEvents(img);
+			}
+			addImagePanel.style.display = "none";
+		});
+
+		addImgFromLocalBtn.addEventListener('click', e => {
+			fileDialog.accept = 'image/*';
+			fileDialog.click();
+			addImagePanel.style.display = "none";
+		});
+
+		addIframeBtn.addEventListener('click', e => {
+			let link = prompt("Enter iframe link", "");
+			if (util.isNotEmpty(link)) {
+				let iframe = domEvent.newIframe(link);
+				editGrid.appendChild(iframe);
+				init.addDefaultEvents(iframe);
+			}
+		});
+
+		arrangeSection.forEach(item => {
+			item.addEventListener('click', e => {
+				btnEvent.loadTemplate('arrange', item);
+			})
+		});
+
+		backgroundSection.forEach(item => {
+			item.addEventListener('click', e => {
+				btnEvent.loadTemplate('background', item);
+			})
+		});
 	},
 
 	mouseEvent: function(e) {
 		if ((e.target === editGrid || e.target === document.documentElement) && selected != undefined) {
 			domEvent.removeSelected();
+		}
+
+		if ((e.target === editGrid || e.target === document.documentElement)) {
+			addImagePanel.style.display = 'none';
+			colorBgPanel.style.display = 'none';
+			textToolBar.style.display = 'none';
+			colorPicker.style.display = 'none';
+			shadowPicker.style.display = 'none';
 		}
 
 		if (presmode) {
@@ -144,8 +202,45 @@ let init = {
 					}
 				} else if (mySlydesModal.style.display != 'none') {
 					mySlydesModal.style.display = 'none';
-				} else if (colorBgPanel.style.display != 'none') {
+				} else if (colorBgPanel.style.display != 'none' || addImagePanel.style.display != 'none') {
 					colorBgPanel.style.display = 'none';
+					addImagePanel.style.display = 'none';
+				}
+			} else if (e.ctrlKey && key == 67) {
+				if (selected != undefined && !editing) {
+					copySelected = selected.cloneNode(true);
+				}
+			} else if (e.ctrlKey && key == 86) {
+				if (copySelected != undefined && !editing) {
+					let height = parseInt(editGrid.style.height) / 2;
+					let width = parseInt(editGrid.style.width) / 2;
+					copySelected.style.top = (height) + 'px';
+					copySelected.style.left = (width) + 'px';
+					let newCopy = copySelected.cloneNode(true);
+					init.addDefaultEvents(newCopy);
+					init.addEventsText(newCopy);
+					editGrid.appendChild(newCopy);
+					domEvent.setSelected(newCopy);
+				}
+			} else if (key == 39 && !editing) {
+				if (selected != undefined) {
+					selected.style.left = (selected.offsetLeft += 1) + "px";
+				} else {
+					btnEvent.nextPage();
+				}
+			} else if (key == 37 && !editing) {
+				if (selected != undefined) {
+					selected.style.left = (selected.offsetLeft -= 1) + "px";
+				} else {
+					btnEvent.prevPage();
+				}
+			} else if (key == 38 && !editing) {
+				if (selected != undefined) {
+					selected.style.top = (selected.offsetTop -= 1) + "px";
+				}
+			} else if (key == 40 && !editing) {
+				if (selected != undefined) {
+					selected.style.top = (selected.offsetTop += 1) + "px";
 				}
 			}
 		} else if (presmode) {
@@ -317,7 +412,7 @@ let init = {
 
 		content = editGrid.getElementsByTagName("*");
 		presLength = Object.keys(presentation.body).length;
-		currentPageTxt.innerHTML = `filter_${currentPage}filter_${presLength}`;
+		currentPageTxt.innerHTML = `${currentPage} of ${presLength}`;
 		domEvent.setBgColor();
 		init.transformScale();
 
@@ -343,7 +438,7 @@ let init = {
 					optionDom.innerHTML = "&emsp;Title: " + item.name;
 					mySlydesContent.appendChild(optionDom);
 					optionDom.addEventListener('click', e => {
-						btnEvent.loadSelectedPres(item.name, item.id);
+						btnEvent.loadSelectedPres(item.id);
 						mySlydesModal.style.display = 'none';
 					});
 					mySlydesModal.style.display = 'inline-block';
@@ -398,24 +493,75 @@ let init = {
 		});
 	},
 
+	//Scales content to fit clients current window compared to last saved window height (basic scale matrix)
+	//This can only be run once (when elements still have scale ratio from previous save)
 	transformScale: function() {
-		let max = Math.max(presentation.originHeight, screen.height);
-		let min = Math.min(presentation.originHeight, screen.height);
-		let scale;
+		if (presentation.originHeight != screen.height) {
+			let max = Math.max(presentation.originHeight, screen.height);
+			let min = Math.min(presentation.originHeight, screen.height);
+			let scale;
 
-		if (screen.height < presentation.originHeight) {
-			scale = min / max;
-		} else {
-			scale = max / min;
+			if (screen.height < presentation.originHeight) {
+				scale = min / max;
+			} else {
+				scale = max / min;
+			}
+
+			editGrid.childNodes.forEach(item => {
+				let trans = init.getTransform(item);
+				item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
+				item.style.transformOrigin = '0 0';
+				item.style.top = (item.offsetTop * scale) + 'px';
+				item.style.left = (item.offsetLeft * scale) + 'px';
+			});
+
+			presentation.originHeight = screen.height;
+			domEvent.savePage();
 		}
+	},
 
-		editGrid.childNodes.forEach(item => {
-			let trans = init.getTransform(item);
-			item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
-			item.style.transformOrigin = '0 0';
-			item.style.top = (parseInt(item.style.top) * scale) + 'px';
-			item.style.left = (parseInt(item.style.left) * scale) + 'px';
-		});
+	transformTemplate: function(originHeight, htmlContent) {
+		if (originHeight != screen.height) {
+			let max = Math.max(originHeight, screen.height);
+			let min = Math.min(originHeight, screen.height);
+			let tempDiv = document.createElement('div');
+			let scale;
+
+			tempDiv.innerHTML = htmlContent;
+
+			tempDiv.childNodes.forEach(item => {
+				let trans = init.getTransform(item);
+				let scale;
+				if (screen.height < presentation.originHeight) {
+					scale = min / max;
+					item.style.transform = `scale(${trans.scale * scale}) rotate(${trans.rotate}deg)`;
+					item.style.transformOrigin = '0 0';
+					item.style.top = (parseInt(item.style.top) * scale) + 'px';
+					item.style.left = (parseInt(item.style.left) * scale) + 'px';
+				} else {
+					scale = max / min;
+					item.style.transform = `scale(${trans.scale/scale}) rotate(${trans.rotate}deg)`;
+					item.style.transformOrigin = '0 0';
+					item.style.top = (parseInt(item.style.top) / scale) + 'px';
+					item.style.left = (parseInt(item.style.left) / scale) + 'px';
+				}
+			});
+
+			let returnContent = tempDiv.innerHTML;
+			tempDiv.remove();
+			return returnContent;
+		}
+	},
+
+	getTransform(element) {
+		let scale = element.style.transform.split('scale(')[1];
+		scale = scale.split(')')[0];
+		let rotate = element.style.transform.split('rotate(')[1];
+		rotate = rotate.split(')')[0];
+		return {
+			scale: parseFloat(scale),
+			rotate: parseFloat(rotate)
+		}
 	},
 
 	newPresObject: function() {
