@@ -45,12 +45,11 @@ let fsEvents = {
 		if (browserType === 'moz') {
 			let scale = screen.height / parseInt(editGrid.style.height);
 			editGrid.childNodes.forEach(item => {
-				/*let trans = init.getTransform(item);
-				let itemScale = screen.height / parseInt(item.style.height);
-				item.style.transform = `scale(${scale}) rotate(${trans.rotate}deg)`;
-				item.style.transformOrigin = '0 0';*/
-				/*item.style.top = ((item.offsetTop * scale)) + 'px';
-				item.style.left = ((item.offsetLeft * scale) (item.offsetTop/2)) + 'px';*/
+				let trans = init.getTransform(item);
+				item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
+				item.style.transformOrigin = '0 0';
+				item.style.top = ((item.offsetTop * scale)) + 'px';
+				item.style.left = ((item.offsetLeft * scale)) + 'px';
 			});
 		} else {
 			editGrid.style.left = "0px";
@@ -80,15 +79,7 @@ let fsEvents = {
 		editGrid.style.left = "15%";
 		editGrid.style.borderStyle = "dashed";
 
-		if (browserType === 'moz') {
-			editGrid.style.transform = `scale(${1}`;
-			editGrid.style.transformOrigin = '0 0';
-			editGrid.childNodes.forEach(item => {
-				let trans = init.getTransform(item);
-				item.style.transform = `scale(${trans.scale}) rotate(${trans.rotate}deg)`;
-				item.style.transformOrigin = '0 0';
-			});
-		} else {
+		if (browserType != 'moz') {
 			editGrid.style.zoom = "100%";
 		}
 
