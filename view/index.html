@@ -20,22 +20,11 @@
 			<a id="hrfSignOut" href="user/logout">Sign out</a>
 			</menuitem>
 			<menuitem>
-			<a href="userprofile#presentations">Presentations</a>
+			<a href="editor">Editor</a>
 			</menuitem>
 			<menuitem>
-			<a href="/editor">Editor</a>
-			</menuitem>
-			<menuitem>
-			<a href="userprofile">Profile</a>
-			</menuitem>
-			<menuitem>
-			<a href="/help">Help</a>
-			</menuitem>
-			<menuitem>
-			<a href="/about">About</a>
-			</menuitem>
-			<menuitem>
-			<a href="/signup">Sign up</a>
+			<a id="hrfSignUp" href="signup">Sign up</a>
+			<a id="hrfProfile" href="userprofile">Profile</a>
 			</menuitem>
 		</nav>
 	</header>
@@ -105,7 +94,7 @@
 				<p class="neutralText">Username</p>
 				<input type="text" id="createuser_username" placeholder="username">
 				<p class="neutralText">Password:</p>
-				<input type="text" id="createuser_password" placeholder="password">
+				<input type="text" id="createuser_password" type="password" placeholder="password">
 				<p class="neutralText">First name:</p>
 				<input type="text" id="createuser_firstname" placeholder="first name">
 				<p class="neutralText">Last name:</p>
@@ -136,8 +125,8 @@
 	let span = document.getElementsByClassName("close")[0];
 	let spanTwo = document.getElementsByClassName("close")[1];
 
-	//for styling
-	modal_signIn.style.display = "block";
+	//for styling av modal
+	//modal_signIn.style.display = "block";
 
 	// When the user clicks on the button, open the modal 
 	//openSignInModalbtn.onclick = openModal(modal_SignIn);
