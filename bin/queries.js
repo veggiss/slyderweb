@@ -92,6 +92,13 @@ function loginUser(req, res, next) {
     }
 }
 
+function logoutUser(req, res) {
+    
+    req.session.destroy();
+    //req.logout();
+    res.redirect('/');
+}
+
 function setLastlogin(req, res, next) {
     let username = req.body.username;
 
@@ -351,5 +358,6 @@ module.exports = {
     updatePresentation: updatePresentation,
     newPresentation: newPresentation,
     getPresList: getPresList,
-    getPresenation: getPresenation
+    getPresenation: getPresenation,
+    logoutUser: logoutUser
 }
