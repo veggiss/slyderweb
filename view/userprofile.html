@@ -4,31 +4,64 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>Userprofile</title>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="./css/main.css" rel="stylesheet">
 	<link href="./css/userprofile.css" rel="stylesheet">
+	
 </head>
 <body>
 
+    <header class="centered">
+			<nav>
+				<menuitem class="logo">
+				<a href="/">SlyderWeb</a>
+				</menuitem>
+				<menuitem class="signInOut">
+				<a id="hrfSignIn" href="/">Sign in</a>
+				<a id="hrfSignOut" href="user/logout">Sign out</a>
+				</menuitem>
+				<menuitem>
+					<a href="userprofile#presentations">Presentations</a>
+				</menuitem>
+				<menuitem>
+				<a href="/editor">Editor</a>
+				</menuitem>
+				<menuitem>
+				<a href="userprofile">Settings</a>
+				</menuitem>
+				<menuitem>
+				<menuitem>
+				<a href="/help">Help</a>
+				</menuitem>
+				<a href="/about">About</a>
+				</menuitem>
+			</nav>
+		</header>
+    
   <main id="profile-root">
   
     <section id="profile-controls">
       <div><!-- <img src="https://lorempixel.com/200/200/people/1" alt=""> --></div>
   		<nav>
         <a href="#slides"  class="menu-item">Presentations</a>
+        <hr>
+        <hr>
         <a href="#setting" class="menu-item">Setting</a>
+        <hr>
+        <hr>
   		</nav>
     </section>
   
     <section id="page-slides" class="page">
-      <header><h1>Slides</h1></header>
+      <header class="header-userprofile"><h1>Slides</h1></header>
       <div id="page-slides-root"><!-- CONTENT -->
       </div><!-- CONTENT - END -->
     </section>
   
     <section id="page-setting" class="page">
-      <header><h1>Settings</h1></header>
-      <div><!-- CONTENT -->
+      <header class="header-userprofile"><h1>Settings</h1></header>
+      <div class="page-settings-root"><!-- CONTENT -->
         <form>
           <label> Change first name
           <input id="firstname" type="text" /></label>
