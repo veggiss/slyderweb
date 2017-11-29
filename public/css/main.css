@@ -79,10 +79,7 @@ menuitem a:hover {
     float: left;
 }
 
-.signInOut {
-    float: right;
-   
-}
+.signInOut { float: right;}
 
 logo a {color: white;}
 
