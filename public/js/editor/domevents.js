@@ -118,6 +118,7 @@ let domEvent = {
 		img.style.transform = 'scale(1) rotate(0)';
 		img.style.width = "250px";
 		img.style.height = "auto";
+		img.style.zIndex = "3";
 		img.draggable = false;
 
 		return img;
@@ -136,6 +137,7 @@ let domEvent = {
 		container.appendChild(iframe);
 		container.style.width = "auto";
 		container.style.height = ((parseInt(iframe.style.height)) + 50) + 'px';
+		container.style.zIndex = "3";
 
 		return container;
 	},

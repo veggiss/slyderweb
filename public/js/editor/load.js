@@ -21,6 +21,8 @@ let addImageBtn 			= document.getElementById('addImageBtn');
 let addIframeBtn 			= document.getElementById('addIframeBtn');
 let deletePresBtn 			= document.getElementById('deletePresBtn');
 let deletePageBtn 			= document.getElementById('deletePageBtn');
+let layerUpBtn 				= document.getElementById('layerUpBtn');
+let layerDownBtn 			= document.getElementById('layerDownBtn');
 //Text toolbar stuff
 let textToolBar 			= document.getElementById('textToolBar');
 let toolbar_font 			= document.getElementById('toolbar_font');
@@ -86,6 +88,8 @@ deletePresBtn.onclick 		= btnEvent.deletePresentation;
 changeBgBtn.onclick			= btnEvent.toggleBgPanel;
 templatesBtn.onclick 		= btnEvent.openTemplates;
 deletePageBtn.onclick 		= btnEvent.deletePage;
+layerUpBtn.onclick 			= btnEvent.layerUp;
+layerDownBtn.onclick 		= btnEvent.layerDown;
 //Load everything
 init.loadGrid();
 init.loadContent();

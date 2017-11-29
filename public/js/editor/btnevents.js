@@ -209,6 +209,28 @@ let btnEvent = {
 		}
 	},
 
+	layerUp: function() {
+		if (selected) {
+			let zindex = parseInt(selected.style.zIndex);
+			if (zindex < 4) {
+				zindex++;
+				selected.style.zIndex = zindex.toString();
+				console.log(zindex);
+			}
+		}
+	},
+
+	layerDown: function() {
+		if (selected) {
+			let zindex = parseInt(selected.style.zIndex);
+			if (zindex > 1) {
+				zindex--;
+				selected.style.zIndex = zindex.toString();
+				console.log(zindex);
+			}
+		}
+	},
+
 	newTextBox: function() {
 		domEvent.removeSelected();
 
@@ -217,7 +239,7 @@ let btnEvent = {
 		let left = parseInt(editGrid.style.width) / 2;
 		box.className = 'content';
 		box.setAttribute('name', 'text');
-		box.style = `font-size: 25px; width: 150px; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px; list-style-position: inside; transform: scale(1) rotate(0)`;
+		box.style = `font-size: 25px; width: 150px; z-index: 3; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px; list-style-position: inside; transform: scale(1) rotate(0)`;
 		box.innerHTML = 'Enter text';
 		editGrid.appendChild(box);
 		init.addDefaultEvents(box);
