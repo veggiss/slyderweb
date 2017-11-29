@@ -31,6 +31,8 @@ app.use(session({
 app.get('/user', db.getUser, ut.logEvent);
 app.get('/user/preslist', ut.userAuth, db.getPresList, ut.logEvent);
 app.get('/user/presentation', ut.userAuth, db.getPresenation, ut.logEvent);
+app.get('/user/userauth', ut.userAuth, ut.logEvent);
+app.get('/user/logout', db.logoutUser, ut.logEvent);
 
 // Page navigation  Her lukter det funksjon
 app.get('/editor', (req, res) => {
