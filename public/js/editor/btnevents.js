@@ -184,6 +184,27 @@ let btnEvent = {
 		btnEvent.nextPage();
 	},
 
+	deletePage: function() {
+		let presLength = Object.keys(presentation.body).length;
+
+		if (presLength == 1 && presLength == 1) {
+			presentation.body['page_' + currentPage].content = '';
+			presentation.body['page_' + currentPage].notes = '';
+		} else {
+			for (let i = currentPage; i <= presLength; i++) {
+				presentation.body['page_' + i] = presentation.body['page_' + (i + 1)];
+			}
+
+			delete presentation.body['page_' + presLength];
+
+			if (presLength == currentPage) {
+				currentPage--;
+			}
+		}
+		
+		init.loadContent();
+	},
+
 	newTextBox: function() {
 		domEvent.removeSelected();
 

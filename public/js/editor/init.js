@@ -10,6 +10,7 @@ let init = {
 		editGrid.style.width		= (screen.width * 0.65) + 'px';
 		//editGrid.style.width		= (parseInt(editGrid.style.height) * (4/3)) + 'px';
 		pageNav.style.top 			= (editGrid.offsetTop + editGrid.offsetHeight) + "px";
+		pageNav.style.width 		= editGrid.offsetWidth + "px";
 
 		//We need this for hsla coloring with execCommand
 		document.execCommand('styleWithCSS', false, true);
@@ -28,6 +29,10 @@ let init = {
 				templatesModal.style.display = 'none';
 			}
 		});
+
+		window.onresize = e => {
+			pageNav.style.top = (editGrid.offsetTop + editGrid.offsetHeight) + "px";
+		}
 
 		editGrid.addEventListener('dragenter', e => {
 			e.preventDefault();
@@ -406,7 +411,7 @@ let init = {
 
 		content = editGrid.getElementsByTagName("*");
 		presLength = Object.keys(presentation.body).length;
-		currentPageTxt.innerHTML = `filter_${currentPage}filter_${presLength}`;
+		currentPageTxt.innerHTML = `${currentPage} of ${presLength}`;
 		domEvent.setBgColor();
 		init.transformScale();
 

@@ -20,6 +20,7 @@ let rotationRange 			= document.getElementById('rotationRange');
 let addImageBtn 			= document.getElementById('addImageBtn');
 let addIframeBtn 			= document.getElementById('addIframeBtn');
 let deletePresBtn 			= document.getElementById('deletePresBtn');
+let deletePageBtn 			= document.getElementById('deletePageBtn');
 //Text toolbar stuff
 let textToolBar 			= document.getElementById('textToolBar');
 let toolbar_font 			= document.getElementById('toolbar_font');
@@ -84,6 +85,7 @@ removeGradientBtn.onclick	= btnEvent.removeGradient;
 deletePresBtn.onclick 		= btnEvent.deletePresentation;
 changeBgBtn.onclick			= btnEvent.toggleBgPanel;
 templatesBtn.onclick 		= btnEvent.openTemplates;
+deletePageBtn.onclick 		= btnEvent.deletePage;
 //Load everything
 init.loadGrid();
 init.loadContent();
