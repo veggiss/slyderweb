@@ -1,109 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>User profile</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/userProfile.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <nav> <!-- det hvite, øverste -->
-  <header class="logo">SlyderWeb</header>
-  <menuitem class="right">
-  <a href="">Presentations</a>
-  </menuitem>
-  <menuitem class="right">
-  <a href="">Editor</a>
-  </menuitem>
-  <menuitem class="right">
-  <a href="">Show</a>
-  </menuitem>
-  <menuitem class="right">
-  <a href="">Settings</a>
-  </menuitem>
-  <menuitem class="right">
-  <a href="">Sign out</a>
-  </menuitem>
-  <menuitem class="right">
-  <a href="">Sign in</a>
-  </menuitem>
-</nav>
 
-<div class="page-tmp">
-
+  <main id="profile-root">
   
+    <section id="profile-controls">
+      <div><!-- <img src="https://lorempixel.com/200/200/people/1" alt=""> --></div>
+  		<nav>
+        <a href="#slides"  class="menu-item">Presentations</a>
+        <a href="#setting" class="menu-item">Setting</a>
+  		</nav>
+    </section>
+  
+    <section id="page-slides" class="page">
+      <header><h1>Slides</h1></header>
+      <div id="page-slides-root"><!-- CONTENT -->
+      </div><!-- CONTENT - END -->
+    </section>
+  
+    <section id="page-setting" class="page">
+      <header><h1>Settings</h1></header>
+      <div><!-- CONTENT -->
+        <form>
+          <label> Change first name
+          <input id="firstname" type="text" /></label>
+          <label> Change last name:
+          <input id="lastname"  type="text" /></label>
+          <label> Username:
+          <input id="username"  type="text"  disabled /></label>
+          <label> Email:
+          <input id="email"     type="email" disabled /></label>
+  
+          <!-- TODO: Gamle profilbilde skal være synlig -->
+          <img src="" alt="">
+          <label> Change image:
+          <input id="image"     type="url" /></label>
+  
+          <!-- TODO: Gamle profilbilde skal være synlig -->
+          <!--<img src="" alt="">
+          <label> Change image:
+          <input id="image"     type="file" /></label>-->
+  
+          <button id="saveChanges" type="button">Save changes</button>
+        </form>
+        <hr>
+        <form>
+          <label> Type in old password:
+          <input id="password_old" type="password" /></label>
+          <label> Type in new password:
+          <input id="password_new" type="password" /></label>
+          <label> Repeat new password:
+          <input id="password_new_repeat" type="password" /></label>
+          <button id="save_password" type="button">Save changes</button>
+        </form>
+        <hr>
+        <button id="btnDelete" type="button">Delete profile</button>
+      </div><!-- CONTENT - END -->
+    </section>
+  
+  </main>
 
-</div>
-
-<hr>
-<main id="profile-root">
-  <section id="profile-controls">
-    <div><!-- <img src="https://lorempixel.com/200/200/people/1" alt=""> --></div>
-		<nav>
-      <a href="#info"    class="menu-item">User info</a>
-      <a href="#slides"  class="menu-item">Presentations</a>
-      <a href="#setting" class="menu-item">Setting</a>
-		</nav>
-  </section>
-
-  <section id="page-info" class="page">
-    <header><h1>Info</h1></header>
-    <div><!-- CONTENT -->
-    <!--TODO: Hva skal stå på infosiden? Lastlogin-->
-    </div><!-- CONTENT - END -->
-  </section>
-
-  <section id="page-slides" class="page">
-    <header><h1>Slides</h1></header>
-    <div id="page-slides-root"><!-- CONTENT -->
-    </div><!-- CONTENT - END -->
-  </section>
-
-  <section id="page-setting" class="page">
-    <header><h1>Settings</h1></header>
-    <div><!-- CONTENT -->
-      <form>
-        <label> Change first name
-        <input id="firstname" type="text" /></label>
-        <label> Change last name:
-        <input id="lastname"  type="text" /></label>
-        <label> Username:
-        <input id="username"  type="text"  disabled value="asdasd" /></label>
-        <label> Email:
-        <input id="email"     type="email" disabled value="abc@mail.com" /></label>
-
-        <img src="" alt=""> <!-- TODO: Gamle profilbilde skal være synlig -->
-        <label> Change image:
-        <input id="image"     type="file" /></label>
-
-        <button type="button">Save changes</button>
-      </form>
-      <hr>
-      <form>
-        <label> Type in old password:
-        <input id="password_old" type="password" /></label>
-        <label> Type in new password:
-        <input id="password_new" type="password" /></label>
-        <label> Repeat new password:
-        <input id="password_new_repeat" type="password" /></label>
-        <button type="button">Save changes</button>
-      </form>
-      <hr>
-      <button type="button">Delete profile</button>
-    </div><!-- CONTENT - END -->
-  </section>
-
-</main>
-
-
-<footer>  <!-- del som inneholder ekstrainformasjon -->
-  <menuitem>
-  <a href="">Help</a>
-  </menuitem>
-  <menuitem>
-  <a href="">About</a>
-  </menuitem>
-</footer>
+<script src="./js/util.js"></script>
+<script src="./js/userprofile/slides.js"></script>
+<script src="./js/userprofile/settings.js"></script>
+<script src="./js/userprofile.js"></script>
 </body>
-<script type="text/javascript" src="js/userProfile.js"></script>
-<script type="text/javascript" src="js/userProfile/slides.js"></script>
 </html>
