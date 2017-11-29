@@ -1,6 +1,6 @@
 {
   "name": "slyderweb",
-  "version": "0.0.1",
+  "version": "0.16.00",
   "description": "Server files for slyderweb project",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,9 @@
   "homepage": "https://github.com/veggiss/slyderweb#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "connect-pg-simple": "^4.2.1",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "heroku": "^0.2.0",
     "pg": "^7.3.0"
   }

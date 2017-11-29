@@ -1,0 +1,72 @@
+<!-- slides.com-inspirert layout
+	Forfattere:
+	- Vegard
+	- Silje U.
+-->
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+	<meta chartset="utf-8" />
+	<title>Slyderweb - homepage</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		console.log(getUser("veggis"));
+
+		function getUser(username) {
+			fetch(newRequest('GET', 'http://localhost:8080/user', {
+				username: username
+			})).then(res =>{
+			    return res.json();
+			}).then(res => {
+			    console.log(res);
+			}).catch(err => {
+			    console.log(err);
+			});
+		}
+
+		function uriParams(params) {
+			let esc = encodeURIComponent;
+			let query = Object.keys(params).map(k => esc(k) + '=' + esc(params[k])).join('&');
+			return '?' + query;
+		}
+
+
+		function newRequest(type, path, params) {
+			let request;
+
+			if (type == "GET") {
+				request = new Request(path + uriParams(params), {
+					method: 'GET',
+					credentials: 'same-origin',
+					headers:{
+						"content-type":"application/json"
+					}
+				});
+			} else if (type == 'PUT') {
+				request = new Request(path + uriParams(params), {
+					method: 'PUT',
+					credentials: 'same-origin',
+					headers:{
+						"Content-type":"application/json"
+					}
+				});
+			} else if (type == 'POST') {
+				request = new Request(path, {
+					method: 'POST',
+					credentials: 'same-origin',
+					body: JSON.stringify(params),
+					headers:{
+						"Content-type":"application/json"
+					}
+				});
+			}
+
+			return request;
+		}
+	</script>
+</body>
+
+</html>
