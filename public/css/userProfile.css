@@ -1,8 +1,3 @@
-/*@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");*/
-body {
-  background-color: #666;
-}
-
 #profile-root {
   display: -webkit-box;
   display: -webkit-flex;
@@ -25,8 +20,8 @@ body {
   display: block;
   margin: 0;
   padding: 2px 5px;
-  border: 1px solid black;
-  color: #FFF;
+  /*border: 1px solid black;*/
+  color: #000;
   line-height: 2;
   text-decoration: none;
 }
@@ -36,13 +31,13 @@ nav {
 }
 
 .menu-item.menu-item-current {
-  color: #000;
+  color: #fff;
 }
 
 .page {
   margin: 0;
   padding: 2px 5px;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 
 /*
@@ -54,14 +49,50 @@ nav {
   display: block;
 }
 
+
+#profile-controls {
+    position: absolute;
+	z-index: 2000;
+	width: 150px;
+	height: 100vh;
+	overflow-y: auto;
+	background-color: olive;
+	font-family: Courier;
+	font-size: 12px;
+    text-align: center;
+    cursor: default;
+	box-shadow: 1px 0px 5px #999;
+    overflow: -moz-scrollbars-none;
+}
+
+hr {
+    border-top: 1px solid #CCC;
+}
+
+.page.page-visible {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    text-align: center;
+}
+
+.header-userprofile {
+    background-color: transparent;
+    margin-top: 10px;
+}
+
 .ic {
   display: inline-block;
   font-size: 30px;
   line-height: 50px;
   text-align: center;
-  outline: 1px solid black;
 }
 
+/*
 .ic-50 {
   width: 50px;
   height: 50px;
@@ -76,3 +107,4 @@ nav {
   width: 200px;
   height: 200px;
 }
+*/
