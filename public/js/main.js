@@ -6,6 +6,9 @@ let userinfo_btn = document.getElementById('userinfo_btn');
 let login_username = document.getElementById('login_username');
 let login_password = document.getElementById('login_password');
 let login_btn = document.getElementById('login_btn');
+let hrfSignIn = document.getElementById('hrfSignIn');
+let hrfSignOut = document.getElementById('hrfSignOut');
+
 
 // Create user
 let createuser_username = document.getElementById('createuser_username');
@@ -14,6 +17,12 @@ let createuser_firstname = document.getElementById('createuser_firstname');
 let createuser_lastname = document.getElementById('createuser_lastname');
 let createuser_mail = document.getElementById('createuser_mail');
 let createuser_btn = document.getElementById('createuser_btn');
+
+//Main code
+
+window.onload = function(){
+    setSignedInOut();
+}
 
 userinfo_btn.addEventListener("click", () => {
 	getUser(userinfo_input.value);
@@ -56,11 +65,28 @@ function login(username, password) {
 	})).then(res => {
 	    if (res.status === 200) {
 	    	console.log('Login success');
+            location.reload();
 		}
 	}).catch(err => {
 	    util.printError(err);
 	});
 }
+
+//Denne funksjonen sjekker om brukeren er autentisert.
+// er brukeren logget inn setter vi hrfSignOut og hrfSignIn riktig.
+function setSignedInOut(){
+	fetch(util.newRequest('GET', '/user/isLogged', {})).then(res =>{      
+        if(res.status === 200){
+            hrfSignIn.style.display = 'none';
+            hrfSignOut.style.display = 'inline';
+        }else{
+            hrfSignIn.style.display = 'inline';
+            hrfSignOut.style.display = 'none';
+        } 
+	}).catch(err => {
+	    util.printError(err);
+	});
+} 
 
 function newUser(user) {
 	fetch(util.newRequest('POST', '/user', {

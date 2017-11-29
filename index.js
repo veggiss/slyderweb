@@ -31,6 +31,8 @@ app.use(session({
 app.get('/user', db.getUser, ut.logEvent);
 app.get('/user/preslist', ut.userAuth, db.getPresList, ut.logEvent);
 app.get('/user/presentation', ut.userAuth, db.getPresenation, ut.logEvent);
+app.get('/user/isLogged', ut.userAuth, db.isLogged);
+app.get('/user/logout', ut.userAuth, db.logoutUser, ut.logEvent);
 
 // Page navigation
 app.get('/editor', (req, res) => {

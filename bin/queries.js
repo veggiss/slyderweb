@@ -50,6 +50,16 @@ function getUser(req, res, next) {
     }
 }
 
+function isLogged(req, res, next) {
+    if(req.session.username && res.authenticated) {
+        res.statusMessage = 'User logged in';
+        res.status(200).end();
+    } else {
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
+    }
+}
+
 function loginUser(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
@@ -90,6 +100,11 @@ function loginUser(req, res, next) {
         res.statusMessage = 'Username or password contains no or illigal characters';
         res.status(403).end();
     }
+}
+
+function logoutUser(req, res) {
+    req.session.destroy();
+    res.redirect('/');
 }
 
 function setLastlogin(req, res, next) {
@@ -382,5 +397,7 @@ module.exports = {
     newPresentation: newPresentation,
     getPresList: getPresList,
     getPresenation: getPresenation,
-    deletePresentation: deletePresentation
+    deletePresentation: deletePresentation,
+    logoutUser: logoutUser,
+    isLogged: isLogged
 }
