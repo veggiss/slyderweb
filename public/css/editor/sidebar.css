@@ -5,16 +5,16 @@
 
 .side-bar {
 	position: absolute;
-	z-index: 1000;
+	z-index: 2000;
 	width: 150px;
 	height: 100vh;
 	overflow-y: scroll;
-	background-color: #3d3d3d;
+	background-color: olive;
 	font-family: Courier;
 	font-size: 12px;
   text-align: center;
   cursor: default;
-	box-shadow: 0 0 20px #202021;
+	box-shadow: 1px 0px 5px #999;
   overflow: -moz-scrollbars-none;
 }
 
@@ -24,7 +24,7 @@
 .side-bar section div {
   display: table;
 	margin: auto;
-	color: #ccc;
+	color: #eee;
 	cursor: pointer;
 	margin-top: 10px;
 }
@@ -46,6 +46,7 @@
 
 .side-bar [name=btn]:hover {
 	background-color: #494949;
+  opacity: 0.7;
     -webkit-transition: .2s;
     transition: background-color .2s;
 }
@@ -57,6 +58,7 @@
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
+    margin-left: 0px;
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
@@ -101,11 +103,11 @@
   display: block;
   padding: 0.5em;
   border-bottom: 1px solid #CCC;
-  color: #666;
+  color: #eee;
 }
 
 .side-bar main label:hover {
-  color: #aaa;
+  color: #fff;
 }
 
 .side-bar main label::before {
@@ -147,8 +149,8 @@
   cursor: default;
   text-align: center;
   font-size: 35px;
-  left: 0; right: -5%;
-  top: 0;
+  left: 15%; right: 0;
+  top: 0; bottom: 0;
 }
 
 .page-nav section div {
@@ -158,10 +160,20 @@
   cursor: pointer;
 }
 
-#mySlydesContainer {
+.mySlydesContainer {
   height: auto;
   max-height: 50vh;
   overflow-y: auto;
+}
+
+.templatesImg {
+  display: inline-flex;
+  border: 1px solid #888;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 45%
 }
 
 .mySlydesContent {
@@ -191,7 +203,7 @@
   width: 75px;
   margin-top: 205px;
   padding: 15px;
-  color: #999;
+  color: #ccc;
   max-height: 30vh;
 }
 
@@ -232,4 +244,16 @@
     border: 1px solid #888;
     border-radius: 5px;
     width: 80%;
+}
+
+.img-bar {
+  display: none;
+  left: 150px;
+  z-index: 999;
+  height: auto;
+  width: 75px;
+  margin-top: 130px;
+  padding: 15px;
+  color: #eee;
+  max-height: 30vh;
 }

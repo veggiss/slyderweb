@@ -10,15 +10,19 @@ let presNameInput 			= document.getElementById('presNameInput');
 let currentPageTxt 			= document.getElementById('currentPageTxt');
 let notesTxt 				= document.getElementById('notesTxt');
 let pageNav 				= document.getElementById('pageNav');
-let mySlydesModal 			= document.getElementById('mySlydesModal');
-let mySlydesBtn 			= document.getElementById('mySlydesBtn');
-let mySlydesContent 		= document.getElementById('mySlydesContent');
 let importBtn 				= document.getElementById('importBtn');
 let changeBgBtn 			= document.getElementById('changeBgBtn');
 let gradRotationRange 		= document.getElementById('gradRotationRange');
 let colorBgPanel 			= document.getElementById('colorBgPanel');
 let scaleRange 				= document.getElementById('scaleRange');
+let borderRange 			= document.getElementById('borderRange');
 let rotationRange 			= document.getElementById('rotationRange');
+let addImageBtn 			= document.getElementById('addImageBtn');
+let addIframeBtn 			= document.getElementById('addIframeBtn');
+let deletePresBtn 			= document.getElementById('deletePresBtn');
+let deletePageBtn 			= document.getElementById('deletePageBtn');
+let layerUpBtn 				= document.getElementById('layerUpBtn');
+let layerDownBtn 			= document.getElementById('layerDownBtn');
 //Text toolbar stuff
 let textToolBar 			= document.getElementById('textToolBar');
 let toolbar_font 			= document.getElementById('toolbar_font');
@@ -35,26 +39,40 @@ let toolbar_numberList 		= document.getElementById('toolbar_numberList');
 let toolbar_alignLeft 		= document.getElementById('toolbar_alignLeft');
 let toolbar_alignCenter 	= document.getElementById('toolbar_alignCenter');
 let toolbar_alignRight 		= document.getElementById('toolbar_alignRight');
-//Background color stuff
+//Background color bar stuff
 let bgColorDiv 				= document.getElementById('bgColorDiv');
 let addGradientBtn 			= document.getElementById('addGradientBtn');
 let removeGradientBtn 		= document.getElementById('removeGradientBtn');
 let gradientListDiv 		= document.getElementById('gradientListDiv');
+//Add image bar stuff
+let addImagePanel 			= document.getElementById('addImagePanel');
+let addImgFromLinkBtn 		= document.getElementById('addImgFromLinkBtn');
+let addImgFromLocalBtn 		= document.getElementById('addImgFromLocalBtn');
 //Extra stuff for toolbar
 let colorPicker 			= document.getElementById('colorPicker');
 let shadowPicker 			= document.getElementById('shadowPicker');
 //Presmode stuff
 let presmodeBtn 			= document.getElementById('presmodeBtn');
 let previewmodeBtn 			= document.getElementById('previewmodeBtn');
+//My slydes modal stuff
+let mySlydesModal 			= document.getElementById('mySlydesModal');
+let mySlydesBtn 			= document.getElementById('mySlydesBtn');
+let mySlydesContent 		= document.getElementById('mySlydesContent');
+//Templates modal stuff
+let templatesModal 			= document.getElementById('templatesModal');
+let templatesBtn 			= document.getElementById('templatesBtn');
+let templatesContent 		= document.getElementById('templatesContent');
+let arrangeSection 			= document.getElementById('arrangeSection').querySelectorAll('img');
+let backgroundSection 		= document.getElementById('backgroundSection').querySelectorAll('img');
 //Various vars
 let fileDialog 				= document.createElement('input');
-let editing, presmode, pressedDelKey = false;
 let originX, originY, gradRotation   = 0;
+let editing, presmode, pressedDelKey = false;
 //Presentation object
 let currentPage 			= 1;
-let presentation 			= init.newPresObject();
+let presentation 			= JSON.parse(localStorage.getItem('presentation')) || init.newPresObject();
 //To be defined later
-let selected, content, presLength, lastSelected, lastPage, originTop, originLeft;
+let selected, copySelected, content, presLength, lastSelected, lastPage, originTop, originLeft, presWidth, presHeight;
 //Button events
 savePageBtn.onclick 		= btnEvent.saveCurrentPage;
 newPresentationBtn.onclick 	= btnEvent.newPresentation;
@@ -66,7 +84,12 @@ exportToFileBtn.onclick 	= btnEvent.exportToFile;
 mySlydesBtn.onclick 		= btnEvent.openMySlydes;
 addGradientBtn.onclick 		= btnEvent.addGradient;
 removeGradientBtn.onclick	= btnEvent.removeGradient;
+deletePresBtn.onclick 		= btnEvent.deletePresentation;
 changeBgBtn.onclick			= btnEvent.toggleBgPanel;
+templatesBtn.onclick 		= btnEvent.openTemplates;
+deletePageBtn.onclick 		= btnEvent.deletePage;
+layerUpBtn.onclick 			= btnEvent.layerUp;
+layerDownBtn.onclick 		= btnEvent.layerDown;
 //Load everything
 init.loadGrid();
 init.loadContent();
