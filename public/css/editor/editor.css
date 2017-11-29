@@ -19,7 +19,7 @@ body {
 	background-color: #fcfcfc;
 }
 
-#editGrid {
+.editGrid {
 	position: absolute;
 	margin: auto;
 	left: 15%; right: 0;
@@ -46,9 +46,10 @@ body {
 /* Toolbars */
 
 #textToolBar {
+	z-index: 100;
 	position: absolute;
 	display: none;
-	width: 445px;
+	width: 475px;
 	height: 0px;
 }
 

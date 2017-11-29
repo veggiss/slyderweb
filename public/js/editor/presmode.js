@@ -31,32 +31,31 @@ let fsEvents = {
 
 	lockGrid: function(page, browserType) {
 		domEvent.removeSelected();
-
 		lastPage = currentPage;
 		currentPage = page;
-		init.loadContent(currentPage);
-
+		presHeight = editGrid.style.height;
+		presWidth = editGrid.style.width;
+		init.loadContent();
 		fsEvents.lockCursor();
 
 		editGrid.style.borderStyle = "none";
+		editGrid.style.width = screen.width + 'px';
 
 		//Since firefox is hipster, it needs a special transformation for scaling
 		if (browserType === 'moz') {
 			let scale = screen.height / parseInt(editGrid.style.height);
 			editGrid.childNodes.forEach(item => {
-				/*let trans = init.getTransform(item);
-				let itemScale = screen.height / parseInt(item.style.height);
-				item.style.transform = `scale(${scale}) rotate(${trans.rotate}deg)`;
-				item.style.transformOrigin = '0 0';*/
-				/*item.style.top = ((item.offsetTop * scale)) + 'px';
-				item.style.left = ((item.offsetLeft * scale) (item.offsetTop/2)) + 'px';*/
+				let trans = init.getTransform(item);
+				item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
+				item.style.transformOrigin = '0 0';
+				item.style.top = ((item.offsetTop * scale)) + 'px';
+				item.style.left = ((item.offsetLeft * scale)) + 'px';
 			});
 		} else {
 			editGrid.style.left = "0px";
 			editGrid.style.top = "0px";
 			editGrid.style.zoom = (screen.height / editGrid.offsetHeight) * 100 +"%";
 		}
-
 		presmode = true;
 	},
 
@@ -80,18 +79,13 @@ let fsEvents = {
 		editGrid.style.left = "15%";
 		editGrid.style.borderStyle = "dashed";
 
-		if (browserType === 'moz') {
-			editGrid.style.transform = `scale(${1}`;
-			editGrid.style.transformOrigin = '0 0';
-			editGrid.childNodes.forEach(item => {
-				let trans = init.getTransform(item);
-				item.style.transform = `scale(${trans.scale}) rotate(${trans.rotate}deg)`;
-				item.style.transformOrigin = '0 0';
-			});
-		} else {
+		if (browserType != 'moz') {
 			editGrid.style.zoom = "100%";
 		}
 
+		editGrid.style.height = presHeight;
+		editGrid.style.width = presWidth;
+		pageNav.style.top = (editGrid.offsetTop + editGrid.offsetHeight) + "px";
 		presmode = false;
 	},
 

@@ -45,14 +45,39 @@ let btnEvent = {
 		init.loadPresList();
 	},
 
-	loadSelectedPres: function(name, uid) {
-	    if (confirm("Save changes?") == true) {
+	openTemplates: function() {
+		if (templatesModal.style.display == 'none') {
+			templatesModal.style.display = 'inline-block';
+		} else {
+			templatesModal.style.display = 'none';
+		}
+	},
+
+	loadTemplate(type, item) {
+		if (type == 'arrange') {
+			let presObject = presentation.body['page_' + currentPage];
+			let templateObject = template_arrange.body[item.name];
+			let templateContent = templateObject.content;
+			if (template_arrange.originHeight != screen.height) {
+				templateContent = init.transformTemplate(1080, templateObject.content);
+			}
+			presObject.content += templateContent;
+			init.loadContent();
+		} else if (type == 'background') {
+			gradRotation = template_background[item.name].rotation;
+			presentation.bgColors = template_background[item.name].color;
+			domEvent.setBgColor();
+		}
+		templatesModal.style.display = 'none';
+	},
+
+	loadSelectedPres: function(uid) {
+	    if (confirm("Save changes?") === true) {
 	        btnEvent.saveCurrentPage();
 	    }
 
-		if (name && uid) {
+		if (uid) {
 			fetch(util.newRequest('GET', '/user/presentation', {
-				name: name,
 				uid: uid
 			})).then(res => {
 			    return res.json();
@@ -74,6 +99,23 @@ let btnEvent = {
 			});
 		} else {
 			util.printError('Could not get presentation: undefined values');
+		}
+	},
+
+	deletePresentation: function() {
+		if (presentation.uid) {
+			if (confirm("Are you sure you want to delete slyde?") === true) {
+				fetch(util.newRequest('DELETE', '/user/presentation', {
+					uid: presentation.uid,
+					name: presentation.name
+				})).then(res => {
+				    if(res.status === 200) {
+				    	console.log('Slyde deleted');
+				    }
+				}).catch(err => {
+				    util.printError(err);
+				});
+			}
 		}
 	},
 
@@ -100,15 +142,15 @@ let btnEvent = {
 	},
 
 	newPresentation: function() {
-	    if (confirm("Are you sure?") == true) {
-		    if (confirm("Save changes?") == true) {
+	    if (confirm("Are you sure?") === true) {
+		    if (confirm("Save changes?") === true) {
 		        btnEvent.saveCurrentPage();
 		    }
 
 		    currentPage = 1;
 		    domEvent.removeGradColors();
 		    presentation = init.newPresObject();
-		    init.loadContent(currentPage);
+		    init.loadContent();
 	    }
 	},
 
@@ -116,7 +158,7 @@ let btnEvent = {
 		domEvent.removeSelected();
 		if (currentPage > 1) {
 			currentPage--;
-			init.loadContent(currentPage);
+			init.loadContent();
 		}
 	},
 
@@ -127,7 +169,7 @@ let btnEvent = {
 
 		if (currentPage < presLength) {
 			currentPage++;
-			init.loadContent(currentPage);
+			init.loadContent();
 		}
 	},
 
@@ -144,6 +186,49 @@ let btnEvent = {
 		btnEvent.nextPage();
 	},
 
+	deletePage: function() {
+		if (confirm("Are you sure you want to delete page?") === true) {
+			let presLength = Object.keys(presentation.body).length;
+
+			if (presLength == 1 && presLength == 1) {
+				presentation.body['page_' + currentPage].content = '';
+				presentation.body['page_' + currentPage].notes = '';
+			} else {
+				for (let i = currentPage; i <= presLength; i++) {
+					presentation.body['page_' + i] = presentation.body['page_' + (i + 1)];
+				}
+
+				delete presentation.body['page_' + presLength];
+
+				if (presLength == currentPage) {
+					currentPage--;
+				}
+			}
+
+			init.loadContent();
+		}
+	},
+
+	layerUp: function() {
+		if (selected) {
+			let zindex = parseInt(selected.style.zIndex);
+			if (zindex < 4) {
+				zindex++;
+				selected.style.zIndex = zindex.toString();
+			}
+		}
+	},
+
+	layerDown: function() {
+		if (selected) {
+			let zindex = parseInt(selected.style.zIndex);
+			if (zindex > 1) {
+				zindex--;
+				selected.style.zIndex = zindex.toString();
+			}
+		}
+	},
+
 	newTextBox: function() {
 		domEvent.removeSelected();
 
@@ -152,7 +237,7 @@ let btnEvent = {
 		let left = parseInt(editGrid.style.width) / 2;
 		box.className = 'content';
 		box.setAttribute('name', 'text');
-		box.style = `font-size: 25px; width: 150px; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px; list-style-position: inside; transform: scale(1) rotate(0)`;
+		box.style = `font-size: 25px; width: 150px; z-index: 3; border-color: transparent; left: ${left - 75}px; top: ${top - 30}px; list-style-position: inside; transform: scale(1) rotate(0)`;
 		box.innerHTML = 'Enter text';
 		editGrid.appendChild(box);
 		init.addDefaultEvents(box);

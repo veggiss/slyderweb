@@ -35,6 +35,11 @@ let domEvent = {
 			colorPicker.style.top = (e.clientY - 220) + "px";
 			colorPicker.style.left = (e.clientX) + "px";
 			colorPicker.style.display = "inline-block";
+
+			if(colorPicker.offsetTop < 0) {
+				colorPicker.style.top = 0;
+			}
+
 		} else {
 			colorPicker.style.display = "none";
 			shadowPicker.style.display = "none";
@@ -51,6 +56,11 @@ let domEvent = {
 			shadowPicker.style.top = colorPicker.style.top;
 			shadowPicker.style.left = (left + parseInt(colorPicker.offsetWidth) + 2) + "px";
 			shadowPicker.style.display = "inline-block";
+
+			if(colorPicker.offsetTop < 0) {
+				colorPicker.style.top = 0;
+				shadowPicker.style.top = 0;
+			}
 		} else {
 			colorPicker.style.display = "none";
 			shadowPicker.style.display = "none";
@@ -58,12 +68,16 @@ let domEvent = {
 	},
 
 	setToolbarPos: function(element) {
-		let top = parseInt(element.style.top);
-		let left = parseInt(element.style.left);
+		let top = element.offsetTop;
+		let left = element.offsetLeft;
 		let offsetTop = parseInt(editGrid.offsetTop);
 		let offsetLeft = parseInt(editGrid.offsetLeft);
 		textToolBar.style.top = (top + offsetTop - 50) + "px";
 		textToolBar.style.left = (left + offsetLeft) + "px";
+
+		if ((textToolBar.offsetLeft + textToolBar.offsetWidth) > window.innerWidth) {
+			textToolBar.style.left = textToolBar.offsetLeft - ((textToolBar.offsetLeft + textToolBar.offsetWidth) - window.innerWidth) + "px";
+		}
 	},
 
 	checkClickedToolbar: function() {
@@ -92,6 +106,40 @@ let domEvent = {
 		let presObject = presentation.body["page_" + currentPage];
 		presObject.content = editGrid.innerHTML;
 		presObject.notes = notesTxt.innerHTML;
+		localStorage.setItem('presentation', JSON.stringify(presentation));
+	},
+
+	newImage: function(src) {
+		let img = document.createElement('img');
+
+		img.className = 'content'
+		img.name = 'img';
+		img.src = src;
+		img.style.transform = 'scale(1) rotate(0)';
+		img.style.width = "250px";
+		img.style.height = "auto";
+		img.style.zIndex = "3";
+		img.draggable = false;
+
+		return img;
+	},
+
+	newIframe: function(src) {
+		let container = document.createElement('div');
+		let iframe = document.createElement('iframe');
+
+		container.className = 'content'
+		iframe.src = src;
+		container.style.transform = 'scale(1) rotate(0)';
+		iframe.draggable = false;
+		iframe.style.height = '250px';
+		container.draggable = false;
+		container.appendChild(iframe);
+		container.style.width = "auto";
+		container.style.height = ((parseInt(iframe.style.height)) + 50) + 'px';
+		container.style.zIndex = "3";
+
+		return container;
 	},
 
 	loadFile: function(files) {
@@ -99,22 +147,13 @@ let domEvent = {
 			if (parseInt(obj.size) > 10485760) {
 				alert('Files over 10mb is not allowed');
 			} else {
-				if (obj.type.includes("image")) {
+				if (obj.type.includes('image')) {
 					let reader = new FileReader();
 					
 					reader.readAsDataURL(obj);
 
 					reader.onload = (e => {
-						let img = document.createElement('img');
-
-						img.className = 'content'
-						img.name = 'img';
-						img.src = e.target.result;
-						img.style.transform = 'scale(1) rotate(0)';
-						img.style.width = "250px";
-						img.style.height = "auto";
-						img.draggable = false;
-
+						let img = domEvent.newImage(e.target.result);
 						editGrid.appendChild(img);
 						init.addDefaultEvents(img);
 					});
