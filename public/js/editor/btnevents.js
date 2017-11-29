@@ -215,7 +215,6 @@ let btnEvent = {
 			if (zindex < 4) {
 				zindex++;
 				selected.style.zIndex = zindex.toString();
-				console.log(zindex);
 			}
 		}
 	},
@@ -226,7 +225,6 @@ let btnEvent = {
 			if (zindex > 1) {
 				zindex--;
 				selected.style.zIndex = zindex.toString();
-				console.log(zindex);
 			}
 		}
 	},
