@@ -41,7 +41,7 @@ app.get('/editor', (req, res) => {
 
 app.get('/', (req, res) => {
     if (req.session.username) {
-        res.sendFile(appRoot + '/view/userprofile.html#presentations');
+        res.sendFile(appRoot + '/view/userprofile.html');
     } else {
         res.sendFile(appRoot + '/view/index.html');
     }
