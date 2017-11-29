@@ -46,6 +46,7 @@ body {
 /* Toolbars */
 
 #textToolBar {
+	z-index: 100;
 	position: absolute;
 	display: none;
 	width: 475px;
