@@ -3,67 +3,58 @@
 
 <head>
 	<meta chartset="utf-8" />
-	<title>Slyderweb - home</title>
+	<title>Slyderweb</title>
 	<link rel="stylesheet" type="text/css" href="./css/main.css" />
 	<link rel="stylesheet" type="text/css" href="./css/index.css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 </head>
 
 <body>
-		<header class="centered">
-			<nav>
-				<menuitem class="logo">
-				<a href="/">SlyderWeb</a>
-				</menuitem>
-				<menuitem class="signInOut">
-				<a id="hrfSignIn" href="/">Sign in</a>
-				<a id="hrfSignOut" href="user/logout">Sign out</a>
-				</menuitem>
-				<menuitem>
-					<a href="userprofile#presentations">Presentations</a>
-				</menuitem>
-				<menuitem>
-				<a href="/editor">Editor</a>
-				</menuitem>
-				<menuitem>
-				<a href="userprofile">Settings</a>
-				</menuitem>
-				<menuitem>
-				<menuitem>
-				<a href="/help">Help</a>
-				</menuitem>
-				<a href="/about">About</a>
-				</menuitem>
-			</nav>
-		</header>
+	<header class="centered colorScheme">
+		<nav>
+			<menuitem class="logo">
+			<a href="/">SlyderWeb</a>
+			</menuitem>
+			<menuitem class="signInOut">
+			<a id="hrfSignIn" href="login">Sign in</a>
+			<a id="hrfSignOut" href="user/logout">Sign out</a>
+			</menuitem>
+			<menuitem>
+			<a href="editor">Editor</a>
+			</menuitem>
+			<menuitem>
+			<a id="hrfSignUp" href="signup">Sign up</a>
+			<a id="hrfProfile" href="userprofile">Profile</a>
+			</menuitem>
+		</nav>
+	</header>
 
 	<main>
+		<section class="textContainer">
+			<h1>SlyderWeb - a browser presentation tool</h1>
+			<h2>Make presentations online - and offline!</h2>
+			<h3>Header 3</h3>
+			<h4>Header 4</h4>
+			<h5>Header 5</h5>
+			<button>
+				<a class="noLinkStyle" href="/editor">Try now</a>
+			</button>
+			<button id="openCreateUserModalbtn">Sign up</button>
+			<button id="openSignInModalbtn">Sign in</button>
+		</section>
+		</div>
+		<div class="colored3">
+			<section class="textContainer">
+				<h1>Features</h1>
+				<ul>
+					<li>Create presentations now - no signing up required!</li>
+					<li>Export and import of files</li>
+					<li>Log in to see your presentations anywhere</li>
+					<li>Work efficiently - with hotkeys!</li>
+				</ul>
+			</section>
+		</div>
 		<section class="centered">
-			<fieldset>
-				<h3>Sign in</h3>
-				<input type="text" id="login_username" placeholder="Username">
-				<br>
-				<input type="text" id="login_password" placeholder="Password">
-				<br>
-				<button id="login_btn">Sign in</button>
-			</fieldset>
-			<hr>
-			<fieldset>
-				<h3>Create new user</h3>
-				Username:
-				<input type="text" id="createuser_username">
-				<br> Password:
-				<input type="text" id="createuser_password">
-				<br> First name:
-				<input type="text" id="createuser_firstname">
-				<br> Last name:
-				<input type="text" id="createuser_lastname">
-				<br> e-mail address:
-				<input type="text" id="createuser_mail">
-				<br>
-				<button id="createuser_btn">Create user</button>
-			</fieldset>
-			<hr>
 			<fieldset>
 				<h3>User details</h3>
 				<input type="text" id="userinfo_input" placeholder="Username">
@@ -71,26 +62,105 @@
 			</fieldset>
 			<hr>
 		</section>
-		<div class="colored3">
-				<section class="textContainer">
-					<h1>Header 1</h1>
-					<h2>Header 2</h2>
-					<h3>Header 3</h3>
-					<h4>Header 4</h4>
-					<h5>Header 5</h5>
-					<p>
-						What is slyderWeb? You tell me?
-					</p>
-				</section>
+	</main>
+
+	<!-- Sign in modal -->
+
+	<div id="modal_signIn" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<fieldset>
+				<h3 class="modal-header">Sign in</h3>
+				<hr>
+				<div class="modal-body centered">
+					<input type="text" id="login_username" placeholder="Username">
+					<br>
+					<input type="text" id="login_password" placeholder="Password">
+					<br>
+					<button id="login_btn">Sign in</button>
+				</div>
+		</div>
+	</div>
+
+
+	<!-- Sign up modal -->
+
+	<div id="modal_createUser" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h3 class="modal-header">Create new user</h3>
+			<hr>
+			<div class="modal-body centered">
+				<p class="neutralText">Username</p>
+				<input type="text" id="createuser_username" placeholder="username">
+				<p class="neutralText">Password:</p>
+				<input type="text" id="createuser_password" type="password" placeholder="password">
+				<p class="neutralText">First name:</p>
+				<input type="text" id="createuser_firstname" placeholder="first name">
+				<p class="neutralText">Last name:</p>
+				<input type="text" id="createuser_lastname" placeholder="last name">
+				<p class="neutralText">E-mail address:</p>
+				<input type="text" id="createuser_mail" placeholder="email">
+				<br>
+				<button id="createuser_btn">Create user</button>
+				<button id="cancel_btn">Cancel</button>
 			</div>
-			<section class="textContainer">
-				<p>
-					What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is
-					slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb? What is slyderWeb?
-				</p>
-			</section>
-		</main>
+		</div>
+	</div>
+
+
 </body>
+
+<script>
+	// Get the modal
+	let modal_signIn = document.getElementById('modal_signIn');
+	let modal_createUser = document.getElementById('modal_createUser');
+
+	// Get the button that opens the modal
+	let openSignInModalbtn = document.getElementById("openSignInModalbtn");
+	let openCreateUserModalbtn = document.getElementById("openCreateUserModalbtn");
+	let cancel_btn = document.getElementById("cancel_btn");
+
+	// Get the <span> element that closes the modal
+	let span = document.getElementsByClassName("close")[0];
+	let spanTwo = document.getElementsByClassName("close")[1];
+
+	//for styling av modal
+	//modal_signIn.style.display = "block";
+
+	// When the user clicks on the button, open the modal 
+	//openSignInModalbtn.onclick = openModal(modal_SignIn);
+	openSignInModalbtn.onclick = function () {
+		modal_signIn.style.display = "block";
+	}
+	openCreateUserModalbtn.onclick = function () {
+		modal_createUser.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+
+	cancel_btn.onclick = function () {
+		modal_createUser.style.display = "none";
+	}
+
+	span.onclick = function () {
+		modal_signIn.style.display = "none";
+	}
+	spanTwo.onclick = function () {
+		modal_createUser.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function (event) {
+		if (event.target == modal_signIn) {
+			modal_signIn.style.display = "none";
+		} else if (event.target == modal_createUser) {
+			modal_createUser.style.display = "none";
+		}
+	}
+
+</script>
+
 <script type="text/javascript" src="./js/util.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/sha1.min.js"></script>
