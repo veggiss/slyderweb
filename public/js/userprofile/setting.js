@@ -52,9 +52,6 @@ const settings = (function (elms)
     email.value     = data.mail;
     image.value     = data.profileImg;
 
-    // TODO: Add image preview or rely on page already showing (?)
-    // image.value = data.profileImg;
-
     btnSaveName.onclick = (event) => {
       if (!opt.onSave) return; // returner når ingen handler er mottatt.
       
@@ -82,7 +79,6 @@ const settings = (function (elms)
 
 			if (Object.keys(newData).length) {
       	opt.onSave(newData);
-        //update();
       }
     };
   }
@@ -90,16 +86,13 @@ const settings = (function (elms)
   //init: function ({ onDeleteHandler }) {
   function init (opt) {
     options = opt;
-    //update()
   }
 
   function updateData (data) {
     const opt = options;
-    //getData().then((data) => {
       fillMainForm(data, opt);
       fillPasswordForm(data, opt);
       prepDelete(data, opt);
-    //}).catch((err) => {console.error(err)})
   }
 
   return {

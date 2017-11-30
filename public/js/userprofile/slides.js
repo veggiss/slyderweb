@@ -14,21 +14,12 @@ const slides = (function (elms)
   function createSlideList (slides)
   {
   	const eSlideList = document.createElement("ul");
-    // const arr = [];
     for (let i = 0; i < slides.length; i++) {
-    // 	arr.push(
-    //   	createSlideItem(
-    //     	slides[i],
-    //       deleteHandler,
-    //       itemClass
-    //     )
-    //   );
     
       eSlideList.appendChild(_createSlideItem(
       	slides[i]
       ));
     }
-    // return arr;
     return eSlideList;
   }
   
@@ -46,10 +37,7 @@ const slides = (function (elms)
   	if (!image) {
   		eImage = _createIcon();
     }
-    /*
-    else {// TODO: Finn ut ka trenge å lag
-    	const eImage = document.createElement("img")
-    }*/
+      
     // Etter if blir bilde plassert som child under eItem (div som ble laget for innholdet)
     eItem.appendChild(eImage);
   

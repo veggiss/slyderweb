@@ -9,7 +9,6 @@ const profile = (function ()
 	const MENU_ITEM_CLASS_CURRENT = "menu-item-current";
 
 	const pages = {
-		// info:    document.getElementById(PAGE_ID_PREFIX + "info"),
 		slides:  document.getElementById(PAGE_ID_PREFIX + "slides"),
 		setting: document.getElementById(PAGE_ID_PREFIX + "setting"),
 	};
@@ -23,15 +22,12 @@ const profile = (function ()
 		    window.location.hash = "#slides";
 		    return;
 		  }
-			// window.location.hash = (window.location.hash ? window.location.hash : "#info");
-		  // window.location.hash = (window.location.hash ? window.location.hash : "#slides");
 
 			for (let key in pages) {
 				pages[key].classList.remove(PAGE_CLASS_VISIBLE);
 			}
 			this.showPage(window.location.hash);
 
-			//
 			const menuItems = document.getElementsByClassName(MENU_ITEM_CLASS);
 			for (let i = 0; i < menuItems.length; i++) {
 				const elm  = menuItems[i];
@@ -51,13 +47,6 @@ const profile = (function ()
 			console.log('[showPage]:', window.location.hash); // DEBUG
 			console.log('[showPage]:', pageId); // DEBUG
 
-			// sjekker om user info linker er aktive
-			// if (pageId === "#info") {
-			// 	console.warn('PAGE:', 'info');
-			// 	pages.info.classList.add(PAGE_CLASS_VISIBLE);
-			// }
-		  // else
-			// sjekker om Presentations linken er aktive
 			if (pageId === "#slides") {
 				console.warn('PAGE:', 'slides');
 				pages.slides.classList.add(PAGE_CLASS_VISIBLE);
@@ -91,7 +80,7 @@ function initialize () {//====================
 	settings.init({
 		onSave:          onSaveHandler, // TODO: må fikse slik en kan lagre endring av navn og bilde
 		onSavePassword:  onSaveHandler, // TODO: må fikse slik en kan lagre nytt passord
-		//onDelete:        clickHandler, //   TODO: må fikse slik at en kan slette brukerprofilen
+		//onDelete:        clickHandler,// TODO: må fikse slik at en kan slette brukerprofilen
 	});  
 
   slides.init({
