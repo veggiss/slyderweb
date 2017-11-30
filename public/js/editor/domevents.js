@@ -25,6 +25,8 @@ let domEvent = {
 				gradString += item + ',';
 			}
 		});
+
+		init.updateBgSidebar();
 	},
 
 	toggleColorPicker: function(e) {
@@ -120,6 +122,9 @@ let domEvent = {
 		img.style.height = "auto";
 		img.style.zIndex = "3";
 		img.draggable = false;
+		img.ondragstart = e => {
+			return false;
+		}
 
 		return img;
 	},
@@ -168,7 +173,6 @@ let domEvent = {
 						let decoded = window.atob(base64);
 						presentation = JSON.parse(atob(decoded));
 						currentPage = 1;
-						init.updateBgSidebar();
 						init.loadContent();
 					});
 				} else {

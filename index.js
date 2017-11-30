@@ -41,7 +41,7 @@ app.get('/editor', (req, res) => {
 
 app.get('/', (req, res) => {
     if (req.session.username) {
-        res.sendFile(appRoot + '/view/userprofile.html');
+        res.sendFile(appRoot + '/view/editor.html');
     } else {
         res.sendFile(appRoot + '/view/index.html');
     }
@@ -49,14 +49,6 @@ app.get('/', (req, res) => {
 
 app.get('/userprofile', (req, res) => {
     res.sendFile(appRoot + '/view/userprofile.html');
-});
-
-app.get('/help', (req, res) => {
-    res.sendFile(appRoot + '/view/help.html');
-});
-
-app.get('/about', (req, res) => {
-    res.sendFile(appRoot + '/view/about.html');
 });
 
 app.get('/login', (req, res) => {

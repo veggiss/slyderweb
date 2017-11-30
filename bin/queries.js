@@ -20,7 +20,6 @@ function getUser(req, res, next) {
                         firstname: query.rows[0].firstname,
                         lastname: query.rows[0].lastname,
                         mail: query.rows[0].mail,
-                        presentations: query.rows[0].presentations,
                         profileimg: query.rows[0].profileimg
                     }
                     res.statusMessage = 'User found';

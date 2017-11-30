@@ -91,7 +91,6 @@ let btnEvent = {
 					presentation.bgColors = res.bgColors;
 					presentation.originHeight = res.originHeight;
 					presentation.body = res.body;
-					init.updateBgSidebar();
 					init.loadContent();
 				}
 			}).catch(err => {
