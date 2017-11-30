@@ -12,32 +12,24 @@
 </head>
 <body>
 
-    <header class="centered colorScheme">
-			<nav>
-				<menuitem class="logo">
-				<a href="/">SlyderWeb</a>
-				</menuitem>
-				<menuitem class="signInOut">
-				<a id="hrfSignIn" href="/">Sign in</a>
-				<a id="hrfSignOut" href="user/logout">Sign out</a>
-				</menuitem>
-				<menuitem>
-				<a href="userprofile#presentations">Presentations</a>
-				</menuitem>
-				<menuitem>
-				<a href="/editor">Editor</a>
-				</menuitem>
-				<menuitem>
-				<a href="userprofile">Settings</a>
-				</menuitem>
-				<menuitem>
-				<menuitem>
-				<a href="/help">Help</a>
-				</menuitem>
-				<a href="/about">About</a>
-				</menuitem>
-			</nav>
-		</header>
+	<header class="centered colorScheme">
+		<nav>
+			<menuitem class="logo">
+			<a href="/">SlyderWeb</a>
+			</menuitem>
+			<menuitem class="signInOut">
+			<a id="hrfSignIn" href="login">Sign in</a>
+			<a id="hrfSignOut" href="user/logout">Sign out</a>
+			</menuitem>
+			<menuitem>
+			<a href="editor">Editor</a>
+			</menuitem>
+			<menuitem>
+			<a id="hrfSignUp" href="signup">Sign up</a>
+			<a id="hrfProfile" href="userprofile">Profile</a>
+			</menuitem>
+		</nav>
+	</header>
     
   <main id="profile-root">
   
@@ -97,6 +89,7 @@
   </main>
 
 <script src="./js/util.js"></script>
+<script src="./js/main.js"></script>
 <script src="./js/userprofile/slides.js"></script>
 <script src="./js/userprofile/setting.js"></script>
 <script src="./js/userprofile.js"></script>
