@@ -37,14 +37,8 @@ nav {
 .page {
   margin: 0;
   padding: 2px 5px;
-  /*border: 1px solid black;*/
 }
 
-/*
-<i class="fa fa-address-book-o ic ic-50" aria-hidden="true"></i>
-<i class="fa fa-address-book-o ic ic-100" aria-hidden="true"></i>
-<i class="fa fa-address-book-o ic ic-200" aria-hidden="true"></i>
-*/
 .page input {
   display: block;
 }
@@ -52,16 +46,16 @@ nav {
 
 #profile-controls {
     position: absolute;
-	z-index: 2000;
-	width: 150px;
-	height: 100vh;
-	overflow-y: auto;
-	background-color: olive;
-	font-family: Courier;
-	font-size: 12px;
+  z-index: 2000;
+  width: 150px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: olive;
+  font-family: Courier;
+  font-size: 12px;
     text-align: center;
     cursor: default;
-	box-shadow: 1px 0px 5px #999;
+  box-shadow: 1px 0px 5px #999;
     overflow: -moz-scrollbars-none;
 }
 
