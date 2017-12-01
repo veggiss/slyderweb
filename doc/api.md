@@ -43,5 +43,5 @@
 
 ## POST
 
-### Bruker autentisering
+### Lage ny presentasjon
 		app.POST("/user/presentation")  | Returns: uid          | Type: integer
