@@ -90,7 +90,6 @@ let header = {
 			});
 
 			if (passInputs) {
-				console.log(user);
 				header.newUser(user);
 			}
 		});
