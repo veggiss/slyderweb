@@ -1,3 +1,4 @@
+//Global namespace
 //Editor area
 let editGrid				= document.getElementById('editGrid');
 //Sidebar buttons
@@ -74,7 +75,7 @@ let presentation 			= JSON.parse(localStorage.getItem('presentation')) || init.n
 //To be defined later
 let selected, copySelected, content, presLength, lastSelected, lastPage, originTop, originLeft, presWidth, presHeight;
 //Button events
-savePageBtn.onclick 		= btnEvent.saveCurrentPage;
+savePageBtn.onclick 		= btnEvent.savePresentation;
 newPresentationBtn.onclick 	= btnEvent.newPresentation;
 loadprevBtn.onclick 		= btnEvent.prevPage;
 loadnextBtn.onclick 		= btnEvent.nextPage;

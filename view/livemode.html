@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="no">
-
+<html>
 <head>
-	<meta chartset="utf-8" />
-	<title>Slyderweb</title>
-	<link rel="stylesheet" type="text/css" href="./css/main.css" />
-	<link rel="stylesheet" type="text/css" href="./css/index.css" />
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+	<meta charset="utf-8" />
+	<title>Slyderweb - Editor</title>
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<style type="text/css">
+		#notesContainer * {
+			font-family: monospace;
+			font-size: 35px;
+		}
+	</style>
 </head>
-
 <body>
 	<header class="centered colorScheme">
 		<nav>
@@ -24,34 +27,6 @@
 			</menuitem>
 		</nav>
 	</header>
-
-	<main>
-		<section class="textContainer">
-			<h1 style="text-align: center">Slyderweb - a presentation tool in your browser</h1>
-			<img src="./img/intro.gif" style="width: 400px; height: auto; margin-left: 18.5%">
-			<h2 style="text-align: center">Make presentations online - with ease!</h2>
-			<button style="margin-left: 44%">
-				<a class="noLinkStyle" href="/editor">Try now</a>
-			</button>
-		</section>
-		</div>
-		<div class="colored3">
-			<section class="textContainer">
-				<h2 style="margin-left: 15%">Features</h2>
-				<ul style="margin-left: 15%">
-					<li>Create presentations now - no sign up required!</li>
-					<li>Export and import presentation files</li>
-					<li>Log in and load your presentation anywhere</li>
-					<li>Read slyde notes and information with live mode</li>
-					<li>Pick from our selection of themes</li>
-					<li>Or dynamically create anything you'd like</li>
-				</ul>
-			</section>
-		</div>
-	</main>
-
-	<!-- Sign in modal -->
-
 	<div id="modal_signIn" class="login_modal">
 		<div class="login_modal-content">
 			<span class="close" id="cancel_btn_login">&times;</span>
@@ -68,10 +43,6 @@
 				</div>
 		</div>
 	</div>
-
-
-	<!-- Sign up modal -->
-
 	<div id="modal_createUser" class="login_modal">
 		<div class="login_modal-content">
 			<span class="close" id="cancel_btn_createUser">&times;</span>
@@ -94,11 +65,16 @@
 		</div>
 	</div>
 
-
+	<h1 id="statusTitle" style="margin-left: 50px;"><h1>
+	<div id="livemodeContainer" style="margin-left: 50px;">
+		<p id="currentPageText"><p>
+		<p style="font-size: 25px;">Notes:</p>
+		<span id="notesContainer">
+			<div id="notesText" style="width: 90vw; height: auto; border: thin solid black; background-color: white; font-size: 35px;"></div>
+		</span>
+	</div>
 </body>
-
-<script type="text/javascript" src="./js/util.js"></script>
-<script type="text/javascript" src="./js/sha1.min.js"></script>
-<script type="text/javascript" src="./js/main.js"></script>
-
+<script src="./js/util.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/livemode/livemode.js"></script>
 </html>

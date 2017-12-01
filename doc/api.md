@@ -1,57 +1,42 @@
 # Table of endpoints
 
-| URL                 | HTTP Verb | Action                                   | Required URL Params |
-|---------------------|-----------|------------------------------------------|---------------------|
-| /user/:username     | GET       | hente info om brukerprofil               | username=[string]   |
-| /user/pres          | GET       | hente liste over presentasjoner          |                     |
-| /user/login         | POST      | logge inn                                | username/password   |
-| /user               | POST      | lage ny bruker                           | user schema         |
-| /user/pres          | POST      | lage ny presentasjon                     | pres schema         |
-| /user/pres/page     | POST      | lage ny side i presentasjon              |                     |
-| /user/pres/:id      | PUT       | endre på informasjon om presentasjon     | id=[integer]        |
-| /user/:username     | PUT       | endre informasjon om eksisterende bruker | username=[string]   |
-| /user/pres/page/:id | PUT       | endre på side                            | id=[integer]        |
-| /user/pres/:id      | DELETE    | slette en presentasjon                   | id=[integer]        |
+	Auth: Demands authorization
+	Mw: Middlware
+	Sf: Send file
+
+| URL                 | HTTP Verb | Action                                   | Required URL Params |  Auth  |  MW  |   
+|---------------------|-----------|------------------------------------------|---------------------|--------|------|
+| /                   | GET       | Auth: sf.editor, !Auth: sf.index         | -                   | true   | -    |
+| /home               | GET       | sf.index                                 | -                   | -      | -    |
+| /editor             | GET       | sf.editor                                | -                   | -      | -    |
+| /livemode           | GET       | sf.livemode                              | -                   | -      | -    |
+| /userprofile        | GET       | Auth: sf.userprofile, !Auth: sf.index    | -                   | true   | -    |	  
+| /user               | GET       | hente info om brukerprofil               | -                   | true   | -    |
+| /user/preslist      | GET       | hente liste over presentasjoner          | -                   | true   | -    |
+| /user/presentation  | GET       | Hente presentasjons object               | id, username, name  | true   | -    |
+| /user/isLogged      | GET       | Bruker autentisering                     | -                   | -      | -    |
+| /user/logout        | GET       | Log ut bruker                            | -                   | true   | -    |
+| /user/login         | POST      | logge inn                                | username, password  | false  | -    |
+| ~~                  | ~~        | Set login timestamp                      | ~~                  | ~~     | true |
+| /user               | POST      | lage ny bruker                           | user schema         | false  | -    |
+| /user/pres          | POST      | lage ny presentasjon                     | pres schema         | true   | -    |
+| ~~                  | ~~        | Oppdatere presentasjon                   | ~~                  | ~~     | true |
+| /user/pres          | DELETE    | Slette en presentasjon                   | id, username        | true   | -    |
+| ~~                  | ~~        | Log event                                | ~~                  | ~~     | true |
 
 
-# Beskrivelse av hvert endpoint
+# List of return values
 
 ## GET
 
 ### hente info om brukerprofil
-		app.GET("/user/:username", req, res)
+		app.GET("/user")                | Returns: user         | type: object
 
 ### hente liste over presentasjoner
-		app.GET("/user/pres", req, res)
+		app.GET("/user/preslist")       | Returns: name         | Type: array
 
+### hente presentasjon
+		app.GET("/user/presentation")   | Returns: presentation | Type: object
 
-## POST
-### logge inn
-		app.POST("/user/login", req, res)
-brukernavn og passord defineres i body
-
-### lage ny bruker
-		app.POST("/user", res, req)
-Alle parametere fra schema untatt presentations, lastlogin og profileImg.
-
-### lage ny presentasjon
-		app.POST("/user/pres", res, req)
-Alle parametere fra presentation schema vil være nødvendig.
-
-### lage ny side i presentasjon:
-		app.POST("/user/pres", res, req)
-
-## PUT
-### endre på informasjon om presentasjon
-		app.PUT("/user/pres/:id", res, req)
-
-### endre informasjon om eksi.sterende bruker
-		app.PUT("/user/:username", res, req)
-
-### endre på side
-		app.PUT("/user/pres/page/:id", res, req)
-
-
-## DELETE
-### slette en presentasjon:
-		app.DELETE("/user/pres/:id", res, req)
+### Bruker autentisering
+		app.GET("/user/isLogged")       | Returns: HTTP         | Type: statuscode

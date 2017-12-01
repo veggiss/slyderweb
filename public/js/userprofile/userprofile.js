@@ -36,7 +36,6 @@ const profile = (function ()
 			for (let i = 0; i < menuItems.length; i++) {
 				const elm  = menuItems[i];
 
-				console.log({ wHash: window.location.hash, aHash: elm.hash, elm }); // DEBUG
 
 				// her blir hash sjekket om den er lik href, er dette tilfellet blir classList lagt til
 				if (elm.hash === window.location.hash) {
@@ -48,8 +47,6 @@ const profile = (function ()
 		},
 
 		showPage: function (pageId) {
-			console.log('[showPage]:', window.location.hash); // DEBUG
-			console.log('[showPage]:', pageId); // DEBUG
 
 			// sjekker om user info linker er aktive
 			// if (pageId === "#info") {
@@ -59,18 +56,11 @@ const profile = (function ()
 		  // else
 			// sjekker om Presentations linken er aktive
 			if (pageId === "#slides") {
-				console.warn('PAGE:', 'slides');
 				pages.slides.classList.add(PAGE_CLASS_VISIBLE);
 			}
 			// sjekker om settings linken er active
 			else if (pageId === "#setting") {
-				console.warn('PAGE:', 'setting');
 				pages.setting.classList.add(PAGE_CLASS_VISIBLE);
-			}
-			// kjøres når ingen andre alternativer stemmer, da blir info siden activ
-			else {
-				console.error('Invalid hash:', pageId);
-				window.location.hash = "#info";
 			}
 		},
 	};
@@ -121,36 +111,12 @@ function initialize () {//====================
 
 function update () {//====================
 
-  fetch(util.newRequest('GET', '/user/preslist', {}))
-    .then((res) => {
-			if (res.status == 401) {
-				alert('You need to be logged in to do that!');
-			} else {
-				return res.json();
-			}
-	  })
-    .then((data) => {
-      slides.updateData(data);
-    })
-    .catch((err) => {
-      util.printError(err);
+	Promise.resolve(util.getPresList()).then((res) => {
+		slides.updateData(res);
+	});
 
-      slides.updateData(data2list(2)); // TODO: Remove later
-    });
-
-  fetch(util.newRequest('GET', '/user', {
-    // username: username // TODO: trenger brukernavn får å vite hvem som er logget inn, for å kunne gjøre endringer
-  }))
-    .then((res) => {
-      return res.json();
-	  })
-    .then((data) => {
-      setting.updateData(data);
-    })
-    .catch((err) => {
-      util.printError(err);
-
-      settings.updateData(data()); // TODO: Remove later
+    Promise.resolve(util.getUser()).then((res) => {
+    	settings.updateData(res);
     });
 
 }//===========================================

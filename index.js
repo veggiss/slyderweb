@@ -23,20 +23,28 @@ app.use(session({
     secret: 'uia2017mm200slyderweb',
     resave: false,
     saveUninitialized: false,
-    //Secure should only be true with https connections (e.g heroku)
+    //Log out after 60 minutes
     cookie: { maxAge: 60 * 60 * 1000, secure: false }
 }));
 
 // Get
-app.get('/user', db.getUser, ut.logEvent);
+app.get('/user', ut.userAuth, db.getUser, ut.logEvent);
 app.get('/user/preslist', ut.userAuth, db.getPresList, ut.logEvent);
 app.get('/user/presentation', ut.userAuth, db.getPresenation, ut.logEvent);
 app.get('/user/isLogged', ut.userAuth, db.isLogged);
 app.get('/user/logout', ut.userAuth, db.logoutUser, ut.logEvent);
 
 // Page navigation
+app.get('/home', (req, res) => {
+    res.sendFile(appRoot + '/view/index.html');
+});
+
 app.get('/editor', (req, res) => {
     res.sendFile(appRoot + '/view/editor.html');
+});
+
+app.get('/livemode', (req, res) => {
+    res.sendFile(appRoot + '/view/livemode.html');
 });
 
 app.get('/', (req, res) => {
@@ -48,15 +56,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/userprofile', (req, res) => {
-    res.sendFile(appRoot + '/view/userprofile.html');
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(appRoot + '/view/login.html');
-});
-
-app.get('/signup', (req, res) => {
-    res.sendFile(appRoot + '/view/signup.html');
+    if(req.session.username) {
+        res.sendFile(appRoot + '/view/userprofile.html');
+    } else {
+        res.sendFile(appRoot + '/view/index.html');
+    }
 });
 
 // Post

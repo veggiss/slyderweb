@@ -42,7 +42,27 @@ let btnEvent = {
 	},
 
 	openMySlydes: function() {
-		init.loadPresList();
+		Promise.resolve(util.getPresList()).then((res) => {
+			if (res) {
+				mySlydesContent.innerHTML = "";
+
+				if (res.length > 0) {
+					res.forEach(item => {
+						let optionDom = document.createElement('section');
+						optionDom.classList.add('mySlydesContent')
+						optionDom.innerHTML = "&emsp;Title: " + item.name;
+						mySlydesContent.appendChild(optionDom);
+						optionDom.addEventListener('click', e => {
+							btnEvent.loadSelectedPres(item.id);
+							mySlydesModal.style.display = 'none';
+						});
+						mySlydesModal.style.display = 'inline-block';
+					});
+				} else {
+					alert('You have no slydes yet');
+				}
+			}
+		});
 	},
 
 	openTemplates: function() {
@@ -73,7 +93,7 @@ let btnEvent = {
 
 	loadSelectedPres: function(uid) {
 	    if (confirm("Save changes?") === true) {
-	        btnEvent.saveCurrentPage();
+	        btnEvent.savePresentation();
 	    }
 
 		if (uid) {
@@ -109,23 +129,31 @@ let btnEvent = {
 					name: presentation.name
 				})).then(res => {
 				    if(res.status === 200) {
-				    	console.log('Slyde deleted');
+						alert('Slyde deleted');
+						presentation.uid = '';
+				    } else if(res.status === 304) {
+				    	alert('This slyde has already been deleted');
+				    	presentation.uid = '';
 				    }
 				}).catch(err => {
 				    util.printError(err);
 				});
 			}
+		} else {
+			alert("This slyde haven't been saved yet");
 		}
 	},
 
-	saveCurrentPage: function() {
+	savePresentation: function() {
 		domEvent.removeSelected();
 
 		fetch(util.newRequest('POST', '/user/presentation', {
 			presentation: presentation
 		})).then(res => {
-			if (res.status == 401) {
+			if (res.status === 401) {
 				alert('You need to be logged in to do that!');
+			} else if (res.status === 200) {
+				alert('Slydes saved');
 			} else {
 				return res.json();
 			}
@@ -134,6 +162,9 @@ let btnEvent = {
 				presentation.uid = res.uid;
 				presentation.author = res.author;
 				presentation.name = res.name;
+				alert('Slyde saved');
+			} else {
+				alert('Could not fetch new id, slydes did not get saved');
 			}
 		}).catch(err => {
 		    util.printError(err);
@@ -143,7 +174,7 @@ let btnEvent = {
 	newPresentation: function() {
 	    if (confirm("Are you sure?") === true) {
 		    if (confirm("Save changes?") === true) {
-		        btnEvent.saveCurrentPage();
+		        btnEvent.savePresentation();
 		    }
 
 		    currentPage = 1;
@@ -158,6 +189,10 @@ let btnEvent = {
 		if (currentPage > 1) {
 			currentPage--;
 			init.loadContent();
+			localStorage.setItem('currentPage', currentPage.toString());
+			if (presmode) {
+				fsEvents.firefoxTransformScale();
+			}
 		}
 	},
 
@@ -169,6 +204,10 @@ let btnEvent = {
 		if (currentPage < presLength) {
 			currentPage++;
 			init.loadContent();
+			localStorage.setItem('currentPage', currentPage.toString());
+			if (presmode) {
+				fsEvents.firefoxTransformScale();
+			}
 		}
 	},
 

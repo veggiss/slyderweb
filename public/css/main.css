@@ -20,28 +20,12 @@ html {
 html, body, section, main { margin: 0; padding: 0;}  /* resetting */
 
 body {
+	overflow: hidden;
 	color: #000;
 	background:white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVQoU2NkwA6kGBgYniFLMaKpQ1aAohhdIbr5cMUwhRhWoesAKSSoCKSGkNVwg4mxGmwjySbCrCA5eDA8CAAGVAslgCPX9wAAAABJRU5ErkJggg==) repeat;
 	font-family: 'Lato', 'Verdana', sans-serif;
 	font-size: 1.6rem; /* this sets the baseline size. Header sizes are then set by ems in browser*/
 }
-
-/* main {} */
-
-aside {
-	/* border-right:1px solid rgb(19, 17, 17); */
-	color:  #ccc;
-	background-color: #000;
-	margin: 0.5rem 0.3rem;
-}
-
-aside>h1, h2, h3, h4, h5{
-	margin: 0;
-	padding: 0.5rem 0;
-}
-
-
-
 
 /* Header */
 
@@ -49,6 +33,7 @@ header {
 	/*background-color: olive;*/
 	box-shadow: 0px 1px 5px #999;
 	padding: 0.4em 0;
+	height: 24px;
 	/* z-index:2;  om man ønsker headerskygge i editor.html */
 }
 
@@ -83,7 +68,19 @@ menuitem a:hover {
 
 logo a {color: white;}
 
+/* main {} */
 
+aside {
+	/* border-right:1px solid rgb(19, 17, 17); */
+	color:  #ccc;
+	background-color: #000;
+	margin: 0.5rem 0.3rem;
+}
+
+aside>h1, h2, h3, h4, h5{
+	margin: 0;
+	padding: 0.5rem 0;
+}
 
 
 /* Form elements */
@@ -107,27 +104,6 @@ button:hover {
 button:active {
 	color: #fff;
 	background-color: olive;
-	margin: 0.2em;
-}
-
-button.dark {
-	box-shadow: none;
-	color: #fff;
-	background-color: #555;
-	font-size:1.2rem;
-	border-radius: 4px;
-	border-style: none;
-}
-
-button:hover.dark {
-	color: #000;
-	background-color: #ccc;
-	cursor: pointer;
-}
-
-button:active.dark {
-	color: #fff;
-	background-color: rgb(227, 17, 71);
 }
 
 fieldset { border: none;}	
@@ -170,18 +146,13 @@ ul.hidden { padding-left: 0; list-style: none;}
 
 .colorScheme { background-color: olive; color: white;}
 
-/* TODO Smal skjerm */
-
-
-
-
 /* Modals */
 
 /* The Modal (background) */
-.modal {
+.login_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 5000; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -192,7 +163,7 @@ ul.hidden { padding-left: 0; list-style: none;}
 }
 
 /* Modal Content/Box */
-.modal-content {
+.login_modal-content {
     background-color: #fefefe;
     margin: 20% auto; /* 15% from the top and centered */
     /*border: 1px solid #888;*/
@@ -228,21 +199,7 @@ ul.hidden { padding-left: 0; list-style: none;}
     cursor: pointer;
 }
 
-#createuser_btn {
-	float: left;
-	background: green;
-	width: 50%;
-	border-radius: none;
-}
-
-#cancel_btn {
-	border-radius: none;
-	width: 49%;	
-	float: right;
-	background: red;
-}
-
-#login_btn {
+.modal-btns {
 	background: olive;
 	color: white;
 }

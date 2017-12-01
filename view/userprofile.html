@@ -12,32 +12,64 @@
 </head>
 <body>
 
-    <header class="centered">
-			<nav>
-				<menuitem class="logo">
-				<a href="/">SlyderWeb</a>
-				</menuitem>
-				<menuitem class="signInOut">
-				<a id="hrfSignIn" href="/">Sign in</a>
-				<a id="hrfSignOut" href="user/logout">Sign out</a>
-				</menuitem>
-				<menuitem>
-					<a href="userprofile#presentations">Presentations</a>
-				</menuitem>
-				<menuitem>
-				<a href="/editor">Editor</a>
-				</menuitem>
-				<menuitem>
-				<a href="userprofile">Settings</a>
-				</menuitem>
-				<menuitem>
-				<menuitem>
-				<a href="/help">Help</a>
-				</menuitem>
-				<a href="/about">About</a>
-				</menuitem>
-			</nav>
-		</header>
+  <header class="centered colorScheme">
+    <nav>
+      <menuitem class="logo">
+      <a href="/">SlyderWeb</a>
+      </menuitem>
+      <menuitem class="signInOut">
+      <a href="livemode">Live mode</a>
+      <a href="editor">Editor</a>
+      <a id="hrfProfile" href="userprofile">Profile</a>
+      <a id="openSignInModalbtn" style="cursor: pointer;">Sign in</a>
+      <a id="hrfSignOut" href="user/logout">Sign out</a>
+      </menuitem>
+    </nav>
+  </header>
+
+  <!-- Sign in modal -->
+
+  <div id="modal_signIn" class="login_modal">
+    <div class="login_modal-content">
+      <span class="close" id="cancel_btn_login">&times;</span>
+      <fieldset>
+        <h3 class="modal-header">Sign in</h3>
+        <hr>
+        <div class="modal-body centered">
+          <input type="text" id="login_username" placeholder="Username">
+          <br>
+          <input type="password" id="login_password" placeholder="Password">
+          <br>
+          <button class="modal-btns" id="login_btn">Sign in</button>
+          <button class="modal-btns" id="openCreateUserModalbtn">Sign up</button>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Sign up modal -->
+
+  <div id="modal_createUser" class="login_modal">
+    <div class="login_modal-content">
+      <span class="close" id="cancel_btn_createUser">&times;</span>
+      <h3 class="modal-header">Create new user</h3>
+      <hr>
+      <div class="modal-body centered">
+        <p class="neutralText">Username</p>
+        <input type="text" id="createuser_username" placeholder="username">
+        <p class="neutralText">Password:</p>
+        <input type="password" id="createuser_password" placeholder="password">
+        <p class="neutralText">First name:</p>
+        <input type="text" id="createuser_firstname" placeholder="first name">
+        <p class="neutralText">Last name:</p>
+        <input type="text" id="createuser_lastname" placeholder="last name">
+        <p class="neutralText">E-mail address:</p>
+        <input type="text" id="createuser_mail" placeholder="email">
+        <br>
+        <button class="modal-btns" id="createuser_btn">Create user</button>
+      </div>
+    </div>
+  </div>
     
   <main id="profile-root">
   
@@ -54,13 +86,13 @@
     </section>
   
     <section id="page-slides" class="page">
-      <header class="header-userprofile"><h1>Slides</h1></header>
+      <div class="header-userprofile"><h1>Slides</h1></div>
       <div id="page-slides-root"><!-- CONTENT -->
       </div><!-- CONTENT - END -->
     </section>
   
     <section id="page-setting" class="page">
-      <header class="header-userprofile"><h1>Settings</h1></header>
+      <div class="header-userprofile"><h1>Settings</h1></div>
       <div class="page-settings-root"><!-- CONTENT -->
         <form>
           <label> Change first name
@@ -102,8 +134,9 @@
   </main>
 
 <script src="./js/util.js"></script>
+<script src="./js/main.js"></script>
 <script src="./js/userprofile/slides.js"></script>
 <script src="./js/userprofile/setting.js"></script>
-<script src="./js/userprofile.js"></script>
+<script src="./js/userprofile/userprofile.js"></script>
 </body>
 </html>

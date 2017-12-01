@@ -1,9 +1,9 @@
 // Returns user info
 function getUser(req, res, next) {
-    let username = req.query.username;
+    let username = req.session.username;
 
-    // Check query not containing no or illigal characters
-    if (ut.isNotEmpty(username) && ut.noSymbols(username)) {
+    // Check if user is logged in
+    if (username) {
         // Prepare query strings and connection
         let client = ut.newClient();
         let sql = 'SELECT * FROM users WHERE username = $1';
@@ -19,6 +19,7 @@ function getUser(req, res, next) {
                         lastlogin: query.rows[0].lastlogin,
                         firstname: query.rows[0].firstname,
                         lastname: query.rows[0].lastname,
+                        username: query.rows[0].username,
                         mail: query.rows[0].mail,
                         profileimg: query.rows[0].profileimg
                     }
@@ -43,9 +44,9 @@ function getUser(req, res, next) {
             next();
         });
     } else {
-        // Either username was empty or contained illigal symbols
-        res.statusMessage = 'Username contains no or illigal characters';
-        res.status(403).end();
+        // User not authrized
+        res.statusMessage = 'Not logged in';
+        res.status(401).end();
     }
 }
 
@@ -203,7 +204,7 @@ function updatePresentation(req, res, next) {
                             res.status(200).end();
                         } else {
                             res.statusMessage = "Presentation does not exist, proceed to create new";
-                            res.status(200);
+                            res.status(202);
                             res.next = true;
                         }
                     } else {
@@ -372,11 +373,18 @@ function deletePresentation(req, res, next) {
 
         client.query(sql, params, (err, query) => {
             if (!err) {
-                res.statusMessage = 'Deleted presentation';
-                res.status(200).end();
+                if (query.rowCount > 0) {
+                    res.statusMessage = `Deleted presentation '${uid}' from user '${username}'`;
+                    res.status(200).end();
+                } else {
+                    res.statusMessage = `Could not find presentation '${uid}' from user '${username}'`;
+                    res.status(304).end();
+                }
             } else {
-                res.statusMessage = `Could not find presentation '${presName}'`;
-                res.status(404).end();
+                res.statusMessage = `There was a problem deleting presentation '${uid}' from user '${username}'`;
+                res.status(500).end();
+                res.err = err;
+                res.next = true;
             }
             client.end();
             next();

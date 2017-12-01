@@ -28,9 +28,10 @@ Stylesheet for editor.html.
 }
 
 .textContainer {
-	padding: 10px; 
-	max-width: 32em; /* for å angi en leselig linjelengde */
-	margin: 0 auto;
+	padding-top: 1px; 
+	padding-bottom: 10px; 
+	max-width: 40em; /* for å angi en leselig linjelengde */
+	margin: 0 auto 0;
 }
 
 

@@ -1,4 +1,6 @@
 let fsEvents = {
+	browserType: 'default',
+
 	preventMenu: function(e) {
 		if (presmode) {
 			e.preventDefault();
@@ -6,8 +8,6 @@ let fsEvents = {
 	},
 
 	goFullScreen: function(page) {
-		let browser;
-
 		if(editGrid.requestFullscreen) {
 			document.addEventListener('fullscreenchange', fsEvents.exitHandler);
 			editGrid.requestFullscreen();
@@ -31,6 +31,7 @@ let fsEvents = {
 
 	lockGrid: function(page, browserType) {
 		domEvent.removeSelected();
+
 		lastPage = currentPage;
 		currentPage = page;
 		presHeight = editGrid.style.height;
@@ -41,22 +42,17 @@ let fsEvents = {
 		editGrid.style.borderStyle = "none";
 		editGrid.style.width = screen.width + 'px';
 
-		//Since firefox is hipster, it needs a special transformation for scaling
+		//Firefox can't use zoom attribute, so we need to transform all elements to scale
 		if (browserType === 'moz') {
-			let scale = screen.height / parseInt(editGrid.style.height);
-			editGrid.childNodes.forEach(item => {
-				let trans = init.getTransform(item);
-				item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
-				item.style.transformOrigin = '0 0';
-				item.style.top = ((item.offsetTop * scale)) + 'px';
-				item.style.left = ((item.offsetLeft * scale)) + 'px';
-			});
+			fsEvents.firefoxTransformScale();
 		} else {
 			editGrid.style.left = "0px";
 			editGrid.style.top = "0px";
 			editGrid.style.zoom = (screen.height / editGrid.offsetHeight) * 100 +"%";
 		}
 		presmode = true;
+		localStorage.setItem('livemode', 'true');
+		localStorage.setItem('currentPage', currentPage);
 	},
 
 	lockCursor: function() {
@@ -87,6 +83,7 @@ let fsEvents = {
 		editGrid.style.width = presWidth;
 		pageNav.style.top = (editGrid.offsetTop + editGrid.offsetHeight) + "px";
 		presmode = false;
+		localStorage.setItem('livemode', 'false');
 	},
 
 	exitHandler: function() {
@@ -99,5 +96,18 @@ let fsEvents = {
 	    } else if (document.fullscreenElement === false) {
 	    	fsEvents.resetGrid();
 	    }
+	},
+
+	firefoxTransformScale: function() {
+		if(browserType === 'moz') {
+			let scale = screen.height / parseInt(editGrid.style.height);
+			editGrid.childNodes.forEach(item => {
+				let trans = init.getTransform(item);
+				item.style.transform = `scale(${scale * trans.scale}) rotate(${trans.rotate}deg)`;
+				item.style.transformOrigin = '0 0';
+				item.style.top = ((item.offsetTop * scale)) + 'px';
+				item.style.left = ((item.offsetLeft * scale)) + 'px';
+			});
+		}
 	}
 }

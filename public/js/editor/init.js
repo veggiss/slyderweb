@@ -9,17 +9,24 @@ let init = {
 		fileDialog.type 			= 'file';
 		editGrid.style.height		= (screen.height * 0.65) + 'px';
 		editGrid.style.width		= (screen.width * 0.65) + 'px';
-		//editGrid.style.width		= (parseInt(editGrid.style.height) * (4/3)) + 'px';
 		pageNav.style.top 			= (editGrid.offsetTop + editGrid.offsetHeight) + "px";
 		pageNav.style.width 		= editGrid.offsetWidth + "px";
 
 		//We need this for hsla coloring with execCommand
 		document.execCommand('styleWithCSS', false, true);
 
+		// declare event function listeners
 		document.addEventListener('contextmenu', fsEvents.preventMenu);
 		document.addEventListener('keydown', init.keyEvents);
 		document.addEventListener('mousedown', init.mouseEvent);
-		
+
+		window.onresize = e => {
+			pageNav.style.top = (editGrid.offsetTop + editGrid.offsetHeight) + "px";
+		}
+
+		// Declare event listeners with anonymous lambdas
+
+		// --- Global events
 		document.addEventListener('keyup', e => {
 			pressedDelKey = false;
 		});
@@ -31,10 +38,7 @@ let init = {
 			}
 		});
 
-		window.onresize = e => {
-			pageNav.style.top = (editGrid.offsetTop + editGrid.offsetHeight) + "px";
-		}
-
+		// --- Editgrid events
 		editGrid.addEventListener('dragenter', e => {
 			e.preventDefault();
 		});
@@ -48,6 +52,7 @@ let init = {
 			domEvent.loadFile(e.dataTransfer.files);
 		});
 
+		// --- Sidebar main button events
 		presNameInput.addEventListener('input', e => {
 			presentation.name = presNameInput.value.trim();
 		});
@@ -56,23 +61,9 @@ let init = {
 			presentation.body["page_" + currentPage].notes = notesTxt.innerHTML;
 		});
 
-		fileDialog.addEventListener('change', e => {
-			domEvent.loadFile(e.target.files);
-		});
-
 		importBtn.addEventListener('click', e => {
 			fileDialog.accept = '.slyderweb';
 			fileDialog.click();
-		});
-
-		bgColorDiv.addEventListener('click', e => {
-			lastSelected = bgColorDiv;
-			domEvent.toggleColorPicker(e);
-		});
-
-		gradRotationRange.addEventListener('input', e => {
-			gradRotation = e.target.value;
-			domEvent.setBgColor();
 		});
 
 		presmodeBtn.addEventListener('click', e => {
@@ -114,6 +105,7 @@ let init = {
 			}
 		});
 
+		// --- Sidebar sub button events
 		addImgFromLinkBtn.addEventListener('click', e => {
 			let link = prompt("Enter image link", "");
 			if (util.isNotEmpty(link) && link.match(/\.(jpeg|jpg|gif|png)$/) != null) {
@@ -139,6 +131,10 @@ let init = {
 			}
 		});
 
+		fileDialog.addEventListener('change', e => {
+			domEvent.loadFile(e.target.files);
+		});
+
 		arrangeSection.forEach(item => {
 			item.addEventListener('click', e => {
 				btnEvent.loadTemplate('arrange', item);
@@ -150,9 +146,20 @@ let init = {
 				btnEvent.loadTemplate('background', item);
 			})
 		});
+
+		bgColorDiv.addEventListener('click', e => {
+			lastSelected = bgColorDiv;
+			domEvent.toggleColorPicker(e);
+		});
+
+		gradRotationRange.addEventListener('input', e => {
+			gradRotation = e.target.value;
+			domEvent.setBgColor();
+		});
 	},
 
 	mouseEvent: function(e) {
+		// Element unselection on click within the editor area
 		if ((e.target === editGrid || e.target === document.documentElement) && selected != undefined) {
 			domEvent.removeSelected();
 		}
@@ -165,6 +172,7 @@ let init = {
 			shadowPicker.style.display = 'none';
 		}
 
+		// Navigate slydes with clicks
 		if (presmode) {
 			e.preventDefault();
 
@@ -181,7 +189,15 @@ let init = {
 	},
 
 	keyEvents: function(e) {
+		//Declare global key events, its messy, but it works
 		let key = e.which || e.keyCode;
+		let key_esc = 27;
+		let key_up = 38;
+		let key_left = 37;
+		let key_right = 39;
+		let key_down = 40;
+		let key_c = 67;
+		let key_v = 86;
 		
 		if (!pressedDelKey && !presmode) {
 			let key = e.which || e.keyCode;
@@ -191,7 +207,7 @@ let init = {
 					domEvent.savePage();
 					pressedDelKey = true;
 				}
-			} else if (key == 27) {
+			} else if (key == key_esc) {
 				if (colorPicker.style.display != 'none') {
 					colorPicker.style.display = 'none';
 					shadowPicker.style.display = 'none';
@@ -206,11 +222,11 @@ let init = {
 					colorBgPanel.style.display = 'none';
 					addImagePanel.style.display = 'none';
 				}
-			} else if (e.ctrlKey && key == 67) {
+			} else if (e.ctrlKey && key == key_c) {
 				if (selected != undefined && !editing) {
 					copySelected = selected.cloneNode(true);
 				}
-			} else if (e.ctrlKey && key == 86) {
+			} else if (e.ctrlKey && key == key_v) {
 				if (copySelected != undefined && !editing) {
 					let height = parseInt(editGrid.style.height) / 2;
 					let width = parseInt(editGrid.style.width) / 2;
@@ -222,33 +238,33 @@ let init = {
 					editGrid.appendChild(newCopy);
 					domEvent.setSelected(newCopy);
 				}
-			} else if (key == 39 && !editing) {
+			} else if (key == key_right && !editing) {
 				if (selected != undefined) {
 					selected.style.left = (selected.offsetLeft += 1) + "px";
 				} else {
 					btnEvent.nextPage();
 				}
-			} else if (key == 37 && !editing) {
+			} else if (key == key_left && !editing) {
 				if (selected != undefined) {
 					selected.style.left = (selected.offsetLeft -= 1) + "px";
 				} else {
 					btnEvent.prevPage();
 				}
-			} else if (key == 38 && !editing) {
+			} else if (key == key_up && !editing) {
 				if (selected != undefined) {
 					selected.style.top = (selected.offsetTop -= 1) + "px";
 				}
-			} else if (key == 40 && !editing) {
+			} else if (key == key_down && !editing) {
 				if (selected != undefined) {
 					selected.style.top = (selected.offsetTop += 1) + "px";
 				}
 			}
 		} else if (presmode) {
-			if (key === 39 || key === 37) {
+			if (key === key_right || key === key_left) {
 				e.preventDefault();
-				if (key === 39) {
+				if (key === key_right) {
 					btnEvent.nextPage();
-				} else if (key === 37) {
+				} else if (key === key_left) {
 					btnEvent.prevPage();
 				}
 				fsEvents.lockCursor();
@@ -257,7 +273,7 @@ let init = {
 	},
 
 	loadToolbar: function() {
-		// Add font size options to selector
+		// Declare toolbar stuff
 		let toolbar_fontSize_selector = toolbar_fontSize.firstElementChild;
 		let colorPickerChildren = colorPicker.getElementsByTagName('input');
 		let shadowPickerChildren = shadowPicker.getElementsByTagName('input');
@@ -279,10 +295,12 @@ let init = {
 
 		colorPickerSat.style = `background-color: hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha});`;
 
+		// Add font size options to selector (execCommand only deals with 1-7 in size)
 		for (let i = 1; i <= 7; i ++) {
 			toolbar_fontSize_selector.innerHTML += `<option value=${i}>${i}</option>`;
 		}
 
+		// Declare toolbar events
 		toolbar_font.addEventListener('change', e => {
 			document.execCommand("fontName", false, e.target.value);
 		});
@@ -323,15 +341,42 @@ let init = {
 			domEvent.toggleColorPicker(e);
 		});
 
+		removeShadowBtn.addEventListener('click', e => {
+			selected.style.textShadow = '';
+		});
+
+		toolbar_bulletList.addEventListener('mousedown', e => {
+			document.execCommand("insertunorderedlist");
+		});
+
+		toolbar_numberList.addEventListener('mousedown', e => {
+			document.execCommand("insertorderedlist");
+		});
+
+		toolbar_alignLeft.addEventListener('mousedown', e => {
+			document.execCommand("JustifyLeft", false);
+		});
+
+		toolbar_alignCenter.addEventListener('mousedown', e => {
+			document.execCommand("JustifyCenter", false);
+		});
+
+		toolbar_alignRight.addEventListener('mousedown', e => {
+			document.execCommand("JustifyRight", false);
+		});
+
+		//Iterate through the children in color panel
 		for (let element of colorPickerChildren) {
 			element.addEventListener('input', e => {
 				let name = element.parentElement.getAttribute('name');
 				colors[name] = element.value;
 				
+				// Get color and shadow values
 				let shadow = `${shadows.cordX}px ${shadows.cordY}px ${shadows.feather}px`;
 				let hsla = `hsla(${colors.hue}, ${colors.light}%, ${colors.sat}%, ${colors.alpha})`;
 				colorPickerSat.style.backgroundColor = hsla;
 
+				// Check what item was selected, and do whatever accordingly
 				if (lastSelected === toolbar_txtColor) {
 					document.execCommand('foreColor', false, hsla);
 				} else if (lastSelected === toolbar_hiliteColor) {
@@ -363,6 +408,7 @@ let init = {
 			});
 		}
 
+		//Iterate through the children in shadow panel
 		for (let element of shadowPickerChildren) {
 			element.addEventListener('input', e => {
 				let name = element.parentElement.getAttribute('name');
@@ -376,32 +422,9 @@ let init = {
 				}
 			});
 		}
-
-		removeShadowBtn.addEventListener('click', e => {
-			selected.style.textShadow = '';
-		});
-
-		toolbar_bulletList.addEventListener('mousedown', e => {
-			document.execCommand("insertunorderedlist");
-		});
-
-		toolbar_numberList.addEventListener('mousedown', e => {
-			document.execCommand("insertorderedlist");
-		});
-
-		toolbar_alignLeft.addEventListener('mousedown', e => {
-			document.execCommand("JustifyLeft", false);
-		});
-
-		toolbar_alignCenter.addEventListener('mousedown', e => {
-			document.execCommand("JustifyCenter", false);
-		});
-
-		toolbar_alignRight.addEventListener('mousedown', e => {
-			document.execCommand("JustifyRight", false);
-		});
 	},
 
+	// Loads everything to the grid and adds events
 	loadContent: function() {
 		let presObject = presentation.body["page_" + currentPage];
 		notesTxt.innerHTML = "";
@@ -415,6 +438,7 @@ let init = {
 		currentPageTxt.innerHTML = `${currentPage} of ${presLength}`;
 		domEvent.setBgColor();
 		init.transformScale();
+		init.updateBgSidebar();
 
 		for (let element of content) {
 			let parent = domEvent.getParent(editGrid, element);
@@ -428,25 +452,7 @@ let init = {
 		}
 	},
 
-	loadPresList() {
-		Promise.resolve(util.getPresList()).then((res) => {
-			if (res) {
-				mySlydesContent.innerHTML = "";
-				res.forEach(item => {
-					let optionDom = document.createElement('section');
-					optionDom.classList.add('mySlydesContent')
-					optionDom.innerHTML = "&emsp;Title: " + item.name;
-					mySlydesContent.appendChild(optionDom);
-					optionDom.addEventListener('click', e => {
-						btnEvent.loadSelectedPres(item.id);
-						mySlydesModal.style.display = 'none';
-					});
-					mySlydesModal.style.display = 'inline-block';
-				});
-			}
-		});
-	},
-
+	// Declare events to elements
 	addDefaultEvents: function(element) {
 		element.addEventListener('mousedown', e => {
 			if (!editing && e.target != undefined) {
@@ -473,6 +479,7 @@ let init = {
 		});
 	},
 
+	// Special event for text boxes
 	addEventsText: function(element) {
 		element.addEventListener('dblclick', e => {
 			e.preventDefault();
@@ -482,6 +489,7 @@ let init = {
 		});
 	},
 
+	// Updates the color labels in the sidebar
 	updateBgSidebar: function() {
 		domEvent.removeGradColors();
 
@@ -520,6 +528,7 @@ let init = {
 		}
 	},
 
+	//Special transformation mostly for template elements
 	transformTemplate: function(originHeight, htmlContent) {
 		if (originHeight != screen.height) {
 			let max = Math.max(originHeight, screen.height);
@@ -553,6 +562,7 @@ let init = {
 		}
 	},
 
+	// Returns transform dimensions as floats
 	getTransform(element) {
 		let scale = element.style.transform.split('scale(')[1];
 		scale = scale.split(')')[0];
@@ -564,6 +574,7 @@ let init = {
 		}
 	},
 
+	// The might presentation object
 	newPresObject: function() {
 		return {
 			uid: '',

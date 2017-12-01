@@ -46,8 +46,8 @@ const settings = (function (elms)
   
   // fillMainForm ------------------------------------------------------
 	function fillMainForm (data, opt) { // Fylle inn existerende bruker-informasjon
-    firstName.value = data.firstName;
-    lastName.value  = data.lastName;
+    firstName.value = data.firstname;
+    lastName.value  = data.lastname;
     userName.value  = data.username;
     email.value     = data.mail;
     image.value     = data.profileImg;

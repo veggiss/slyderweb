@@ -1,7 +1,7 @@
 ## Schema for user table
 
 	{
-		"type":"object",
+		"type":"JSON",
 		"properties":{
 			"username":{"type":"string"},
 			"password":{"type":"string"},
@@ -9,8 +9,7 @@
 			"lastName":{"type":"string"},
 			"mail":{"type":"string"},
 			"profileImg":{"type":"string"},
-			"lastLogin":{"type":"number"},
-			"presentations":{"type":"array"}
+			"lastLogin":{"type":"number"}
 	   }
 	}
 
@@ -23,45 +22,48 @@
 		"lastName":"Schau",
 		"mail":"vegaes15@uia.no",
 		"profileImg":"path_on_serv/img.jpg",
-		"lastLogin":"34598374958734",
-		"presentations":[pres_object, pres_object]
+		"lastLogin":"34598374958734"
 	}
 
 ## Schema for presentations
 
 	{
-		"type":"object",
+		"type":"JSON",
 		"properties":{
+			"uid":{"type":"integer"},
 			"author":{"type":"string"},
 			"name":{"type":"string"},
-			"pages":{
-				"type":"array",
-				"items":{
-					"type":"object",
-					"properties": {
-						"body":"string"
+			"bgColors":{"type":"array"},
+			"presmode":{"type":"boolean"},
+			"originHeight":{"type":"integer"},
+			"body":{
+				"type":"JSON",
+				"properties": {
+					"page_n":{
+						"type":"JSON",
+						"properties": {
+							"content":{"type":"string"},
+							"notes":{"type":"string"}
+						}
 					}
 				}
-			},
-			"created":{"type":"number"}
+			}
 		}
 	}
 
 ### Example use:
 
 	{
+		"uid":3141592
 		"author":"vegard",
 		"name":"Mysuper presentation",
-		"pages":[{"body":"
-			<div class=center>
-				<p id=infoBox></p>
-				<input placeholder=Whats your name?.. class='input' id='input'/>
-				<button class='btn' id='btnSend'>Say hi</button>
-				<br><br>
-				<h2 id='txtOut'></h2>
-			</div>
-			"}, {"body":"
-			<h1>Page 2</h1>
-			"}],
-		"created":"193485039480"
+		"bgColors":["hsla(150, 50%, 64%, 1)", "white"],
+		"presmode":false,
+		"originHeight":1080,
+		"body":{
+			"page_1":{
+				"content":"<div class="content" name="text" style....",
+				"notes":"This is my notes for this page"
+			}
+		}
 	}
