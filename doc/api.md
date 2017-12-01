@@ -44,4 +44,4 @@
 ## POST
 
 ### Bruker autentisering
-		app.POST("/user/presentation")  | Returns: presentation | Type: object
+		app.POST("/user/presentation")  | Returns: uid          | Type: integer
