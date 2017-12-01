@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8" />
-	<title>Slyderweb - Editor</title>
+	<title>Slyderweb - Live mode</title>
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 	<style type="text/css">
 		#notesContainer * {
 			font-family: monospace;
@@ -12,6 +14,7 @@
 		}
 	</style>
 </head>
+
 <body>
 	<header class="centered colorScheme">
 		<nav>
@@ -38,8 +41,10 @@
 					<br>
 					<input type="password" id="login_password" placeholder="Password">
 					<br>
-					<button class="modal-btns" id="login_btn">Sign in</button>
-					<button class="modal-btns" id="openCreateUserModalbtn">Sign up</button>
+					<div class="modal-footer">
+						<button class="modal-btns" id="login_btn">Sign in</button>
+						<button class="modal-btns" id="openCreateUserModalbtn">Sign up</button>
+					</div>
 				</div>
 		</div>
 	</div>
@@ -60,21 +65,26 @@
 				<p class="neutralText">E-mail address:</p>
 				<input type="text" id="createuser_mail" placeholder="email">
 				<br>
-				<button class="modal-btns" id="createuser_btn">Create user</button>
+				<div class="modal-footer">
+					<button class="modal-btns" id="createuser_btn">Create user</button>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<h1 id="statusTitle" style="margin-left: 50px;"><h1>
-	<div id="livemodeContainer" style="margin-left: 50px;">
-		<p id="currentPageText"><p>
-		<p style="font-size: 25px;">Notes:</p>
-		<span id="notesContainer">
-			<div id="notesText" style="width: 90vw; height: auto; border: thin solid black; background-color: white; font-size: 35px;"></div>
-		</span>
-	</div>
+	<h1 id="statusTitle" style="margin-left: 50px;">
+		<h1>
+			<div id="livemodeContainer" style="margin-left: 50px;">
+				<p id="currentPageText">
+					<p>
+						<p style="font-size: 25px;">Notes:</p>
+						<span id="notesContainer">
+							<div id="notesText" style="width: 90vw; height: auto; border: thin solid black; background-color: white; font-size: 35px;"></div>
+						</span>
+			</div>
 </body>
 <script src="./js/util.js"></script>
 <script src="./js/main.js"></script>
 <script src="./js/livemode/livemode.js"></script>
+
 </html>

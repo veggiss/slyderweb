@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Userprofile</title>
+  <title>Slyderweb - Userprofile</title>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="./css/main.css" rel="stylesheet">
   <link href="./css/userprofile.css" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+
 </head>
+
 <body>
 
   <header class="centered colorScheme">
@@ -40,8 +43,10 @@
           <br>
           <input type="password" id="login_password" placeholder="Password">
           <br>
-          <button class="modal-btns" id="login_btn">Sign in</button>
-          <button class="modal-btns" id="openCreateUserModalbtn">Sign up</button>
+          <div class="modal-footer">
+            <button class="modal-btns" id="login_btn">Sign in</button>
+            <button class="modal-btns" id="openCreateUserModalbtn">Sign up</button>
+          </div>
         </div>
     </div>
   </div>
@@ -66,17 +71,21 @@
         <p class="neutralText">E-mail address:</p>
         <input type="text" id="createuser_mail" placeholder="email">
         <br>
-        <button class="modal-btns" id="createuser_btn">Create user</button>
+        <div class="modal-footer">
+          <button class="modal-btns" id="createuser_btn">Create user</button>
+        </div>
       </div>
     </div>
   </div>
-    
+
   <main id="profile-root">
-  
+
     <section id="profile-controls">
-      <div><!-- <img src="https://lorempixel.com/200/200/people/1" alt=""> --></div>
+      <div>
+        <!-- <img src="https://lorempixel.com/200/200/people/1" alt=""> -->
+      </div>
       <nav>
-        <a href="#slides"  class="menu-item">Presentations</a>
+        <a href="#slides" class="menu-item">Presentations</a>
         <hr>
         <hr>
         <a href="#setting" class="menu-item">Setting</a>
@@ -84,59 +93,76 @@
         <hr>
       </nav>
     </section>
-  
+
     <section id="page-slides" class="page">
-      <div class="header-userprofile"><h1>Slides</h1></div>
-      <div id="page-slides-root"><!-- CONTENT -->
-      </div><!-- CONTENT - END -->
+      <div class="header-userprofile">
+        <h1>Slides</h1>
+      </div>
+      <div id="page-slides-root">
+        <!-- CONTENT -->
+      </div>
+      <!-- CONTENT - END -->
     </section>
-  
+
     <section id="page-setting" class="page">
-      <div class="header-userprofile"><h1>Settings</h1></div>
-      <div class="page-settings-root"><!-- CONTENT -->
+      <div class="header-userprofile">
+        <h1>Settings</h1>
+      </div>
+      <div class="page-settings-root">
+        <!-- CONTENT -->
         <form>
           <label> Change first name
-          <input id="firstname" type="text" /></label>
+            <input id="firstname" type="text" />
+          </label>
           <label> Change last name:
-          <input id="lastname"  type="text" /></label>
+            <input id="lastname" type="text" />
+          </label>
           <label> Username:
-          <input id="username"  type="text"  disabled /></label>
+            <input id="username" type="text" disabled />
+          </label>
           <label> Email:
-          <input id="email"     type="email" disabled /></label>
-  
+            <input id="email" type="email" disabled />
+          </label>
+
           <!-- TODO: Gamle profilbilde skal være synlig -->
           <img src="" alt="">
           <label> Change image:
-          <input id="image"     type="url" /></label>
-  
+            <input id="image" type="url" />
+          </label>
+
           <!-- TODO: Gamle profilbilde skal være synlig -->
           <!--<img src="" alt="">
           <label> Change image:
           <input id="image"     type="file" /></label>-->
-  
+
           <button id="saveChanges" type="button">Save changes</button>
         </form>
         <hr>
         <form>
           <label> Type in old password:
-          <input id="password_old" type="password" /></label>
+            <input id="password_old" type="password" />
+          </label>
           <label> Type in new password:
-          <input id="password_new" type="password" /></label>
+            <input id="password_new" type="password" />
+          </label>
           <label> Repeat new password:
-          <input id="password_new_repeat" type="password" /></label>
+            <input id="password_new_repeat" type="password" />
+          </label>
           <button id="save_password" type="button">Save changes</button>
         </form>
         <hr>
         <button id="btnDelete" type="button">Delete profile</button>
-      </div><!-- CONTENT - END -->
+      </div>
+      <!-- CONTENT - END -->
     </section>
-  
+
   </main>
 
-<script src="./js/util.js"></script>
-<script src="./js/main.js"></script>
-<script src="./js/userprofile/slides.js"></script>
-<script src="./js/userprofile/setting.js"></script>
-<script src="./js/userprofile/userprofile.js"></script>
+  <script src="./js/util.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/userprofile/slides.js"></script>
+  <script src="./js/userprofile/setting.js"></script>
+  <script src="./js/userprofile/userprofile.js"></script>
 </body>
+
 </html>
