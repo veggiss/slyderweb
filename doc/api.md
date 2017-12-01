@@ -19,9 +19,9 @@
 | /user/login         | POST      | logge inn                                | username, password  | false  | -    |
 | ~~                  | ~~        | Set login timestamp                      | ~~                  | ~~     | true |
 | /user               | POST      | lage ny bruker                           | user schema         | false  | -    |
-| /user/pres          | POST      | lage ny presentasjon                     | pres schema         | true   | -    |
+| /user/presentation  | POST      | lage ny presentasjon                     | pres schema         | true   | -    |
 | ~~                  | ~~        | Oppdatere presentasjon                   | ~~                  | ~~     | true |
-| /user/pres          | DELETE    | Slette en presentasjon                   | id, username        | true   | -    |
+| /user/presentation  | DELETE    | Slette en presentasjon                   | id, username        | true   | -    |
 | ~~                  | ~~        | Log event                                | ~~                  | ~~     | true |
 
 
@@ -40,3 +40,8 @@
 
 ### Bruker autentisering
 		app.GET("/user/isLogged")       | Returns: HTTP         | Type: statuscode
+
+## POST
+
+### Bruker autentisering
+		app.POST("/user/presentation")  | Returns: presentation | Type: object
