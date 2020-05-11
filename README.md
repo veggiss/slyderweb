@@ -1,5 +1,5 @@
 # [slyderweb](http://slyderweb.herokuapp.com/)
-Repository for project slyderweb
+Repository for school project slyderweb. No third party libraries were allowed, only vanilla JS.
 
 # Team members/Gruppemedlemmer
 
